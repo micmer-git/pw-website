@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particleworks Europe — Meshfree CFD Simulation Software</title>
+  <meta name="description" content="Particleworks is a CFD software for the simulation of liquid and multi-phase flows using meshless particle methods. European competence center.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pw-blue: #0088cc;
+      --pw-blue-dark: #006da3;
+      --pw-green: #25a361;
+      --pw-green-dark: #1e8a51;
+      --pw-dark: #333333;
+      --pw-gray: #6c757d;
+      --pw-light: #f8f9fa;
+      --pw-gradient: linear-gradient(135deg, #0088cc 0%, #25a361 100%);
+      --pw-gradient-dark: linear-gradient(135deg, #004466 0%, #0088cc 50%, #1a7a4a 100%);
+    }
+
+    * { font-family: 'Inter', sans-serif; }
+
+    html { scroll-behavior: smooth; }
+
+    body { color: var(--pw-dark); overflow-x: hidden; }
+
+    /* ── Navbar ── */
+    .navbar {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+      padding: 0.6rem 0;
+      transition: box-shadow 0.3s;
+    }
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .navbar-brand img { height: 38px; }
+    .navbar .nav-link {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--pw-dark);
+      padding: 0.5rem 0.75rem !important;
+      transition: color 0.2s;
+    }
+    .navbar .nav-link:hover { color: var(--pw-blue); }
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      padding: 0.5rem;
+    }
+    .dropdown-item {
+      border-radius: 6px;
+      font-size: 0.87rem;
+      padding: 0.45rem 1rem;
+    }
+    .dropdown-item:hover { background: var(--pw-light); color: var(--pw-blue); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      background: var(--pw-gradient-dark);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(37,163,97,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,136,204,0.3) 0%, transparent 60%);
+    }
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .hero-particles span {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      animation: float-up linear infinite;
+    }
+    @keyframes float-up {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -1px;
+      line-height: 1.1;
+    }
+    .hero .lead {
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      color: rgba(255,255,255,0.85);
+      font-weight: 300;
+      max-width: 560px;
+    }
+    .btn-pw {
+      background: var(--pw-blue);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+    .btn-pw:hover { background: var(--pw-blue-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,136,204,0.3); }
+    .btn-pw-outline {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.4);
+      padding: 0.7rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+    .btn-pw-outline:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    /* ── Section Defaults ── */
+    section { padding: 5rem 0; }
+    .section-title {
+      font-weight: 700;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--pw-dark);
+    }
+    .section-subtitle {
+      color: var(--pw-gray);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+    .accent-line {
+      width: 50px;
+      height: 3px;
+      background: var(--pw-gradient);
+      border-radius: 3px;
+      margin: 1rem auto 1.5rem;
+    }
+
+    /* ── Fade-in on scroll ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── About / What is PW ── */
+    .about-section { background: #fff; }
+    .about-section .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, rgba(0,136,204,0.1), rgba(37,163,97,0.1));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pw-blue);
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Quote ── */
+    .quote-section {
+      background: var(--pw-gradient);
+      color: #fff;
+      padding: 4rem 0;
+    }
+    .quote-section blockquote {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .quote-section cite {
+      font-size: 1rem;
+      opacity: 0.8;
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* ── Cards ── */
+    .pw-card {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.06);
+      padding: 2rem;
+      height: 100%;
+      transition: all 0.35s ease;
+    }
+    .pw-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+      border-color: transparent;
+    }
+    .pw-card .card-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .icon-blue { background: rgba(0,136,204,0.1); color: var(--pw-blue); }
+    .icon-green { background: rgba(37,163,97,0.1); color: var(--pw-green); }
+
+    /* ── SPH vs MPS ── */
+    .comparison-section { background: var(--pw-light); }
+    .comparison-table {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .comparison-table th {
+      background: var(--pw-blue);
+      color: #fff;
+      font-weight: 600;
+      padding: 1rem 1.5rem;
+      font-size: 0.95rem;
+    }
+    .comparison-table td { padding: 0.9rem 1.5rem; font-size: 0.92rem; }
+
+    /* ── Who We Are ── */
+    .who-section { background: #fff; }
+
+    /* ── Services ── */
+    .services-section { background: var(--pw-light); }
+
+    /* ── Case Studies ── */
+    .casestudies-section { background: #fff; }
+    .case-card .case-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.3rem 0.75rem;
+      border-radius: 50px;
+      background: rgba(0,136,204,0.08);
+      color: var(--pw-blue);
+      margin-bottom: 0.8rem;
+    }
+    .case-card h5 { font-size: 1rem; font-weight: 600; line-height: 1.5; }
+    .case-card .case-author { font-size: 0.85rem; color: var(--pw-gray); font-style: italic; }
+
+    /* ── Industries ── */
+    .industries-section { background: var(--pw-light); }
+    .industry-item {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.3s;
+      height: 100%;
+    }
+    .industry-item:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.07); }
+    .industry-item .ind-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(0,136,204,0.1), rgba(37,163,97,0.08));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.8rem;
+      font-size: 1.3rem;
+      color: var(--pw-blue);
+    }
+    .industry-item span { font-size: 0.88rem; font-weight: 500; color: var(--pw-dark); }
+
+    /* ── Resellers ── */
+    .resellers-section { background: #fff; }
+    .reseller-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 50px;
+      background: var(--pw-light);
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--pw-dark);
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.3s;
+    }
+    .reseller-badge:hover { background: rgba(0,136,204,0.06); border-color: rgba(0,136,204,0.15); transform: translateY(-2px); }
+    .reseller-badge i { color: var(--pw-blue); }
+
+    /* ── Futurities ── */
+    .futurities-section {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      padding: 5rem 0;
+    }
+    .futurities-section h2 { color: #fff; }
+    .futurities-section p { color: rgba(255,255,255,0.75); }
+
+    /* ── Footer ── */
+    footer {
+      background: #1a1a2e;
+      color: rgba(255,255,255,0.7);
+      padding: 3.5rem 0 1.5rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+    footer .footer-brand img { height: 34px; margin-bottom: 1rem; }
+    footer .footer-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0 1.5rem; }
+    footer .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+    footer .social-link:hover { background: var(--pw-blue); color: #fff; }
+
+    /* ── Misc ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--pw-blue);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      cursor: pointer;
+      z-index: 999;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0,136,204,0.3);
+    }
+    .back-to-top.show { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: var(--pw-blue-dark); }
+
+    @media (max-width: 991px) {
+      .hero { min-height: 75vh; }
+      section { padding: 3.5rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="images/PW_Europe_logo_small.png" alt="Particleworks Europe">
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#who">Company</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Products</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Particleworks</a></li>
+              <li><a class="dropdown-item" href="#">Granuleworks</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Services</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Consulting</a></li>
+              <li><a class="dropdown-item" href="#">Training</a></li>
+              <li><a class="dropdown-item" href="#">Support</a></li>
+              <li><a class="dropdown-item" href="#">Resources</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Resources</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Case Studies</a></li>
+              <li><a class="dropdown-item" href="#">Webinars</a></li>
+              <li><a class="dropdown-item" href="#">Glossary</a></li>
+              <li><a class="dropdown-item" href="#">Blog</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#resellers">Resellers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-pw btn-sm px-3 py-2" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-particles" id="particles"></div>
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <p class="text-uppercase fw-semibold mb-3" style="color:rgba(255,255,255,0.55);letter-spacing:3px;font-size:0.85rem;">Meshfree CFD Simulation</p>
+          <h1 class="mb-4">Particle<span style="color:rgba(255,255,255,0.6)">works</span></h1>
+          <p class="lead mb-5">Meshfree liquid flow simulation software for complex engineering challenges. From concept to insight in hours, not weeks.</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="#contact" class="btn btn-pw">Contact Us</a>
+            <a href="#about" class="btn btn-pw-outline">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Decorative gradient orb -->
+    <div style="position:absolute;right:-10%;top:10%;width:500px;height:500px;background:radial-gradient(circle,rgba(37,163,97,0.15),transparent 70%);border-radius:50%;z-index:1;"></div>
+  </section>
+
+  <!-- ============ WHAT IS PARTICLEWORKS ============ -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title fade-up">What is Particleworks?</h2>
+        <div class="accent-line fade-up"></div>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-10">
+          <div class="row g-4">
+            <div class="col-md-12 fade-up">
+              <div class="d-flex gap-3 mb-4">
+                <div class="feature-icon"><i class="bi bi-water"></i></div>
+                <div>
+                  <p class="mb-0" style="font-size:1.05rem;line-height:1.75;">Particleworks is a CFD software for the simulation of liquid and multi-phase flows. The mesh-less solver and the intuitive interface make the simulation process simple and fast, even for complex geometries with moving parts, like transmissions, electric-motors or IC engines.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 fade-up">
+              <div class="d-flex gap-3 mb-4">
+                <div class="feature-icon"><i class="bi bi-diagram-3"></i></div>
+                <div>
+                  <p class="mb-0" style="font-size:1.05rem;line-height:1.75;">The Navier-Stokes solver is based on a deterministic Lagrangian method &mdash; Moving Particle Simulation &mdash; that allows to simulate fluid flow, heat transfer and granular flow.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 fade-up">
+              <div class="d-flex gap-3">
+                <div class="feature-icon"><i class="bi bi-globe-europe-africa"></i></div>
+                <div>
+                  <p class="mb-0" style="font-size:1.05rem;line-height:1.75;">Particleworks is used in different industrial sectors, from automotive and aerospace to consumer goods, from power generation to the Food &amp; Beverage industry.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIAL ============ -->
+  <section class="quote-section">
+    <div class="container text-center fade-up">
+      <i class="bi bi-quote" style="font-size:3rem;opacity:0.3;display:block;margin-bottom:1rem;"></i>
+      <blockquote>
+        &ldquo;Typically we would go from CAD to test in around ten to twelve weeks. With Particleworks we can do that in three days.&rdquo;
+      </blockquote>
+      <cite class="d-block mt-3">&mdash; Hewland Engineering</cite>
+    </div>
+  </section>
+
+  <!-- ============ SPH vs MPS ============ -->
+  <section class="comparison-section" id="sph-mps">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title fade-up">SPH vs MPS</h2>
+        <div class="accent-line fade-up"></div>
+        <p class="section-subtitle fade-up">Understanding the key differences between Smoothed Particle Hydrodynamics and Moving Particle Simulation</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-10 fade-up">
+          <div class="comparison-table">
+            <table class="table table-striped mb-0">
+              <thead>
+                <tr>
+                  <th style="width:30%;">Feature</th>
+                  <th style="width:35%;">SPH</th>
+                  <th style="width:35%;">MPS (Particleworks)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-semibold">Method type</td>
+                  <td>Smoothed Particle Hydrodynamics</td>
+                  <td>Moving Particle Simulation</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Formulation</td>
+                  <td>Strong-form (kernel approximation)</td>
+                  <td>Weak-form (differential operators)</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Compressibility</td>
+                  <td>Weakly compressible or incompressible</td>
+                  <td>Fully incompressible</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Pressure stability</td>
+                  <td>Can exhibit noise</td>
+                  <td>Pressure Poisson equation &mdash; stable</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Typical applications</td>
+                  <td>Astrophysics, ballistics, high-speed flows</td>
+                  <td>Lubrication, cooling, sloshing, heat transfer</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Meshing required</td>
+                  <td>No</td>
+                  <td>No</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHO WE ARE ============ -->
+  <section class="who-section" id="who">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 fade-up">
+          <h2 class="section-title">Who We Are</h2>
+          <div class="accent-line" style="margin:1rem 0 1.5rem;"></div>
+          <p style="font-size:1.08rem;line-height:1.8;">Particleworks Europe is the European competence center for the Particleworks and Granuleworks technologies.</p>
+          <p style="font-size:1.08rem;line-height:1.8;">We support distributors and assist customers who require help for applications, verticalization, dedicated developments or integration into their IT systems.</p>
+          <div class="d-flex gap-4 mt-4">
+            <div>
+              <div class="fw-bold fs-3" style="color:var(--pw-blue);">8+</div>
+              <div class="text-muted small">Reseller Partners</div>
+            </div>
+            <div>
+              <div class="fw-bold fs-3" style="color:var(--pw-green);">20+</div>
+              <div class="text-muted small">Countries Served</div>
+            </div>
+            <div>
+              <div class="fw-bold fs-3" style="color:var(--pw-blue);">100+</div>
+              <div class="text-muted small">Industrial Users</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 fade-up">
+          <div style="background:var(--pw-light);border-radius:20px;padding:3rem;text-align:center;">
+            <img src="images/EU-map_white.png" alt="European coverage" style="max-width:100%;height:auto;opacity:0.9;mix-blend-mode:multiply;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title fade-up">Our Services</h2>
+        <div class="accent-line fade-up"></div>
+        <p class="section-subtitle fade-up">Comprehensive support to help you get the most out of your simulation workflow</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3 fade-up">
+          <div class="pw-card text-center">
+            <div class="card-icon icon-blue mx-auto"><i class="bi bi-lightbulb"></i></div>
+            <h5 class="fw-semibold mb-2">Consulting</h5>
+            <p class="text-muted small mb-0">Expert guidance on simulation strategy, model setup, and result interpretation for your specific engineering challenges.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 fade-up">
+          <div class="pw-card text-center">
+            <div class="card-icon icon-green mx-auto"><i class="bi bi-mortarboard"></i></div>
+            <h5 class="fw-semibold mb-2">Training</h5>
+            <p class="text-muted small mb-0">Hands-on training courses tailored to your team's experience level, from beginner to advanced workflows.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 fade-up">
+          <div class="pw-card text-center">
+            <div class="card-icon icon-blue mx-auto"><i class="bi bi-journal-richtext"></i></div>
+            <h5 class="fw-semibold mb-2">Resources</h5>
+            <p class="text-muted small mb-0">Access to case studies, webinars, tutorials and a growing knowledge base of simulation best practices.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 fade-up">
+          <div class="pw-card text-center">
+            <div class="card-icon icon-green mx-auto"><i class="bi bi-headset"></i></div>
+            <h5 class="fw-semibold mb-2">Technical Support</h5>
+            <p class="text-muted small mb-0">Dedicated engineering support for troubleshooting, software updates, and application-specific assistance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASE STUDIES ============ -->
+  <section class="casestudies-section" id="casestudies">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title fade-up">Case Studies</h2>
+        <div class="accent-line fade-up"></div>
+        <p class="section-subtitle fade-up">Real-world applications across the engineering spectrum</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3 fade-up">
+          <div class="pw-card case-card">
+            <span class="case-tag">Motorsport</span>
+            <h5>Estimation of cycle average convective heat transfer coefficient on the underside of a racing piston</h5>
+            <p class="case-author">Gaspare Argento &mdash; Ducati Corse</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 fade-up">
+          <div class="pw-card case-card">
+            <span class="case-tag">Water Technology</span>
+            <h5>Testing ParticleWorks coupled with Recurdyn to simulate water behavior</h5>
+            <p class="case-author">Chiaki Miyazawa, Akiko Kondoh &mdash; LIXIL</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 fade-up">
+          <div class="pw-card case-card">
+            <span class="case-tag">Fire Safety</span>
+            <h5>Simulating fire extinguishing equipment for historical buildings</h5>
+            <p class="case-author">Sunao Tokura et al.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 fade-up">
+          <div class="pw-card case-card">
+            <span class="case-tag">E-Mobility</span>
+            <h5>Thermal Optimisation of e-Drives Using MPS Method</h5>
+            <p class="case-author">Luca Martinelli et al. &mdash; Drive System Design</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INDUSTRIES ============ -->
+  <section class="industries-section" id="industries">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title fade-up">Industries We Serve</h2>
+        <div class="accent-line fade-up"></div>
+      </div>
+      <div class="row g-3 justify-content-center">
+        <div class="col-6 col-sm-4 col-lg fade-up">
+          <div class="industry-item">
+            <div class="ind-icon"><i class="bi bi-gear-wide-connected"></i></div>
+            <span>Gearboxes &amp; Bearings</span>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-lg fade-up">
+          <div class="industry-item">
+            <div class="ind-icon"><i class="bi bi-speedometer2"></i></div>
+            <span>Engines &amp; Pistons</span>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-lg fade-up">
+          <div class="industry-item">
+            <div class="ind-icon"><i class="bi bi-tools"></i></div>
+            <span>Cutting Tools</span>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-lg fade-up">
+          <div class="industry-item">
+            <div class="ind-icon"><i class="bi bi-lightning-charge"></i></div>
+            <span>E-Motors</span>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-lg fade-up">
+          <div class="industry-item">
+            <div class="ind-icon"><i class="bi bi-arrow-repeat"></i></div>
+            <span>Mixing &amp; Separation</span>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-lg fade-up">
+          <div class="industry-item">
+            <div class="ind-icon"><i class="bi bi-disc"></i></div>
+            <span>Clutches &amp; Brakes</span>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-lg fade-up">
+          <div class="industry-item">
+            <div class="ind-icon"><i class="bi bi-truck"></i></div>
+            <span>Vehicle Management</span>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-lg fade-up">
+          <div class="industry-item">
+            <div class="ind-icon"><i class="bi bi-cup-straw"></i></div>
+            <span>Consumer Goods</span>
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-lg fade-up">
+          <div class="industry-item">
+            <div class="ind-icon"><i class="bi bi-building"></i></div>
+            <span>Civil Engineering</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESELLERS ============ -->
+  <section class="resellers-section" id="resellers">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title fade-up">Our Reseller Network</h2>
+        <div class="accent-line fade-up"></div>
+        <p class="section-subtitle fade-up">Trusted distribution partners across Europe and beyond</p>
+      </div>
+      <div class="d-flex flex-wrap justify-content-center gap-3 fade-up">
+        <div class="reseller-badge"><i class="bi bi-patch-check-fill"></i> EnginSoft</div>
+        <div class="reseller-badge"><i class="bi bi-patch-check-fill"></i> SVSFem</div>
+        <div class="reseller-badge"><i class="bi bi-patch-check-fill"></i> CFX</div>
+        <div class="reseller-badge"><i class="bi bi-patch-check-fill"></i> Tensor</div>
+        <div class="reseller-badge"><i class="bi bi-patch-check-fill"></i> Mesco</div>
+        <div class="reseller-badge"><i class="bi bi-patch-check-fill"></i> PowerSolution</div>
+        <div class="reseller-badge"><i class="bi bi-patch-check-fill"></i> eCon Engineering</div>
+        <div class="reseller-badge"><i class="bi bi-patch-check-fill"></i> Globas Engineering</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FUTURITIES ============ -->
+  <section class="futurities-section" id="futurities">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7 fade-up">
+          <p class="text-uppercase fw-semibold mb-2" style="color:rgba(255,255,255,0.4);letter-spacing:2px;font-size:0.8rem;">Featured Publication</p>
+          <h2 class="section-title" style="color:#fff;">Futurities Magazine</h2>
+          <div class="accent-line" style="margin:1rem 0 1.5rem;"></div>
+          <p style="font-size:1.05rem;line-height:1.8;">Discover the special issue dedicated to Particleworks applications, featuring in-depth technical articles, industrial case studies and insights from leading engineers across Europe.</p>
+          <a href="#" class="btn btn-pw mt-3">Read the Special Issue</a>
+        </div>
+        <div class="col-lg-5 text-center fade-up">
+          <img src="images/futurities-special-issue-particleworks.png" alt="Futurities Magazine" style="max-width:280px;width:100%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" style="background:#fff;padding:5rem 0;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title fade-up">Get in Touch</h2>
+        <div class="accent-line fade-up"></div>
+        <p class="section-subtitle fade-up">Ready to accelerate your simulation workflow? We'd love to hear from you.</p>
+      </div>
+      <div class="row justify-content-center g-4">
+        <div class="col-md-4 fade-up">
+          <div class="pw-card text-center">
+            <div class="card-icon icon-blue mx-auto"><i class="bi bi-telephone"></i></div>
+            <h6 class="fw-semibold">Phone</h6>
+            <p class="text-muted small mb-0">+39 0461 915391</p>
+          </div>
+        </div>
+        <div class="col-md-4 fade-up">
+          <div class="pw-card text-center">
+            <div class="card-icon icon-green mx-auto"><i class="bi bi-envelope"></i></div>
+            <h6 class="fw-semibold">Email</h6>
+            <p class="text-muted small mb-0"><a href="mailto:info@particleworks-europe.com" style="color:var(--pw-blue);text-decoration:none;">info@particleworks-europe.com</a></p>
+          </div>
+        </div>
+        <div class="col-md-4 fade-up">
+          <div class="pw-card text-center">
+            <div class="card-icon icon-blue mx-auto"><i class="bi bi-linkedin"></i></div>
+            <h6 class="fw-semibold">LinkedIn</h6>
+            <p class="text-muted small mb-0"><a href="#" style="color:var(--pw-blue);text-decoration:none;">Follow us on LinkedIn</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <img src="images/PWEurope_negativ-logo.png" alt="Particleworks Europe">
+          </div>
+          <p class="small" style="max-width:300px;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
+          <div class="d-flex gap-2 mt-3">
+            <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Products</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="#">Particleworks</a></li>
+            <li class="mb-2"><a href="#">Granuleworks</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Services</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="#">Consulting</a></li>
+            <li class="mb-2"><a href="#">Training</a></li>
+            <li class="mb-2"><a href="#">Support</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Resources</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="#">Case Studies</a></li>
+            <li class="mb-2"><a href="#">Webinars</a></li>
+            <li class="mb-2"><a href="#">Glossary</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Contact</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li>
+            <li class="mb-2"><a href="mailto:info@particleworks-europe.com"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <p class="small mb-0">&copy; 2025 Particleworks Europe. All rights reserved.</p>
+        <p class="small mb-0">Meshfree CFD simulation technology</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ── Navbar scroll shadow ──
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // ── Back to top button ──
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      btt.classList.toggle('show', window.scrollY > 400);
+    });
+
+    // ── Intersection Observer for fade-in ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Stagger siblings slightly
+          const siblings = entry.target.parentElement.querySelectorAll('.fade-up');
+          const idx = Array.from(siblings).indexOf(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, idx * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── Hero floating particles ──
+    (function() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 30; i++) {
+        const span = document.createElement('span');
+        const size = Math.random() * 6 + 2;
+        span.style.width = size + 'px';
+        span.style.height = size + 'px';
+        span.style.left = Math.random() * 100 + '%';
+        span.style.animationDuration = (Math.random() * 12 + 8) + 's';
+        span.style.animationDelay = (Math.random() * 10) + 's';
+        container.appendChild(span);
+      }
+    })();
+
+    // ── Close mobile nav on link click ──
+    document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle), .navbar-nav .btn').forEach(link => {
+      link.addEventListener('click', () => {
+        const collapse = document.getElementById('navContent');
+        if (collapse.classList.contains('show')) {
+          bootstrap.Collapse.getInstance(collapse)?.hide();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
