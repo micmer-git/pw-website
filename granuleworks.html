@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Granuleworks — Granular Flow Simulation with Discrete Element Method</title>
+  <meta name="description" content="Granuleworks is an advanced DEM solver for bulk solids and powders. Simulate granular flows, powder mixing, material transport and thermal evolution with GPU acceleration.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pw-blue: #0088cc;
+      --pw-blue-dark: #006da3;
+      --pw-green: #25a361;
+      --pw-green-dark: #1e8a51;
+      --pw-dark: #1a1a2e;
+      --pw-gray: #6c757d;
+      --pw-light: #f7f8fc;
+      --gw-gradient-dark: linear-gradient(135deg, #0a2e1a 0%, #134d2e 30%, #0d3320 70%, #002a40 100%);
+    }
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { color: #2d2d3a; overflow-x: hidden; background: #fff; }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+      padding: 0.5rem 0;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      z-index: 1050;
+    }
+    .navbar.scrolled { background: rgba(255,255,255,0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+    .navbar-brand img { height: 36px; transition: transform 0.3s; }
+    .navbar-brand:hover img { transform: scale(1.04); }
+    .navbar .nav-link {
+      font-size: 0.85rem; font-weight: 500; color: var(--pw-dark);
+      padding: 0.5rem 0.7rem !important; transition: color 0.2s; letter-spacing: -0.01em;
+    }
+    .navbar .nav-link:hover { color: var(--pw-green); }
+    .btn-nav-cta {
+      background: var(--pw-green); color: #fff !important; border: none;
+      padding: 0.5rem 1.4rem; border-radius: 50px; font-weight: 600; font-size: 0.84rem;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .btn-nav-cta:hover { background: var(--pw-green-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,163,97,0.3); color: #fff; }
+
+    /* Hero */
+    .product-hero {
+      position: relative;
+      padding: 10rem 0 6rem;
+      background: var(--gw-gradient-dark);
+      overflow: hidden;
+    }
+    .product-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(37,163,97,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,136,204,0.1) 0%, transparent 60%);
+    }
+    .product-hero .container { position: relative; z-index: 2; }
+    .product-hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -1px;
+      line-height: 1.05;
+    }
+    .product-hero .lead {
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-top: 1.25rem;
+      font-weight: 300;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(37,163,97,0.2); color: rgba(255,255,255,0.9);
+      border: 1px solid rgba(37,163,97,0.4);
+      padding: 0.35rem 1rem; border-radius: 50px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Sections */
+    .section-white { padding: 5rem 0; background: #fff; }
+    .section-gray { padding: 5rem 0; background: var(--pw-light); }
+    .section-title {
+      font-size: 2rem; font-weight: 800; letter-spacing: -0.5px;
+      color: var(--pw-dark); margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      font-size: 1.08rem; color: var(--pw-gray); line-height: 1.8;
+      max-width: 680px;
+    }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--pw-green); margin-bottom: 0.75rem;
+    }
+    .section-rule {
+      border: none; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(37,163,97,0.15), transparent);
+      margin: 0;
+    }
+
+    /* Feature grid */
+    .feature-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 16px;
+      padding: 2rem 1.75rem;
+      height: 100%;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .feature-card:hover {
+      border-color: rgba(37,163,97,0.2);
+      box-shadow: 0 12px 40px rgba(37,163,97,0.08);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.35rem; margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, rgba(37,163,97,0.1), rgba(0,136,204,0.06));
+      color: var(--pw-green);
+    }
+    .feature-card h4 {
+      font-size: 1.05rem; font-weight: 700; color: var(--pw-dark);
+      margin-bottom: 0.5rem; letter-spacing: -0.2px;
+    }
+    .feature-card p {
+      font-size: 0.92rem; color: var(--pw-gray); line-height: 1.65; margin-bottom: 0;
+    }
+
+    /* Video section */
+    .video-wrap {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
+    .video-wrap iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
+    .video-label {
+      font-size: 0.82rem; font-weight: 600; color: var(--pw-gray);
+      text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1rem;
+    }
+
+    /* FAQ accordion */
+    .faq-accordion .accordion-item {
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 14px !important;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .faq-accordion .accordion-item:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .faq-accordion .accordion-button {
+      font-size: 1rem; font-weight: 600; color: var(--pw-dark);
+      padding: 1.25rem 1.5rem;
+      background: #fff;
+      letter-spacing: -0.1px;
+    }
+    .faq-accordion .accordion-button:not(.collapsed) {
+      color: var(--pw-green);
+      background: #fff;
+      box-shadow: none;
+    }
+    .faq-accordion .accordion-button::after {
+      background-size: 1rem;
+    }
+    .faq-accordion .accordion-body {
+      padding: 0 1.5rem 1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: #444;
+    }
+    .faq-accordion .accordion-body p { margin-bottom: 0.75rem; }
+    .faq-accordion .accordion-body p:last-child { margin-bottom: 0; }
+
+    /* CTA */
+    .cta-section {
+      padding: 5rem 0;
+      background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 100%);
+    }
+    .btn-gw {
+      background: var(--pw-green); color: #fff; border: none;
+      padding: 0.85rem 2.5rem; border-radius: 50px;
+      font-weight: 600; font-size: 1rem;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      display: inline-block; text-decoration: none;
+    }
+    .btn-gw:hover {
+      background: var(--pw-green-dark); color: #fff;
+      transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,163,97,0.3);
+    }
+    .btn-gw-lg {
+      padding: 1rem 3rem; font-size: 1.05rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #1a1a2e;
+      color: rgba(255,255,255,0.7);
+      padding: 3.5rem 0 1.5rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+    footer .footer-brand img { height: 34px; margin-bottom: 1rem; }
+    footer .footer-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0 1.5rem; }
+    footer .social-link {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: all 0.3s;
+    }
+    footer .social-link:hover { background: var(--pw-green); color: #fff; }
+
+    /* Intro */
+    .intro-text {
+      font-size: 1.15rem; line-height: 1.9; color: #444; max-width: 740px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/PW_Europe_logo_small.png" alt="Particleworks Europe">
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#products">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#casestudies">Case Studies</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+          <li class="nav-item ms-lg-1">
+            <a class="nav-link" href="https://www.linkedin.com/company/particleworks-europe/" target="_blank" rel="noopener" aria-label="LinkedIn" style="color:var(--pw-green) !important;font-size:1.15rem;"><i class="bi bi-linkedin"></i></a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-nav-cta" href="index.html#demo">Request Demo</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="product-hero">
+    <div class="container">
+      <div class="hero-badge"><i class="bi bi-circle-fill me-1" style="font-size:0.5rem;"></i> Discrete Element Method</div>
+      <h1>Granuleworks</h1>
+      <p class="lead">Granular flow simulation with Discrete Element Method. Powders, bulk solids, and everything in between.</p>
+    </div>
+  </section>
+
+  <!-- What is Granuleworks -->
+  <section class="section-white">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <p class="section-label">Overview</p>
+          <h2 class="section-title mb-4">What is Granuleworks</h2>
+          <p class="intro-text mx-auto">Granuleworks is an advanced DEM (Discrete Element Method) solver for simulating the behaviour of bulk solids and powders. It is installed together with Particleworks and shares the same graphical interface, making it straightforward to set up coupled fluid-powder simulations. Model granular flows, predict material segregation, analyse powder transport, and simulate filling and emptying processes &mdash; all with GPU-accelerated performance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- Key Capabilities -->
+  <section class="section-gray">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="section-label">Capabilities</p>
+        <h2 class="section-title">What you can do with Granuleworks</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-diagram-3"></i></div>
+            <h4>Discrete Element Method</h4>
+            <p>Newton's 2nd Law applied to individual particles. Simulate bulk solids and powders with realistic contact mechanics, friction and energy dissipation.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-sliders2"></i></div>
+            <h4>Material properties</h4>
+            <p>User-defined granulometry, bulk density, angle of repose, adhesion, friction coefficients. Calibrate to match real-world material behaviour.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-arrow-left-right"></i></div>
+            <h4>Multi-phase coupling</h4>
+            <p>MPS-DEM for fluid-powder mixing, FVM-DEM and LBM-DEM for air-driven powder transport and fluidisation simulations.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-bezier2"></i></div>
+            <h4>Flexible body coupling</h4>
+            <p>RecurDyn integration for deformable structures interacting with granular materials. Simulate conveyor belts, flexible walls and rubber liners.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-thermometer-half"></i></div>
+            <h4>Thermal simulations</h4>
+            <p>Temperature evolution in powders with particle-to-particle and particle-to-wall conduction models. Track heat fronts through granular beds.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-gpu-card"></i></div>
+            <h4>GPU acceleration</h4>
+            <p>Fast simulations with multi-GPU support. Handle millions of particles in practical turnaround times for industrial-scale problems.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-bounding-box-circles"></i></div>
+            <h4>Scalable DEM (SDEM)</h4>
+            <p>Coarse-graining technique that represents clusters of fine particles as larger computational particles, enabling simulation of very fine powders.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-hexagon"></i></div>
+            <h4>Non-spherical particles</h4>
+            <p>Capture anisotropic behaviour of real-world granules. Model elongated, flat or irregular particle shapes for more accurate flow predictions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- Demo Videos -->
+  <section class="section-white">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="section-label">See it in action</p>
+        <h2 class="section-title">Demo Videos</h2>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-6">
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/K-0Xs-zN1Tk" title="Granuleworks — Angle of repose" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <p class="video-label text-center">Angle of repose simulation</p>
+        </div>
+        <div class="col-lg-6">
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/0RrG_vi3AE4" title="Granuleworks — Powder transport with air" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <p class="video-label text-center">Powder transport with air coupling</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- FAQ -->
+  <section class="section-gray" id="faq">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="text-center mb-5">
+            <p class="section-label">FAQ</p>
+            <h2 class="section-title">Frequently asked questions</h2>
+          </div>
+
+          <div class="accordion faq-accordion" id="gwFaq">
+
+            <!-- FAQ 1 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">What is the Discrete Element Method?</button>
+              </h3>
+              <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#gwFaq">
+                <div class="accordion-body">
+                  <p>The Discrete Element Method (DEM) is a numerical technique for simulating the motion of large numbers of individual particles. Each particle is tracked individually: forces (gravity, contact, friction, cohesion) are computed from Newton's second law, and particle positions and velocities are updated at each time step. DEM is the standard approach for modelling granular materials such as sand, powders, pellets, rocks and agricultural grains, where the bulk behaviour emerges from the interactions between millions of individual particles.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">What is Granuleworks and how does it relate to Particleworks?</button>
+              </h3>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#gwFaq">
+                <div class="accordion-body">
+                  <p>Granuleworks is the DEM solver module developed by Prometech Software and distributed alongside Particleworks. It is installed as part of the same software package and shares the identical graphical user interface, project structure and post-processing tools. This tight integration means engineers can set up coupled simulations &mdash; for example, liquid and powder mixing (MPS-DEM) or air-driven powder transport (LBM-DEM) &mdash; within a single project file, without any data translation or file exchange between separate tools.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">What industries use granular flow simulation?</button>
+              </h3>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#gwFaq">
+                <div class="accordion-body">
+                  <p>Granular flow simulation with DEM is used in a wide range of industries:</p>
+                  <p><strong>Mining and minerals:</strong> Ore crushing, screening, conveyor transfer points, stockpile formation.</p>
+                  <p><strong>Pharmaceuticals:</strong> Powder blending, tablet coating, capsule filling, fluidised-bed drying.</p>
+                  <p><strong>Food processing:</strong> Grain handling, cereal mixing, sugar and flour transport.</p>
+                  <p><strong>Construction materials:</strong> Concrete mixing, aggregate flow, silo discharge.</p>
+                  <p><strong>Automotive and industrial:</strong> Snow accumulation and clearing simulation, powder coating, additive manufacturing powder spreading.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">What is Scalable DEM (SDEM)?</button>
+              </h3>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#gwFaq">
+                <div class="accordion-body">
+                  <p>Scalable DEM (SDEM) is a coarse-graining technique available in Granuleworks. In standard DEM, every physical particle is represented individually, which can become prohibitively expensive when dealing with very fine powders (particle diameters below ~100 microns) that result in billions of particles. SDEM groups clusters of small particles into larger representative particles, scaling contact forces and material properties accordingly. This makes it practical to simulate fine powder processes &mdash; such as pharmaceutical blending or additive manufacturing powder beds &mdash; at industrial scale while retaining the essential bulk-level physics.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container text-center">
+      <h2 class="section-title mb-3">See Granuleworks in action</h2>
+      <p class="section-sub mx-auto mb-4">Book a personalised demo with our engineering team. We will set up a simulation relevant to your powder or granular material application.</p>
+      <a href="index.html#demo" class="btn-gw btn-gw-lg"><i class="bi bi-play-circle me-2"></i>Request a Demo</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <img src="images/PWEurope_negativ-logo.png" alt="Particleworks Europe">
+          </div>
+          <p class="small" style="max-width:300px;line-height:1.7;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
+          <div class="d-flex gap-2 mt-3">
+            <a href="https://www.linkedin.com/company/particleworks-europe/" target="_blank" class="social-link"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.82rem;">Products</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="particleworks.html">Particleworks</a></li>
+            <li class="mb-2"><a href="granuleworks.html">Granuleworks</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.82rem;">Services</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="index.html#services">Consulting</a></li>
+            <li class="mb-2"><a href="index.html#services">Training</a></li>
+            <li class="mb-2"><a href="index.html#services">Support</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.82rem;">Resources</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="index.html#casestudies">Case Studies</a></li>
+            <li class="mb-2"><a href="index.html#resources">Downloads</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.82rem;">Contact</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li>
+            <li class="mb-2"><a href="mailto:info@particleworks-europe.com"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
+        <p class="small mb-0">Meshfree CFD simulation technology by <a href="https://www.prometech.co.jp/english/" target="_blank">Prometech Software</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.addEventListener('scroll', function() {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+  </script>
+</body>
+</html>

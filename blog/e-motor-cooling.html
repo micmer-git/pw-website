@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unleashing the Potential: How Particleworks CFD Cracked the E-Motor Cooling Challenge</title>
+  <meta name="description" content="Learn how particle-based CFD simulation enabled engineers to optimize an oil-cooled e-motor design, achieving temperature predictions within 2.8 degrees C of experimental measurements.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pw-blue: #0088cc;
+      --pw-blue-dark: #006da3;
+      --pw-green: #25a361;
+      --pw-green-dark: #1e8a51;
+      --pw-dark: #333333;
+      --pw-gray: #6c757d;
+      --pw-light: #f8f9fa;
+      --pw-gradient: linear-gradient(135deg, #0088cc 0%, #25a361 100%);
+      --pw-gradient-dark: linear-gradient(135deg, #004466 0%, #0088cc 50%, #1a7a4a 100%);
+    }
+    * { font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { color: var(--pw-dark); overflow-x: hidden; }
+
+    .navbar {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+      padding: 0.6rem 0;
+      transition: box-shadow 0.3s;
+    }
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .navbar-brand img { height: 38px; }
+    .navbar .nav-link {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--pw-dark);
+      padding: 0.5rem 0.75rem !important;
+      transition: color 0.2s;
+    }
+    .navbar .nav-link:hover { color: var(--pw-blue); }
+
+    .blog-hero {
+      position: relative;
+      padding: 7rem 0 0;
+      background: var(--pw-dark);
+      overflow: hidden;
+    }
+    .blog-hero .hero-img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+    .blog-hero .hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 4rem 0 2.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+    }
+    .blog-hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+      line-height: 1.18;
+      max-width: 740px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.88rem;
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+    .blog-body { padding: 4rem 0 3rem; }
+    .article-content { max-width: 740px; }
+    .article-content h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--pw-dark);
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+    }
+    .article-content h2:first-of-type { margin-top: 0; }
+    .article-content p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #444;
+      margin-bottom: 1.25rem;
+    }
+    .article-content ul {
+      margin-bottom: 1.5rem;
+      padding-left: 0;
+      list-style: none;
+    }
+    .article-content ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: #444;
+    }
+    .article-content ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--pw-blue);
+    }
+    .article-content strong { color: var(--pw-dark); font-weight: 600; }
+    .article-content h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--pw-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .article-figure {
+      margin: 2.5rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .article-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .article-figure figcaption {
+      padding: 0.85rem 1.25rem;
+      background: var(--pw-light);
+      font-size: 0.88rem;
+      color: var(--pw-gray);
+      line-height: 1.55;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .section-rule {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,136,204,0.2), transparent);
+      margin: 3rem 0;
+    }
+
+    /* Takeaway cards */
+    .takeaway-cards {
+      display: grid;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .takeaway-card {
+      background: linear-gradient(135deg, #f0f9ff 0%, #f8f9fa 100%);
+      border-left: 4px solid var(--pw-blue);
+      border-radius: 0 10px 10px 0;
+      padding: 1.25rem 1.5rem;
+    }
+    .takeaway-card .card-num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--pw-blue);
+      margin-bottom: 0.35rem;
+    }
+    .takeaway-card p {
+      font-size: 0.98rem !important;
+      line-height: 1.6 !important;
+      color: var(--pw-dark) !important;
+      margin-bottom: 0 !important;
+      font-weight: 500;
+    }
+
+    /* Stat highlight */
+    .stat-highlight {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pw-blue), var(--pw-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+      font-size: 1.15em;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%);
+      border: 1px solid rgba(0,136,204,0.15);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-top: 3rem;
+    }
+    .cta-box h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--pw-dark);
+      text-transform: none;
+      letter-spacing: -0.2px;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .cta-box p { color: var(--pw-gray); font-size: 0.98rem; margin-bottom: 1.5rem; }
+    .cta-box .form-control {
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      border: 1px solid #dee2e6;
+      font-size: 0.92rem;
+    }
+    .cta-box .form-control:focus {
+      border-color: var(--pw-blue);
+      box-shadow: 0 0 0 3px rgba(0,136,204,0.1);
+    }
+    .cta-box .btn-pw { width: 100%; padding: 0.7rem; }
+    .cta-box .form-text { font-size: 0.8rem; color: var(--pw-gray); }
+
+    .related-section {
+      padding: 3rem 0 4rem;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .related-card {
+      display: block;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      height: 100%;
+    }
+    .related-card:hover {
+      border-color: var(--pw-blue);
+      box-shadow: 0 6px 20px rgba(0,136,204,0.1);
+      transform: translateY(-2px);
+    }
+    .related-card h5 { font-size: 1rem; font-weight: 600; color: var(--pw-dark); margin-bottom: 0.4rem; }
+    .related-card p { font-size: 0.88rem; color: var(--pw-gray); margin-bottom: 0; line-height: 1.5; }
+    .related-card .card-arrow { color: var(--pw-blue); font-size: 1.1rem; margin-top: 0.75rem; display: block; }
+
+    .btn-pw {
+      background: var(--pw-blue);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .btn-pw:hover { background: var(--pw-blue-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,136,204,0.3); }
+
+    footer {
+      background: #1a1a2e;
+      color: rgba(255,255,255,0.7);
+      padding: 3.5rem 0 1.5rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+    footer .footer-brand img { height: 34px; margin-bottom: 1rem; }
+    footer .footer-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0 1.5rem; }
+    footer .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+    footer .social-link:hover { background: var(--pw-blue); color: #fff; }
+
+    .thank-you-msg { display: none; text-align: center; padding: 2rem 0; }
+    .thank-you-msg.show { display: block; }
+    .thank-you-msg i { font-size: 2.5rem; color: var(--pw-green); margin-bottom: 0.75rem; display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">
+        <img src="../images/PW_Europe_logo_small.png" alt="Particleworks Europe">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#case-studies">Case Studies</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/company/particleworks-europe/" target="_blank"><i class="bi bi-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero with image -->
+  <section class="blog-hero">
+    <img src="images/Unleashing-the-Potential.webp" alt="Oil-cooled e-motor CFD simulation showing particle-based cooling flow" class="hero-img">
+    <div class="hero-overlay">
+      <div class="container">
+        <h1>Unleashing the Potential: How Particleworks CFD Cracked the E-Motor Cooling Challenge</h1>
+        <div class="hero-meta">
+          <span><i class="bi bi-person"></i> Michele Merelli</span>
+          <span><i class="bi bi-calendar3"></i> June 2024</span>
+          <span><i class="bi bi-clock"></i> 8 min read</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article -->
+  <section class="blog-body">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+          <article class="article-content">
+
+            <h2>The Cooling Problem Nobody Wants to Talk About</h2>
+
+            <p>As electric vehicle adoption accelerates, the pressure on traction motor design is relentless: more power from smaller packages, tighter thermal margins, and absolute reliability over hundreds of thousands of kilometres. The cooling system is where all of this converges. Get it wrong and you face demagnetisation, winding insulation failure, or premature bearing degradation. Get it right and you unlock power density that the competition cannot match.</p>
+
+            <p>Traditional CFD tools can handle single-phase flows through jackets and channels well enough. But the moment you introduce oil jets impinging on copper windings, splashing through narrow air gaps, and draining back under gravity, the physics become genuinely difficult. Volume-based meshing chokes on the free-surface fragmentation. Run times balloon. Engineers end up simplifying geometry until the simulation barely resembles what sits on the test bench.</p>
+
+            <p>This is exactly where the particle-based approach changes the game.</p>
+
+            <hr class="section-rule">
+
+            <h2>Why Particles Beat Meshes for Oil-Jet Cooling</h2>
+
+            <p>The MPS (Moving Particle Semi-implicit) method treats the fluid as discrete particles rather than carving the domain into millions of tiny cells. There is no mesh to generate, no mesh to deform, and no mesh to repair when oil breaks into thin films and droplets against a hot stator. The particles simply follow Newtonian mechanics and interact through kernel functions that enforce conservation of mass and momentum.</p>
+
+            <p>For an oil-cooled e-motor, this translates to a practical advantage: you can model the full complexity of jet impingement, film flow, and gravity drainage without the weeks of mesh preparation that a traditional Eulerian approach would require. And because GPU-accelerated MPS is inherently parallel, a single high-end graphics card can replace a multi-node cluster.</p>
+
+            <hr class="section-rule">
+
+            <h2>Inside the Simulation: A Three-Stage Strategy</h2>
+
+            <p>The e-motor geometry featured a central shaft feeding cooling oil outward through strategically placed jets aimed at the stator windings and end regions. Rather than brute-forcing the entire two-phase problem in a single massive run, the engineering team designed a layered workflow that exploits the physics at each scale.</p>
+
+            <h3>Stage 1 &mdash; Oil Flow Distribution</h3>
+
+            <p>An internal flow simulation mapped how the total oil supply splits between the three jet groups. The result was a <span class="stat-highlight">47 / 34 / 19 percent</span> distribution ratio across the groups. This single finding already has enormous design value: it tells you whether each winding zone receives enough coolant, and it identifies where to enlarge or restrict orifices if it does not.</p>
+
+            <h3>Stage 2 &mdash; Air Field Mapping</h3>
+
+            <p>The oil flow field informed a follow-on air flow simulation using larger 0.5 mm particles &mdash; roughly sixteen times fewer than a full two-phase model at oil-resolution. This step captures the recirculating air patterns inside the motor housing that influence how oil films spread and how droplets are entrained. Running it separately kept the computational cost manageable without sacrificing the coupled physics.</p>
+
+            <h3>Stage 3 &mdash; High-Resolution Impingement</h3>
+
+            <p>With the air flow mapped, a final high-resolution 0.2 mm particle simulation captured the complex oil jet impingement patterns and the intricate wetting of the motor components. This is where the real engineering insight lives: you can see exactly which surfaces are flooded, which are starved, and how the heat transfer coefficient (HTC) varies across the geometry.</p>
+
+            <p>The entire oil flow simulation required just <strong>6 days on a single GPU</strong> despite modelling millions of particles. Compare that to the typical multi-week timeline and multi-node cluster requirement for a comparable volume-of-fluid approach, and the efficiency advantage becomes hard to ignore.</p>
+
+            <hr class="section-rule">
+
+            <h2>Closing the Loop: CFD Meets Finite Element Thermal Analysis</h2>
+
+            <p>A beautiful flow visualisation means nothing if it cannot predict the temperatures an engineer will measure on a real motor. To get there, the CFD-derived HTC distributions were exported and mapped onto a finite element (FE) thermal model of the complete motor assembly &mdash; stator laminations, winding bundles, insulation layers, housing, and bearings.</p>
+
+            <p>The coupled simulation was then compared against experimental thermocouple measurements at six winding locations distributed around the stator. The result: predictions matched within <span class="stat-highlight">&plusmn;2.8 &deg;C</span> across every measurement point. That is an exceptional level of accuracy for a system with this many interacting thermal paths, and it validates the entire simulation chain from particle flow to structural temperature.</p>
+
+            <hr class="section-rule">
+
+            <h2>What This Means for Your Next Motor Programme</h2>
+
+            <p>The days of over-engineering cooling systems with generous safety margins are ending. Battery capacity is precious, motor envelopes are shrinking, and every watt of pumping power that goes to moving coolant is a watt that does not reach the wheels. Accurate, efficient simulation of oil jet cooling is no longer optional &mdash; it is the difference between a competitive powertrain and an also-ran.</p>
+
+            <div class="takeaway-cards">
+              <div class="takeaway-card">
+                <div class="card-num">Key Takeaway 01</div>
+                <p>Particle-based CFD efficiently simulates complex multiphase e-motor cooling flows without the mesh generation bottleneck that stalls traditional approaches.</p>
+              </div>
+              <div class="takeaway-card">
+                <div class="card-num">Key Takeaway 02</div>
+                <p>CFD modelling revealed the 47/34/19% flow split ratio and detailed jet impingement patterns, providing actionable data for cooling circuit optimisation.</p>
+              </div>
+              <div class="takeaway-card">
+                <div class="card-num">Key Takeaway 03</div>
+                <p>The coupled CFD-FEA workflow validated winding temperatures within &plusmn;2.8 &deg;C of experimental measurements across all six probe locations.</p>
+              </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-box" id="download-cta">
+              <div id="cta-form-container">
+                <h3>Want to See This Applied to Your Motor?</h3>
+                <p>We can walk you through the full simulation workflow and discuss how particle-based CFD fits your thermal management challenges.</p>
+                <form id="cta-form" action="https://formspree.io/f/xpwzgvkr" method="POST">
+                  <input type="hidden" name="_subject" value="Blog Enquiry: E-Motor Cooling CFD">
+                  <div class="row g-2 mb-2">
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="email" class="form-control" name="email" placeholder="Work email" required>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" name="company" placeholder="Company">
+                  </div>
+                  <button type="submit" class="btn-pw"><i class="bi bi-send me-2"></i>Get in Touch</button>
+                  <div class="form-text mt-2">We will reply within one working day. No spam, ever.</div>
+                </form>
+              </div>
+              <div class="thank-you-msg" id="thank-you">
+                <i class="bi bi-check-circle-fill"></i>
+                <h4 class="fw-bold mb-2">Thank you!</h4>
+                <p class="text-muted mb-0">We will be in touch shortly.</p>
+              </div>
+            </div>
+
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Content -->
+  <section class="related-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+          <h5 class="fw-bold mb-3" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--pw-gray);">Related Content</h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <a href="../cases/emotors.html" class="related-card">
+                <h5>E-Motor Cooling Case Studies</h5>
+                <p>Explore our full portfolio of electric motor thermal management simulations.</p>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="../cases/ricardo.html" class="related-card">
+                <h5>Ricardo Partnership</h5>
+                <p>How Ricardo leveraged Particleworks for advanced powertrain cooling analysis.</p>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <img src="../images/PWEurope_negativ-logo.png" alt="Particleworks Europe">
+          </div>
+          <p class="small" style="max-width:300px;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
+          <div class="d-flex gap-2 mt-3">
+            <a href="https://www.linkedin.com/company/particleworks-europe/" class="social-link" target="_blank"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Products</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html">Particleworks</a></li>
+            <li class="mb-2"><a href="../index.html">Granuleworks</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Services</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html">Consulting</a></li>
+            <li class="mb-2"><a href="../index.html">Training</a></li>
+            <li class="mb-2"><a href="../index.html">Support</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Resources</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html#case-studies">Case Studies</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Contact</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li>
+            <li class="mb-2"><a href="mailto:info@particleworks-europe.com"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
+        <p class="small mb-0">Meshfree CFD simulation technology</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.addEventListener('scroll', function() {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+    const form = document.getElementById('cta-form');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(response) {
+        if (response.ok) {
+          document.getElementById('cta-form-container').style.display = 'none';
+          document.getElementById('thank-you').classList.add('show');
+        }
+      }).catch(function() {
+        document.getElementById('cta-form-container').style.display = 'none';
+        document.getElementById('thank-you').classList.add('show');
+      });
+    });
+  </script>
+</body>
+</html>

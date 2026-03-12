@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particleworks — Meshfree CFD Particle Simulation Software</title>
+  <meta name="description" content="Particleworks is a cutting-edge CAE software based on the Moving Particle Simulation method for meshfree CFD. Multi-phase flows, thermal analysis, GPU acceleration.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pw-blue: #0088cc;
+      --pw-blue-dark: #006da3;
+      --pw-green: #25a361;
+      --pw-green-dark: #1e8a51;
+      --pw-dark: #1a1a2e;
+      --pw-gray: #6c757d;
+      --pw-light: #f7f8fc;
+      --pw-gradient: linear-gradient(135deg, #0088cc 0%, #25a361 100%);
+      --pw-gradient-dark: linear-gradient(135deg, #002a40 0%, #004466 30%, #003d1a 100%);
+    }
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { color: #2d2d3a; overflow-x: hidden; background: #fff; }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+      padding: 0.5rem 0;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      z-index: 1050;
+    }
+    .navbar.scrolled { background: rgba(255,255,255,0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+    .navbar-brand img { height: 36px; transition: transform 0.3s; }
+    .navbar-brand:hover img { transform: scale(1.04); }
+    .navbar .nav-link {
+      font-size: 0.85rem; font-weight: 500; color: var(--pw-dark);
+      padding: 0.5rem 0.7rem !important; transition: color 0.2s; letter-spacing: -0.01em;
+    }
+    .navbar .nav-link:hover { color: var(--pw-blue); }
+    .btn-nav-cta {
+      background: var(--pw-blue); color: #fff !important; border: none;
+      padding: 0.5rem 1.4rem; border-radius: 50px; font-weight: 600; font-size: 0.84rem;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .btn-nav-cta:hover { background: var(--pw-blue-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,136,204,0.3); color: #fff; }
+
+    /* Hero */
+    .product-hero {
+      position: relative;
+      padding: 10rem 0 6rem;
+      background: var(--pw-gradient-dark);
+      overflow: hidden;
+    }
+    .product-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(0,136,204,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(37,163,97,0.12) 0%, transparent 60%);
+    }
+    .product-hero .container { position: relative; z-index: 2; }
+    .product-hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -1px;
+      line-height: 1.05;
+    }
+    .product-hero .lead {
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-top: 1.25rem;
+      font-weight: 300;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(0,136,204,0.2); color: rgba(255,255,255,0.9);
+      border: 1px solid rgba(0,136,204,0.35);
+      padding: 0.35rem 1rem; border-radius: 50px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Sections */
+    .section-white { padding: 5rem 0; background: #fff; }
+    .section-gray { padding: 5rem 0; background: var(--pw-light); }
+    .section-title {
+      font-size: 2rem; font-weight: 800; letter-spacing: -0.5px;
+      color: var(--pw-dark); margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      font-size: 1.08rem; color: var(--pw-gray); line-height: 1.8;
+      max-width: 680px;
+    }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--pw-blue); margin-bottom: 0.75rem;
+    }
+    .section-rule {
+      border: none; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,136,204,0.15), transparent);
+      margin: 0;
+    }
+
+    /* Feature grid */
+    .feature-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 16px;
+      padding: 2rem 1.75rem;
+      height: 100%;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .feature-card:hover {
+      border-color: rgba(0,136,204,0.2);
+      box-shadow: 0 12px 40px rgba(0,136,204,0.08);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.35rem; margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, rgba(0,136,204,0.08), rgba(37,163,97,0.08));
+      color: var(--pw-blue);
+    }
+    .feature-card h4 {
+      font-size: 1.05rem; font-weight: 700; color: var(--pw-dark);
+      margin-bottom: 0.5rem; letter-spacing: -0.2px;
+    }
+    .feature-card p {
+      font-size: 0.92rem; color: var(--pw-gray); line-height: 1.65; margin-bottom: 0;
+    }
+
+    /* Video section */
+    .video-wrap {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
+    .video-wrap iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
+    .video-label {
+      font-size: 0.82rem; font-weight: 600; color: var(--pw-gray);
+      text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1rem;
+    }
+
+    /* FAQ accordion */
+    .faq-accordion .accordion-item {
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 14px !important;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .faq-accordion .accordion-item:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .faq-accordion .accordion-button {
+      font-size: 1rem; font-weight: 600; color: var(--pw-dark);
+      padding: 1.25rem 1.5rem;
+      background: #fff;
+      letter-spacing: -0.1px;
+    }
+    .faq-accordion .accordion-button:not(.collapsed) {
+      color: var(--pw-blue);
+      background: #fff;
+      box-shadow: none;
+    }
+    .faq-accordion .accordion-button::after {
+      background-size: 1rem;
+    }
+    .faq-accordion .accordion-body {
+      padding: 0 1.5rem 1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: #444;
+    }
+    .faq-accordion .accordion-body p { margin-bottom: 0.75rem; }
+    .faq-accordion .accordion-body p:last-child { margin-bottom: 0; }
+
+    /* CTA */
+    .cta-section {
+      padding: 5rem 0;
+      background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%);
+    }
+    .btn-pw {
+      background: var(--pw-blue); color: #fff; border: none;
+      padding: 0.85rem 2.5rem; border-radius: 50px;
+      font-weight: 600; font-size: 1rem;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      display: inline-block; text-decoration: none;
+    }
+    .btn-pw:hover {
+      background: var(--pw-blue-dark); color: #fff;
+      transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,136,204,0.3);
+    }
+    .btn-pw-lg {
+      padding: 1rem 3rem; font-size: 1.05rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #1a1a2e;
+      color: rgba(255,255,255,0.7);
+      padding: 3.5rem 0 1.5rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+    footer .footer-brand img { height: 34px; margin-bottom: 1rem; }
+    footer .footer-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0 1.5rem; }
+    footer .social-link {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: all 0.3s;
+    }
+    footer .social-link:hover { background: var(--pw-blue); color: #fff; }
+
+    /* Intro */
+    .intro-text {
+      font-size: 1.15rem; line-height: 1.9; color: #444; max-width: 740px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/PW_Europe_logo_small.png" alt="Particleworks Europe">
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#products">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#casestudies">Case Studies</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+          <li class="nav-item ms-lg-1">
+            <a class="nav-link" href="https://www.linkedin.com/company/particleworks-europe/" target="_blank" rel="noopener" aria-label="LinkedIn" style="color:var(--pw-blue) !important;font-size:1.15rem;"><i class="bi bi-linkedin"></i></a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-nav-cta" href="index.html#demo">Request Demo</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="product-hero">
+    <div class="container">
+      <div class="hero-badge"><i class="bi bi-water me-1"></i> Meshfree CFD</div>
+      <h1>Particleworks</h1>
+      <p class="lead">Particle simulation software for meshfree CFD. From CAD to insight without meshing.</p>
+    </div>
+  </section>
+
+  <!-- What is Particleworks -->
+  <section class="section-white">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <p class="section-label">Overview</p>
+          <h2 class="section-title mb-4">What is Particleworks</h2>
+          <p class="intro-text mx-auto">Particleworks is a cutting-edge CAE software based on the innovative mesh-less Moving Particle Simulation (MPS) method. It solves the Navier-Stokes equations without requiring a computational mesh, enabling engineers to go from CAD geometry to running simulation in a single day. Free-surface flows, splashing, sloshing, multi-phase mixing &mdash; problems that are notoriously painful with traditional CFD become straightforward with a particle-based approach.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- Key Capabilities -->
+  <section class="section-gray">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="section-label">Capabilities</p>
+        <h2 class="section-title">What you can do with Particleworks</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-droplet-half"></i></div>
+            <h4>Mesh-less CFD</h4>
+            <p>Navier-Stokes solver based on the MPS method. No meshing required &mdash; go from imported CAD to running simulation in one day.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-layers-half"></i></div>
+            <h4>Multi-phase flows</h4>
+            <p>Oil jets, water splash, free-surface flows. Simulate complex liquid behaviour including mixing, separation and surface interaction.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-thermometer-half"></i></div>
+            <h4>Thermal solver</h4>
+            <p>Conjugate heat transfer between fluids and solids. Generate HTC maps directly on solid surfaces for downstream thermal analysis.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-wind"></i></div>
+            <h4>Air simulations</h4>
+            <p>Integrated FVM solver and Lattice-Boltzmann method for aerodynamics, multiphase air-liquid coupling and ventilation analysis.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-gpu-card"></i></div>
+            <h4>GPU acceleration</h4>
+            <p>Multi-GPU with near-linear speedup. A single GPU delivers the equivalent of 100&ndash;500 CPU cores of computational throughput.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-moisture"></i></div>
+            <h4>Non-Newtonian fluids</h4>
+            <p>User-defined viscosity models for chocolate, snow, grease, adhesives and other complex rheological materials.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-zoom-in"></i></div>
+            <h4>High-resolution refinement</h4>
+            <p>Multi-resolution regions let you place fine particle detail exactly where you need it, without slowing down the entire domain.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-plug"></i></div>
+            <h4>Software couplings</h4>
+            <p>Direct integration with ANSYS Workbench, Romax, RecurDyn and modeFRONTIER for multi-physics and optimization workflows.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- Demo Videos -->
+  <section class="section-white">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="section-label">See it in action</p>
+        <h2 class="section-title">Demo Videos</h2>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-6">
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/pNB1USc6fKQ" title="Particleworks demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/meCBakr7A5o" title="Particleworks simulation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- FAQ -->
+  <section class="section-gray" id="faq">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="text-center mb-5">
+            <p class="section-label">FAQ</p>
+            <h2 class="section-title">Frequently asked questions</h2>
+          </div>
+
+          <div class="accordion faq-accordion" id="pwFaq">
+
+            <!-- FAQ 1 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">What is particle simulation software?</button>
+              </h3>
+              <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#pwFaq">
+                <div class="accordion-body">
+                  <p>Particle simulation software models the behaviour of fluids, granular materials or other continua by representing them as a large collection of discrete particles rather than solving equations on a fixed computational mesh. Each particle carries physical properties &mdash; mass, velocity, temperature &mdash; and interacts with its neighbours according to the governing equations of motion. This approach is particularly powerful for problems involving free surfaces, splashing, fragmentation and large deformations, where traditional mesh-based methods struggle to maintain accuracy.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">What is Particleworks?</button>
+              </h3>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#pwFaq">
+                <div class="accordion-body">
+                  <p>Particleworks is a commercial CAE software developed by Prometech Software in Japan and distributed in Europe by Particleworks Europe. It uses the Moving Particle Simulation (MPS) method to solve incompressible Navier-Stokes equations without a computational mesh. Engineers import CAD geometry, define fluid regions and boundary conditions, and run the solver &mdash; typically going from raw geometry to first results within a single working day. The software is widely adopted in automotive, industrial machinery, food processing and energy sectors for oil flow, cooling, sloshing and mixing analyses.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">What is Moving Particle Simulation?</button>
+              </h3>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#pwFaq">
+                <div class="accordion-body">
+                  <p>Moving Particle Simulation (MPS) is a meshfree computational method originally developed by Professor Seiichi Koshizuka at the University of Tokyo. It discretises the fluid domain into particles and approximates differential operators &mdash; gradient, divergence, Laplacian &mdash; using weighted averages over neighbouring particles. The method naturally tracks free surfaces, handles topology changes such as merging and splitting, and avoids the mesh distortion issues that plague Lagrangian finite-element or ALE approaches. MPS solves the incompressible Navier-Stokes equations through a semi-implicit pressure correction scheme, ensuring mass conservation and numerical stability even in violent flow scenarios.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">What are the differences between mesh-based and mesh-less CFD?</button>
+              </h3>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#pwFaq">
+                <div class="accordion-body">
+                  <p>In mesh-based CFD (e.g. finite volume, finite element), the simulation domain is divided into a structured or unstructured grid of cells. The governing equations are solved at each cell, and accuracy depends heavily on mesh quality. Generating a high-quality mesh for complex geometries can take days or weeks and often requires significant manual effort.</p>
+                  <p>In mesh-less CFD &mdash; as implemented in Particleworks &mdash; there is no mesh. The fluid is represented by moving particles, and the equations of motion are evaluated through particle-to-particle interactions. This eliminates meshing entirely, dramatically reduces setup time, and naturally handles free surfaces, large deformations and multi-phase interfaces. The trade-off is that meshfree methods can be more computationally intensive per degree of freedom, but modern GPU acceleration (as used in Particleworks) largely compensates for this.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">What are examples of particle simulation?</button>
+              </h3>
+              <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#pwFaq">
+                <div class="accordion-body">
+                  <p>Particle simulation is used across many industries. Common applications include:</p>
+                  <p><strong>Automotive:</strong> Oil splashing and churning inside gearboxes and transmissions, oil jet cooling of gears and bearings, sloshing in fuel tanks, water management on vehicle exteriors.</p>
+                  <p><strong>Electric vehicles:</strong> Direct oil cooling of e-motor stators and rotors, inverter cooling, thermal management of battery packs.</p>
+                  <p><strong>Industrial machinery:</strong> Hydraulic systems, lubrication circuits, pump and valve flow analysis.</p>
+                  <p><strong>Food and chemicals:</strong> Mixing of viscous or non-Newtonian fluids such as chocolate, dough and adhesives. Filling and pouring simulations.</p>
+                  <p><strong>Civil and environmental:</strong> Dam-break analysis, flood propagation, coastal wave impact on structures.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 6 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">Can particle simulation predict temperatures?</button>
+              </h3>
+              <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#pwFaq">
+                <div class="accordion-body">
+                  <p>Yes. Particleworks includes a full thermal solver that supports conjugate heat transfer (CHT) between fluids and solid structures. Each particle and each solid surface element carries a temperature value, and the solver computes conduction, convection and heat exchange at the fluid-solid interface. Engineers can extract heat transfer coefficient (HTC) maps on solid surfaces and export them for downstream structural or thermal FEA analysis. Version 8.2 also introduced anisotropic thermal conductivity for solids, enabling accurate modelling of laminated structures such as electric motor stator cores.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 7 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7">What features are available in Particleworks?</button>
+              </h3>
+              <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#pwFaq">
+                <div class="accordion-body">
+                  <p>Particleworks offers a comprehensive feature set for meshfree CFD simulation:</p>
+                  <p><strong>Fluid dynamics:</strong> Incompressible Navier-Stokes via MPS, explicit and semi-implicit pressure solvers (including the new EIMPS method), free-surface tracking, surface tension, wettability models.</p>
+                  <p><strong>Multi-phase:</strong> Multiple immiscible fluids with different densities and viscosities, oil-water-air interactions.</p>
+                  <p><strong>Thermal:</strong> Conjugate heat transfer, HTC mapping, anisotropic solid conductivity, Nusselt-based wall HTC.</p>
+                  <p><strong>Air solvers:</strong> Finite Volume Method (FVM) for steady-state or transient airflow, Lattice-Boltzmann Method (LBM) for aerodynamics and two-way air-liquid coupling.</p>
+                  <p><strong>Rheology:</strong> Non-Newtonian viscosity models (power law, Bingham, Cross, Herschel-Bulkley) and user-defined viscosity functions.</p>
+                  <p><strong>Performance:</strong> Multi-GPU acceleration with near-linear scaling, multi-resolution particle refinement, automatic domain decomposition.</p>
+                  <p><strong>Post-processing:</strong> Streamlines, force mapping, probe-based monitoring, CSV export, flow-rate measurement, VTK output.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 8 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq8">What software can be coupled with Particleworks?</button>
+              </h3>
+              <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#pwFaq">
+                <div class="accordion-body">
+                  <p>Particleworks supports direct coupling with several leading engineering tools:</p>
+                  <p><strong>ANSYS Workbench:</strong> Bi-directional coupling for thermal and structural analysis. Export HTC maps and pressure loads to ANSYS Mechanical or Fluent.</p>
+                  <p><strong>Romax (Hexagon):</strong> Integration for transmission and gearbox simulations, combining Particleworks oil-flow results with Romax bearing and gear analysis.</p>
+                  <p><strong>RecurDyn (FunctionBay):</strong> Multi-body dynamics coupling for fluid-structure interaction. Simulate moving components interacting with liquids or powders in real time.</p>
+                  <p><strong>modeFRONTIER (ESTECO):</strong> Design optimisation platform that can drive Particleworks simulations parametrically, exploring the design space to find optimal geometries and operating conditions.</p>
+                  <p>Additionally, Particleworks exports standard formats (CSV, VTK, STL) for integration with virtually any post-processing or analysis toolchain.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container text-center">
+      <h2 class="section-title mb-3">See Particleworks in action</h2>
+      <p class="section-sub mx-auto mb-4">Book a personalised demo with our engineering team. We will walk you through the software using a case relevant to your application.</p>
+      <a href="index.html#demo" class="btn-pw btn-pw-lg"><i class="bi bi-play-circle me-2"></i>Request a Demo</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <img src="images/PWEurope_negativ-logo.png" alt="Particleworks Europe">
+          </div>
+          <p class="small" style="max-width:300px;line-height:1.7;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
+          <div class="d-flex gap-2 mt-3">
+            <a href="https://www.linkedin.com/company/particleworks-europe/" target="_blank" class="social-link"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.82rem;">Products</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="particleworks.html">Particleworks</a></li>
+            <li class="mb-2"><a href="granuleworks.html">Granuleworks</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.82rem;">Services</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="index.html#services">Consulting</a></li>
+            <li class="mb-2"><a href="index.html#services">Training</a></li>
+            <li class="mb-2"><a href="index.html#services">Support</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.82rem;">Resources</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="index.html#casestudies">Case Studies</a></li>
+            <li class="mb-2"><a href="index.html#resources">Downloads</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.82rem;">Contact</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li>
+            <li class="mb-2"><a href="mailto:info@particleworks-europe.com"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
+        <p class="small mb-0">Meshfree CFD simulation technology by <a href="https://www.prometech.co.jp/english/" target="_blank">Prometech Software</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.addEventListener('scroll', function() {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+  </script>
+</body>
+</html>

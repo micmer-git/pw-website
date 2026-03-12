@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulation of a Pelton Turbine: Application to Two Challenging Situations</title>
+  <meta name="description" content="A peer-reviewed study compares MPS particle simulation against traditional FVM for Pelton turbine analysis, tackling the falaise effect and splitter erosion with dramatic efficiency gains.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pw-blue: #0088cc;
+      --pw-blue-dark: #006da3;
+      --pw-green: #25a361;
+      --pw-green-dark: #1e8a51;
+      --pw-dark: #333333;
+      --pw-gray: #6c757d;
+      --pw-light: #f8f9fa;
+      --pw-gradient: linear-gradient(135deg, #0088cc 0%, #25a361 100%);
+      --pw-gradient-dark: linear-gradient(135deg, #004466 0%, #0088cc 50%, #1a7a4a 100%);
+    }
+    * { font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { color: var(--pw-dark); overflow-x: hidden; }
+
+    .navbar {
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06); padding: 0.6rem 0; transition: box-shadow 0.3s;
+    }
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .navbar-brand img { height: 38px; }
+    .navbar .nav-link {
+      font-size: 0.88rem; font-weight: 500; color: var(--pw-dark);
+      padding: 0.5rem 0.75rem !important; transition: color 0.2s;
+    }
+    .navbar .nav-link:hover { color: var(--pw-blue); }
+
+    .blog-hero {
+      position: relative; padding: 7rem 0 0; background: var(--pw-dark); overflow: hidden;
+    }
+    .blog-hero .hero-img { width: 100%; max-height: 480px; object-fit: cover; display: block; }
+    .blog-hero .hero-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 4rem 0 2.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+    }
+    .blog-hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; color: #fff;
+      letter-spacing: -0.5px; line-height: 1.18; max-width: 740px;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem;
+      color: rgba(255,255,255,0.6); font-size: 0.88rem;
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+    .blog-body { padding: 4rem 0 3rem; }
+    .article-content { max-width: 740px; }
+    .article-content h2 {
+      font-size: 1.55rem; font-weight: 700; color: var(--pw-dark);
+      margin-top: 3rem; margin-bottom: 1rem; letter-spacing: -0.3px; line-height: 1.3;
+    }
+    .article-content h2:first-of-type { margin-top: 0; }
+    .article-content p { font-size: 1.05rem; line-height: 1.85; color: #444; margin-bottom: 1.25rem; }
+    .article-content ul { margin-bottom: 1.5rem; padding-left: 0; list-style: none; }
+    .article-content ul li {
+      position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem;
+      font-size: 1.02rem; line-height: 1.75; color: #444;
+    }
+    .article-content ul li::before {
+      content: ''; position: absolute; left: 0; top: 0.65rem;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--pw-blue);
+    }
+    .article-content strong { color: var(--pw-dark); font-weight: 600; }
+    .article-content h3 {
+      font-size: 1.1rem; font-weight: 700; color: var(--pw-blue);
+      text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2rem; margin-bottom: 0.75rem;
+    }
+
+    .section-rule {
+      border: none; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,136,204,0.2), transparent);
+      margin: 3rem 0;
+    }
+
+    /* Two-column comparison */
+    .vs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    @media (max-width: 576px) { .vs-grid { grid-template-columns: 1fr; } }
+    .vs-card {
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .vs-card.fvm { background: #f8f9fa; }
+    .vs-card.mps { background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%); border-color: rgba(0,136,204,0.2); }
+    .vs-card .vs-label {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; margin-bottom: 0.75rem;
+    }
+    .vs-card.fvm .vs-label { color: var(--pw-gray); }
+    .vs-card.mps .vs-label { color: var(--pw-blue); }
+    .vs-card .vs-stat {
+      font-size: 1.6rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.25rem;
+    }
+    .vs-card.mps .vs-stat { color: var(--pw-blue); }
+    .vs-card .vs-detail { font-size: 0.88rem; color: var(--pw-gray); line-height: 1.5; }
+
+    .paper-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--pw-light);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 10px;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--pw-blue);
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-top: 1rem;
+    }
+    .paper-link:hover {
+      background: var(--pw-blue);
+      color: #fff;
+      border-color: var(--pw-blue);
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%);
+      border: 1px solid rgba(0,136,204,0.15);
+      border-radius: 16px; padding: 2.5rem; margin-top: 3rem;
+    }
+    .cta-box h3 {
+      font-size: 1.4rem; font-weight: 700; color: var(--pw-dark);
+      text-transform: none; letter-spacing: -0.2px; margin-top: 0; margin-bottom: 0.5rem;
+    }
+    .cta-box p { color: var(--pw-gray); font-size: 0.98rem; margin-bottom: 1.5rem; }
+    .cta-box .form-control {
+      border-radius: 10px; padding: 0.65rem 1rem; border: 1px solid #dee2e6; font-size: 0.92rem;
+    }
+    .cta-box .form-control:focus { border-color: var(--pw-blue); box-shadow: 0 0 0 3px rgba(0,136,204,0.1); }
+    .cta-box .btn-pw { width: 100%; padding: 0.7rem; }
+    .cta-box .form-text { font-size: 0.8rem; color: var(--pw-gray); }
+
+    .related-section { padding: 3rem 0 4rem; border-top: 1px solid rgba(0,0,0,0.06); }
+    .related-card {
+      display: block; background: #fff; border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 12px; padding: 1.5rem; text-decoration: none;
+      transition: all 0.25s; height: 100%;
+    }
+    .related-card:hover { border-color: var(--pw-blue); box-shadow: 0 6px 20px rgba(0,136,204,0.1); transform: translateY(-2px); }
+    .related-card h5 { font-size: 1rem; font-weight: 600; color: var(--pw-dark); margin-bottom: 0.4rem; }
+    .related-card p { font-size: 0.88rem; color: var(--pw-gray); margin-bottom: 0; line-height: 1.5; }
+    .related-card .card-arrow { color: var(--pw-blue); font-size: 1.1rem; margin-top: 0.75rem; display: block; }
+
+    .btn-pw {
+      background: var(--pw-blue); color: #fff; border: none; padding: 0.75rem 2rem;
+      border-radius: 50px; font-weight: 600; font-size: 0.95rem;
+      transition: all 0.3s; display: inline-block; text-decoration: none;
+    }
+    .btn-pw:hover { background: var(--pw-blue-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,136,204,0.3); }
+
+    footer {
+      background: #1a1a2e; color: rgba(255,255,255,0.7); padding: 3.5rem 0 1.5rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+    footer .footer-brand img { height: 34px; margin-bottom: 1rem; }
+    footer .footer-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0 1.5rem; }
+    footer .social-link {
+      width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.06);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: all 0.3s;
+    }
+    footer .social-link:hover { background: var(--pw-blue); color: #fff; }
+
+    .thank-you-msg { display: none; text-align: center; padding: 2rem 0; }
+    .thank-you-msg.show { display: block; }
+    .thank-you-msg i { font-size: 2.5rem; color: var(--pw-green); margin-bottom: 0.75rem; display: block; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">
+        <img src="../images/PW_Europe_logo_small.png" alt="Particleworks Europe">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#case-studies">Case Studies</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/company/particleworks-europe/" target="_blank"><i class="bi bi-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="blog-hero">
+    <img src="images/Simulation-Pelton-turbine-using-moving-particle-simulation-method.webp" alt="Pelton turbine water jet simulation using MPS particle method" class="hero-img">
+    <div class="hero-overlay">
+      <div class="container">
+        <h1>Simulation of a Pelton Turbine: Application to Two Challenging Situations</h1>
+        <div class="hero-meta">
+          <span><i class="bi bi-person"></i> Michele Merelli</span>
+          <span><i class="bi bi-calendar3"></i> September 2024</span>
+          <span><i class="bi bi-clock"></i> 9 min read</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog-body">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+          <article class="article-content">
+
+            <h2>The Pelton Problem</h2>
+
+            <p>Pelton turbines convert the kinetic energy of high-velocity water jets into mechanical rotation. They are the workhorses of high-head hydropower installations, and their design has been refined over more than a century. Yet two phenomena continue to frustrate engineers and operators: the <em>falaise</em> effect &mdash; a sharp, sudden efficiency drop when jet velocity decreases below a critical threshold &mdash; and splitter erosion, where the thin central ridge dividing each bucket gradually degrades under the relentless impact of water and entrained sediment.</p>
+
+            <p>Both problems are inherently transient, three-dimensional, and involve complex free-surface fragmentation. Traditional volume-based CFD can address them, but at extraordinary computational cost. A peer-reviewed paper by Jean Decaix, Mathieu Mettille, and C&eacute;cile M&uuml;nch-Allign&eacute; from HES-SO Valais-Wallis explores whether the MPS particle method in Particleworks can do it faster and better.</p>
+
+            <hr class="section-rule">
+
+            <h2>Simulation Setup</h2>
+
+            <p>The researchers modelled a laboratory-scale Pelton turbine with the following configuration:</p>
+
+            <ul>
+              <li>Particle diameter: <strong>2.5 mm</strong></li>
+              <li>Total particle count: approximately <strong>12 million</strong></li>
+              <li>Hardware: a single <strong>NVIDIA Quadro RTX 5000</strong> GPU</li>
+              <li>Multiple operating points spanning the full efficiency curve, including the critical low-speed region where the falaise appears</li>
+            </ul>
+
+            <p>The choice of a 2.5 mm particle size was driven by a convergence study showing it provided sufficient resolution to capture the bucket filling, sheet formation, and drainage processes that govern torque generation. Larger particles missed the thin water sheets leaving the bucket trailing edge; smaller particles drove up the count without meaningful accuracy gains.</p>
+
+            <hr class="section-rule">
+
+            <h2>FVM vs MPS: The Numbers That Matter</h2>
+
+            <div class="vs-grid">
+              <div class="vs-card fvm">
+                <div class="vs-label">Traditional FVM</div>
+                <div class="vs-stat">10 days</div>
+                <div class="vs-detail">Less than one full revolution</div>
+                <div class="vs-detail" style="margin-top: 0.5rem;">24 CPU cores</div>
+              </div>
+              <div class="vs-card mps">
+                <div class="vs-label">MPS (Particleworks)</div>
+                <div class="vs-stat">24 hours</div>
+                <div class="vs-detail">Two full revolutions simulated</div>
+                <div class="vs-detail" style="margin-top: 0.5rem;">Single GPU</div>
+              </div>
+            </div>
+
+            <p>The FVM simulation required 10 days on a 24-core machine and could not even complete a single revolution. The MPS simulation delivered two full revolutions in 24 hours on one GPU. This is not an academic curiosity &mdash; it is the difference between running one design iteration per sprint and running ten.</p>
+
+            <hr class="section-rule">
+
+            <h2>Capturing the Falaise Effect</h2>
+
+            <p>The falaise (French for "cliff") describes the precipitous efficiency drop that Pelton turbines experience when operated significantly below their design speed. As the runner slows, the relative velocity between the incoming jet and the bucket changes, altering the flow pattern inside the bucket. Water no longer drains cleanly from the trailing edge; instead, it accumulates and interferes with neighbouring buckets. The result is vibration, noise, and a dramatic loss of power.</p>
+
+            <p>The MPS simulation captured this transition clearly. At nominal speed, the water sheet exits the bucket in a well-defined pattern with minimal interference. As speed decreases, the simulation showed increasing water retention, bucket-to-bucket interference, and the characteristic sharp efficiency cliff that operators observe in the field. The ability to visualise and quantify this transient process gives turbine designers direct insight into where the falaise begins and what geometric modifications might delay it.</p>
+
+            <hr class="section-rule">
+
+            <h2>Predicting Splitter Erosion</h2>
+
+            <p>The splitter &mdash; the sharp ridge at the centre of each Pelton bucket &mdash; takes the full force of the incoming jet. Over thousands of hours of operation, this impact erodes the splitter, rounding its edge and reducing the turbine's ability to split the jet symmetrically. Asymmetric bucket filling means asymmetric torque, vibration, and progressive efficiency loss.</p>
+
+            <p>Erosion prediction demands accurate knowledge of impact velocity, angle, and the volume of water striking the splitter surface at each instant. The MPS approach tracks every particle impact directly, providing a natural framework for erosion modelling without the interpolation artefacts that plague mesh-based approaches at thin geometric features.</p>
+
+            <p>The MPS erosion prediction showed less than <strong>0.2% deviation</strong> from the theoretical erosion rate, compared to 0.7% for the FVM approach. For a turbine operator planning maintenance intervals worth millions of euros, that threefold improvement in prediction accuracy translates directly into better asset management.</p>
+
+            <a href="https://doi.org/10.1080/00221686.2024.2371300" target="_blank" class="paper-link">
+              <i class="bi bi-journal-text"></i> Read the full paper (Journal of Hydraulic Research)
+            </a>
+
+            <!-- CTA -->
+            <div class="cta-box" id="download-cta">
+              <div id="cta-form-container">
+                <h3>Working on Turbomachinery or Hydropower?</h3>
+                <p>We support research groups and turbine manufacturers with Particleworks licensing, training, and simulation consulting.</p>
+                <form id="cta-form" action="https://formspree.io/f/xpwzgvkr" method="POST">
+                  <input type="hidden" name="_subject" value="Blog Enquiry: Pelton Turbine Simulation">
+                  <div class="row g-2 mb-2">
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="email" class="form-control" name="email" placeholder="Work email" required>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" name="company" placeholder="Company / Institution">
+                  </div>
+                  <button type="submit" class="btn-pw"><i class="bi bi-send me-2"></i>Get in Touch</button>
+                  <div class="form-text mt-2">We will reply within one working day. No spam, ever.</div>
+                </form>
+              </div>
+              <div class="thank-you-msg" id="thank-you">
+                <i class="bi bi-check-circle-fill"></i>
+                <h4 class="fw-bold mb-2">Thank you!</h4>
+                <p class="text-muted mb-0">We will be in touch shortly.</p>
+              </div>
+            </div>
+
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="related-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+          <h5 class="fw-bold mb-3" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--pw-gray);">Related Content</h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <a href="../cases/zeco.html" class="related-card">
+                <h5>Zeco Hydropower Case Study</h5>
+                <p>Industrial-scale Pelton and Francis turbine simulation for hydropower manufacturers.</p>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="../index.html#demo" class="related-card">
+                <h5>Request a Demo</h5>
+                <p>See Particleworks applied to your turbomachinery application.</p>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <img src="../images/PWEurope_negativ-logo.png" alt="Particleworks Europe">
+          </div>
+          <p class="small" style="max-width:300px;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
+          <div class="d-flex gap-2 mt-3">
+            <a href="https://www.linkedin.com/company/particleworks-europe/" class="social-link" target="_blank"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Products</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html">Particleworks</a></li>
+            <li class="mb-2"><a href="../index.html">Granuleworks</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Services</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html">Consulting</a></li>
+            <li class="mb-2"><a href="../index.html">Training</a></li>
+            <li class="mb-2"><a href="../index.html">Support</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Resources</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html#case-studies">Case Studies</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Contact</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li>
+            <li class="mb-2"><a href="mailto:info@particleworks-europe.com"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
+        <p class="small mb-0">Meshfree CFD simulation technology</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.addEventListener('scroll', function() {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+    const form = document.getElementById('cta-form');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(response) {
+        if (response.ok) {
+          document.getElementById('cta-form-container').style.display = 'none';
+          document.getElementById('thank-you').classList.add('show');
+        }
+      }).catch(function() {
+        document.getElementById('cta-form-container').style.display = 'none';
+        document.getElementById('thank-you').classList.add('show');
+      });
+    });
+  </script>
+</body>
+</html>

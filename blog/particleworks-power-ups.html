@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particleworks Power-Ups: Python Automation for Faster Simulation Workflows</title>
+  <meta name="description" content="EnginSoft UK's Power-Ups are bite-sized Python automation scripts for Particleworks that eliminate repetitive setup tasks, from gearbox configuration to fluid property libraries.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pw-blue: #0088cc;
+      --pw-blue-dark: #006da3;
+      --pw-green: #25a361;
+      --pw-green-dark: #1e8a51;
+      --pw-dark: #333333;
+      --pw-gray: #6c757d;
+      --pw-light: #f8f9fa;
+      --pw-gradient: linear-gradient(135deg, #0088cc 0%, #25a361 100%);
+      --pw-gradient-dark: linear-gradient(135deg, #004466 0%, #0088cc 50%, #1a7a4a 100%);
+    }
+    * { font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { color: var(--pw-dark); overflow-x: hidden; }
+
+    .navbar {
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06); padding: 0.6rem 0; transition: box-shadow 0.3s;
+    }
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .navbar-brand img { height: 38px; }
+    .navbar .nav-link {
+      font-size: 0.88rem; font-weight: 500; color: var(--pw-dark);
+      padding: 0.5rem 0.75rem !important; transition: color 0.2s;
+    }
+    .navbar .nav-link:hover { color: var(--pw-blue); }
+
+    .blog-hero {
+      position: relative; padding: 7rem 0 0; background: var(--pw-dark); overflow: hidden;
+    }
+    .blog-hero .hero-img { width: 100%; max-height: 480px; object-fit: cover; display: block; }
+    .blog-hero .hero-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 4rem 0 2.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+    }
+    .blog-hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; color: #fff;
+      letter-spacing: -0.5px; line-height: 1.18; max-width: 740px;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem;
+      color: rgba(255,255,255,0.6); font-size: 0.88rem;
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+    .blog-body { padding: 4rem 0 3rem; }
+    .article-content { max-width: 740px; }
+    .article-content h2 {
+      font-size: 1.55rem; font-weight: 700; color: var(--pw-dark);
+      margin-top: 3rem; margin-bottom: 1rem; letter-spacing: -0.3px; line-height: 1.3;
+    }
+    .article-content h2:first-of-type { margin-top: 0; }
+    .article-content p { font-size: 1.05rem; line-height: 1.85; color: #444; margin-bottom: 1.25rem; }
+    .article-content ul { margin-bottom: 1.5rem; padding-left: 0; list-style: none; }
+    .article-content ul li {
+      position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem;
+      font-size: 1.02rem; line-height: 1.75; color: #444;
+    }
+    .article-content ul li::before {
+      content: ''; position: absolute; left: 0; top: 0.65rem;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--pw-blue);
+    }
+    .article-content strong { color: var(--pw-dark); font-weight: 600; }
+    .article-content h3 {
+      font-size: 1.1rem; font-weight: 700; color: var(--pw-blue);
+      text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2rem; margin-bottom: 0.75rem;
+    }
+
+    .section-rule {
+      border: none; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,136,204,0.2), transparent);
+      margin: 3rem 0;
+    }
+
+    /* Power-up block */
+    .powerup-block {
+      margin: 2.5rem 0;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    .powerup-block .pu-header {
+      padding: 1.25rem 1.5rem;
+      background: var(--pw-light);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .powerup-block .pu-num {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--pw-blue);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.82rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .powerup-block .pu-title {
+      font-size: 1.08rem; font-weight: 700; color: var(--pw-dark);
+      margin: 0;
+    }
+    .powerup-block .pu-desc {
+      padding: 1rem 1.5rem 0;
+      font-size: 0.98rem; line-height: 1.7; color: #555;
+    }
+    .powerup-block .pu-video {
+      padding: 1rem 1.5rem 1.5rem;
+    }
+    .powerup-block .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin: 0;
+    }
+    .powerup-block .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    .external-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--pw-light);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 10px;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--pw-blue);
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-top: 0.5rem;
+    }
+    .external-link:hover {
+      background: var(--pw-blue); color: #fff; border-color: var(--pw-blue);
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%);
+      border: 1px solid rgba(0,136,204,0.15);
+      border-radius: 16px; padding: 2.5rem; margin-top: 3rem;
+    }
+    .cta-box h3 {
+      font-size: 1.4rem; font-weight: 700; color: var(--pw-dark);
+      text-transform: none; letter-spacing: -0.2px; margin-top: 0; margin-bottom: 0.5rem;
+    }
+    .cta-box p { color: var(--pw-gray); font-size: 0.98rem; margin-bottom: 1.5rem; }
+    .cta-box .form-control {
+      border-radius: 10px; padding: 0.65rem 1rem; border: 1px solid #dee2e6; font-size: 0.92rem;
+    }
+    .cta-box .form-control:focus { border-color: var(--pw-blue); box-shadow: 0 0 0 3px rgba(0,136,204,0.1); }
+    .cta-box .btn-pw { width: 100%; padding: 0.7rem; }
+    .cta-box .form-text { font-size: 0.8rem; color: var(--pw-gray); }
+
+    .related-section { padding: 3rem 0 4rem; border-top: 1px solid rgba(0,0,0,0.06); }
+    .related-card {
+      display: block; background: #fff; border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 12px; padding: 1.5rem; text-decoration: none;
+      transition: all 0.25s; height: 100%;
+    }
+    .related-card:hover { border-color: var(--pw-blue); box-shadow: 0 6px 20px rgba(0,136,204,0.1); transform: translateY(-2px); }
+    .related-card h5 { font-size: 1rem; font-weight: 600; color: var(--pw-dark); margin-bottom: 0.4rem; }
+    .related-card p { font-size: 0.88rem; color: var(--pw-gray); margin-bottom: 0; line-height: 1.5; }
+    .related-card .card-arrow { color: var(--pw-blue); font-size: 1.1rem; margin-top: 0.75rem; display: block; }
+
+    .btn-pw {
+      background: var(--pw-blue); color: #fff; border: none; padding: 0.75rem 2rem;
+      border-radius: 50px; font-weight: 600; font-size: 0.95rem;
+      transition: all 0.3s; display: inline-block; text-decoration: none;
+    }
+    .btn-pw:hover { background: var(--pw-blue-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,136,204,0.3); }
+
+    footer {
+      background: #1a1a2e; color: rgba(255,255,255,0.7); padding: 3.5rem 0 1.5rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+    footer .footer-brand img { height: 34px; margin-bottom: 1rem; }
+    footer .footer-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0 1.5rem; }
+    footer .social-link {
+      width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.06);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: all 0.3s;
+    }
+    footer .social-link:hover { background: var(--pw-blue); color: #fff; }
+
+    .thank-you-msg { display: none; text-align: center; padding: 2rem 0; }
+    .thank-you-msg.show { display: block; }
+    .thank-you-msg i { font-size: 2.5rem; color: var(--pw-green); margin-bottom: 0.75rem; display: block; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">
+        <img src="../images/PW_Europe_logo_small.png" alt="Particleworks Europe">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#case-studies">Case Studies</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/company/particleworks-europe/" target="_blank"><i class="bi bi-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="blog-hero">
+    <img src="images/Particleworks-Power-Ups.webp" alt="Particleworks Power-Ups Python automation tools by EnginSoft UK" class="hero-img">
+    <div class="hero-overlay">
+      <div class="container">
+        <h1>Particleworks Power-Ups: Python Automation for Faster Simulation Workflows</h1>
+        <div class="hero-meta">
+          <span><i class="bi bi-person"></i> EnginSoft UK</span>
+          <span><i class="bi bi-calendar3"></i> July 2025</span>
+          <span><i class="bi bi-clock"></i> 4 min read</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog-body">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+          <article class="article-content">
+
+            <h2>The Setup Tax Nobody Budgets For</h2>
+
+            <p>Every simulation engineer knows the feeling. The physics is interesting, the geometry is ready, and then you spend two hours clicking through dialog boxes to set up gear trains, assign material properties, and configure motion constraints. It is not difficult work. It is tedious work. And tedious work is where mistakes hide.</p>
+
+            <p>EnginSoft UK built a set of Python automation tools for Particleworks called <strong>Power-Ups</strong> &mdash; bite-sized scripts that hook into the Particleworks Python API to eliminate the most common repetitive setup tasks. Each one solves a specific problem, runs in seconds, and does exactly what it says on the tin.</p>
+
+            <hr class="section-rule">
+
+            <!-- Power-Up 1 -->
+            <div class="powerup-block">
+              <div class="pu-header">
+                <span class="pu-num">01</span>
+                <h4 class="pu-title">Spot Polygon Motion Constraint Errors</h4>
+              </div>
+              <p class="pu-desc">When you import complex assemblies, it is easy for a component's motion constraint to reference the wrong coordinate system or rotation axis. This Power-Up visualises min/max displacement markers on every moving polygon, instantly revealing CAD import mismatches that would otherwise surface only after hours of wasted compute time.</p>
+              <div class="pu-video">
+                <div class="video-wrap">
+                  <iframe src="https://www.youtube.com/embed/9VQe1biQfQU" title="Power-Up: Spot Polygon Motion Constraint Errors" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <!-- Power-Up 2 -->
+            <div class="powerup-block">
+              <div class="pu-header">
+                <span class="pu-num">02</span>
+                <h4 class="pu-title">Automate Gearbox Setup</h4>
+              </div>
+              <p class="pu-desc">A typical gearbox model involves dozens of parent-child relationships, gear ratios, and rotation directions. Configuring them manually is slow and error-prone. This script reads the gear train definition and applies all parenting hierarchies and motion rules in seconds, turning a half-day setup task into a single click.</p>
+              <div class="pu-video">
+                <div class="video-wrap">
+                  <iframe src="https://www.youtube.com/embed/EJjEBHk3n9I" title="Power-Up: Automate Gearbox Setup" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <!-- Power-Up 3 -->
+            <div class="powerup-block">
+              <div class="pu-header">
+                <span class="pu-num">03</span>
+                <h4 class="pu-title">Build a Fluid Property Library</h4>
+              </div>
+              <p class="pu-desc">Every new project starts with the same ritual: dig through datasheets, copy viscosity curves, enter density and surface tension values. This Power-Up lets you build and maintain a centralised fluid property library. Click once, pick your fluid, and the correct temperature-dependent properties are imported directly into the simulation. No more transcription errors, no more hunting for that PDF.</p>
+              <div class="pu-video">
+                <div class="video-wrap">
+                  <iframe src="https://www.youtube.com/embed/8ygynXS8d3A" title="Power-Up: Build a Fluid Property Library" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <!-- Power-Up 4 -->
+            <div class="powerup-block">
+              <div class="pu-header">
+                <span class="pu-num">04</span>
+                <h4 class="pu-title">Calculate Gear Power Loss</h4>
+              </div>
+              <p class="pu-desc">Churning and windage losses in gearboxes depend on rotational speed, oil level, and gear geometry. This Power-Up handles variable RPM profiles across multiple gear meshes, extracting torque-averaged power loss data directly from the simulation results without the spreadsheet gymnastics.</p>
+              <div class="pu-video">
+                <div class="video-wrap">
+                  <iframe src="https://www.youtube.com/embed/tmPnDaHzROM" title="Power-Up: Calculate Gear Power Loss" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <!-- Power-Up 5 -->
+            <div class="powerup-block">
+              <div class="pu-header">
+                <span class="pu-num">05</span>
+                <h4 class="pu-title">Circumferential Velocity in the GUI</h4>
+              </div>
+              <p class="pu-desc">Checking circumferential velocity used to mean exporting particle data to Excel, computing radial positions, and back-calculating tangential components. This Power-Up adds the quantity directly to the Particleworks GUI as a derived field, so you can visualise and interrogate it without leaving the application.</p>
+              <div class="pu-video">
+                <div class="video-wrap">
+                  <iframe src="https://www.youtube.com/embed/Z0ZUrbG2Tgw" title="Power-Up: Circumferential Velocity in GUI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <hr class="section-rule">
+
+            <p>All Power-Ups are available through EnginSoft UK and can be customised to fit your specific workflow requirements.</p>
+
+            <a href="https://enginsoftukltd.trumpet.app/pods/639c9749df82551eb93bb0d2/live" target="_blank" class="external-link">
+              <i class="bi bi-box-arrow-up-right"></i> Browse all Power-Ups on the EnginSoft UK portal
+            </a>
+
+            <!-- CTA -->
+            <div class="cta-box" id="download-cta">
+              <div id="cta-form-container">
+                <h3>Want Power-Ups for Your Team?</h3>
+                <p>Tell us about your workflow and we will recommend the right automation package or build custom scripts for your specific simulation setup.</p>
+                <form id="cta-form" action="https://formspree.io/f/xpwzgvkr" method="POST">
+                  <input type="hidden" name="_subject" value="Blog Enquiry: Particleworks Power-Ups">
+                  <div class="row g-2 mb-2">
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="email" class="form-control" name="email" placeholder="Work email" required>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" name="company" placeholder="Company">
+                  </div>
+                  <button type="submit" class="btn-pw"><i class="bi bi-send me-2"></i>Get in Touch</button>
+                  <div class="form-text mt-2">We will reply within one working day. No spam, ever.</div>
+                </form>
+              </div>
+              <div class="thank-you-msg" id="thank-you">
+                <i class="bi bi-check-circle-fill"></i>
+                <h4 class="fw-bold mb-2">Thank you!</h4>
+                <p class="text-muted mb-0">We will be in touch shortly.</p>
+              </div>
+            </div>
+
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="related-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+          <h5 class="fw-bold mb-3" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--pw-gray);">Related Content</h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <a href="../index.html#about" class="related-card">
+                <h5>About Particleworks</h5>
+                <p>Learn about the meshfree CFD technology behind the simulation platform.</p>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="../index.html#demo" class="related-card">
+                <h5>Request a Demo</h5>
+                <p>See Particleworks and Power-Ups in action with a personalised walkthrough.</p>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <img src="../images/PWEurope_negativ-logo.png" alt="Particleworks Europe">
+          </div>
+          <p class="small" style="max-width:300px;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
+          <div class="d-flex gap-2 mt-3">
+            <a href="https://www.linkedin.com/company/particleworks-europe/" class="social-link" target="_blank"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Products</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html">Particleworks</a></li>
+            <li class="mb-2"><a href="../index.html">Granuleworks</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Services</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html">Consulting</a></li>
+            <li class="mb-2"><a href="../index.html">Training</a></li>
+            <li class="mb-2"><a href="../index.html">Support</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Resources</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html#case-studies">Case Studies</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Contact</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li>
+            <li class="mb-2"><a href="mailto:info@particleworks-europe.com"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
+        <p class="small mb-0">Meshfree CFD simulation technology</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.addEventListener('scroll', function() {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+    const form = document.getElementById('cta-form');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(response) {
+        if (response.ok) {
+          document.getElementById('cta-form-container').style.display = 'none';
+          document.getElementById('thank-you').classList.add('show');
+        }
+      }).catch(function() {
+        document.getElementById('cta-form-container').style.display = 'none';
+        document.getElementById('thank-you').classList.add('show');
+      });
+    });
+  </script>
+</body>
+</html>
