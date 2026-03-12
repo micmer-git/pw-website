@@ -762,7 +762,78 @@
       .case-card img { height: 140px; }
       .section-title { font-size: 1.6rem; }
     }
+    /* ── SEARCH MODAL ── */
+    .search-modal .modal-content {
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(20px);
+      border: none;
+      border-radius: var(--pw-radius);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+    }
+    .search-modal .modal-body { padding: 2rem; }
+    .search-input {
+      width: 100%;
+      font-size: 1.3rem;
+      font-weight: 500;
+      border: 2px solid rgba(0,0,0,0.08);
+      border-radius: var(--pw-radius-sm);
+      padding: 1rem 1.2rem 1rem 3rem;
+      outline: none;
+      transition: border-color 0.3s;
+      background: #fff;
+    }
+    .search-input:focus { border-color: var(--pw-blue); }
+    .search-input-wrap { position: relative; }
+    .search-input-wrap i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: var(--pw-gray);
+    }
+    .search-results { margin-top: 1.2rem; max-height: 420px; overflow-y: auto; }
+    .search-result-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: var(--pw-radius-sm);
+      text-decoration: none;
+      color: var(--pw-dark);
+      transition: background 0.2s;
+    }
+    .search-result-item:hover { background: var(--pw-blue-light); color: var(--pw-dark); }
+    .search-result-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.2rem 0.55rem;
+      border-radius: 50px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .search-result-badge.case-study { background: rgba(0,136,204,0.1); color: var(--pw-blue); }
+    .search-result-badge.blog { background: rgba(37,163,97,0.1); color: var(--pw-green); }
+    .search-result-badge.application { background: rgba(26,26,46,0.08); color: var(--pw-dark); }
+    .search-result-badge.product { background: rgba(0,136,204,0.15); color: var(--pw-blue-dark); }
+    .search-result-title { font-weight: 600; font-size: 0.92rem; margin-bottom: 0.15rem; }
+    .search-result-desc { font-size: 0.8rem; color: var(--pw-gray); margin: 0; }
+    .search-empty { text-align: center; padding: 2rem; color: var(--pw-gray); font-size: 0.95rem; }
+
+    /* ── CASE STUDIES COMPACT ── */
+    .case-card-wrap.cs-extra { display: none; }
+    .case-card-wrap.cs-extra.cs-revealed { display: block; }
+    .case-card-compact .case-card img { height: 130px; }
+    .case-card-compact .case-card .card-body { padding: 0.9rem; }
+    .case-card-compact .case-card h6 { font-size: 0.8rem; line-height: 1.4; }
+    .case-card-compact .case-card .case-author { font-size: 0.72rem; }
+    .case-card-compact .case-card .case-tag { font-size: 0.65rem; padding: 0.2rem 0.5rem; margin-bottom: 0.4rem; }
   </style>
+  <!-- HubSpot Tracking Code — replace with your portal ID -->
+  <!-- <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/YOUR_PORTAL_ID.js"></script> -->
 </head>
 <body>
 
@@ -788,6 +859,9 @@
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
           <li class="nav-item ms-lg-1">
             <a class="nav-link nav-linkedin" href="https://www.linkedin.com/company/particleworks-europe/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          </li>
+          <li class="nav-item ms-lg-1">
+            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchModal" aria-label="Search" style="font-size:1.1rem;"><i class="bi bi-search"></i></a>
           </li>
           <li class="nav-item ms-lg-2">
             <a class="btn btn-nav-cta" href="#demo">Request Demo</a>
@@ -1202,9 +1276,9 @@
         <button class="filter-btn" data-filter="civil">Civil &amp; Energy</button>
       </div>
       <!-- Cards grid -->
-      <div class="row g-3" id="caseGrid">
+      <div class="row g-2 case-card-compact" id="caseGrid">
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="engines">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap" data-category="engines">
           <a href="cases/ducati.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/ducaticorse_img01.png" alt="Ducati Corse"></div>
@@ -1217,7 +1291,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="consumer">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap" data-category="consumer">
           <a href="cases/lixil.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/lixil_01_0.png" alt="LIXIL"></div>
@@ -1230,7 +1304,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="transmissions">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="transmissions">
           <a href="cases/comer-high-speed.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/ElisabettaFava_01.png" alt="Comer Industries"></div>
@@ -1243,7 +1317,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="transmissions">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="transmissions">
           <a href="cases/comer-oil-splashing.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/comer_industries_02.png" alt="Comer Industries"></div>
@@ -1256,7 +1330,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="transmissions">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="transmissions">
           <a href="cases/comer-oil-flow.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/comer_industries_img03.png" alt="Comer Industries"></div>
@@ -1269,7 +1343,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="transmissions">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="transmissions">
           <a href="cases/dana.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/DanaMotion_01.png" alt="Dana Motion"></div>
@@ -1282,7 +1356,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="emotors">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap" data-category="emotors">
           <a href="cases/drive-system-design.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/DriveSystemDesign_01.png" alt="DSD"></div>
@@ -1295,7 +1369,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="emotors">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap" data-category="emotors">
           <a href="cases/emotors.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/emotors-enginsoft.png" alt="EMOTORS"></div>
@@ -1308,7 +1382,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="transmissions">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="transmissions">
           <a href="cases/gima.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/GIMATransmissionTechnology_02_1.png" alt="GIMA"></div>
@@ -1321,7 +1395,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="transmissions">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap" data-category="transmissions">
           <a href="cases/gkn.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/HenningDombrowski_02.png" alt="GKN Driveline"></div>
@@ -1334,7 +1408,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="engines">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="engines">
           <a href="cases/hpe.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/HPE-COXA-img01.png" alt="HPE COXA"></div>
@@ -1347,7 +1421,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="engines">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="engines">
           <a href="cases/hitachi.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/piston_hitachi01_0.png" alt="Hitachi"></div>
@@ -1360,7 +1434,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="transmissions">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="transmissions">
           <a href="cases/hyundai.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/Hyundai_01.png" alt="Hyundai"></div>
@@ -1373,7 +1447,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="emotors">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="emotors">
           <a href="cases/iav.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/IAV_01.png" alt="IAV"></div>
@@ -1386,7 +1460,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="consumer">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="consumer">
           <a href="cases/lion.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/LION_01.png" alt="LION"></div>
@@ -1399,7 +1473,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="emotors">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="emotors">
           <a href="cases/marelli.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/MarelliMotori_01.png" alt="Marelli Motori"></div>
@@ -1412,7 +1486,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="emotors">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="emotors">
           <a href="cases/ricardo.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/Ricardo_01_3.png" alt="Ricardo"></div>
@@ -1425,7 +1499,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="engines">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="engines">
           <a href="cases/royal-enfield.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/RoyalEnfield_01.png" alt="Royal Enfield"></div>
@@ -1438,7 +1512,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="consumer">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap" data-category="consumer">
           <a href="cases/spm.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/spm-washing-machine.png" alt="SPM Engineering"></div>
@@ -1451,7 +1525,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="emotors">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="emotors">
           <a href="cases/total-energies.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/TotalEnergies_JonathanRaisin.png" alt="TotalEnergies"></div>
@@ -1464,7 +1538,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="consumer">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="consumer">
           <a href="cases/unitn.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/Coesia_UniTN.png" alt="UniTN"></div>
@@ -1477,7 +1551,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="transmissions">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="transmissions">
           <a href="cases/univance.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/Univance_01_0.png" alt="Univance"></div>
@@ -1490,7 +1564,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="engines">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap cs-extra" data-category="engines">
           <a href="cases/wfinland.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/SamiOjala_01.png" alt="Wartsila"></div>
@@ -1503,7 +1577,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="civil">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap" data-category="civil">
           <a href="cases/zeco.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/Zeco_01.png" alt="ZECO"></div>
@@ -1516,7 +1590,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 case-card-wrap" data-category="civil">
+        <div class="col-6 col-md-4 col-lg-3 case-card-wrap" data-category="civil">
           <a href="cases/fire-simulation.html" class="text-decoration-none">
             <div class="case-card">
               <div class="img-wrap"><img src="images/case-studies/Simulating-fire.png" alt="Fire Simulation"></div>
@@ -1529,6 +1603,11 @@
           </a>
         </div>
 
+      </div>
+      <div class="text-center mt-4 fade-up">
+        <button class="btn btn-pw-outline" id="showAllCases" style="color:var(--pw-blue);border-color:var(--pw-blue);" onclick="revealAllCases(this)">
+          <i class="bi bi-grid-3x3-gap me-2"></i>Show all 25 case studies
+        </button>
       </div>
     </div>
   </section>
@@ -1543,58 +1622,76 @@
       </div>
       <div class="row g-3 justify-content-center">
         <div class="col-6 col-sm-4 col-lg fade-up">
-          <div class="industry-item">
-            <div class="ind-icon"><i class="bi bi-gear-wide-connected"></i></div>
-            <span>Gearboxes &amp; Bearings</span>
-          </div>
+          <a href="applications/gearboxes-and-bearings.html" style="text-decoration:none;color:inherit;">
+            <div class="industry-item">
+              <div class="ind-icon"><i class="bi bi-gear-wide-connected"></i></div>
+              <span>Gearboxes &amp; Bearings</span>
+            </div>
+          </a>
         </div>
         <div class="col-6 col-sm-4 col-lg fade-up">
-          <div class="industry-item">
-            <div class="ind-icon"><i class="bi bi-speedometer2"></i></div>
-            <span>Engines &amp; Pistons</span>
-          </div>
+          <a href="applications/engines-and-pistons.html" style="text-decoration:none;color:inherit;">
+            <div class="industry-item">
+              <div class="ind-icon"><i class="bi bi-speedometer2"></i></div>
+              <span>Engines &amp; Pistons</span>
+            </div>
+          </a>
         </div>
         <div class="col-6 col-sm-4 col-lg fade-up">
-          <div class="industry-item">
-            <div class="ind-icon"><i class="bi bi-tools"></i></div>
-            <span>Cutting Tools</span>
-          </div>
+          <a href="applications/cutting-tools.html" style="text-decoration:none;color:inherit;">
+            <div class="industry-item">
+              <div class="ind-icon"><i class="bi bi-tools"></i></div>
+              <span>Cutting Tools</span>
+            </div>
+          </a>
         </div>
         <div class="col-6 col-sm-4 col-lg fade-up">
-          <div class="industry-item">
-            <div class="ind-icon"><i class="bi bi-lightning-charge"></i></div>
-            <span>E-Motors</span>
-          </div>
+          <a href="applications/e-motors.html" style="text-decoration:none;color:inherit;">
+            <div class="industry-item">
+              <div class="ind-icon"><i class="bi bi-lightning-charge"></i></div>
+              <span>E-Motors</span>
+            </div>
+          </a>
         </div>
         <div class="col-6 col-sm-4 col-lg fade-up">
-          <div class="industry-item">
-            <div class="ind-icon"><i class="bi bi-arrow-repeat"></i></div>
-            <span>Mixing &amp; Separation</span>
-          </div>
+          <a href="applications/mixing-and-separation.html" style="text-decoration:none;color:inherit;">
+            <div class="industry-item">
+              <div class="ind-icon"><i class="bi bi-arrow-repeat"></i></div>
+              <span>Mixing &amp; Separation</span>
+            </div>
+          </a>
         </div>
         <div class="col-6 col-sm-4 col-lg fade-up">
-          <div class="industry-item">
-            <div class="ind-icon"><i class="bi bi-disc"></i></div>
-            <span>Clutches &amp; Brakes</span>
-          </div>
+          <a href="applications/clutches-and-brakes.html" style="text-decoration:none;color:inherit;">
+            <div class="industry-item">
+              <div class="ind-icon"><i class="bi bi-disc"></i></div>
+              <span>Clutches &amp; Brakes</span>
+            </div>
+          </a>
         </div>
         <div class="col-6 col-sm-4 col-lg fade-up">
-          <div class="industry-item">
-            <div class="ind-icon"><i class="bi bi-truck"></i></div>
-            <span>Vehicle Systems</span>
-          </div>
+          <a href="applications/vehicle-management.html" style="text-decoration:none;color:inherit;">
+            <div class="industry-item">
+              <div class="ind-icon"><i class="bi bi-truck"></i></div>
+              <span>Vehicle Management</span>
+            </div>
+          </a>
         </div>
         <div class="col-6 col-sm-4 col-lg fade-up">
-          <div class="industry-item">
-            <div class="ind-icon"><i class="bi bi-cup-straw"></i></div>
-            <span>Consumer Goods</span>
-          </div>
+          <a href="applications/sterilization-food-consumer.html" style="text-decoration:none;color:inherit;">
+            <div class="industry-item">
+              <div class="ind-icon"><i class="bi bi-cup-straw"></i></div>
+              <span>Consumer Goods</span>
+            </div>
+          </a>
         </div>
         <div class="col-6 col-sm-4 col-lg fade-up">
-          <div class="industry-item">
-            <div class="ind-icon"><i class="bi bi-building"></i></div>
-            <span>Civil Engineering</span>
-          </div>
+          <a href="applications/civil-engineering.html" style="text-decoration:none;color:inherit;">
+            <div class="industry-item">
+              <div class="ind-icon"><i class="bi bi-building"></i></div>
+              <span>Civil Engineering</span>
+            </div>
+          </a>
         </div>
       </div>
     </div>
@@ -1656,8 +1753,10 @@
         </div>
         <div class="modal-body">
           <p class="text-muted small mb-3">Enter your email to access this resource. We respect your privacy.</p>
-          <form id="gateForm" onsubmit="handleGateSubmit(event)">
-            <input type="hidden" id="gateFileUrl" value="">
+          <form id="gateForm" action="https://formspree.io/f/xpwzgvkr" method="POST" onsubmit="handleGateSubmit(event)">
+            <input type="hidden" name="_replyto" value="support@particleworks-europe.com">
+            <input type="hidden" name="_subject" value="PW Website: New inquiry">
+            <input type="hidden" id="gateFileUrl" name="resource_url" value="">
             <div class="mb-3">
               <input type="email" class="form-control" id="gateEmail" placeholder="your.email@company.com" required>
             </div>
@@ -1665,6 +1764,24 @@
               <i class="bi bi-download me-2"></i>Download Now
             </button>
           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SEARCH MODAL ============ -->
+  <div class="modal fade search-modal" id="searchModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="search-input-wrap mt-2">
+            <i class="bi bi-search"></i>
+            <input type="text" class="search-input" id="siteSearchInput" placeholder="Search case studies, blog posts, applications..." autocomplete="off">
+          </div>
+          <div class="search-results" id="searchResults">
+            <div class="search-empty" id="searchPlaceholder">Start typing to search across case studies, blog posts, applications and products.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1821,6 +1938,8 @@
           </div>
           <div class="demo-card fade-up">
             <form action="https://formspree.io/f/xpwzgvkr" method="POST">
+              <input type="hidden" name="_replyto" value="support@particleworks-europe.com">
+              <input type="hidden" name="_subject" value="PW Website: New inquiry">
               <div class="row g-3">
                 <div class="col-md-6">
                   <label class="form-label small fw-semibold">Full Name *</label>
@@ -2069,21 +2188,43 @@
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const filter = btn.dataset.filter;
+        const showAllBtn = document.getElementById('showAllCases');
 
-        caseCards.forEach((card, i) => {
-          const match = filter === 'all' || card.dataset.category === filter;
-          if (match) {
-            setTimeout(() => {
-              card.classList.remove('hidden');
-              card.style.display = '';
-            }, i * 30);
-          } else {
-            card.classList.add('hidden');
-            setTimeout(() => {
-              if (card.classList.contains('hidden')) card.style.display = 'none';
-            }, 400);
-          }
-        });
+        if (filter !== 'all') {
+          // When filtering, reveal all matching cards including cs-extra
+          caseCards.forEach((card, i) => {
+            const match = card.dataset.category === filter;
+            if (match) {
+              setTimeout(() => {
+                card.classList.add('cs-revealed');
+                card.classList.remove('hidden');
+                card.style.display = '';
+              }, i * 30);
+            } else {
+              card.classList.add('hidden');
+              setTimeout(() => {
+                if (card.classList.contains('hidden')) card.style.display = 'none';
+              }, 400);
+            }
+          });
+          if (showAllBtn) showAllBtn.style.display = 'none';
+        } else {
+          // Reset to initial state: hide cs-extra unless already revealed by button
+          const allRevealed = document.querySelectorAll('.cs-extra.cs-revealed').length ===
+                              document.querySelectorAll('.cs-extra').length;
+          caseCards.forEach((card, i) => {
+            if (!allRevealed && card.classList.contains('cs-extra') && !card.classList.contains('cs-revealed')) {
+              card.classList.add('hidden');
+              card.style.display = 'none';
+            } else {
+              setTimeout(() => {
+                card.classList.remove('hidden');
+                card.style.display = '';
+              }, i * 30);
+            }
+          });
+          if (!allRevealed && showAllBtn) showAllBtn.style.display = '';
+        }
       });
     });
 
@@ -2139,6 +2280,116 @@
           window.scrollTo({ top, behavior: 'smooth' });
         }
       });
+    });
+
+    // ── Show all case studies ──
+    function revealAllCases(btn) {
+      document.querySelectorAll('.cs-extra').forEach((el, i) => {
+        setTimeout(() => {
+          el.classList.add('cs-revealed');
+          el.classList.remove('hidden');
+          el.style.display = '';
+        }, i * 40);
+      });
+      btn.style.display = 'none';
+    }
+
+    // ── Site Search ──
+    const searchData = [
+      {t:"Racing piston heat transfer",c:"Case Study",d:"Ducati Corse -- oil jet cooling optimization",u:"cases/ducati.html",k:"ducati piston cooling racing engine oil jet"},
+      {t:"Water behavior in shower products",c:"Case Study",d:"LIXIL -- Ecoful Shower simulation with Recurdyn",u:"cases/lixil.html",k:"lixil water shower recurdyn consumer"},
+      {t:"High speed transmission oil path",c:"Case Study",d:"Comer Industries -- oil path prediction and optimization",u:"cases/comer-high-speed.html",k:"comer transmission gearbox oil path"},
+      {t:"Oil splashing and churning losses",c:"Case Study",d:"Comer Industries -- MPS for lubrication prediction",u:"cases/comer-oil-splashing.html",k:"comer oil splashing churning losses gearbox"},
+      {t:"Axle oil flow rate optimization",c:"Case Study",d:"Comer Industries -- planetary stage lubrication",u:"cases/comer-oil-flow.html",k:"comer axle planetary oil flow"},
+      {t:"Axial piston pump churning losses",c:"Case Study",d:"Dana Motion Systems -- swashplate pump evaluation",u:"cases/dana.html",k:"dana pump churning losses piston hydraulic"},
+      {t:"E-drive thermal optimisation",c:"Case Study",d:"Drive System Design -- MPS for oil-cooled e-machines",u:"cases/drive-system-design.html",k:"drive system design e-motor thermal cooling"},
+      {t:"Spray cooling of e-drives",c:"Case Study",d:"EMOTORS -- optimizing e-motor cooling with MPS",u:"cases/emotors.html",k:"emotors spray cooling e-motor electric"},
+      {t:"Gear oil jet lubrication",c:"Case Study",d:"GIMA -- lubrication efficiency optimization",u:"cases/gima.html",k:"gima gear oil jet lubrication transmission"},
+      {t:"Gearbox lubrication with meshless CFD",c:"Case Study",d:"GKN Driveline -- AWD and EV gearbox systems",u:"cases/gkn.html",k:"gkn gearbox lubrication meshless awd"},
+      {t:"Piston cooling jet validation",c:"Case Study",d:"HPE COXA -- MPS vs STAR CCM+ comparison",u:"cases/hpe.html",k:"hpe coxa piston cooling validation engine"},
+      {t:"Piston oil jet simulation",c:"Case Study",d:"Hitachi Automotive -- cooling performance evaluation",u:"cases/hitachi.html",k:"hitachi piston oil jet cooling automotive"},
+      {t:"Churning oil path optimization",c:"Case Study",d:"Hyundai Motor Group -- MPS for transmission design",u:"cases/hyundai.html",k:"hyundai churning oil transmission design"},
+      {t:"Electric motor coolant simulation",c:"Case Study",d:"IAV -- free flow coolant using MPS method",u:"cases/iav.html",k:"iav electric motor coolant simulation e-motor"},
+      {t:"Laundry detergent spout design",c:"Case Study",d:"LION Corporation -- cap design optimization",u:"cases/lion.html",k:"lion detergent spout cap consumer packaging"},
+      {t:"Electric generator bearing analysis",c:"Case Study",d:"Marelli Motori -- oil lubricated bearings",u:"cases/marelli.html",k:"marelli generator bearing oil lubrication"},
+      {t:"Oil-cooled e-motor thermal simulation",c:"Case Study",d:"Ricardo -- validated against experimental data",u:"cases/ricardo.html",k:"ricardo e-motor thermal oil cooled electric"},
+      {t:"Piston cooling optimization",c:"Case Study",d:"Royal Enfield -- Particleworks with modeFRONTIER",u:"cases/royal-enfield.html",k:"royal enfield piston cooling optimization"},
+      {t:"Washing machine hydraulic balancer",c:"Case Study",d:"SPM Engineering -- vertical-axis CFD analysis",u:"cases/spm.html",k:"spm washing machine hydraulic balancer consumer"},
+      {t:"Electric motor cooling: direct vs indirect",c:"Case Study",d:"TotalEnergies -- simulation for e-mobility",u:"cases/total-energies.html",k:"totalenergies electric motor cooling direct"},
+      {t:"Stand-up pouch filling process",c:"Case Study",d:"University of Trento -- flexible body coupling",u:"cases/unitn.html",k:"trento pouch filling packaging flexible"},
+      {t:"Transfer case oil lubrication",c:"Case Study",d:"Univance -- visualization of oil flow",u:"cases/univance.html",k:"univance transfer case oil lubrication transmission"},
+      {t:"Medium speed engine piston cooling",c:"Case Study",d:"Wartsila Finland -- MPS validation for piston temperatures",u:"cases/wfinland.html",k:"wartsila piston cooling engine medium speed"},
+      {t:"Pelton turbine CFD vs MPS",c:"Case Study",d:"ZECO -- numerical simulation comparison",u:"cases/zeco.html",k:"zeco pelton turbine hydro power energy"},
+      {t:"Fire extinguishing for historical buildings",c:"Case Study",d:"Prometech -- drencher and drone simulation",u:"cases/fire-simulation.html",k:"fire extinguishing historical buildings civil"},
+      {t:"Particleworks v8.2 New Release",c:"Blog",d:"EIMPS solver, LBM coupling, anisotropic thermal",u:"blog/particleworks-82.html",k:"release 8.2 eimps pressure solver lbm"},
+      {t:"E-Motor Cooling Challenge",c:"Blog",d:"47/34/19% flow split, +/-2.8C validation",u:"blog/e-motor-cooling.html",k:"e-motor cooling flow split thermal cfd"},
+      {t:"Race Car Fuel Tank Design",c:"Blog",d:"Dallara -- MPS vs FVM, PTFE spheres, 17% COG",u:"blog/race-car-fuel-tank.html",k:"dallara race car fuel tank sloshing"},
+      {t:"Pelton Turbine Simulation",c:"Blog",d:"Falaise effect, splitter erosion, MPS accuracy",u:"blog/pelton-turbine.html",k:"pelton turbine hydro mps fvm simulation"},
+      {t:"Waterproofing Car AC Air Intakes",c:"Blog",d:"90% water intrusion reduction with CFD",u:"blog/waterproofing-car-ac.html",k:"waterproofing car ac hvac rain water"},
+      {t:"Python Automation Power-Ups",c:"Blog",d:"EnginSoft UK -- bite-sized workflow automation",u:"blog/particleworks-power-ups.html",k:"python automation power-ups api workflow"},
+      {t:"Gearboxes & Bearings",c:"Application",d:"Churning losses, oil distribution, operating temperatures",u:"applications/gearboxes-and-bearings.html",k:"gearbox bearing transmission lubrication churning"},
+      {t:"Engines & Pistons",c:"Application",d:"Piston cooling, jet nozzle design, air drag effects",u:"applications/engines-and-pistons.html",k:"engine piston cooling jet nozzle oil"},
+      {t:"E-Motors & Electric Drives",c:"Application",d:"Winding cooling, flow split, windage, airgap contamination",u:"applications/e-motors.html",k:"e-motor electric drive cooling winding thermal"},
+      {t:"Cutting Tools",c:"Application",d:"Emulsion distribution, pressure drops, insert temperature",u:"applications/cutting-tools.html",k:"cutting tool cnc machining coolant drill"},
+      {t:"Mixing & Separation",c:"Application",d:"Impeller design, non-Newtonian mixing, multiphase",u:"applications/mixing-and-separation.html",k:"mixing separation impeller non-newtonian viscous"},
+      {t:"Clutches & Brakes",c:"Application",d:"Oil flow, HTC on plates, temperature prediction",u:"applications/clutches-and-brakes.html",k:"clutch brake oil flow temperature plate"},
+      {t:"Vehicle Management",c:"Application",d:"Wading, aquaplaning, mud/snow contamination",u:"applications/vehicle-management.html",k:"vehicle wading aquaplaning mud snow car"},
+      {t:"Food & Consumer Goods",c:"Application",d:"Dishwashers, sterilization, packaging, filling",u:"applications/sterilization-food-consumer.html",k:"food consumer sterilization dishwasher packaging"},
+      {t:"Civil Engineering & Fire Prevention",c:"Application",d:"Drencher systems, concrete flow, tsunami simulation",u:"applications/civil-engineering.html",k:"civil fire prevention concrete tsunami drencher"},
+      {t:"Particleworks",c:"Product",d:"Meshfree CFD software -- MPS method for liquid flows",u:"particleworks.html",k:"particleworks cfd meshfree mps navier stokes"},
+      {t:"Granuleworks",c:"Product",d:"DEM software for granular flow and powder simulation",u:"granuleworks.html",k:"granuleworks dem powder granular discrete element"},
+    ];
+
+    function getBadgeClass(cat) {
+      if (cat === 'Case Study') return 'case-study';
+      if (cat === 'Blog') return 'blog';
+      if (cat === 'Application') return 'application';
+      return 'product';
+    }
+
+    const searchInput = document.getElementById('siteSearchInput');
+    const searchResults = document.getElementById('searchResults');
+    const searchPlaceholder = document.getElementById('searchPlaceholder');
+
+    searchInput.addEventListener('input', function() {
+      const q = this.value.trim().toLowerCase();
+      if (q.length < 2) {
+        searchResults.innerHTML = '';
+        searchResults.appendChild(searchPlaceholder);
+        searchPlaceholder.style.display = '';
+        return;
+      }
+      searchPlaceholder.style.display = 'none';
+      const terms = q.split(/\s+/);
+      const scored = searchData.map(item => {
+        const haystack = (item.t + ' ' + item.d + ' ' + item.k).toLowerCase();
+        let score = 0;
+        terms.forEach(term => {
+          if (haystack.includes(term)) score++;
+        });
+        return { item, score };
+      }).filter(s => s.score > 0).sort((a, b) => b.score - a.score).slice(0, 8);
+
+      if (scored.length === 0) {
+        searchResults.innerHTML = '<div class="search-empty">No results found. Try different keywords.</div>';
+        return;
+      }
+      searchResults.innerHTML = scored.map(s => {
+        const it = s.item;
+        return '<a href="' + it.u + '" class="search-result-item">' +
+          '<span class="search-result-badge ' + getBadgeClass(it.c) + '">' + it.c + '</span>' +
+          '<div><div class="search-result-title">' + it.t + '</div>' +
+          '<p class="search-result-desc">' + it.d + '</p></div></a>';
+      }).join('');
+    });
+
+    // Focus search input when modal opens
+    document.getElementById('searchModal').addEventListener('shown.bs.modal', function() {
+      searchInput.value = '';
+      searchResults.innerHTML = '';
+      searchResults.appendChild(searchPlaceholder);
+      searchPlaceholder.style.display = '';
+      searchInput.focus();
     });
   </script>
 </body>
