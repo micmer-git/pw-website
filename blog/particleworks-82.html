@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particleworks v8.2 New Release — Better Post-Processing, Advanced Air Solvers & EIMPS Pressure Method</title>
+  <meta name="description" content="Particleworks v8.2 brings the EIMPS explicit pressure method, massive FVM and LBM enhancements, anisotropic thermal conductivity, and serious post-processing improvements for engineers running complex CFD simulations.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pw-blue: #0088cc;
+      --pw-blue-dark: #006da3;
+      --pw-green: #25a361;
+      --pw-green-dark: #1e8a51;
+      --pw-dark: #333333;
+      --pw-gray: #6c757d;
+      --pw-light: #f8f9fa;
+      --pw-gradient: linear-gradient(135deg, #0088cc 0%, #25a361 100%);
+      --pw-gradient-dark: linear-gradient(135deg, #004466 0%, #0088cc 50%, #1a7a4a 100%);
+    }
+    * { font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { color: var(--pw-dark); overflow-x: hidden; }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+      padding: 0.6rem 0;
+      transition: box-shadow 0.3s;
+    }
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .navbar-brand img { height: 38px; }
+    .navbar .nav-link {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--pw-dark);
+      padding: 0.5rem 0.75rem !important;
+      transition: color 0.2s;
+    }
+    .navbar .nav-link:hover { color: var(--pw-blue); }
+
+    /* Hero */
+    .blog-hero {
+      position: relative;
+      padding: 9rem 0 4rem;
+      background: var(--pw-gradient-dark);
+      overflow: hidden;
+    }
+    .blog-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(37,163,97,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,136,204,0.2) 0%, transparent 60%);
+    }
+    .blog-hero .container { position: relative; z-index: 2; }
+    .blog-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      max-width: 720px;
+    }
+    .blog-hero .lead {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 620px;
+      line-height: 1.7;
+      margin-top: 1.25rem;
+    }
+    .version-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(0,136,204,0.25);
+      color: #fff;
+      border: 1px solid rgba(0,136,204,0.5);
+      padding: 0.3rem 0.9rem;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.88rem;
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+    /* Article body */
+    .blog-body {
+      padding: 4rem 0 3rem;
+    }
+    .article-content {
+      max-width: 740px;
+    }
+    .article-content h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--pw-dark);
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+    }
+    .article-content h2:first-of-type {
+      margin-top: 0;
+    }
+    .article-content p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #444;
+      margin-bottom: 1.25rem;
+    }
+    .article-content ul {
+      margin-bottom: 1.5rem;
+      padding-left: 0;
+      list-style: none;
+    }
+    .article-content ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: #444;
+    }
+    .article-content ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--pw-blue);
+    }
+    .article-content strong {
+      color: var(--pw-dark);
+      font-weight: 600;
+    }
+
+    /* Sub-headers within sections */
+    .article-content h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--pw-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Figure / image */
+    .article-figure {
+      margin: 2.5rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .article-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .article-figure figcaption {
+      padding: 0.85rem 1.25rem;
+      background: var(--pw-light);
+      font-size: 0.88rem;
+      color: var(--pw-gray);
+      line-height: 1.55;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    /* Video embed */
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      margin: 2.5rem 0;
+    }
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Section divider */
+    .section-rule {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,136,204,0.2), transparent);
+      margin: 3rem 0;
+    }
+
+    /* CTA box */
+    .cta-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%);
+      border: 1px solid rgba(0,136,204,0.15);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-top: 3rem;
+    }
+    .cta-box h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--pw-dark);
+      text-transform: none;
+      letter-spacing: -0.2px;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .cta-box p {
+      color: var(--pw-gray);
+      font-size: 0.98rem;
+      margin-bottom: 1.5rem;
+    }
+    .cta-box .form-control {
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      border: 1px solid #dee2e6;
+      font-size: 0.92rem;
+    }
+    .cta-box .form-control:focus {
+      border-color: var(--pw-blue);
+      box-shadow: 0 0 0 3px rgba(0,136,204,0.1);
+    }
+    .cta-box .btn-pw {
+      width: 100%;
+      padding: 0.7rem;
+    }
+    .cta-box .form-text {
+      font-size: 0.8rem;
+      color: var(--pw-gray);
+    }
+
+    /* Related links */
+    .related-section {
+      padding: 3rem 0 4rem;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .related-card {
+      display: block;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      height: 100%;
+    }
+    .related-card:hover {
+      border-color: var(--pw-blue);
+      box-shadow: 0 6px 20px rgba(0,136,204,0.1);
+      transform: translateY(-2px);
+    }
+    .related-card h5 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--pw-dark);
+      margin-bottom: 0.4rem;
+    }
+    .related-card p {
+      font-size: 0.88rem;
+      color: var(--pw-gray);
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+    .related-card .card-arrow {
+      color: var(--pw-blue);
+      font-size: 1.1rem;
+      margin-top: 0.75rem;
+      display: block;
+    }
+
+    /* Buttons */
+    .btn-pw {
+      background: var(--pw-blue);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .btn-pw:hover { background: var(--pw-blue-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,136,204,0.3); }
+    .btn-pw-outline {
+      background: transparent;
+      color: var(--pw-blue);
+      border: 2px solid var(--pw-blue);
+      padding: 0.65rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .btn-pw-outline:hover { background: var(--pw-blue); color: #fff; transform: translateY(-2px); }
+
+    /* Footer */
+    footer {
+      background: #1a1a2e;
+      color: rgba(255,255,255,0.7);
+      padding: 3.5rem 0 1.5rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+    footer .footer-brand img { height: 34px; margin-bottom: 1rem; }
+    footer .footer-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0 1.5rem; }
+    footer .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+    footer .social-link:hover { background: var(--pw-blue); color: #fff; }
+
+    /* Smooth thank-you transition */
+    .thank-you-msg {
+      display: none;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    .thank-you-msg.show {
+      display: block;
+    }
+    .thank-you-msg i {
+      font-size: 2.5rem;
+      color: var(--pw-green);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">
+        <img src="../images/PW_Europe_logo_small.png" alt="Particleworks Europe">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#case-studies">Case Studies</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/company/particleworks-europe/" target="_blank"><i class="bi bi-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="blog-hero">
+    <div class="container">
+      <div class="version-badge"><i class="bi bi-rocket-takeoff me-1"></i> v8.2 Release</div>
+      <h1>Particleworks v8.2 New Release</h1>
+      <p class="lead">Better post-processing, advanced air solvers and a new explicit method for pressure.</p>
+      <div class="hero-meta">
+        <span><i class="bi bi-calendar3"></i> March 2026</span>
+        <span><i class="bi bi-clock"></i> 6 min read</span>
+        <span><i class="bi bi-tag"></i> Product Update</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article -->
+  <section class="blog-body">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+          <article class="article-content">
+
+            <p>CFD software updates usually bring a mix of minor UI tweaks and one big feature you might never actually use in production. Particleworks v8.2 is different. It's a heavy-hitting release focused strictly on what engineers have been asking for: better multiphase coupling, stable pressure solvers, and tools to make massive simulations physically manageable.</p>
+
+            <p>If you are running complex fluid-structure interactions, splashing gearboxes, or e-motor cooling scenarios, here is a no-nonsense look at the new capabilities under the hood, pulled directly from the v8.2 feature log.</p>
+
+            <hr class="section-rule">
+
+            <!-- Section 1 -->
+            <h2>Fluids: EIMPS Method Kills Pressure Oscillations</h2>
+
+            <p>Let's talk about the MPS (Moving Particle Semi-implicit) solver. Explicit solvers are brilliant for sheer calculation speed, but they often suffer from annoying pressure oscillations and require you to artificially tweak the speed of sound just to keep the simulation stable.</p>
+
+            <p>Version 8.2 introduces the <strong>EIMPS (Explicit-Incompressible MPS) method</strong>.</p>
+
+            <ul>
+              <li>It inherently suppresses pressure oscillations during calculations, providing much cleaner data outputs.</li>
+              <li>Unlike older pressure explicit solvers, you no longer need to set the speed of sound.</li>
+            </ul>
+
+            <p>This translates to more reliable data when analyzing high-speed rotors or pumps. Additionally, you can now calculate <strong>Heat Transfer Coefficients (HTC)</strong> via the Nusselt number directly on insulated (adiabatic) walls, giving you more flexibility in thermal setups without needing complex workarounds.</p>
+
+            <div class="video-wrap">
+              <iframe src="https://www.youtube.com/embed/ko53Y_acGyc" title="Particleworks v8.2 — EIMPS pressure method" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
+            <hr class="section-rule">
+
+            <!-- Section 2 -->
+            <h2>The Air Game: Massive FVM & LBM Enhancements</h2>
+
+            <p>Aerodynamics and multiphase flows received a massive, practical upgrade in this release.</p>
+
+            <h3>FVM (Finite Volume Method)</h3>
+            <ul>
+              <li><strong>Single-precision execution</strong> to speed up iterative solver convergence (available when AMG is disabled).</li>
+              <li><strong>Partial Lattice Generation</strong> — saves RAM by generating FVM cells only where necessary via shape file.</li>
+              <li>FVM now supports <strong>direct heat transfer coupling</strong> with CHT (Conjugate Heat Transfer) cells.</li>
+              <li><strong>Specific drag adjustment parameters</strong> for different material properties in FVM-MPS coupling.</li>
+            </ul>
+
+            <h3>LBM (Lattice Boltzmann Method)</h3>
+            <ul>
+              <li><strong>True two-way coupling</strong> between LBM and MPS via the Immersed Boundary Method (IBM). Instead of treating particles as isolated aerosols, the solver considers interaction between non-isolated liquid bodies and airflow. Simulate bulk liquids splitting apart and deforming due to air shear.</li>
+              <li>New <strong>Cumulant K17 collision model</strong> for high-precision, low-numerical-viscosity aerodynamics.</li>
+            </ul>
+
+            <hr class="section-rule">
+
+            <!-- Section 3 -->
+            <h2>Thermal & Powders: Anisotropy and Deposition</h2>
+
+            <p>Heat conduction isn't always isotropic. <strong>CHT internal heat conduction simulations</strong> in 8.2 now support anisotropic thermal conductivity.</p>
+
+            <ul>
+              <li>Set thermal conductivity individually for each spatial direction.</li>
+              <li>This is exactly what you need when modeling the laminated structures of motor stator cores, where heat moves differently radially versus axially.</li>
+            </ul>
+
+            <figure class="article-figure">
+              <img src="images/pw82-anisotropic-thermal.png" alt="Isotropic vs orthotropic thermal conductivity comparison on an e-motor stator core in Particleworks v8.2">
+              <figcaption>Isotropic vs orthotropic thermal conductivity on a motor stator core — v8.2 now supports direction-dependent heat conduction in CHT.</figcaption>
+            </figure>
+
+            <h3>DEM (Discrete Element Method)</h3>
+            <ul>
+              <li>New <strong>Deposition model</strong> — simulate powders and snow adhering to walls under air resistance.</li>
+              <li>Coupled with LBM, predict flow channel blockages from material buildup.</li>
+              <li>New <strong>mass/volumetric flowrate boundary condition</strong> for DEM.</li>
+            </ul>
+
+            <hr class="section-rule">
+
+            <!-- Section 4 -->
+            <h2>Post-Processing That Doesn't Eat Your Time (Or Storage)</h2>
+
+            <p>We spend half our lives in post-processing. v8.2 brings serious quality-of-life improvements:</p>
+
+            <ul>
+              <li><strong>Streamlines:</strong> Generate visual streamlines directly for FVM mesh and LBM airflow fields.</li>
+              <li><strong>Force Mapping:</strong> Map normal and tangential fluid resistance forces onto polygon structures.</li>
+              <li><strong>CSV Probes:</strong> Import probe positions via CSV file instead of clicking them manually.</li>
+              <li><strong>Net Flowrate:</strong> Flow-rate measurements now output net flow (forward minus backward), with customizable output intervals.</li>
+              <li><strong>File Size Control:</strong> LBM and DEM allow specific output regions or skip writing heavy restart data. Copy and paste multiple nodes across project scenes.</li>
+            </ul>
+
+            <!-- CTA -->
+            <div class="cta-box" id="download-cta">
+              <div id="cta-form-container">
+                <h3>Get the Full Release Notes</h3>
+                <p>Download the complete Particleworks v8.2 technical documentation with all features, parameters and migration notes.</p>
+                <form id="cta-form" action="https://formspree.io/f/xpwzgvkr" method="POST">
+                  <input type="hidden" name="_subject" value="PW v8.2 Release Notes PDF Request">
+                  <div class="row g-2 mb-2">
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="email" class="form-control" name="email" placeholder="Work email" required>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" name="company" placeholder="Company">
+                  </div>
+                  <button type="submit" class="btn-pw"><i class="bi bi-file-earmark-pdf me-2"></i>Download PDF</button>
+                  <div class="form-text mt-2">We'll send the PDF to your email. No spam, ever.</div>
+                </form>
+              </div>
+              <div class="thank-you-msg" id="thank-you">
+                <i class="bi bi-check-circle-fill"></i>
+                <h4 class="fw-bold mb-2">Thank you!</h4>
+                <p class="text-muted mb-0">The PDF will be sent to your email shortly.</p>
+              </div>
+            </div>
+
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Content -->
+  <section class="related-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+          <h5 class="fw-bold mb-3" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--pw-gray);">Related Content</h5>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <a href="../index.html#about" class="related-card">
+                <h5>Particleworks Product Overview</h5>
+                <p>Meshfree CFD simulation technology for automotive and industrial applications.</p>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="../cases/emotors.html" class="related-card">
+                <h5>E-Motor Cooling Case Studies</h5>
+                <p>Thermal management simulations for electric motor and inverter cooling.</p>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="../index.html#demo" class="related-card">
+                <h5>Request a Demo</h5>
+                <p>See Particleworks in action with a personalized walkthrough.</p>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <img src="../images/PWEurope_negativ-logo.png" alt="Particleworks Europe">
+          </div>
+          <p class="small" style="max-width:300px;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
+          <div class="d-flex gap-2 mt-3">
+            <a href="https://www.linkedin.com/company/particleworks-europe/" class="social-link" target="_blank"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Products</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html">Particleworks</a></li>
+            <li class="mb-2"><a href="../index.html">Granuleworks</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Services</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html">Consulting</a></li>
+            <li class="mb-2"><a href="../index.html">Training</a></li>
+            <li class="mb-2"><a href="../index.html">Support</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Resources</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html#case-studies">Case Studies</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Contact</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li>
+            <li class="mb-2"><a href="mailto:info@particleworks-europe.com"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
+        <p class="small mb-0">Meshfree CFD simulation technology</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    // Form submission with thank-you message
+    const form = document.getElementById('cta-form');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(response) {
+        if (response.ok) {
+          document.getElementById('cta-form-container').style.display = 'none';
+          document.getElementById('thank-you').classList.add('show');
+        }
+      }).catch(function() {
+        document.getElementById('cta-form-container').style.display = 'none';
+        document.getElementById('thank-you').classList.add('show');
+      });
+    });
+  </script>
+</body>
+</html>
