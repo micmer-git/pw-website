@@ -338,27 +338,73 @@
             <!-- Software -->
             <h2>Software Evolution: Particleworks v8.2</h2>
 
-            <p>Prometech opened the conference with the release of Particleworks v8.2, and the numbers speak for themselves. Memory consumption reductions between <strong>35% and 86%</strong> across typical industrial models, with corresponding time savings in the same range. For teams running multi-variant studies on GPU clusters, this translates directly into more design iterations per development cycle.</p>
+            <p><img src="images/pwe2025/Takuya-Natsume.png" alt="Takuya Natsume" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;">Prometech opened the conference with the release of Particleworks v8.2, and the numbers speak for themselves. Memory consumption reductions between <strong>35% and 86%</strong> across typical industrial models, with corresponding time savings in the same range. For teams running multi-variant studies on GPU clusters, this translates directly into more design iterations per development cycle.</p>
 
             <p>Beyond raw performance, v8.2 introduces LBM-MPS coupling for airflow-particle interaction, snow deposition modeling, and anisotropic conjugate heat transfer — expanding the physics envelope into territory that previously required separate solver chains.</p>
+
+            <img src="images/pwe2025/pw82-p11.png" alt="Particleworks v8.2 LBM-MPS bidirectional coupling" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <div style="position:relative;margin:1.5rem 0;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+              <div style="padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(0,68,102,0.95),rgba(0,136,204,0.85));color:#fff;">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎥</div>
+                <h5 style="font-weight:700;margin-bottom:0.25rem;font-size:0.95rem;">Watch the Recording</h5>
+                <p style="font-size:0.82rem;opacity:0.8;margin-bottom:1rem;">Enter your email to access the full presentation video</p>
+                <form style="display:flex;gap:0.5rem;max-width:400px;margin:0 auto;" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Check your inbox!';this.querySelector('button').style.background='var(--pw-green)';">
+                  <input type="email" placeholder="your@email.com" required style="flex:1;padding:0.6rem 1rem;border:none;border-radius:8px;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.6rem 1.2rem;background:var(--pw-blue);color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;">Request Access</button>
+                </form>
+              </div>
+            </div>
 
             <hr class="section-rule">
 
             <!-- Gearbox -->
             <h2>Gearbox and Lubrication: Where Accuracy Meets Physics</h2>
 
-            <p><strong>SADEN</strong> presented a hybrid MPS+FVM simulation of power losses in a turbo gearbox, achieving better than <strong>95% accuracy</strong> against experimental measurements — a maximum deviation of 5%. The work revealed that air creates "candle-like" structures inside the gearbox cavity that actively block lubricant from reaching critical contact zones. This is the kind of insight that no amount of physical testing reveals without invasive instrumentation, and it was captured in hours rather than the days required by traditional mesh-based CFD.</p>
+            <p><img src="images/pwe2025/Patrick-Neuenfeldt.png" alt="Patrick Neuenfeldt" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;"><strong>SADEN</strong> presented a hybrid MPS+FVM simulation of power losses in a turbo gearbox, achieving better than <strong>95% accuracy</strong> against experimental measurements — a maximum deviation of 5%. The work revealed that air creates "candle-like" structures inside the gearbox cavity that actively block lubricant from reaching critical contact zones. This is the kind of insight that no amount of physical testing reveals without invasive instrumentation, and it was captured in hours rather than the days required by traditional mesh-based CFD.</p>
+
+            <img src="images/pwe2025/saden-p9.png" alt="SADEN diagonal candle-like air structures in gearbox" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
 
             <p><strong>TotalEnergies</strong> tackled lubricant aeration head-on, deriving a Weber-number scaling law that predicts production rate within <strong>1-9%</strong> and bubble radius within 1-12%. Their validation campaign on an FZG test rig reached pitch-line velocities up to 42 m/s, and included the finding that quartz-based oil formulations reduce aeration by 50%.</p>
 
-            <p><strong>WITTENSTEIN</strong> demonstrated splash lubrication simulation of their Galaxie gearbox, a uniquely challenging geometry where individually movable radial teeth create a constantly changing flow domain. <strong>SPN Schwaben Prasision</strong> extended the material modeling frontier with power-law grease simulation, capturing the non-Newtonian shear-thinning behavior that makes grease fundamentally different from oil in lubrication analysis.</p>
+            <img src="images/pwe2025/totalenergies-p10.png" alt="TotalEnergies experimental data collection — aeration rig" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <p><img src="images/pwe2025/Michael-Keller.png" alt="Michael Keller" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;"><strong>WITTENSTEIN</strong> demonstrated splash lubrication simulation of their Galaxie gearbox, a uniquely challenging geometry where individually movable radial teeth create a constantly changing flow domain. <strong>SPN Schwaben Prasision</strong> extended the material modeling frontier with power-law grease simulation, capturing the non-Newtonian shear-thinning behavior that makes grease fundamentally different from oil in lubrication analysis.</p>
+
+            <img src="images/pwe2025/saden-p11.png" alt="SADEN conclusions — greater than 95% accuracy, suitable for industry" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <div style="position:relative;margin:1.5rem 0;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+              <div style="padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(0,68,102,0.95),rgba(0,136,204,0.85));color:#fff;">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎥</div>
+                <h5 style="font-weight:700;margin-bottom:0.25rem;font-size:0.95rem;">Watch the Recording</h5>
+                <p style="font-size:0.82rem;opacity:0.8;margin-bottom:1rem;">Enter your email to access the full presentation video</p>
+                <form style="display:flex;gap:0.5rem;max-width:400px;margin:0 auto;" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Check your inbox!';this.querySelector('button').style.background='var(--pw-green)';">
+                  <input type="email" placeholder="your@email.com" required style="flex:1;padding:0.6rem 1rem;border:none;border-radius:8px;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.6rem 1.2rem;background:var(--pw-blue);color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;">Request Access</button>
+                </form>
+              </div>
+            </div>
 
             <hr class="section-rule">
 
             <!-- Bearings and Seals -->
             <h2>Bearings and Seals: Virtual Testing at Scale</h2>
 
-            <p><strong>SKF</strong> presented a bearing seal water ingress study running 8 million particles per case, with each simulation completing in approximately <strong>two days</strong>. Three seal design variants were evaluated virtually, including hydro-deflector geometries and misalignment conditions — work that would have required physical prototype tooling and weeks of test rig time for each configuration.</p>
+            <p><img src="images/pwe2025/Mehul-Pandya.png" alt="Mehul Pandya" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;"><strong>SKF</strong> presented a bearing seal water ingress study running 8 million particles per case, with each simulation completing in approximately <strong>two days</strong>. Three seal design variants were evaluated virtually, including hydro-deflector geometries and misalignment conditions — work that would have required physical prototype tooling and weeks of test rig time for each configuration.</p>
+
+            <img src="images/pwe2025/skf-p9.png" alt="SKF — there is a seal for every application overview" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <div style="position:relative;margin:1.5rem 0;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+              <div style="padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(0,68,102,0.95),rgba(0,136,204,0.85));color:#fff;">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎥</div>
+                <h5 style="font-weight:700;margin-bottom:0.25rem;font-size:0.95rem;">Watch the Recording</h5>
+                <p style="font-size:0.82rem;opacity:0.8;margin-bottom:1rem;">Enter your email to access the full presentation video</p>
+                <form style="display:flex;gap:0.5rem;max-width:400px;margin:0 auto;" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Check your inbox!';this.querySelector('button').style.background='var(--pw-green)';">
+                  <input type="email" placeholder="your@email.com" required style="flex:1;padding:0.6rem 1rem;border:none;border-radius:8px;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.6rem 1.2rem;background:var(--pw-blue);color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;">Request Access</button>
+                </form>
+              </div>
+            </div>
 
             <hr class="section-rule">
 
@@ -367,18 +413,52 @@
 
             <p><strong>DUMAREY</strong> brought one of the most computationally ambitious cases of the conference: a full 3-stage gearbox thermal simulation combining MPS, conjugate heat transfer and FVM on an NVIDIA A100 GPU with 80 GB of memory. Using Becker's heat transfer coefficient formulation, the simulation matched experimental temperatures within <strong>2-9 degrees Celsius</strong> across the gearbox housing. Critically, the model identified sub-optimal oil residence times at bearings B2 and B6 — localized thermal risks that would be invisible to bulk-temperature monitoring.</p>
 
-            <p><strong>Drive System Design (DSD)</strong> closed the EV powertrain theme with a result that drew audible reactions from the audience. They reported a <strong>90% reduction in solve times</strong> compared to their previous mesh-based CFD workflow, and a 63% reduction in combined engineering workflow time. The headline finding: simulation results matched physical test data without any calibration or tuning parameters. "No Tuning!" was their phrase, and for anyone who has spent weeks adjusting turbulence models and wall functions in conventional CFD, it resonates.</p>
+            <img src="images/pwe2025/dumarey-p10.png" alt="DUMAREY R&D CFD capabilities overview" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <div style="position:relative;margin:1.5rem 0;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+              <div style="padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(0,68,102,0.95),rgba(0,136,204,0.85));color:#fff;">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎥</div>
+                <h5 style="font-weight:700;margin-bottom:0.25rem;font-size:0.95rem;">Watch the Recording</h5>
+                <p style="font-size:0.82rem;opacity:0.8;margin-bottom:1rem;">Enter your email to access the full presentation video</p>
+                <form style="display:flex;gap:0.5rem;max-width:400px;margin:0 auto;" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Check your inbox!';this.querySelector('button').style.background='var(--pw-green)';">
+                  <input type="email" placeholder="your@email.com" required style="flex:1;padding:0.6rem 1rem;border:none;border-radius:8px;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.6rem 1.2rem;background:var(--pw-blue);color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;">Request Access</button>
+                </form>
+              </div>
+            </div>
+
+            <p><img src="images/pwe2025/Michael-Bryant.png" alt="Michael Bryant" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;"><strong>Drive System Design (DSD)</strong> closed the EV powertrain theme with a result that drew audible reactions from the audience. They reported a <strong>90% reduction in solve times</strong> compared to their previous mesh-based CFD workflow, and a 63% reduction in combined engineering workflow time. The headline finding: simulation results matched physical test data without any calibration or tuning parameters. "No Tuning!" was their phrase, and for anyone who has spent weeks adjusting turbulence models and wall functions in conventional CFD, it resonates.</p>
+
+            <img src="images/pwe2025/dsd-p10.png" alt="DSD combined implementation — dynamic, steady state and combined" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <img src="images/pwe2025/dsd-p13.png" alt="DSD No Tuning slide with best practices" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <div style="position:relative;margin:1.5rem 0;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+              <div style="padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(0,68,102,0.95),rgba(0,136,204,0.85));color:#fff;">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎥</div>
+                <h5 style="font-weight:700;margin-bottom:0.25rem;font-size:0.95rem;">Watch the Recording</h5>
+                <p style="font-size:0.82rem;opacity:0.8;margin-bottom:1rem;">Enter your email to access the full presentation video</p>
+                <form style="display:flex;gap:0.5rem;max-width:400px;margin:0 auto;" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Check your inbox!';this.querySelector('button').style.background='var(--pw-green)';">
+                  <input type="email" placeholder="your@email.com" required style="flex:1;padding:0.6rem 1rem;border:none;border-radius:8px;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.6rem 1.2rem;background:var(--pw-blue);color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;">Request Access</button>
+                </form>
+              </div>
+            </div>
 
             <hr class="section-rule">
 
             <!-- Agricultural and Industrial -->
             <h2>Agricultural and Industrial Applications</h2>
 
-            <p><strong>SAME DEUTZ-FAHR (SDF)</strong> presented a PowerShuttle clutch simulation at 0.22 mm particle resolution, analyzing oil distribution across individual clutch disks with a 3.2:1 split ratio between competing flow paths. The ability to resolve wetting on each disk surface — not just bulk flow rates — gives transmission designers the granularity needed to prevent localized hot spots and premature wear.</p>
+            <p><img src="images/pwe2025/Tommaso-Lucidi.png" alt="Tommaso Lucidi" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;"><strong>SAME DEUTZ-FAHR (SDF)</strong> presented a PowerShuttle clutch simulation at 0.22 mm particle resolution, analyzing oil distribution across individual clutch disks with a 3.2:1 split ratio between competing flow paths. The ability to resolve wetting on each disk surface — not just bulk flow rates — gives transmission designers the granularity needed to prevent localized hot spots and premature wear.</p>
+
+            <img src="images/pwe2025/sdf-p8.png" alt="SDF PowerShuttle tractor operations" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
 
             <p><strong>R&D CFD</strong> demonstrated engine cooling circuit filling simulation, predicting time-to-priming of <strong>3 to 3.5 seconds</strong> in close agreement with experimental measurements. Their work highlighted that accurate modeling of flow resistance in narrow passages is essential for capturing the transient filling sequence. The simulation ran on an NVIDIA RTX 6000 ADA GPU.</p>
 
-            <p><strong>JKU Linz</strong> contributed a coupled DEM+MPS simulation of centrifugal pelletizing, modeling the separation of moisture from polymer strands — a multi-physics problem at the intersection of particle and fluid mechanics.</p>
+            <img src="images/pwe2025/redcfd-p6.png" alt="R&D CFD engine filling simulation" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <p><img src="images/pwe2025/Mohammadreza-Aali.png" alt="Mohammadreza Aali" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;"><strong>JKU Linz</strong> contributed a coupled DEM+MPS simulation of centrifugal pelletizing, modeling the separation of moisture from polymer strands — a multi-physics problem at the intersection of particle and fluid mechanics.</p>
 
             <hr class="section-rule">
 
@@ -386,6 +466,20 @@
             <h2>Validation Breakthroughs: The Common Thread</h2>
 
             <p><strong>ZF</strong> rounded out the programme with <strong>five distinct MPS applications</strong> spanning worm gearboxes, water spray simulation, IPx ingress protection testing, sealant flow and bearing lubrication. Their emphasis was on rapid model setup for frequently changing CAD geometry — a reality in high-volume automotive development where design iterations arrive faster than simulation teams can mesh them.</p>
+
+            <img src="images/pwe2025/zf-p8.png" alt="ZF vehicle water spraying analysis — four views" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <div style="position:relative;margin:1.5rem 0;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+              <div style="padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(0,68,102,0.95),rgba(0,136,204,0.85));color:#fff;">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎥</div>
+                <h5 style="font-weight:700;margin-bottom:0.25rem;font-size:0.95rem;">Watch the Recording</h5>
+                <p style="font-size:0.82rem;opacity:0.8;margin-bottom:1rem;">Enter your email to access the full presentation video</p>
+                <form style="display:flex;gap:0.5rem;max-width:400px;margin:0 auto;" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Check your inbox!';this.querySelector('button').style.background='var(--pw-green)';">
+                  <input type="email" placeholder="your@email.com" required style="flex:1;padding:0.6rem 1rem;border:none;border-radius:8px;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.6rem 1.2rem;background:var(--pw-blue);color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;">Request Access</button>
+                </form>
+              </div>
+            </div>
 
             <p>Across all twelve presentations, one pattern was unmistakable: presenters did not ask the audience to trust qualitative animations. They showed quantitative comparisons against physical measurements, stated their error margins, and discussed where the models still need work. SADEN's 5% deviation. TotalEnergies' scaling law within 1-12%. DUMAREY's 2-9 degrees Celsius thermal accuracy. DSD's zero-tuning correlation. SKF's three-variant virtual test campaign completed in days.</p>
 
