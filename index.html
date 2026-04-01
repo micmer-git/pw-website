@@ -1753,9 +1753,11 @@
         </div>
         <div class="modal-body">
           <p class="text-muted small mb-3">Enter your email to access this resource. We respect your privacy.</p>
-          <form id="gateForm" action="https://formspree.io/f/xpwzgvkr" method="POST" onsubmit="handleGateSubmit(event)">
+          <form id="gateForm" action="https://formsubmit.co/michelemerelli.8@gmail.com" method="POST" onsubmit="handleGateSubmit(event)">
             <input type="hidden" name="_replyto" value="support@particleworks-europe.com">
             <input type="hidden" name="_subject" value="PW Website: New inquiry">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
             <input type="hidden" id="gateFileUrl" name="resource_url" value="">
             <div class="mb-3">
               <input type="email" class="form-control" id="gateEmail" placeholder="your.email@company.com" required>
@@ -1940,9 +1942,11 @@
             <p class="section-subtitle fade-up">See Particleworks in action. Fill out the form and our team will get back to you within 24 hours.</p>
           </div>
           <div class="demo-card fade-up">
-            <form action="https://formspree.io/f/xpwzgvkr" method="POST">
+            <form action="https://formsubmit.co/michelemerelli.8@gmail.com" method="POST">
               <input type="hidden" name="_replyto" value="support@particleworks-europe.com">
               <input type="hidden" name="_subject" value="PW Website: New inquiry">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="table">
               <div class="row g-3">
                 <div class="col-md-6">
                   <label class="form-label small fw-semibold">Full Name *</label>
@@ -2244,14 +2248,18 @@
     function handleGateSubmit(e) {
       e.preventDefault();
       const email = document.getElementById('gateEmail').value;
-      // Send email to formspree silently
-      fetch('https://formspree.io/f/xpwzgvkr', {
+      // Send email via formsubmit.co silently
+      fetch('https://formsubmit.co/ajax/michelemerelli.8@gmail.com', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
           email: email,
           resource: document.getElementById('gateTitle').textContent,
-          type: 'resource_download'
+          type: 'resource_download',
+          _subject: 'PW Website: Resource Download',
+          _replyto: email,
+          _captcha: 'false',
+          _template: 'table'
         })
       }).catch(() => {}); // silent fail OK
 
