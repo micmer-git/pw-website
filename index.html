@@ -1942,46 +1942,53 @@
             <p class="section-subtitle fade-up">See Particleworks in action. Fill out the form and our team will get back to you within 24 hours.</p>
           </div>
           <div class="demo-card fade-up">
-            <form action="https://formsubmit.co/michelemerelli.8@gmail.com" method="POST">
-              <input type="hidden" name="_replyto" value="support@particleworks-europe.com">
-              <input type="hidden" name="_subject" value="PW Website: New inquiry">
-              <input type="hidden" name="_captcha" value="false">
-              <input type="hidden" name="_template" value="table">
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <label class="form-label small fw-semibold">Full Name *</label>
-                  <input type="text" name="name" class="form-control" placeholder="John Smith" required>
+            <div id="demoFormContainer">
+              <form id="demoForm" action="https://formsubmit.co/ajax/michelemerelli.8@gmail.com" method="POST">
+                <input type="hidden" name="_replyto" value="support@particleworks-europe.com">
+                <input type="hidden" name="_subject" value="PW Website: New inquiry">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label small fw-semibold">Full Name *</label>
+                    <input type="text" name="name" class="form-control" placeholder="John Smith" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label small fw-semibold">Company *</label>
+                    <input type="text" name="company" class="form-control" placeholder="Your Company" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label small fw-semibold">Work Email *</label>
+                    <input type="email" name="email" class="form-control" placeholder="john@company.com" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label small fw-semibold">Use Case *</label>
+                    <select name="use_case" class="form-select" required>
+                      <option value="" disabled selected>Select your application</option>
+                      <option value="Gearbox Lubrication">Gearbox Lubrication</option>
+                      <option value="E-Motor Cooling">E-Motor Cooling</option>
+                      <option value="Piston Cooling">Piston Cooling</option>
+                      <option value="Mixing & Separation">Mixing &amp; Separation</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label small fw-semibold">Message (optional)</label>
+                    <textarea name="message" class="form-control" rows="3" placeholder="Tell us about your simulation needs..."></textarea>
+                  </div>
+                  <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn btn-submit">
+                      <i class="bi bi-send me-2"></i>Request Demo
+                    </button>
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label small fw-semibold">Company *</label>
-                  <input type="text" name="company" class="form-control" placeholder="Your Company" required>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label small fw-semibold">Work Email *</label>
-                  <input type="email" name="email" class="form-control" placeholder="john@company.com" required>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label small fw-semibold">Use Case *</label>
-                  <select name="use_case" class="form-select" required>
-                    <option value="" disabled selected>Select your application</option>
-                    <option value="Gearbox Lubrication">Gearbox Lubrication</option>
-                    <option value="E-Motor Cooling">E-Motor Cooling</option>
-                    <option value="Piston Cooling">Piston Cooling</option>
-                    <option value="Mixing & Separation">Mixing &amp; Separation</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <div class="col-12">
-                  <label class="form-label small fw-semibold">Message (optional)</label>
-                  <textarea name="message" class="form-control" rows="3" placeholder="Tell us about your simulation needs..."></textarea>
-                </div>
-                <div class="col-12 text-center mt-4">
-                  <button type="submit" class="btn btn-submit">
-                    <i class="bi bi-send me-2"></i>Request Demo
-                  </button>
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
+            <div id="demoThankYou" style="display:none;text-align:center;padding:2rem;">
+              <i class="bi bi-check-circle-fill" style="font-size:3rem;color:var(--pw-blue);"></i>
+              <h4 class="fw-bold mt-3 mb-2">Thank you!</h4>
+              <p class="text-muted mb-0">We will get back to you within 24 hours.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -2235,6 +2242,28 @@
       });
     });
 
+    // ── Getform.io redundant endpoint (replace ID after creating form at getform.io) ──
+    const PW_GETFORM_URL = 'https://getform.io/f/GETFORM_PW_ID';
+
+    // ── Dual-send helper: formsubmit.co + getform.io ──
+    function dualSend(formsubmitPayload, getformPayload) {
+      var sends = [
+        fetch('https://formsubmit.co/ajax/michelemerelli.8@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(formsubmitPayload)
+        })
+      ];
+      if (!PW_GETFORM_URL.includes('REPLACE_ME') && !PW_GETFORM_URL.includes('GETFORM_PW_ID')) {
+        sends.push(fetch(PW_GETFORM_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(getformPayload)
+        }));
+      }
+      return Promise.allSettled(sends);
+    }
+
     // ── Gated resource download ──
     let pendingDownloadUrl = '';
     function openGate(fileUrl, title) {
@@ -2248,25 +2277,39 @@
     function handleGateSubmit(e) {
       e.preventDefault();
       const email = document.getElementById('gateEmail').value;
-      // Send email via formsubmit.co silently
-      fetch('https://formsubmit.co/ajax/michelemerelli.8@gmail.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          resource: document.getElementById('gateTitle').textContent,
-          type: 'resource_download',
-          _subject: 'PW Website: Resource Download',
-          _replyto: email,
-          _captcha: 'false',
-          _template: 'table'
-        })
-      }).catch(() => {}); // silent fail OK
+      const resource = document.getElementById('gateTitle').textContent;
+      // Dual-send: formsubmit.co + getform.io
+      dualSend(
+        { email: email, resource: resource, type: 'resource_download', _subject: 'PW Website: Resource Download', _replyto: email, _captcha: 'false', _template: 'table' },
+        { email: email, resource: resource, type: 'resource_download', source: 'pw-website-gate' }
+      ).catch(function() {}); // silent fail OK
 
       // Download immediately
       window.open(pendingDownloadUrl, '_blank');
       bootstrap.Modal.getInstance(document.getElementById('gateModal')).hide();
     }
+
+    // ── Demo form AJAX with dual-send ──
+    (function() {
+      var demoForm = document.getElementById('demoForm');
+      if (!demoForm) return;
+      demoForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var fd = new FormData(demoForm);
+        var payload = {};
+        for (var pair of fd.entries()) payload[pair[0]] = pair[1];
+        dualSend(
+          Object.assign({}, payload, { _replyto: 'support@particleworks-europe.com', _subject: 'PW Website: New inquiry', _captcha: 'false', _template: 'table' }),
+          Object.assign({}, payload, { source: 'pw-website-demo' })
+        ).then(function() {
+          document.getElementById('demoFormContainer').style.display = 'none';
+          document.getElementById('demoThankYou').style.display = '';
+        }).catch(function() {
+          document.getElementById('demoFormContainer').style.display = 'none';
+          document.getElementById('demoThankYou').style.display = '';
+        });
+      });
+    })();
 
     // ── Close mobile nav on link click ──
     document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle), .navbar-nav .btn').forEach(link => {

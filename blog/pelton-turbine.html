@@ -406,19 +406,22 @@
     window.addEventListener('scroll', function() {
       document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30);
     });
+    const PW_GETFORM_URL = 'https://getform.io/f/GETFORM_PW_ID';
     const form = document.getElementById('cta-form');
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       const data = new FormData(form);
-      fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      }).then(function(response) {
-        if (response.ok) {
-          document.getElementById('cta-form-container').style.display = 'none';
-          document.getElementById('thank-you').classList.add('show');
-        }
+      const payload = {};
+      for (const pair of data.entries()) payload[pair[0]] = pair[1];
+      const sends = [
+        fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+      ];
+      if (!PW_GETFORM_URL.includes('REPLACE_ME') && !PW_GETFORM_URL.includes('GETFORM_PW_ID')) {
+        sends.push(fetch(PW_GETFORM_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign(payload, { source: 'pw-blog-pelton' })) }));
+      }
+      Promise.allSettled(sends).then(function() {
+        document.getElementById('cta-form-container').style.display = 'none';
+        document.getElementById('thank-you').classList.add('show');
       }).catch(function() {
         document.getElementById('cta-form-container').style.display = 'none';
         document.getElementById('thank-you').classList.add('show');
