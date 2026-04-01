@@ -1753,11 +1753,7 @@
         </div>
         <div class="modal-body">
           <p class="text-muted small mb-3">Enter your email to access this resource. We respect your privacy.</p>
-          <form id="gateForm" action="https://formsubmit.co/michelemerelli.8@gmail.com" method="POST" onsubmit="handleGateSubmit(event)">
-            <input type="hidden" name="_replyto" value="support@particleworks-europe.com">
-            <input type="hidden" name="_subject" value="PW Website: New inquiry">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
+          <form id="gateForm" onsubmit="handleGateSubmit(event)">
             <input type="hidden" id="gateFileUrl" name="resource_url" value="">
             <div class="mb-3">
               <input type="email" class="form-control" id="gateEmail" placeholder="your.email@company.com" required>
@@ -1943,11 +1939,7 @@
           </div>
           <div class="demo-card fade-up">
             <div id="demoFormContainer">
-              <form id="demoForm" action="https://formsubmit.co/ajax/michelemerelli.8@gmail.com" method="POST">
-                <input type="hidden" name="_replyto" value="support@particleworks-europe.com">
-                <input type="hidden" name="_subject" value="PW Website: New inquiry">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
+              <form id="demoForm">
                 <div class="row g-3">
                   <div class="col-md-6">
                     <label class="form-label small fw-semibold">Full Name *</label>
@@ -2242,26 +2234,16 @@
       });
     });
 
-    // ── Getform.io redundant endpoint (replace ID after creating form at getform.io) ──
-    const PW_GETFORM_URL = 'https://getform.io/f/GETFORM_PW_ID';
+    // ── Worker endpoint for all PW forms ──
+    const PW_WORKER_URL = 'https://recastello-forms.micmer-recastello.workers.dev/pw-form';
 
-    // ── Dual-send helper: formsubmit.co + getform.io ──
-    function dualSend(formsubmitPayload, getformPayload) {
-      var sends = [
-        fetch('https://formsubmit.co/ajax/michelemerelli.8@gmail.com', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(formsubmitPayload)
-        })
-      ];
-      if (!PW_GETFORM_URL.includes('REPLACE_ME') && !PW_GETFORM_URL.includes('GETFORM_PW_ID')) {
-        sends.push(fetch(PW_GETFORM_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(getformPayload)
-        }));
-      }
-      return Promise.allSettled(sends);
+    // ── Send to worker helper ──
+    function sendToWorker(payload) {
+      return fetch(PW_WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
     }
 
     // ── Gated resource download ──
@@ -2278,18 +2260,14 @@
       e.preventDefault();
       const email = document.getElementById('gateEmail').value;
       const resource = document.getElementById('gateTitle').textContent;
-      // Dual-send: formsubmit.co + getform.io
-      dualSend(
-        { email: email, resource: resource, type: 'resource_download', _subject: 'PW Website: Resource Download', _replyto: email, _captcha: 'false', _template: 'table' },
-        { email: email, resource: resource, type: 'resource_download', source: 'pw-website-gate' }
-      ).catch(function() {}); // silent fail OK
+      sendToWorker({ email: email, resource: resource, type: 'resource_download', source: 'pw-website-gate' }).catch(function() {});
 
       // Download immediately
       window.open(pendingDownloadUrl, '_blank');
       bootstrap.Modal.getInstance(document.getElementById('gateModal')).hide();
     }
 
-    // ── Demo form AJAX with dual-send ──
+    // ── Demo form AJAX ──
     (function() {
       var demoForm = document.getElementById('demoForm');
       if (!demoForm) return;
@@ -2298,10 +2276,9 @@
         var fd = new FormData(demoForm);
         var payload = {};
         for (var pair of fd.entries()) payload[pair[0]] = pair[1];
-        dualSend(
-          Object.assign({}, payload, { _replyto: 'support@particleworks-europe.com', _subject: 'PW Website: New inquiry', _captcha: 'false', _template: 'table' }),
-          Object.assign({}, payload, { source: 'pw-website-demo' })
-        ).then(function() {
+        payload.source = 'pw-website-demo';
+        payload.subject = 'PW Website: New inquiry';
+        sendToWorker(payload).then(function() {
           document.getElementById('demoFormContainer').style.display = 'none';
           document.getElementById('demoThankYou').style.display = '';
         }).catch(function() {
