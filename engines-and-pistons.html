@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Studies: engines and pistons - Particleworks Europe</title>
+  <meta name="description" content="Simulation of moving particles: discover the case studies of engines and pistons. Visit our website and check out insights, application and much more!">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pw-blue: #0088cc;
+      --pw-blue-dark: #006da3;
+      --pw-green: #25a361;
+      --pw-dark: #333333;
+      --pw-gray: #6c757d;
+      --pw-light: #f8f9fa;
+      --hero-accent: linear-gradient(135deg, #2c1810 0%, #8b4513 40%, #cc6600 100%);
+    }
+    * { font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { color: var(--pw-dark); overflow-x: hidden; }
+    .navbar { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(0,0,0,0.06); padding: 0.6rem 0; transition: box-shadow 0.3s; }
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .navbar-brand img { height: 38px; }
+    .navbar .nav-link { font-size: 0.88rem; font-weight: 500; color: var(--pw-dark); padding: 0.5rem 0.75rem !important; transition: color 0.2s; }
+    .navbar .nav-link:hover { color: var(--pw-blue); }
+    .app-hero { position: relative; padding: 10rem 0 5rem; background: var(--hero-accent); overflow: hidden; min-height: 480px; }
+    .app-hero::before { content: ''; position: absolute; inset: 0; background: url('/images/case-studies/engines-pistons.webp') center/cover no-repeat; opacity: 0.25; }
+    .app-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,10,0,0.55) 0%, rgba(20,10,0,0.85) 100%); }
+    .app-hero .container { position: relative; z-index: 2; }
+    .app-hero .badge-industry { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(204,102,0,0.3); color: #fff; border: 1px solid rgba(204,102,0,0.5); padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .app-hero h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 800; color: #fff; letter-spacing: -0.5px; line-height: 1.15; max-width: 700px; }
+    .app-hero .lead { font-size: 1.15rem; color: rgba(255,255,255,0.82); max-width: 620px; line-height: 1.7; margin-top: 1.25rem; }
+    .app-body { padding: 4rem 0 3rem; }
+    .app-body h2 { font-size: 1.55rem; font-weight: 700; color: var(--pw-dark); margin-top: 3rem; margin-bottom: 1rem; letter-spacing: -0.3px; line-height: 1.3; }
+    .app-body p { font-size: 1.05rem; line-height: 1.85; color: #444; margin-bottom: 1.25rem; max-width: 740px; }
+    .cap-card { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; padding: 1.25rem 1.5rem; transition: all 0.25s; height: 100%; }
+    .cap-card:hover { border-color: var(--pw-blue); box-shadow: 0 6px 20px rgba(0,136,204,0.1); transform: translateY(-2px); }
+    .cap-card .cap-icon { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, rgba(0,136,204,0.1), rgba(37,163,97,0.1)); display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; color: var(--pw-blue); font-size: 1.1rem; }
+    .cap-card h6 { font-size: 0.95rem; font-weight: 600; color: var(--pw-dark); margin-bottom: 0; }
+    .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+    .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .case-card { display: block; background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 12px; padding: 1.5rem; text-decoration: none; transition: all 0.25s; height: 100%; }
+    .case-card:hover { border-color: var(--pw-blue); box-shadow: 0 6px 20px rgba(0,136,204,0.1); transform: translateY(-2px); }
+    .case-card h5 { font-size: 1rem; font-weight: 600; color: var(--pw-dark); margin-bottom: 0.4rem; }
+    .case-card .card-arrow { color: var(--pw-blue); font-size: 1.1rem; margin-top: 0.5rem; display: block; }
+    .section-rule { border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,136,204,0.2), transparent); margin: 3rem 0; }
+    .cta-section { background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%); border-top: 1px solid rgba(0,136,204,0.1); padding: 4rem 0; }
+    .btn-pw { background: var(--pw-blue); color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 50px; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; display: inline-block; text-decoration: none; }
+    .btn-pw:hover { background: var(--pw-blue-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,136,204,0.3); }
+    footer { background: #1a1a2e; color: rgba(255,255,255,0.7); padding: 3.5rem 0 1.5rem; }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+    footer .footer-brand img { height: 34px; margin-bottom: 1rem; }
+    footer .footer-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0 1.5rem; }
+    footer .social-link { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.06); display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all 0.3s; }
+    footer .social-link:hover { background: var(--pw-blue); color: #fff; }
+  </style>
+
+
+
+<!-- === SEO head (auto-generated, matches backup website_now) === -->
+  <link rel="canonical" href="https://particleworks-europe.com/engines-and-pistons.html">
+  <meta name="author" content="Particleworks Europe">
+  <meta name="keywords" content="Particleworks, Particleworks Europe, Granuleworks, technologies, simulation">
+  <meta name="google-site-verification" content="13JcLKtEM_c2bcIc8ZMrIKncMjxxmwN5nmfLLs8WLQA">
+  <meta property="og:site_name" content="Particleworks Europe">
+  <meta property="og:title" content="Case Studies: engines and pistons - Particleworks Europe">
+  <meta property="og:description" content="Simulation of moving particles: discover the case studies of engines and pistons. Visit our website and check out insights, application and much more!">
+  <meta property="og:url" content="https://particleworks-europe.com/engines-and-pistons.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Case Studies: engines and pistons - Particleworks Europe">
+  <meta name="twitter:description" content="Simulation of moving particles: discover the case studies of engines and pistons. Visit our website and check out insights, application and much more!">
+  <!-- Iubenda -->
+  <script type="text/javascript" src="https://embeds.iubenda.com/widgets/6c5fe0b3-dfc8-4f17-b2ec-91c28fe04e7c.js"></script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-58D7FHDF');</script>
+  <!-- End Google Tag Manager -->
+<!-- === /SEO head === -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58D7FHDF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/index.html"><img src="/images/PW_Europe_logo_small.png" alt="Particleworks Europe"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/index.html#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/index.html#case-studies">Case Studies</a></li>
+          <li class="nav-item"><a class="nav-link" href="/index.html#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/company/particleworks-europe/" target="_blank"><i class="bi bi-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="app-hero">
+    <div class="container">
+      <div class="badge-industry"><i class="bi bi-fuel-pump me-1"></i> Industry Application</div>
+      <h1>Engines & Pistons</h1>
+      <p class="lead">Optimize piston cooling jets, oil gallery flow, and thermal management to extend engine life and performance.</p>
+    </div>
+  </section>
+
+  <section class="app-body">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+
+          <p>Piston cooling plays a critical role in modern engines. The intense heat generated during combustion threatens structural integrity. Lightweight aluminum alloys exhibit strength reduction at elevated temperatures. Oil jets strategically target critical areas ensuring uniform temperature distribution.</p>
+
+          <p>Particleworks enables engineers to simulate the transient oil jet impingement on reciprocating pistons, capturing the complex interaction between moving geometry, oil film formation, and heat extraction. The meshfree approach naturally handles the large deformations and splashing that make traditional mesh-based methods impractical for this application.</p>
+
+          <hr class="section-rule">
+
+          <h2>Key Capabilities</h2>
+          <div class="row g-3 mb-4">
+            <div class="col-md-4 col-sm-6">
+              <div class="cap-card">
+                <div class="cap-icon"><i class="bi bi-bullseye"></i></div>
+                <h6>Jet nozzle design improvements</h6>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="cap-card">
+                <div class="cap-icon"><i class="bi bi-speedometer2"></i></div>
+                <h6>Flowrate/direction impact on cooling</h6>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="cap-card">
+                <div class="cap-icon"><i class="bi bi-wind"></i></div>
+                <h6>Air drag effects on oil distribution</h6>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="cap-card">
+                <div class="cap-icon"><i class="bi bi-water"></i></div>
+                <h6>Sloshing influence on cooling</h6>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="cap-card">
+                <div class="cap-icon"><i class="bi bi-thermometer-half"></i></div>
+                <h6>Piston design modifications for higher HTC</h6>
+              </div>
+            </div>
+          </div>
+
+          <hr class="section-rule">
+
+          <h2>Simulation Demos</h2>
+          <div class="row g-4 mb-4">
+            <div class="col-lg-6">
+              <div class="video-wrap">
+                <iframe src="https://www.youtube.com/embed/zfKaUdy0egc?autoplay=1&mute=1&loop=1&playlist=zfKaUdy0egc&controls=0&showinfo=0" title="Piston cooling jet simulation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="video-wrap">
+                <iframe src="https://www.youtube.com/embed/4ElOUXURYUQ?autoplay=1&mute=1&loop=1&playlist=4ElOUXURYUQ&controls=0&showinfo=0" title="Engine oil gallery simulation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="video-wrap">
+                <iframe src="https://www.youtube.com/embed/24AbjTx5x7E?autoplay=1&mute=1&loop=1&playlist=24AbjTx5x7E&controls=0&showinfo=0" title="Piston thermal management" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+
+          <hr class="section-rule">
+
+          <h2>Related Case Studies</h2>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <a href="/cases/ducati.html" class="case-card">
+                <h5>Ducati</h5>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="/cases/hitachi.html" class="case-card">
+                <h5>Hitachi</h5>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="/cases/hpe.html" class="case-card">
+                <h5>HPE</h5>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="/cases/royal-enfield.html" class="case-card">
+                <h5>Royal Enfield</h5>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="/cases/wfinland.html" class="case-card">
+                <h5>W Finland</h5>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container text-center">
+      <h2 style="font-size:1.8rem; font-weight:800; margin-bottom:0.75rem;">See It in Action</h2>
+      <p style="color:var(--pw-gray); max-width:520px; margin:0 auto 1.5rem; font-size:1.05rem;">Request a personalized demo to explore piston cooling and engine thermal simulation.</p>
+      <a href="/index.html#demo" class="btn-pw"><i class="bi bi-play-circle me-2"></i>Request a Demo</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand"><img src="/images/PWEurope_negativ-logo.png" alt="Particleworks Europe"></div>
+          <p class="small" style="max-width:300px;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
+          <div class="d-flex gap-2 mt-3"><a href="https://www.linkedin.com/company/particleworks-europe/" class="social-link" target="_blank"><i class="bi bi-linkedin"></i></a></div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Products</h6>
+          <ul class="list-unstyled small"><li class="mb-2"><a href="/index.html">Particleworks</a></li><li class="mb-2"><a href="/index.html">Granuleworks</a></li></ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Services</h6>
+          <ul class="list-unstyled small"><li class="mb-2"><a href="/index.html">Consulting</a></li><li class="mb-2"><a href="/index.html">Training</a></li><li class="mb-2"><a href="/index.html">Support</a></li></ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Resources</h6>
+          <ul class="list-unstyled small"><li class="mb-2"><a href="/index.html#case-studies">Case Studies</a></li></ul>
+        </div>
+        <div class="col-lg-2">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Contact</h6>
+          <ul class="list-unstyled small"><li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li><li class="mb-2"><a href="mailto:info@particleworks-europe.com"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li></ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
+        <p class="small mb-0">Meshfree CFD simulation technology</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>window.addEventListener('scroll', function() { document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30); });</script>
+</body>
+</html>
