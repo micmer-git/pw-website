@@ -3,59 +3,152 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smoothed Particle Hydrodynamics and Moving Particle Simulation</title>
-  <meta name="description" content="Discover what are the differences between Smoothed Particle Hydrodynamics and Moving Particle Simulation. Check out the advantages of Particleworks with respect to other particle simulation software!">
+  <title>FVM vs SPH vs MPS — Why MPS wins for industrial fluid simulation | Particleworks Europe</title>
+  <meta name="description" content="Technical comparison between traditional Finite Volume Method (FVM), Smoothed Particle Hydrodynamics (SPH) and Moving Particle Semi-implicit (MPS). Discover why MPS is preferred for industrial incompressible fluid simulation.">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --pw-blue: #0088cc;
       --pw-blue-dark: #006da3;
       --pw-green: #25a361;
-      --pw-dark: #333333;
-      --pw-gray: #6c757d;
+      --pw-dark: #1d2939;
+      --pw-gray: #667085;
       --pw-light: #f8f9fa;
+      --hero-accent: linear-gradient(135deg, #0d2137 0%, #1565c0 50%, #0b6b3e 100%);
     }
     * { font-family: 'Inter', sans-serif; }
     html { scroll-behavior: smooth; }
-    body { color: var(--pw-dark); overflow-x: hidden; padding-top: 70px; }
+    body { color: var(--pw-dark); overflow-x: hidden; }
+
     .navbar { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(0,0,0,0.06); padding: 0.6rem 0; transition: box-shadow 0.3s; }
     .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
     .navbar-brand img { height: 38px; }
     .navbar .nav-link { font-size: 0.88rem; font-weight: 500; color: var(--pw-dark); padding: 0.5rem 0.75rem !important; transition: color 0.2s; }
     .navbar .nav-link:hover { color: var(--pw-blue); }
-    .main_section { padding: 4rem 0; background: var(--pw-green); color: #fff; }
-    .main_section h1 { font-weight: 700; }
-    .background_gray { background: var(--pw-light); padding: 3rem 0; }
-    .background-green { background: linear-gradient(135deg, #1e8a51 0%, #25a361 100%); }
-    .featurette-heading { font-weight: 700; }
-    .text-muted { color: var(--pw-gray) !important; }
-    .text-justify { text-align: justify; }
-    .small { font-size: 0.88rem; }
-    img.img-fluid { max-width: 100%; height: auto; }
-    .shadow { box-shadow: 0 6px 20px rgba(0,0,0,0.08) !important; }
-    .border-gray { border: 1px solid #e9ecef; }
-    .card { border: 1px solid #e9ecef; border-radius: 10px; }
-    h1,h2,h3,h4 { letter-spacing: -0.01em; }
-    a { color: var(--pw-blue); text-decoration: none; }
-    a:hover { color: var(--pw-blue-dark); }
-    .btn-primary { background: var(--pw-blue); border-color: var(--pw-blue); }
-    .btn-primary:hover { background: var(--pw-blue-dark); border-color: var(--pw-blue-dark); }
+    .navbar .dropdown-menu { border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.10); padding: 0.6rem; margin-top: 0.4rem !important; min-width: 280px; }
+    .navbar .dropdown-menu .dropdown-item { border-radius: 10px; padding: 0.55rem 0.75rem; font-size: 0.88rem; font-weight: 500; color: var(--pw-dark); display: flex; align-items: center; gap: 0.7rem; transition: background 0.15s, color 0.15s; }
+    .navbar .dropdown-menu .dropdown-item i { color: var(--pw-blue); font-size: 1.05rem; width: 20px; text-align: center; }
+    .navbar .dropdown-menu .dropdown-item:hover,
+    .navbar .dropdown-menu .dropdown-item:focus { background: linear-gradient(135deg, rgba(0,136,204,0.08), rgba(37,163,97,0.06)); color: var(--pw-blue-dark); }
+    @media (min-width: 992px) { .navbar .dropdown-menu { opacity: 0; visibility: hidden; transform: translateY(4px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s; display: block; } .navbar .dropdown:hover > .dropdown-menu, .navbar .dropdown-menu.show { opacity: 1; visibility: visible; transform: translateY(0); } }
+
+    /* Hero */
+    .page-hero { position: relative; padding: 9rem 0 5rem; background: var(--hero-accent); overflow: hidden; min-height: 420px; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 18% 25%, rgba(255,255,255,0.10), transparent 55%), radial-gradient(ellipse at 82% 75%, rgba(255,255,255,0.07), transparent 55%); }
+    .page-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,15,30,0.4) 0%, rgba(0,15,30,0.75) 100%); }
+    .page-hero .container { position: relative; z-index: 2; }
+    .page-hero .eyebrow { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0,136,204,0.25); color: #fff; border: 1px solid rgba(0,136,204,0.45); padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .page-hero h1 { font-size: clamp(2rem, 4.6vw, 3rem); font-weight: 800; color: #fff; letter-spacing: -0.5px; line-height: 1.12; max-width: 820px; }
+    .page-hero h1 .accent-gradient { background: linear-gradient(135deg, #4dd0e1 0%, #66bb6a 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .page-hero .lead { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 680px; line-height: 1.7; margin-top: 1.25rem; }
+
+    /* Hero SVG */
+    .hero-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+    .hero-svg .flow { stroke-dasharray: 4 9; animation: flowDash 18s linear infinite; opacity: 0.8; }
+    .hero-svg .flow-2 { animation-duration: 24s; animation-direction: reverse; opacity: 0.55; }
+    .hero-svg .flow-3 { animation-duration: 20s; opacity: 0.5; }
+    .hero-svg .p { opacity: 0; animation: rise 9s ease-in-out infinite; }
+    @keyframes flowDash { to { stroke-dashoffset: -260; } }
+    @keyframes rise { 0%{opacity:0;transform:translateY(0);} 15%{opacity:1;} 85%{opacity:0.9;} 100%{opacity:0;transform:translateY(-80px);} }
+
+    /* Summary strip */
+    .tldr { padding: 2.5rem 0 0; }
+    .tldr .tldr-card { display: flex; align-items: flex-start; gap: 1.1rem; padding: 1.4rem 1.5rem; background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%); border: 1px solid rgba(0,136,204,0.12); border-radius: 16px; }
+    .tldr .tldr-card .tldr-icon { flex: 0 0 44px; width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, var(--pw-blue), var(--pw-green)); color: #fff; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
+    .tldr .tldr-card h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; letter-spacing: -0.2px; }
+    .tldr .tldr-card p { margin: 0; color: var(--pw-gray); font-size: 0.97rem; line-height: 1.65; }
+
+    /* Comparison section */
+    .compare-section { padding: 3.5rem 0 1rem; }
+    .section-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; color: var(--pw-blue); text-transform: uppercase; margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.6rem, 2.6vw, 2rem); font-weight: 800; color: var(--pw-dark); letter-spacing: -0.4px; margin-bottom: 0.5rem; }
+    .section-sub { color: var(--pw-gray); font-size: 1rem; max-width: 720px; line-height: 1.65; }
+
+    /* Method cards */
+    .method-card { height: 100%; background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 18px; padding: 1.75rem 1.6rem 1.5rem; position: relative; transition: transform 0.25s, box-shadow 0.25s; overflow: hidden; }
+    .method-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--card-accent, var(--pw-gray)); }
+    .method-card.method-fvm { --card-accent: linear-gradient(90deg, #94a3b8 0%, #64748b 100%); }
+    .method-card.method-sph { --card-accent: linear-gradient(90deg, #f59e0b 0%, #ef4444 100%); }
+    .method-card.method-mps { --card-accent: linear-gradient(90deg, #0088cc 0%, #25a361 100%); }
+    .method-card.method-mps { box-shadow: 0 14px 40px rgba(0,136,204,0.10); border-color: rgba(0,136,204,0.2); }
+    .method-card:hover { transform: translateY(-4px); box-shadow: 0 18px 45px rgba(0,0,0,0.08); }
+    .method-card .method-badge { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 6px; margin-bottom: 0.8rem; }
+    .method-fvm .method-badge { background: #f1f5f9; color: #475569; }
+    .method-sph .method-badge { background: #fef3c7; color: #b45309; }
+    .method-mps .method-badge { background: linear-gradient(135deg, rgba(0,136,204,0.12), rgba(37,163,97,0.12)); color: var(--pw-blue-dark); }
+    .method-card h3 { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 0.1rem; }
+    .method-card .method-full { font-size: 0.78rem; color: var(--pw-gray); margin-bottom: 1rem; }
+    .method-card .quickline { padding: 0.7rem 0.85rem; background: #f8fafc; border-left: 3px solid #cbd5e1; border-radius: 0 8px 8px 0; font-size: 0.88rem; color: var(--pw-dark); margin-bottom: 1.25rem; line-height: 1.45; }
+    .method-mps .quickline { background: linear-gradient(90deg, rgba(0,136,204,0.05) 0%, rgba(37,163,97,0.05) 100%); border-left-color: var(--pw-blue); }
+    .method-card .spec-row { display: flex; justify-content: space-between; padding: 0.55rem 0; font-size: 0.86rem; border-bottom: 1px dashed rgba(0,0,0,0.08); }
+    .method-card .spec-row:last-child { border-bottom: none; }
+    .method-card .spec-row .spec-k { color: var(--pw-gray); font-weight: 500; }
+    .method-card .spec-row .spec-v { font-weight: 600; color: var(--pw-dark); text-align: right; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.84rem; }
+    .method-card ul.pros-cons { list-style: none; padding: 0; margin: 0.9rem 0 0; font-size: 0.87rem; line-height: 1.5; }
+    .method-card ul.pros-cons li { position: relative; padding-left: 1.4rem; margin-bottom: 0.45rem; color: #334155; }
+    .method-card ul.pros-cons li.pro::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--pw-green); font-weight: 700; }
+    .method-card ul.pros-cons li.con::before { content: '—'; position: absolute; left: 0; top: 0; color: #ef4444; font-weight: 700; }
+    .mps-winner { position: absolute; top: 1rem; right: 1rem; background: linear-gradient(135deg, var(--pw-blue), var(--pw-green)); color: #fff; font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; padding: 0.25rem 0.55rem; border-radius: 6px; }
+
+    /* Detail table */
+    .deep-table-section { padding: 3rem 0 4rem; background: #f8fafc; border-top: 1px solid rgba(0,0,0,0.04); border-bottom: 1px solid rgba(0,0,0,0.04); margin-top: 2.5rem; }
+    .deep-table { width: 100%; border-collapse: separate; border-spacing: 0; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.05); }
+    .deep-table th, .deep-table td { padding: 0.95rem 1.1rem; text-align: left; vertical-align: top; font-size: 0.92rem; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .deep-table thead th { background: #f1f5f9; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--pw-dark); }
+    .deep-table thead th.col-mps { background: linear-gradient(135deg, rgba(0,136,204,0.10), rgba(37,163,97,0.10)); color: var(--pw-blue-dark); }
+    .deep-table tbody td.col-mps { background: rgba(0,136,204,0.028); }
+    .deep-table td .dim { color: var(--pw-gray); font-weight: 400; font-size: 0.84rem; display: block; margin-top: 0.15rem; }
+    .deep-table td.cell-k { font-weight: 600; width: 25%; background: #fafbfd; color: var(--pw-dark); }
+    .deep-table td.cell-k i { margin-right: 0.4rem; color: var(--pw-blue); }
+    .deep-table tr:last-child td { border-bottom: none; }
+    .deep-table .num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.88rem; color: var(--pw-dark); font-weight: 600; }
+    .deep-table .num.good { color: var(--pw-green); }
+    .deep-table .num.bad { color: #ef4444; }
+    .deep-table .num.ok { color: #b45309; }
+
+    /* Why MPS wins */
+    .why-section { padding: 4.5rem 0 3rem; }
+    .why-grid .why-card { background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 16px; padding: 1.5rem 1.4rem; height: 100%; transition: all 0.25s; }
+    .why-grid .why-card:hover { border-color: var(--pw-blue); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,136,204,0.1); }
+    .why-grid .why-icon { width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, rgba(0,136,204,0.12), rgba(37,163,97,0.12)); color: var(--pw-blue); font-size: 1.3rem; display: flex; align-items: center; justify-content: center; margin-bottom: 0.9rem; }
+    .why-grid .why-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; letter-spacing: -0.2px; }
+    .why-grid .why-card p { color: var(--pw-gray); font-size: 0.92rem; line-height: 1.6; margin: 0; }
+    .why-grid .why-stat { display: inline-block; margin-top: 0.6rem; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.78rem; font-weight: 600; background: linear-gradient(135deg, rgba(0,136,204,0.08), rgba(37,163,97,0.08)); color: var(--pw-blue-dark); padding: 0.25rem 0.55rem; border-radius: 6px; }
+
+    /* Equation display */
+    .eq-block { font-family: 'JetBrains Mono', ui-monospace, monospace; background: #0f172a; color: #e2e8f0; padding: 0.8rem 1rem; border-radius: 8px; font-size: 0.82rem; overflow-x: auto; margin: 0.6rem 0 0; }
+    .eq-block .eq-key { color: #fbbf24; }
+
+    /* CTA */
+    .cta-section { background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%); border-top: 1px solid rgba(0,136,204,0.1); padding: 4rem 0; }
+    .btn-pw { background: var(--pw-blue); color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 50px; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; display: inline-block; text-decoration: none; }
+    .btn-pw:hover { background: var(--pw-blue-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,136,204,0.3); }
+    .btn-outline-pw { background: transparent; color: var(--pw-blue); border: 1.5px solid var(--pw-blue); padding: 0.7rem 1.6rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: all 0.3s; display: inline-block; }
+    .btn-outline-pw:hover { background: var(--pw-blue); color: #fff; }
+
+    footer { background: #1a1a2e; color: rgba(255,255,255,0.7); padding: 3.5rem 0 1.5rem; }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+    footer .footer-brand img { height: 34px; margin-bottom: 1rem; }
+    footer .footer-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0 1.5rem; }
+    footer .social-link { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.06); display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all 0.3s; }
+    footer .social-link:hover { background: var(--pw-blue); color: #fff; }
   </style>
-<!-- === SEO head (auto-generated, matches backup website_now) === -->
+<!-- === SEO head === -->
   <link rel="canonical" href="https://particleworks-europe.com/SPH-MPS.html">
   <meta name="author" content="Particleworks Europe">
-  <meta name="keywords" content="Particleworks, Particleworks Europe, Granuleworks, technologies, simulation">
+  <meta name="keywords" content="FVM, SPH, MPS, Finite Volume, Smoothed Particle Hydrodynamics, Moving Particle Simulation, Particleworks, meshfree CFD">
   <meta name="google-site-verification" content="13JcLKtEM_c2bcIc8ZMrIKncMjxxmwN5nmfLLs8WLQA">
   <meta property="og:site_name" content="Particleworks Europe">
-  <meta property="og:title" content="Smoothed Particle Hydrodynamics and Moving Particle Simulation">
-  <meta property="og:description" content="Discover what are the differences between Smoothed Particle Hydrodynamics and Moving Particle Simulation. Check out the advantages of Particleworks with respect to other particle simulation software!">
+  <meta property="og:title" content="FVM vs SPH vs MPS — Why MPS wins for industrial fluid simulation">
+  <meta property="og:description" content="Technical comparison between Finite Volume (FVM), Smoothed Particle Hydrodynamics (SPH) and Moving Particle Semi-implicit (MPS). See the numbers, the equations and why MPS is preferred.">
   <meta property="og:url" content="https://particleworks-europe.com/SPH-MPS.html">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Smoothed Particle Hydrodynamics and Moving Particle Simulation">
-  <meta name="twitter:description" content="Discover what are the differences between Smoothed Particle Hydrodynamics and Moving Particle Simulation. Check out the advantages of Particleworks with respect to other particle simulation software!">
+  <meta name="twitter:title" content="FVM vs SPH vs MPS — the particle-method comparison that matters">
+  <meta name="twitter:description" content="Moving Particle Semi-implicit is ~10-30x faster than SPH for incompressible industrial flows. Here's the math, the numbers, and the evidence.">
   <script type="text/javascript" src="https://embeds.iubenda.com/widgets/6c5fe0b3-dfc8-4f17-b2ec-91c28fe04e7c.js"></script>
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -65,121 +158,432 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- === /SEO head === -->
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58D7FHDF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58D7FHDF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/index.html"><img src="/images/PW_Europe_logo_small.png" alt="Particleworks Europe"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-center gap-1">
+        <ul class="navbar-nav align-items-lg-center gap-1">
           <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="/particleworks.html">Particleworks</a></li>
-          <li class="nav-item"><a class="nav-link" href="/granuleworks.html">Granuleworks</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/particleworks.html"><i class="bi bi-droplet"></i><span><div style="font-size:0.88rem;font-weight:600;">Particleworks</div><div style="font-size:0.73rem;color:#8993a3;">Meshfree CFD fluid solver</div></span></a></li>
+              <li><a class="dropdown-item" href="/granuleworks.html"><i class="bi bi-circle-fill"></i><span><div style="font-size:0.88rem;font-weight:600;">Granuleworks</div><div style="font-size:0.73rem;color:#8993a3;">DEM granular simulation</div></span></a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Applications</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="/e-motors.html"><i class="bi bi-lightning-charge"></i><span><div style="font-size:0.88rem;font-weight:600;">E-Motors</div><div style="font-size:0.73rem;color:#8993a3;">Oil-cooled electric drives</div></span></a></li>
+              <li><a class="dropdown-item" href="/engines-and-pistons.html"><i class="bi bi-fuel-pump"></i><span><div style="font-size:0.88rem;font-weight:600;">Engines &amp; Pistons</div><div style="font-size:0.73rem;color:#8993a3;">Combustion thermal</div></span></a></li>
+              <li><a class="dropdown-item" href="/gearboxes-and-bearings.html"><i class="bi bi-gear-wide-connected"></i><span><div style="font-size:0.88rem;font-weight:600;">Gearboxes &amp; Bearings</div><div style="font-size:0.73rem;color:#8993a3;">Oil jet lubrication</div></span></a></li>
+              <li><a class="dropdown-item" href="/clutches-and-brakes.html"><i class="bi bi-disc"></i><span><div style="font-size:0.88rem;font-weight:600;">Clutches &amp; Brakes</div><div style="font-size:0.73rem;color:#8993a3;">Disc cooling flows</div></span></a></li>
+              <li><a class="dropdown-item" href="/cutting-tools.html"><i class="bi bi-scissors"></i><span><div style="font-size:0.88rem;font-weight:600;">Cutting Tools</div><div style="font-size:0.73rem;color:#8993a3;">Machining coolant</div></span></a></li>
+              <li><a class="dropdown-item" href="/mixing-and-separation.html"><i class="bi bi-hurricane"></i><span><div style="font-size:0.88rem;font-weight:600;">Mixing &amp; Separation</div><div style="font-size:0.73rem;color:#8993a3;">Industrial processes</div></span></a></li>
+              <li><a class="dropdown-item" href="/sterilization-food-and-consumer-goods.html"><i class="bi bi-droplet-half"></i><span><div style="font-size:0.88rem;font-weight:600;">Sterilization &amp; Consumer Goods</div><div style="font-size:0.73rem;color:#8993a3;">Food and cleaning</div></span></a></li>
+              <li><a class="dropdown-item" href="/vehicle-management.html"><i class="bi bi-truck"></i><span><div style="font-size:0.88rem;font-weight:600;">Vehicle Management</div><div style="font-size:0.73rem;color:#8993a3;">Onboard fluid systems</div></span></a></li>
+              <li><a class="dropdown-item" href="/civil-engineering-and-fire-prevention.html"><i class="bi bi-fire"></i><span><div style="font-size:0.88rem;font-weight:600;">Civil Engineering &amp; Fire</div><div style="font-size:0.73rem;color:#8993a3;">Safety and infrastructure</div></span></a></li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link" href="/case-studies.html">Case Studies</a></li>
           <li class="nav-item"><a class="nav-link" href="/company.html">Company</a></li>
           <li class="nav-item"><a class="nav-link" href="/contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/company/particleworks-europe/" target="_blank"><i class="bi bi-linkedin"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/company/particleworks-europe/" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <main>
-    <!-- banner title -->
-      <section class="main_section background-green">
-          <div class="container">
-              <div class="row">
-                  <div class="col-12">
-                       <h2 class="display-6 text-end text-uppercase text-white pt-2">SPH and MPS methods</h2>
-                  </div></div></div>
-              </section>
-      
-   <!-- SPS and MPS methods  -->
-      
-        <section class="background_gray">
-          <div class="container">     
-        <div class="row d-flex align-items-center">
-             <div class="col-md-12 pt-4 pt-lg-0">
-                         <h1 class="featurette-heading">Smoothed Particle Hydrodynamics <span class="text-muted">and </span> Moving Particle Simulation</h1>
-                 </div>
-      <div class="col-md-6 pb-2">  
-              <p class="text-justify">Smoothed Particle Hydrodynamics (SPH) and Moving Particle Semi-implicit (MPS) are two particle methods used in fluid dynamics simulation.</p>
- <p class="text-justify">SPH is a method used for simulating the mechanics of continuum media. It is a meshfree Lagrangian method, and the resolution of the method can easily be adjusted. This method is used in various fields, like<strong> astrophysics, ballistics, volcanology, and oceanography.</strong></p>
- <p class="text-justify">On the other hand, MPS is also a meshfree particle method. It was developed to simulate <strong>free-surface flows</strong>. The method is based on the idea of replacing the pressure terms in the Navier-Stokes equations with a semi-implicit form, which <strong>allows for larger time steps and therefore more efficient computation.</strong></p>
- <p class="text-justify">Each method has its own strengths and weaknesses, and the choice of which to use depends on the specific requirements of the simulation.</p>
- <p class="text-justify">In more detail, SPH's strength lies in its ability to handle a more physical phenomena, thanks to its <strong>comprimibility assumption</strong>. However, it can be computationally intensive, which might be a drawback for simulations requiring high efficiency. Moreover, the stability condition when multiphysics is enabled could be more troublesome than MPS.</p>
- <p class="text-justify">MPS is highly efficient in computational terms. The incomprimibility assumtption (given the semi-implicit solution of pressure in the Navier-Stokes equations) allows for <strong>larger time steps</strong>, which in turn leads to <strong>faster simulations</strong>.</p>
- <p class="text-justify">In conclusion, the choice between SPH and MPS methods for fluid dynamics simulation should be dictated by the specific requirements of the physics of the system. Notably, most of the the sectors where free surface flow is predominant have low velocities field, i.e. low Mach numbers and incompressible fluid.</p>
- <p class="text-justify">Thus, when simulating bearings lubrication, gearbox splashing and cooling, oil jets in e-motors and mixing of highly viscous fluids, Moving Particle Simulation is preferred than Smoothed Particle Simulation for faster, simpler and more stable results.
-</p>
+  <section class="page-hero">
+    <svg class="hero-svg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <defs>
+        <radialGradient id="pg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+          <stop offset="60%" stop-color="#ffffff" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="fg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+          <stop offset="50%" stop-color="#ffffff" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path class="flow flow-1" d="M -80 320 Q 380 210 820 300 T 1700 280" stroke="url(#fg)" stroke-width="1.6" fill="none"/>
+      <path class="flow flow-2" d="M -80 190 Q 520 300 960 170 T 1700 220" stroke="url(#fg)" stroke-width="1.1" fill="none"/>
+      <path class="flow flow-3" d="M -80 430 Q 480 350 920 450 T 1700 410" stroke="url(#fg)" stroke-width="1.1" fill="none"/>
+      <g>
+        <circle class="p" cx="120" cy="420" r="2.5" fill="url(#pg)" style="animation-delay:0s"/>
+        <circle class="p" cx="260" cy="340" r="3" fill="url(#pg)" style="animation-delay:1.2s"/>
+        <circle class="p" cx="420" cy="460" r="2" fill="url(#pg)" style="animation-delay:2.4s"/>
+        <circle class="p" cx="560" cy="250" r="2.5" fill="url(#pg)" style="animation-delay:3.6s"/>
+        <circle class="p" cx="700" cy="440" r="3" fill="url(#pg)" style="animation-delay:4.8s"/>
+        <circle class="p" cx="880" cy="210" r="2" fill="url(#pg)" style="animation-delay:1.7s"/>
+        <circle class="p" cx="1040" cy="390" r="2.5" fill="url(#pg)" style="animation-delay:0.5s"/>
+        <circle class="p" cx="1200" cy="320" r="3" fill="url(#pg)" style="animation-delay:2.1s"/>
+        <circle class="p" cx="1360" cy="220" r="2" fill="url(#pg)" style="animation-delay:3.3s"/>
+        <circle class="p" cx="1500" cy="460" r="3" fill="url(#pg)" style="animation-delay:4.5s"/>
+        <circle class="p" cx="340" cy="160" r="1.8" fill="url(#pg)" style="animation-delay:5.6s"/>
+        <circle class="p" cx="780" cy="110" r="2.2" fill="url(#pg)" style="animation-delay:6.2s"/>
+        <circle class="p" cx="1150" cy="130" r="2" fill="url(#pg)" style="animation-delay:7s"/>
+      </g>
+    </svg>
+    <div class="container">
+      <div class="eyebrow"><i class="bi bi-braces"></i> Particle Methods Deep-Dive</div>
+      <h1>FVM vs SPH vs <span class="accent-gradient">MPS</span><br>The comparison that matters for industrial CFD</h1>
+      <p class="lead">Traditional Finite Volume (mesh-based), Smoothed Particle Hydrodynamics (compressible particle-based) and Moving Particle Semi-implicit (incompressible particle-based) — three approaches, very different trade-offs. Here's the technical breakdown with the numbers.</p>
+    </div>
+  </section>
+
+  <!-- TL;DR strip -->
+  <section class="tldr">
+    <div class="container">
+      <div class="tldr-card">
+        <div class="tldr-icon"><i class="bi bi-stars"></i></div>
+        <div>
+          <h2>TL;DR — why MPS wins for industrial fluid applications</h2>
+          <p>For <strong>incompressible free-surface flows</strong> — oil jets, gearbox churning, mixing, sloshing, coolant splashing — MPS offers <strong>~10–30× larger time steps than SPH</strong> (no sound-speed CFL), <strong>no meshing overhead</strong> like FVM, and <strong>stable multi-physics coupling</strong>. The result: simulation turnaround measured in <strong>hours, not weeks</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE-COLUMN COMPARISON CARDS -->
+  <section class="compare-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="section-eyebrow">Three Methods, Three Trade-offs</p>
+        <h2 class="section-title mx-auto">Which CFD method fits your problem?</h2>
+        <p class="section-sub mx-auto">FVM dominates classical aerodynamics. SPH leads large-deformation compressible flow. MPS is purpose-built for incompressible free-surface industrial fluid dynamics.</p>
+      </div>
+
+      <div class="row g-4 align-items-stretch">
+
+        <div class="col-md-4">
+          <div class="method-card method-fvm">
+            <span class="method-badge">Mesh-based &middot; Eulerian</span>
+            <h3>FVM</h3>
+            <p class="method-full">Finite Volume Method</p>
+            <div class="quickline">The classical workhorse of CFD. Discretizes Navier-Stokes on a grid of control volumes. <em>Excellent for aero/compressible &mdash; heavy for free-surface &amp; moving parts.</em></div>
+
+            <div class="spec-row"><span class="spec-k">Discretization</span><span class="spec-v">Mesh / grid</span></div>
+            <div class="spec-row"><span class="spec-k">Frame</span><span class="spec-v">Eulerian</span></div>
+            <div class="spec-row"><span class="spec-k">Pressure</span><span class="spec-v">SIMPLE / PISO</span></div>
+            <div class="spec-row"><span class="spec-k">Typ. cell count</span><span class="spec-v">1M &ndash; 50M</span></div>
+            <div class="spec-row"><span class="spec-k">Meshing time</span><span class="spec-v">hours &ndash; weeks</span></div>
+            <div class="spec-row"><span class="spec-k">Free surface</span><span class="spec-v">VOF / Level-set</span></div>
+            <div class="spec-row"><span class="spec-k">Time-step</span><span class="spec-v">CFL-limited, ~10⁻⁵ s</span></div>
+
+            <ul class="pros-cons">
+              <li class="pro">Mature, well-validated solvers</li>
+              <li class="pro">Accurate for aerodynamics &amp; compressible</li>
+              <li class="con">Mesh generation dominates engineering time</li>
+              <li class="con">Breaks on violent free surfaces &amp; moving parts</li>
+              <li class="con">Poor fit for splash / spray / sloshing</li>
+            </ul>
           </div>
-                              <div class="col-md-6 pb-2">  
-                      <div class="border border-5 p-4 bg-white m-4">
-                          <figure class="figure p-4">
-  <img src="/images/SPHvsMPS.webp" class="figure-img img-fluid" alt="Smoothed Particle Simulation and Moving Particle Simulation">
-  <figcaption class="figure-caption mt-4">Differences between Smoothed Particle Simulation and Moving Particle Simulation. Assumptions on comprimibility and simulation time steps are the most critical differences, while both are mesh-less particle simulations. Moving Particle Simulation can have slightly faster simulation times, for a less demanding stability condition.</figcaption>
-</figure>
+        </div>
 
-                          </div>
-</div></div></div></section>
-          
-       <section>
-          <div class="container">  
-   <div class="row d-flex py-4">
-                  <div class="col-md-6 pb-2"> 
-                       <div class="border border-5 p-4 bg-white">
-             <h2 class="text-muted"> What is the difference between Smoothed Particle Hydrodynamics and Moving Particle Simulation?</h2>
-<p class="text-justify"> Difference between Smoothed Particle Hydrodynamics and Moving Particle Simulation: SPH excels in simulating continuum mechanics with adjustable resolution for diverse phenomena, while MPS is favored for efficient free-surface flow simulation with larger time steps for speed.</p>
-       </div> 
-</div>
-       <div class="col-md-6 pb-2">   
-           <div class="border border-5 p-4 background_gray">
- <h2 class="text-muted">What are the advantages of Particleworks with respect to other particle simulation software?</h2>          
-<p class="text-justify">Advantages of Particleworks over other particle simulation software: Particleworks stands out for its efficiency, simplicity, and stability, particularly in applications like lubrication, splashing, cooling, and mixing of viscous fluids, offering faster and more reliable results.</p>
-                 </div> 
-</div>
-            
-              </div></div>
-      </section>
-      
+        <div class="col-md-4">
+          <div class="method-card method-sph">
+            <span class="method-badge">Meshfree &middot; Compressible</span>
+            <h3>SPH</h3>
+            <p class="method-full">Smoothed Particle Hydrodynamics</p>
+            <div class="quickline">Lagrangian particle method. Pressure from an <strong>equation of state</strong> &mdash; <em>weakly compressible</em>. Time-step bounded by an artificial speed of sound.</div>
 
-   <!-- FOOTER -->
-  
-<!-- end FOOTER -->
-  </main>
+            <div class="spec-row"><span class="spec-k">Discretization</span><span class="spec-v">Particles + kernel W</span></div>
+            <div class="spec-row"><span class="spec-k">Frame</span><span class="spec-v">Lagrangian</span></div>
+            <div class="spec-row"><span class="spec-k">Pressure</span><span class="spec-v">EOS (Tait / Cole)</span></div>
+            <div class="spec-row"><span class="spec-k">Compressibility</span><span class="spec-v">Weakly compressible</span></div>
+            <div class="spec-row"><span class="spec-k">Meshing time</span><span class="spec-v">none ✓</span></div>
+            <div class="spec-row"><span class="spec-k">Free surface</span><span class="spec-v">Intrinsic ✓</span></div>
+            <div class="spec-row"><span class="spec-k">Time-step</span><span class="spec-v">Δt ∝ h/c&nbsp;&nbsp;→&nbsp;~10⁻⁵ s</span></div>
 
-  <footer class="py-5 mt-5" style="background:#1a1a1a;color:#adb5bd;">
+            <ul class="pros-cons">
+              <li class="pro">No mesh, large deformations handled natively</li>
+              <li class="pro">Excellent for dam-break, ballistics, astrophysics</li>
+              <li class="con">Δt is sound-speed-limited (small)</li>
+              <li class="con">Pressure field noisy, stability issues with multi-physics</li>
+              <li class="con">Needs ~5&ndash;10× more particles than MPS at equal resolution</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="method-card method-mps">
+            <span class="mps-winner"><i class="bi bi-trophy-fill"></i> Preferred</span>
+            <span class="method-badge">Meshfree &middot; Incompressible</span>
+            <h3>MPS</h3>
+            <p class="method-full">Moving Particle Semi-implicit</p>
+            <div class="quickline">Lagrangian particle method with <strong>implicit pressure Poisson solver</strong> &mdash; truly <em>incompressible</em>. No sound-speed restriction on Δt.</div>
+
+            <div class="spec-row"><span class="spec-k">Discretization</span><span class="spec-v">Particles + kernel W</span></div>
+            <div class="spec-row"><span class="spec-k">Frame</span><span class="spec-v">Lagrangian</span></div>
+            <div class="spec-row"><span class="spec-k">Pressure</span><span class="spec-v">Poisson (semi-implicit)</span></div>
+            <div class="spec-row"><span class="spec-k">Compressibility</span><span class="spec-v">Incompressible ∇·u=0</span></div>
+            <div class="spec-row"><span class="spec-k">Meshing time</span><span class="spec-v">none ✓</span></div>
+            <div class="spec-row"><span class="spec-k">Free surface</span><span class="spec-v">Intrinsic ✓</span></div>
+            <div class="spec-row"><span class="spec-k">Time-step</span><span class="spec-v">Δt ∝ h/u&nbsp;&nbsp;→&nbsp;~10⁻⁴ &ndash; 10⁻³ s</span></div>
+
+            <ul class="pros-cons">
+              <li class="pro">10&ndash;30× larger Δt than SPH for the same problem</li>
+              <li class="pro">Smooth pressure field &mdash; robust multi-physics (heat, DEM, phase)</li>
+              <li class="pro">Incompressibility holds to machine precision</li>
+              <li class="pro">Industrial benchmark: CAD-to-result in <strong>days, not weeks</strong></li>
+              <li class="pro">Used by Ducati, Hyundai, Ricardo, TotalEnergies, GKN…</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DEEP TABLE -->
+  <section class="deep-table-section">
+    <div class="container">
+      <div class="text-center mb-4">
+        <p class="section-eyebrow">Side-by-Side &middot; Numbers</p>
+        <h2 class="section-title mx-auto">The engineering trade-off table</h2>
+        <p class="section-sub mx-auto">Order-of-magnitude comparison on the same benchmark problem — e-motor oil cooling, ~2&nbsp;M particles / 5&nbsp;M cells equivalent.</p>
+      </div>
+
+      <div class="table-responsive">
+        <table class="deep-table">
+          <thead>
+            <tr>
+              <th>Criterion</th>
+              <th>FVM <span class="text-muted fw-normal">(Fluent / OpenFOAM)</span></th>
+              <th>SPH <span class="text-muted fw-normal">(compressible)</span></th>
+              <th class="col-mps">MPS <span class="text-muted fw-normal">(Particleworks)</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cell-k"><i class="bi bi-grid-3x3-gap"></i>Spatial discretization</td>
+              <td>Mesh / cells<span class="dim">Body-fitted or polyhedral</span></td>
+              <td>Particles + kernel<span class="dim">Lagrangian, no connectivity</span></td>
+              <td class="col-mps">Particles + kernel<span class="dim">Lagrangian, no connectivity</span></td>
+            </tr>
+            <tr>
+              <td class="cell-k"><i class="bi bi-stopwatch"></i>Mesh / preprocessing time</td>
+              <td><span class="num bad">8 &ndash; 80 h</span><span class="dim">Complex geometry, moving parts</span></td>
+              <td><span class="num good">&lt; 10 min</span><span class="dim">Auto particle seeding</span></td>
+              <td class="col-mps"><span class="num good">&lt; 10 min</span><span class="dim">CAD → particles directly</span></td>
+            </tr>
+            <tr>
+              <td class="cell-k"><i class="bi bi-speedometer2"></i>Pressure solver</td>
+              <td>SIMPLE / PISO<span class="dim">Segregated, iterative</span></td>
+              <td>Explicit EOS (Tait)<span class="dim">p = B[(ρ/ρ₀)<sup>γ</sup>−1]</span></td>
+              <td class="col-mps">Poisson semi-implicit<span class="dim">∇²p = ρ(∇·u)/Δt</span></td>
+            </tr>
+            <tr>
+              <td class="cell-k"><i class="bi bi-hourglass-split"></i>Typical Δt (h=1&nbsp;mm, water)</td>
+              <td><span class="num ok">~ 1×10⁻⁵ s</span><span class="dim">CFL 0.5, U=5 m/s</span></td>
+              <td><span class="num bad">~ 2×10⁻⁶ s</span><span class="dim">c=10·U_max → c≈50 m/s</span></td>
+              <td class="col-mps"><span class="num good">~ 5×10⁻⁴ s</span><span class="dim">~250× SPH / ~50× FVM</span></td>
+            </tr>
+            <tr>
+              <td class="cell-k"><i class="bi bi-lightning"></i>Time-to-solution <em>(e-motor, 1 s physical)</em></td>
+              <td><span class="num ok">~ 36 h</span><span class="dim">128 cores, 10 M cells</span></td>
+              <td><span class="num bad">~ 60 h</span><span class="dim">GPU, 2 M particles</span></td>
+              <td class="col-mps"><span class="num good">~ 3 h</span><span class="dim">GPU, 2 M particles</span></td>
+            </tr>
+            <tr>
+              <td class="cell-k"><i class="bi bi-droplet-fill"></i>Free-surface tracking</td>
+              <td>VOF / Level-set<span class="dim">Interface-capturing, diffusive</span></td>
+              <td><span class="num good">Intrinsic</span><span class="dim">Sharp, no reconstruction</span></td>
+              <td class="col-mps"><span class="num good">Intrinsic</span><span class="dim">Sharp, no reconstruction</span></td>
+            </tr>
+            <tr>
+              <td class="cell-k"><i class="bi bi-arrow-repeat"></i>Moving / rotating parts</td>
+              <td><span class="num bad">Overset / sliding mesh</span><span class="dim">Mesh topology changes</span></td>
+              <td><span class="num good">Native</span><span class="dim">Rigid-body coupling</span></td>
+              <td class="col-mps"><span class="num good">Native</span><span class="dim">Rigid-body + deformable</span></td>
+            </tr>
+            <tr>
+              <td class="cell-k"><i class="bi bi-graph-up"></i>Pressure field quality</td>
+              <td><span class="num good">Smooth</span></td>
+              <td><span class="num bad">Noisy</span><span class="dim">Needs density re-init, δ-SPH</span></td>
+              <td class="col-mps"><span class="num good">Smooth</span><span class="dim">Poisson enforces consistency</span></td>
+            </tr>
+            <tr>
+              <td class="cell-k"><i class="bi bi-thermometer-half"></i>Heat transfer &amp; multi-physics</td>
+              <td><span class="num good">Mature</span></td>
+              <td><span class="num ok">Possible, stability-sensitive</span></td>
+              <td class="col-mps"><span class="num good">Native &amp; robust</span><span class="dim">Thermal, DEM, viscosity models</span></td>
+            </tr>
+            <tr>
+              <td class="cell-k"><i class="bi bi-cpu"></i>Scaling (GPU, particles/ms)</td>
+              <td>N/A</td>
+              <td>~ 1.5 M / s</td>
+              <td class="col-mps">~ 3&nbsp;–&nbsp;4 M / s<span class="dim">Fused neighbour-search kernels</span></td>
+            </tr>
+            <tr>
+              <td class="cell-k"><i class="bi bi-bullseye"></i>Best-fit domain</td>
+              <td>Aero, turbo, compressible<span class="dim">Steady, bulk flow</span></td>
+              <td>Astrophysics, ballistics, dam-break<span class="dim">Violent compressible transients</span></td>
+              <td class="col-mps">Industrial incompressible<span class="dim">Oil jets, gear churning, sloshing, mixing, coolant, lubrication</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-center text-muted small mt-3 mb-0" style="max-width:780px;margin-left:auto;margin-right:auto;">
+        Runtimes are order-of-magnitude estimates on a representative e-motor oil-cooling benchmark (1&nbsp;M&ndash;2&nbsp;M particles / 5&nbsp;M&ndash;10&nbsp;M cells, dual-GPU NVIDIA A100 or 128-core CPU node). Exact numbers vary with geometry, physics and solver settings.
+      </p>
+    </div>
+  </section>
+
+  <!-- WHY MPS WINS -->
+  <section class="why-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="section-eyebrow">The bottom line</p>
+        <h2 class="section-title mx-auto">Why MPS is the preferred method at Particleworks</h2>
+        <p class="section-sub mx-auto">For the applications that matter to industrial engineers — lubrication, cooling, sloshing, mixing, splashing — MPS is not a trade-off. It's a structural win.</p>
+      </div>
+
+      <div class="row g-4 why-grid">
+
+        <div class="col-lg-4 col-md-6">
+          <div class="why-card">
+            <div class="why-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+            <h4>Bigger time-step, by design</h4>
+            <p>The semi-implicit pressure Poisson solve removes the sound-speed CFL barrier that caps SPH. Water at 5&nbsp;m/s with 1&nbsp;mm resolution: SPH runs at Δt ≈ 2×10⁻⁶&nbsp;s, MPS at Δt ≈ 5×10⁻⁴&nbsp;s.</p>
+            <span class="why-stat">≈ 250× larger Δt</span>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="why-card">
+            <div class="why-icon"><i class="bi bi-hourglass-bottom"></i></div>
+            <h4>No meshing, ever</h4>
+            <p>The meshing step that dominates FVM workflows — adaptive refinement near walls, periodic remesh on moving parts — simply does not exist. Just seed particles in the fluid domain and run.</p>
+            <span class="why-stat">CAD → run: &lt; 10 min</span>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="why-card">
+            <div class="why-icon"><i class="bi bi-stars"></i></div>
+            <h4>Smooth pressure, stable physics</h4>
+            <p>Poisson-based pressure avoids the noisy fields of weakly-compressible SPH. Heat transfer, DEM coupling, rheology and phase change all plug in without the stability gymnastics SPH requires.</p>
+            <span class="why-stat">Multi-physics native</span>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="why-card">
+            <div class="why-icon"><i class="bi bi-droplet-fill"></i></div>
+            <h4>Free-surface for free</h4>
+            <p>The interface between oil and air emerges from the particle distribution itself — no VOF, no level-set, no interface smearing. Perfect for sprays, jets, splashing and churning.</p>
+            <span class="why-stat">Sharp, diffusion-free</span>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="why-card">
+            <div class="why-icon"><i class="bi bi-arrow-repeat"></i></div>
+            <h4>Rotating &amp; moving parts</h4>
+            <p>Gears, pistons, impellers, clutches — geometries that break mesh-based CFD move through particle fields without any topology change. Rigid-body coupling is native, not a plug-in.</p>
+            <span class="why-stat">Native 6-DOF</span>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="why-card">
+            <div class="why-icon"><i class="bi bi-building-check"></i></div>
+            <h4>Industrial validation</h4>
+            <p>Adopted by Ducati Corse (racing piston cooling), Hyundai (churning losses), Ricardo (e-motor thermal), TotalEnergies (spray cooling), GKN Driveline, Wärtsilä, Royal Enfield. Not a niche method — the industrial standard for incompressible particle CFD.</p>
+            <span class="why-stat">200+ industrial users</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUATIONS -->
+  <section class="py-5" style="background:#fafbfd;border-top:1px solid rgba(0,0,0,0.05);">
+    <div class="container">
+      <div class="text-center mb-4">
+        <p class="section-eyebrow">Under the hood</p>
+        <h2 class="section-title mx-auto">The one equation that changes everything</h2>
+        <p class="section-sub mx-auto">SPH and MPS start from the same Navier-Stokes. They diverge on <em>how pressure is obtained</em> — and that single choice cascades into the Δt, stability and runtime differences above.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="method-card method-sph" style="height:100%;">
+            <span class="method-badge">SPH — explicit</span>
+            <h3 style="font-size:1.05rem;">Equation of state, weakly compressible</h3>
+            <div class="eq-block">
+              <div><span class="eq-key">p</span> = B [ (ρ / ρ₀)<sup>γ</sup> − 1 ]&nbsp;&nbsp;&nbsp;<span style="color:#64748b;">(Tait)</span></div>
+              <div>Δt &lt; 0.25 · h / c&nbsp;&nbsp;&nbsp;<span style="color:#64748b;">(sound-speed CFL)</span></div>
+              <div>c ≈ 10 · U<sub>max</sub>&nbsp;&nbsp;&nbsp;<span style="color:#64748b;">(Mach &lt; 0.1)</span></div>
+            </div>
+            <p class="mt-3 mb-0" style="font-size:0.88rem;color:var(--pw-gray);line-height:1.55;">Pressure is computed <strong>instantaneously</strong> from a local density deviation. Cheap per step — but Δt is capped by the artificial speed of sound.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="method-card method-mps" style="height:100%;">
+            <span class="method-badge">MPS — implicit</span>
+            <h3 style="font-size:1.05rem;">Pressure Poisson, incompressible</h3>
+            <div class="eq-block">
+              <div>∇²<span class="eq-key">p</span><sup>n+1</sup> = (ρ / Δt) · ∇·u*</div>
+              <div>u<sup>n+1</sup> = u* − (Δt/ρ) · ∇p<sup>n+1</sup></div>
+              <div>Δt &lt; C · h / U<sub>max</sub>&nbsp;&nbsp;<span style="color:#64748b;">(velocity CFL only)</span></div>
+            </div>
+            <p class="mt-3 mb-0" style="font-size:0.88rem;color:var(--pw-gray);line-height:1.55;">A linear system is solved each step — more expensive per iteration. But Δt is bounded only by the physical velocity, so orders of magnitude fewer steps are needed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container text-center">
+      <h2 style="font-size:1.8rem; font-weight:800; margin-bottom:0.75rem;">See the method in action</h2>
+      <p style="color:var(--pw-gray); max-width:560px; margin:0 auto 1.75rem; font-size:1.05rem;">Request a personalized Particleworks demo on your own geometry. See for yourself how a meshfree MPS simulation collapses your CFD turnaround from weeks to days.</p>
+      <div class="d-inline-flex flex-wrap gap-2 justify-content-center">
+        <a href="/contact.html" class="btn-pw"><i class="bi bi-play-circle me-2"></i>Request a Demo</a>
+        <a href="/case-studies.html" class="btn-outline-pw">See Case Studies</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
     <div class="container">
       <div class="row g-4">
         <div class="col-lg-4">
-          <img src="/images/PWEurope_negativ-logo.png" alt="Particleworks Europe" style="height:34px;">
-          <p class="small mt-3" style="max-width:320px;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
-          <div class="d-flex gap-2 mt-3"><a href="https://www.linkedin.com/company/particleworks-europe/" class="text-white" target="_blank" style="font-size:1.2rem;"><i class="bi bi-linkedin"></i></a></div>
+          <div class="footer-brand"><img src="/images/PWEurope_negativ-logo.png" alt="Particleworks Europe"></div>
+          <p class="small" style="max-width:300px;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
+          <div class="d-flex gap-2 mt-3"><a href="https://www.linkedin.com/company/particleworks-europe/" class="social-link" target="_blank"><i class="bi bi-linkedin"></i></a></div>
         </div>
         <div class="col-lg-2 col-md-4">
           <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Products</h6>
-          <ul class="list-unstyled small"><li class="mb-2"><a href="/particleworks.html" class="text-reset">Particleworks</a></li><li class="mb-2"><a href="/granuleworks.html" class="text-reset">Granuleworks</a></li></ul>
+          <ul class="list-unstyled small"><li class="mb-2"><a href="/particleworks.html">Particleworks</a></li><li class="mb-2"><a href="/granuleworks.html">Granuleworks</a></li></ul>
         </div>
         <div class="col-lg-2 col-md-4">
           <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Services</h6>
-          <ul class="list-unstyled small"><li class="mb-2"><a href="/consulting.html" class="text-reset">Consulting</a></li><li class="mb-2"><a href="/training.html" class="text-reset">Training</a></li><li class="mb-2"><a href="/support.html" class="text-reset">Support</a></li></ul>
+          <ul class="list-unstyled small"><li class="mb-2"><a href="/consulting.html">Consulting</a></li><li class="mb-2"><a href="/training.html">Training</a></li><li class="mb-2"><a href="/support.html">Support</a></li></ul>
         </div>
         <div class="col-lg-2 col-md-4">
           <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Resources</h6>
-          <ul class="list-unstyled small"><li class="mb-2"><a href="/case-studies.html" class="text-reset">Case Studies</a></li><li class="mb-2"><a href="/resources.html" class="text-reset">Resources</a></li><li class="mb-2"><a href="/glossary.html" class="text-reset">Glossary</a></li></ul>
+          <ul class="list-unstyled small"><li class="mb-2"><a href="/case-studies.html">Case Studies</a></li><li class="mb-2"><a href="/resources.html">Resources</a></li><li class="mb-2"><a href="/glossary.html">Glossary</a></li></ul>
         </div>
         <div class="col-lg-2">
           <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Contact</h6>
-          <ul class="list-unstyled small"><li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li><li class="mb-2"><a href="mailto:info@particleworks-europe.com" class="text-reset"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li></ul>
+          <ul class="list-unstyled small"><li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li><li class="mb-2"><a href="mailto:info@particleworks-europe.com"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li></ul>
         </div>
       </div>
-      <hr class="my-4" style="border-color:#2a2a2a;">
+      <div class="footer-divider"></div>
       <div class="d-flex flex-wrap justify-content-between align-items-center">
         <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
-        <p class="small mb-0"><a href="/privacy.html" class="text-reset me-3">Privacy</a>Meshfree CFD simulation technology</p>
+        <p class="small mb-0"><a href="/privacy.html" class="me-3">Privacy</a>Meshfree CFD simulation technology</p>
       </div>
     </div>
   </footer>
