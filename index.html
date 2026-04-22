@@ -1161,64 +1161,85 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-  <!-- ============ SPH vs MPS ============ -->
+  <!-- ============ FVM vs SPH vs MPS ============ -->
   <section class="comparison-section" id="sph-mps">
     <div class="container">
       <div class="text-center mb-5">
         <p class="section-label fade-up">Methodology</p>
-        <h2 class="section-title fade-up">SPH vs MPS</h2>
+        <h2 class="section-title fade-up">FVM vs SPH vs MPS</h2>
         <div class="accent-line fade-up"></div>
-        <p class="section-subtitle fade-up">Understanding the key differences between Smoothed Particle Hydrodynamics and Moving Particle Simulation</p>
+        <p class="section-subtitle fade-up">Traditional mesh-based CFD, compressible particle CFD, and incompressible particle CFD — three approaches, very different trade-offs.</p>
       </div>
       <div class="row justify-content-center">
-        <div class="col-lg-10 fade-up">
+        <div class="col-lg-11 fade-up">
           <div class="comparison-table">
             <table class="table table-striped mb-0">
               <thead>
                 <tr>
-                  <th style="width:28%;">Feature</th>
-                  <th style="width:36%;">SPH</th>
-                  <th style="width:36%;">MPS (Particleworks)</th>
+                  <th style="width:22%;">Feature</th>
+                  <th style="width:26%;">FVM <span class="text-muted fw-normal" style="font-size:0.8rem;">(Fluent / OpenFOAM)</span></th>
+                  <th style="width:26%;">SPH <span class="text-muted fw-normal" style="font-size:0.8rem;">(compressible)</span></th>
+                  <th style="width:26%;">MPS <span class="text-muted fw-normal" style="font-size:0.8rem;">(Particleworks)</span></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td class="fw-semibold">Method type</td>
-                  <td>Smoothed Particle Hydrodynamics</td>
-                  <td>Moving Particle Simulation <span class="badge-pw">Deterministic</span></td>
+                  <td class="fw-semibold">Discretization</td>
+                  <td>Mesh / control volumes</td>
+                  <td>Meshfree particles + kernel</td>
+                  <td>Meshfree particles + kernel <span class="badge-pw">No mesh</span></td>
                 </tr>
                 <tr>
-                  <td class="fw-semibold">Formulation</td>
-                  <td>Strong-form (kernel approximation)</td>
-                  <td>Weak-form (differential operators)</td>
+                  <td class="fw-semibold">Frame of reference</td>
+                  <td>Eulerian</td>
+                  <td>Lagrangian</td>
+                  <td>Lagrangian</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Pressure solver</td>
+                  <td>SIMPLE / PISO (iterative)</td>
+                  <td>Explicit EOS (Tait)</td>
+                  <td>Pressure Poisson, semi-implicit <span class="badge-pw">Smooth</span></td>
                 </tr>
                 <tr>
                   <td class="fw-semibold">Compressibility</td>
-                  <td>Weakly compressible or incompressible</td>
-                  <td>Fully incompressible <span class="badge-pw">Stable</span></td>
+                  <td>Configurable</td>
+                  <td>Weakly compressible</td>
+                  <td>Fully incompressible</td>
                 </tr>
                 <tr>
-                  <td class="fw-semibold">Pressure stability</td>
-                  <td>Can exhibit noise</td>
-                  <td>Pressure Poisson equation &mdash; highly stable</td>
+                  <td class="fw-semibold">Preprocessing time</td>
+                  <td style="color:#ef4444;">Hours to weeks (meshing)</td>
+                  <td style="color:#25a361;">&lt; 10 min</td>
+                  <td style="color:#25a361;">&lt; 10 min <span class="badge-pw">Fastest</span></td>
                 </tr>
                 <tr>
-                  <td class="fw-semibold">Typical applications</td>
-                  <td>Astrophysics, ballistics, high-speed flows</td>
-                  <td>Lubrication, cooling, sloshing, heat transfer</td>
+                  <td class="fw-semibold">Time-step Δt <span class="text-muted fw-normal" style="font-size:0.78rem;">(h=1mm, U=5m/s)</span></td>
+                  <td>~ 1×10⁻⁵ s (velocity CFL)</td>
+                  <td style="color:#ef4444;">~ 2×10⁻⁶ s (sound-speed CFL)</td>
+                  <td style="color:#25a361;">~ 5×10⁻⁴ s (velocity only) <span class="badge-pw">~250× SPH</span></td>
                 </tr>
                 <tr>
-                  <td class="fw-semibold">Meshing required</td>
-                  <td>No</td>
-                  <td>No <span class="badge-pw">Zero mesh</span></td>
+                  <td class="fw-semibold">Free surface</td>
+                  <td>VOF / Level-set (diffusive)</td>
+                  <td>Intrinsic, sharp</td>
+                  <td>Intrinsic, sharp</td>
                 </tr>
                 <tr>
-                  <td class="fw-semibold">Setup time</td>
-                  <td>Hours to days</td>
-                  <td>Minutes to hours <span class="badge-pw">Fastest</span></td>
+                  <td class="fw-semibold">Moving / rotating parts</td>
+                  <td style="color:#ef4444;">Overset / sliding mesh</td>
+                  <td>Native</td>
+                  <td>Native <span class="badge-pw">6-DOF</span></td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Best-fit domain</td>
+                  <td>Aero, compressible, steady bulk</td>
+                  <td>Astrophysics, ballistics, dam-break</td>
+                  <td>Industrial incompressible: oil jets, churning, sloshing, mixing, cooling, lubrication</td>
                 </tr>
               </tbody>
             </table>
+            <p class="text-muted small text-center mt-3 mb-0">Want the deep-dive with equations and benchmark numbers? &rarr; <a href="SPH-MPS.html" class="fw-semibold">Read the full FVM vs SPH vs MPS comparison</a></p>
           </div>
         </div>
       </div>
