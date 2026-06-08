@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../favicon.ico">
+  <title>PW Experience 2024 — Eleven Presentations, One Clear Message: Meshless CFD Has Gone Mainstream</title>
+  <meta name="description" content="PW Experience 2024 in Frankfurt brought eleven presentations proving that MPS-based meshless CFD is a production tool delivering validated results across gearboxes, e-drives, turbomachinery and more.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* --- unified nav dropdown styles (auto-injected) --- */
+    .navbar .dropdown-menu { border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.10); padding: 0.6rem; margin-top: 0.4rem !important; min-width: 280px; }
+    .navbar .dropdown-menu .dropdown-item { border-radius: 10px; padding: 0.55rem 0.75rem; font-size: 0.88rem; font-weight: 500; color: var(--pw-dark, #1a1a2e); display: flex; align-items: center; gap: 0.7rem; transition: background 0.15s, color 0.15s; white-space: normal; }
+    .navbar .dropdown-menu .dropdown-item i { color: var(--pw-blue, #0088cc); font-size: 1.05rem; width: 20px; text-align: center; flex-shrink: 0; }
+    .navbar .dropdown-menu .dropdown-item:hover,
+    .navbar .dropdown-menu .dropdown-item:focus,
+    .navbar .dropdown-menu .dropdown-item.active { background: linear-gradient(135deg, rgba(0,136,204,0.08), rgba(37,163,97,0.06)); color: var(--pw-blue-dark, #006da3); }
+    .navbar .dropdown-menu .dd-t { font-size: 0.88rem; font-weight: 600; }
+    .navbar .dropdown-menu .dd-s { font-size: 0.72rem; color: #8993a3; font-weight: 400; }
+    @media (min-width: 992px) {
+      .navbar .dropdown-menu { opacity: 0; visibility: hidden; transform: translateY(4px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s; display: block; }
+      .navbar .dropdown:hover > .dropdown-menu, .navbar .dropdown-menu.show { opacity: 1; visibility: visible; transform: translateY(0); }
+    }
+
+    :root {
+      --pw-blue: #0088cc;
+      --pw-blue-dark: #006da3;
+      --pw-green: #25a361;
+      --pw-green-dark: #1e8a51;
+      --pw-dark: #333333;
+      --pw-gray: #6c757d;
+      --pw-light: #f8f9fa;
+      --pw-gradient: linear-gradient(135deg, #0088cc 0%, #25a361 100%);
+      --pw-gradient-dark: linear-gradient(135deg, #004466 0%, #0088cc 50%, #1a7a4a 100%);
+    }
+    * { font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { color: var(--pw-dark); overflow-x: hidden; }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+      padding: 0.6rem 0;
+      transition: box-shadow 0.3s;
+    }
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .navbar-brand img { height: 38px; }
+    .navbar .nav-link {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--pw-dark);
+      padding: 0.5rem 0.75rem !important;
+      transition: color 0.2s;
+    }
+    .navbar .nav-link:hover { color: var(--pw-blue); }
+
+    /* Hero */
+    .blog-hero {
+      position: relative;
+      padding: 9rem 0 4rem;
+      background: var(--pw-gradient-dark);
+      overflow: hidden;
+    }
+    .blog-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(37,163,97,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,136,204,0.2) 0%, transparent 60%);
+    }
+    .blog-hero .container { position: relative; z-index: 2; }
+    .blog-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      max-width: 720px;
+    }
+    .blog-hero .lead {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 620px;
+      line-height: 1.7;
+      margin-top: 1.25rem;
+    }
+    .version-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(0,136,204,0.25);
+      color: #fff;
+      border: 1px solid rgba(0,136,204,0.5);
+      padding: 0.3rem 0.9rem;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.88rem;
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+    /* Article body */
+    .blog-body {
+      padding: 4rem 0 3rem;
+    }
+    .article-content {
+      max-width: 740px;
+    }
+    .article-content h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--pw-dark);
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+    }
+    .article-content h2:first-of-type {
+      margin-top: 0;
+    }
+    .article-content p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #444;
+      margin-bottom: 1.25rem;
+    }
+    .article-content ul {
+      margin-bottom: 1.5rem;
+      padding-left: 0;
+      list-style: none;
+    }
+    .article-content ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: #444;
+    }
+    .article-content ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--pw-blue);
+    }
+    .article-content strong {
+      color: var(--pw-dark);
+      font-weight: 600;
+    }
+
+    /* Sub-headers within sections */
+    .article-content h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--pw-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Section divider */
+    .section-rule {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,136,204,0.2), transparent);
+      margin: 3rem 0;
+    }
+
+    /* CTA box */
+    .cta-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%);
+      border: 1px solid rgba(0,136,204,0.15);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-top: 3rem;
+    }
+    .cta-box h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--pw-dark);
+      text-transform: none;
+      letter-spacing: -0.2px;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .cta-box p {
+      color: var(--pw-gray);
+      font-size: 0.98rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Buttons */
+    .btn-pw {
+      background: var(--pw-blue);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .btn-pw:hover { background: var(--pw-blue-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,136,204,0.3); }
+    .btn-pw-outline {
+      background: transparent;
+      color: var(--pw-blue);
+      border: 2px solid var(--pw-blue);
+      padding: 0.65rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .btn-pw-outline:hover { background: var(--pw-blue); color: #fff; transform: translateY(-2px); }
+
+    /* Related links */
+    .related-section {
+      padding: 3rem 0 4rem;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .related-card {
+      display: block;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      height: 100%;
+    }
+    .related-card:hover {
+      border-color: var(--pw-blue);
+      box-shadow: 0 6px 20px rgba(0,136,204,0.1);
+      transform: translateY(-2px);
+    }
+    .related-card h5 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--pw-dark);
+      margin-bottom: 0.4rem;
+    }
+    .related-card p {
+      font-size: 0.88rem;
+      color: var(--pw-gray);
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+    .related-card .card-arrow {
+      color: var(--pw-blue);
+      font-size: 1.1rem;
+      margin-top: 0.75rem;
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      background: #1a1a2e;
+      color: rgba(255,255,255,0.7);
+      padding: 3.5rem 0 1.5rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+    footer .footer-brand img { height: 34px; margin-bottom: 1rem; }
+    footer .footer-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0 1.5rem; }
+    footer .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+    footer .social-link:hover { background: var(--pw-blue); color: #fff; }
+  </style>
+
+<!-- === SEO head (auto-generated, matches backup website_now) === -->
+  <link rel="canonical" href="https://particleworks-europe.com/blog/pw-experience-2024.html">
+  <meta name="author" content="Particleworks Europe">
+  <meta name="keywords" content="Particleworks, Particleworks Europe, Granuleworks, technologies, simulation">
+  <meta name="google-site-verification" content="13JcLKtEM_c2bcIc8ZMrIKncMjxxmwN5nmfLLs8WLQA">
+  <meta property="og:site_name" content="Particleworks Europe">
+  <meta property="og:title" content="PW Experience 2024 — Eleven Presentations, One Clear Message: Meshless CFD Has Gone Mainstream">
+  <meta property="og:description" content="PW Experience 2024 in Frankfurt brought eleven presentations proving that MPS-based meshless CFD is a production tool delivering validated results across gearboxes, e-drives, turbomachinery and more.">
+  <meta property="og:url" content="https://particleworks-europe.com/blog/pw-experience-2024.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PW Experience 2024 — Eleven Presentations, One Clear Message: Meshless CFD Has Gone Mainstream">
+  <meta name="twitter:description" content="PW Experience 2024 in Frankfurt brought eleven presentations proving that MPS-based meshless CFD is a production tool delivering validated results across gearboxes, e-drives, turbomachinery and more.">
+  <!-- Iubenda -->
+  <script type="text/javascript" src="https://embeds.iubenda.com/widgets/6c5fe0b3-dfc8-4f17-b2ec-91c28fe04e7c.js"></script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-58D7FHDF');</script>
+  <!-- End Google Tag Manager -->
+<!-- === /SEO head === -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58D7FHDF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html"><img src="../images/PW_Europe_logo_small.png" alt="Particleworks Europe"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-lg-center gap-1">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../particleworks.html"><i class="bi bi-droplet"></i><span><div class="dd-t">Particleworks</div><div class="dd-s">Meshfree CFD fluid solver</div></span></a></li>
+              <li><a class="dropdown-item" href="../granuleworks.html"><i class="bi bi-circle-fill"></i><span><div class="dd-t">Granuleworks</div><div class="dd-s">DEM granular simulation</div></span></a></li>
+              <li><a class="dropdown-item" href="../particleworksforansys.html"><i class="bi bi-plug"></i><span><div class="dd-t">Particleworks for Ansys</div><div class="dd-s">Native Workbench integration</div></span></a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Applications</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="../e-motors.html"><i class="bi bi-lightning-charge"></i><span><div class="dd-t">E-Motors</div><div class="dd-s">Oil-cooled electric drives</div></span></a></li>
+              <li><a class="dropdown-item" href="../engines-and-pistons.html"><i class="bi bi-fuel-pump"></i><span><div class="dd-t">Engines &amp; Pistons</div><div class="dd-s">Combustion thermal</div></span></a></li>
+              <li><a class="dropdown-item" href="../gearboxes-and-bearings.html"><i class="bi bi-gear-wide-connected"></i><span><div class="dd-t">Gearboxes &amp; Bearings</div><div class="dd-s">Oil jet lubrication</div></span></a></li>
+              <li><a class="dropdown-item" href="../clutches-and-brakes.html"><i class="bi bi-disc"></i><span><div class="dd-t">Clutches &amp; Brakes</div><div class="dd-s">Disc cooling flows</div></span></a></li>
+              <li><a class="dropdown-item" href="../cutting-tools.html"><i class="bi bi-scissors"></i><span><div class="dd-t">Cutting Tools</div><div class="dd-s">Machining coolant</div></span></a></li>
+              <li><a class="dropdown-item" href="../mixing-and-separation.html"><i class="bi bi-hurricane"></i><span><div class="dd-t">Mixing &amp; Separation</div><div class="dd-s">Industrial processes</div></span></a></li>
+              <li><a class="dropdown-item" href="../sterilization-food-and-consumer-goods.html"><i class="bi bi-droplet-half"></i><span><div class="dd-t">Sterilization &amp; Consumer Goods</div><div class="dd-s">Food and cleaning</div></span></a></li>
+              <li><a class="dropdown-item" href="../vehicle-management.html"><i class="bi bi-truck"></i><span><div class="dd-t">Vehicle Management</div><div class="dd-s">Onboard fluid systems</div></span></a></li>
+              <li><a class="dropdown-item" href="../civil-engineering-and-fire-prevention.html"><i class="bi bi-fire"></i><span><div class="dd-t">Civil Engineering &amp; Fire</div><div class="dd-s">Safety and infrastructure</div></span></a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="../case-studies.html">Case Studies</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resources</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../resources.html"><i class="bi bi-file-earmark-pdf"></i><span><div class="dd-t">Resources &amp; Whitepapers</div><div class="dd-s">Technical documents</div></span></a></li>
+              <li><a class="dropdown-item" href="../SPH-MPS.html"><i class="bi bi-braces"></i><span><div class="dd-t">FVM vs SPH vs MPS</div><div class="dd-s">Method comparison</div></span></a></li>
+              <li><a class="dropdown-item" href="../glossary.html"><i class="bi bi-book"></i><span><div class="dd-t">Glossary</div><div class="dd-s">Meshfree CFD terminology</div></span></a></li>
+              <li><a class="dropdown-item" href="../training.html"><i class="bi bi-mortarboard"></i><span><div class="dd-t">Training</div><div class="dd-s">Courses &amp; workshops</div></span></a></li>
+              <li><a class="dropdown-item" href="../support.html"><i class="bi bi-life-preserver"></i><span><div class="dd-t">Support</div><div class="dd-s">Technical help</div></span></a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Company</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="../company.html"><i class="bi bi-building"></i><span><div class="dd-t">About Particleworks Europe</div><div class="dd-s">Who we are</div></span></a></li>
+              <li><a class="dropdown-item" href="../resellers.html"><i class="bi bi-globe-europe-africa"></i><span><div class="dd-t">Resellers</div><div class="dd-s">Global partner network</div></span></a></li>
+              <li><a class="dropdown-item" href="../careers.html"><i class="bi bi-person-plus"></i><span><div class="dd-t">Careers</div><div class="dd-s">Join the team</div></span></a></li>
+              <li><a class="dropdown-item" href="../consulting.html"><i class="bi bi-briefcase"></i><span><div class="dd-t">Consulting &amp; Services</div><div class="dd-s">Engineering support</div></span></a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+          <li class="nav-item ms-lg-1"><a class="nav-link" href="https://www.linkedin.com/company/particleworks-europe/" target="_blank" rel="noopener" aria-label="LinkedIn" style="color:var(--pw-blue);font-size:1.15rem;"><i class="bi bi-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="blog-hero">
+    <div class="container">
+      <div class="version-badge"><i class="bi bi-calendar-event me-1"></i> PW Experience 2024</div>
+      <h1>Eleven Presentations, One Clear Message — Meshless CFD Has Gone Mainstream</h1>
+      <p class="lead">Frankfurt, Germany — 25-26 September 2024</p>
+      <img src="images/pwe2024/gallery-PWE_0010.jpg" alt="PW Experience 2024 networking area in Frankfurt" style="width:100%;max-height:340px;object-fit:cover;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1.5rem 0 1rem;">
+      <div class="hero-meta">
+        <span><i class="bi bi-calendar3"></i> September 2024</span>
+        <span><i class="bi bi-clock"></i> 5 min read</span>
+        <span><i class="bi bi-tag"></i> Conference Highlights</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article -->
+  <section class="blog-body">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+          <article class="article-content">
+
+            <p>On 25-26 September 2024, engineers, researchers and simulation specialists from across Europe and Japan gathered in Frankfurt, Germany for PW Experience 2024, the annual conference dedicated to particle-based simulation with Particleworks and Granuleworks. Over two packed days, eleven presentations demonstrated that MPS-based meshless CFD is no longer an emerging curiosity — it is a production tool delivering validated results across gearbox lubrication, electric powertrains, turbomachinery, food processing, hydropower and advanced manufacturing.</p>
+
+            <p>The event brought together a cross-section of the simulation community: OEMs, Tier 1 suppliers, academic researchers and software developers, all sharing real-world results and hard-won correlation data. Here is what stood out.</p>
+
+            <hr class="section-rule">
+
+            <!-- Keynote -->
+            <h2>Keynote: The Science Behind the Software</h2>
+
+            <img src="images/pwe2024/Seiichi-Koshizuka.png" alt="Prof. Seiichi Koshizuka" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;">
+            <p>Prof. Seiichi Koshizuka of the University of Tokyo opened the conference with a keynote tracing the spiral development of the MPS method — a collaborative loop between users, vendors and universities. He presented recent advances in high-order schemes, variable spatial resolution, surface tension modelling and multi-phase flow treatment, giving the audience a clear view of the research pipeline feeding into future Particleworks releases.</p>
+
+            <p>Shun Fujimoto of Prometech Software followed with a detailed overview of the new features in Particleworks 8.1 and Granuleworks 3.1, connecting the academic advances directly to the tools engineers use daily.</p>
+
+            <img src="images/pwe2024/gallery-PWE_0005.jpg" alt="Particleworks 8.1 Heat Transfer Coefficient comparison showing MPS Multi-Resolution improvement" style="width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:1rem 0;">
+
+            <div style="position:relative;margin:1.5rem 0;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+              <div style="padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(0,68,102,0.95),rgba(0,136,204,0.85));color:#fff;">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎥</div>
+                <h5 style="font-weight:700;margin-bottom:0.25rem;font-size:0.95rem;">Watch the Recording</h5>
+                <p style="font-size:0.82rem;opacity:0.8;margin-bottom:1rem;">Enter your email to access the full presentation video</p>
+                <form style="display:flex;gap:0.5rem;max-width:400px;margin:0 auto;" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Check your inbox!';this.querySelector('button').style.background='var(--pw-green)';">
+                  <input type="email" placeholder="your@email.com" required style="flex:1;padding:0.6rem 1rem;border:none;border-radius:8px;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.6rem 1.2rem;background:var(--pw-blue);color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;">Request Access</button>
+                </form>
+              </div>
+            </div>
+
+            <hr class="section-rule">
+
+            <!-- Gearbox -->
+            <h2>Gearbox and Drivetrain Lubrication: From Correlation to Virtual Optimization</h2>
+
+            <img src="images/pwe2024/gallery-PWE_0070.jpg" alt="Gearbox gas phase presentation" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <p>Lubrication simulation continues to be the largest application area for Particleworks in Europe, and this year's presentations showed the field maturing from feasibility studies to validated, production-level workflows.</p>
+
+            <p><strong>Fabien Malcoiffe of Valeo</strong> presented correlation activities on eDrive reducer lubrication models, demonstrating that simulation results have reached a correlation level sufficient for virtual optimization — meaning physical prototyping cycles can be shortened and design alternatives explored digitally with reduced lead time. For any engineering manager weighing the investment in simulation infrastructure, this is the headline result: validated models that compress development schedules.</p>
+
+            <p><strong>Alberto Arcos of Punch Powertrain</strong> showed how Particleworks fits into the broader Product Creation Process for EV drive units. His presentation framed meshless CFD not as a standalone analysis but as a Virtual Prototyping step integrated into the full development chain for next-generation electrical powertrains.</p>
+
+            <div style="position:relative;margin:1.5rem 0;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+              <div style="padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(0,68,102,0.95),rgba(0,136,204,0.85));color:#fff;">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎥</div>
+                <h5 style="font-weight:700;margin-bottom:0.25rem;font-size:0.95rem;">Watch the Recording</h5>
+                <p style="font-size:0.82rem;opacity:0.8;margin-bottom:1rem;">Enter your email to access the full presentation video</p>
+                <form style="display:flex;gap:0.5rem;max-width:400px;margin:0 auto;" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Check your inbox!';this.querySelector('button').style.background='var(--pw-green)';">
+                  <input type="email" placeholder="your@email.com" required style="flex:1;padding:0.6rem 1rem;border:none;border-radius:8px;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.6rem 1.2rem;background:var(--pw-blue);color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;">Request Access</button>
+                </form>
+              </div>
+            </div>
+
+            <hr class="section-rule">
+
+            <!-- Bearings -->
+            <h2>Bearings: Thermal Prediction with Physical Validation</h2>
+
+            <img src="images/pwe2024/Mehul-Pandya.png" alt="Mehul Pandya" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;">
+            <p><strong>Mehul Pandya and Fabrizio Mandrile of SKF</strong> tackled one of the most demanding lubrication problems: predicting lubricant behaviour and temperature distribution inside ball bearings. They compared segregated versus coupled thermal simulation approaches and benchmarked the results against both traditional mesh-based CFD and physical testing. The ability to capture thin-film, high-shear lubricant flows inside a bearing cavity — where conventional meshing struggles — is precisely where particle methods earn their place.</p>
+
+            <img src="images/pwe2024/gallery-PWE_0042.jpg" alt="SKF bearing simulation challenges — mesh, boundary conditions and computational resources" style="width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:1rem 0;">
+
+            <div style="position:relative;margin:1.5rem 0;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+              <div style="padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(0,68,102,0.95),rgba(0,136,204,0.85));color:#fff;">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎥</div>
+                <h5 style="font-weight:700;margin-bottom:0.25rem;font-size:0.95rem;">Watch the Recording</h5>
+                <p style="font-size:0.82rem;opacity:0.8;margin-bottom:1rem;">Enter your email to access the full presentation video</p>
+                <form style="display:flex;gap:0.5rem;max-width:400px;margin:0 auto;" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Check your inbox!';this.querySelector('button').style.background='var(--pw-green)';">
+                  <input type="email" placeholder="your@email.com" required style="flex:1;padding:0.6rem 1rem;border:none;border-radius:8px;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.6rem 1.2rem;background:var(--pw-blue);color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;">Request Access</button>
+                </form>
+              </div>
+            </div>
+
+            <hr class="section-rule">
+
+            <!-- Turbomachinery -->
+            <h2>Turbomachinery: Oil-Air Interaction in Sealing Zones</h2>
+
+            <img src="images/pwe2024/Sebastian-Spengler.png" alt="Sebastian Spengler" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;">
+            <p><strong>Sebastian Spengler of MAN Energy Solutions</strong> presented an investigation of oil and air interactions at the sealing areas of a turbocharger, using a two-way coupled MPS+FVM simulation strategy. The results were verified against demonstrator testing, adding another data point to the growing body of industrial validation for coupled particle-mesh approaches in rotating machinery.</p>
+
+            <img src="images/pwe2024/gallery-PWE_0067.jpg" alt="MAN Energy Solutions turbocharger sealing simulation visualization" style="width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:1rem 0;">
+
+            <div style="position:relative;margin:1.5rem 0;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+              <div style="padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(0,68,102,0.95),rgba(0,136,204,0.85));color:#fff;">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎥</div>
+                <h5 style="font-weight:700;margin-bottom:0.25rem;font-size:0.95rem;">Watch the Recording</h5>
+                <p style="font-size:0.82rem;opacity:0.8;margin-bottom:1rem;">Enter your email to access the full presentation video</p>
+                <form style="display:flex;gap:0.5rem;max-width:400px;margin:0 auto;" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Check your inbox!';this.querySelector('button').style.background='var(--pw-green)';">
+                  <input type="email" placeholder="your@email.com" required style="flex:1;padding:0.6rem 1rem;border:none;border-radius:8px;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.6rem 1.2rem;background:var(--pw-blue);color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;">Request Access</button>
+                </form>
+              </div>
+            </div>
+
+            <hr class="section-rule">
+
+            <!-- Machine Tool -->
+            <h2>Machine Tool Cooling: Meshless CFD Meets Conjugate Heat Transfer</h2>
+
+            <img src="images/pwe2024/MicheleMerelli.png" alt="Michele Merelli" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;">
+            <p><strong>Michele Merelli and Gianluca Parma of Particleworks Europe</strong> introduced a simulation workflow for machine tool cooling, combining meshless CFD with conjugate heat transfer to model high-speed coolant flow impacting rotating cutting tools. The inherently transient, free-surface nature of coolant jets on spinning geometry is a textbook case where particle methods outperform conventional approaches.</p>
+
+            <img src="images/pwe2024/gallery-PWE_0002.jpg" alt="Turning and milling cooling process — coolant simulation with Particleworks" style="width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:1rem 0;">
+
+            <img src="images/pwe2024/gallery-PWE_0004.jpg" alt="Flow in Insert: Multi-Resolution Box advantages in Particleworks 8.1" style="width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:1rem 0;">
+
+            <hr class="section-rule">
+
+            <!-- Food -->
+            <h2>Food Processing: Particles in the Sausage</h2>
+
+            <img src="images/pwe2024/Marcel-Nusser.png" alt="Marcel Nusser" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;">
+            <p>In one of the conference's most distinctive applications, <strong>Marcel Nusser of Handtmann</strong> presented a study of flow and particle distribution in meat emulsions during high-performance sausage production. Using DEM+MPS coupling, the simulation captured the behaviour of solid inclusions within a viscous carrier fluid — a problem that matters enormously for product quality and consistency in the food industry but is nearly impossible to address with grid-based methods alone.</p>
+
+            <img src="images/pwe2024/gallery-PWE_0053.jpg" alt="Fluid flow analysis in food processing — Particleworks and RecurDyn simulation results" style="width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:1rem 0;">
+
+            <div style="position:relative;margin:1.5rem 0;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+              <div style="padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(0,68,102,0.95),rgba(0,136,204,0.85));color:#fff;">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎥</div>
+                <h5 style="font-weight:700;margin-bottom:0.25rem;font-size:0.95rem;">Watch the Recording</h5>
+                <p style="font-size:0.82rem;opacity:0.8;margin-bottom:1rem;">Enter your email to access the full presentation video</p>
+                <form style="display:flex;gap:0.5rem;max-width:400px;margin:0 auto;" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Check your inbox!';this.querySelector('button').style.background='var(--pw-green)';">
+                  <input type="email" placeholder="your@email.com" required style="flex:1;padding:0.6rem 1rem;border:none;border-radius:8px;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.6rem 1.2rem;background:var(--pw-blue);color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;">Request Access</button>
+                </form>
+              </div>
+            </div>
+
+            <hr class="section-rule">
+
+            <!-- Hydropower -->
+            <h2>Hydropower: Pelton Turbine Performance at Lower Cost</h2>
+
+            <img src="images/pwe2024/Jean-Decaix.png" alt="Jean Decaix" style="width:64px;height:64px;border-radius:50%;object-fit:cover;float:left;margin-right:1rem;margin-bottom:0.5rem;">
+            <p><strong>Jean Decaix of HES-SO Valais/Wallis</strong> demonstrated simulation of Pelton turbine performance, modelling the air-water mixture inside the turbine buckets to predict efficiency losses and splitter erosion. Pelton turbines operate in a violently fragmented free-surface regime where traditional VOF methods demand extreme mesh refinement. The particle-based approach delivered actionable performance predictions at significantly lower computational cost.</p>
+
+            <div style="position:relative;margin:1.5rem 0;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+              <div style="padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(0,68,102,0.95),rgba(0,136,204,0.85));color:#fff;">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem;">🎥</div>
+                <h5 style="font-weight:700;margin-bottom:0.25rem;font-size:0.95rem;">Watch the Recording</h5>
+                <p style="font-size:0.82rem;opacity:0.8;margin-bottom:1rem;">Enter your email to access the full presentation video</p>
+                <form style="display:flex;gap:0.5rem;max-width:400px;margin:0 auto;" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Check your inbox!';this.querySelector('button').style.background='var(--pw-green)';">
+                  <input type="email" placeholder="your@email.com" required style="flex:1;padding:0.6rem 1rem;border:none;border-radius:8px;font-size:0.85rem;">
+                  <button type="submit" style="padding:0.6rem 1.2rem;background:var(--pw-blue);color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;">Request Access</button>
+                </form>
+              </div>
+            </div>
+
+            <hr class="section-rule">
+
+            <!-- Multi-physics -->
+            <h2>Advanced Manufacturing and Multi-Physics Coupling</h2>
+
+            <img src="images/pwe2024/gallery-PWE_0050.jpg" alt="EnginSoft FSI dampening system presentation" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <p>Two presentations rounded out the programme with multi-physics themes. <strong>Riccardo Sala of EnginSoft and Uwe Eiselt of FunctionBay</strong> presented a two-way FSI coupling between MPS and RecurDyn for soft closure systems, combining fluid simulation with full-flex multi-body dynamics. <strong>Satoshi Takeshige of Prometech Software</strong> closed the technical sessions with a look at Friction Stir Welding and Friction Stir Spot Welding simulation, extending the particle method into solid-state joining processes for lightweight structures.</p>
+
+            <img src="images/pwe2024/gallery-PWE_0051.jpg" alt="FSI coupling between Particleworks and RecurDyn — soft closure system pressure and velocity results" style="width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); margin:1rem 0;">
+
+            <hr class="section-rule">
+
+            <img src="images/pwe2024/gallery-PWE_0080.jpg" alt="GPU benchmark performance slide" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <hr class="section-rule">
+
+            <!-- Looking Ahead -->
+            <h2>Looking Ahead</h2>
+
+            <img src="images/pwe2024/gallery-PWE_0030.jpg" alt="Audience Q&A at PW Experience 2024" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);margin:1rem 0;">
+
+            <p>PW Experience 2024 confirmed a clear trajectory. The community around Particleworks is growing — not only in the number of users, but in the depth and rigour of the work being presented. Correlation against physical testing was a recurring theme, and several presenters showed workflows where simulation has moved from a post-design verification step to an active driver of design decisions.</p>
+
+            <p>We thank all presenters and attendees for making Frankfurt 2024 the strongest PW Experience to date. The conversations that started in the conference hall will continue in projects across Europe — and we look forward to seeing the next set of results at PW Experience 2025.</p>
+
+            <!-- CTA -->
+            <div class="cta-box">
+              <h3>Interested in Particleworks?</h3>
+              <p>See how meshless CFD can accelerate your simulation workflows. Request a personalized demo from our engineering team.</p>
+              <a href="../index.html#demo" class="btn-pw"><i class="bi bi-play-circle me-2"></i>Request a Demo</a>
+            </div>
+
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Content -->
+  <section class="related-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+          <h5 class="fw-bold mb-3" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--pw-gray);">Related Content</h5>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <a href="pw-experience-2025.html" class="related-card">
+                <h5>PW Experience 2025</h5>
+                <p>From validation to virtual prototyping — highlights from Munich 2025.</p>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="particleworks-82.html" class="related-card">
+                <h5>Particleworks v8.2 Release</h5>
+                <p>EIMPS solver, LBM coupling, anisotropic thermal and more.</p>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="../index.html#demo" class="related-card">
+                <h5>Request a Demo</h5>
+                <p>See Particleworks in action with a personalized walkthrough.</p>
+                <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <img src="../images/PWEurope_negativ-logo.png" alt="Particleworks Europe">
+          </div>
+          <p class="small" style="max-width:300px;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
+          <div class="d-flex gap-2 mt-3">
+            <a href="https://www.linkedin.com/company/particleworks-europe/" class="social-link" target="_blank"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Products</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html">Particleworks</a></li>
+            <li class="mb-2"><a href="../index.html">Granuleworks</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Services</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html">Consulting</a></li>
+            <li class="mb-2"><a href="../index.html">Training</a></li>
+            <li class="mb-2"><a href="../index.html">Support</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Resources</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="../index.html#case-studies">Case Studies</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Contact</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li>
+            <li class="mb-2"><a href="mailto:info@particleworks-europe.com"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
+        <p class="small mb-0">Meshfree CFD simulation technology</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.addEventListener('scroll', function() {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+  </script>
+</body>
+</html>
