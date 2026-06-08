@@ -157,7 +157,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               </div>
             </div>
           </div>
-            
+
+            <div class="col">
+            <div class="card h-100 shadow-lg p-3 bg-body">
+                <img src="images/case-studies/RWTHAachenUniversity_01.png" class="img-fluid">
+
+              <div class="card-body">
+                <h5 class="card-title">Simulation of hydraulic losses of a single-speed transmission in an Electric-Drive-Unit</h5>
+                <p class="card-text"><strong>RWTH Aachen University</strong> | <strong>EnginSoft</strong></p>
+                <a href="single-speed-transmission-webinar.html" class="btn btn-primary">Read more</a>
+              </div>
+            </div>
+          </div>
+
             <div class="col">
             <div class="card h-100 shadow-lg p-3 bg-body">
               <img src="images/case-studies/spm-washing-machine.png" class="img-fluid">

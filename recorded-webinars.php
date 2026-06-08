@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="favicon.ico">
+  <title>Particleworks Europe - Recorded webinars</title>
+  <meta name="description" content="Particleworks is a CAE software for the simulation of liquid flows based on the Moving Particle Simulation method.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* --- unified nav dropdown styles (auto-injected) --- */
+    .navbar .dropdown-menu { border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.10); padding: 0.6rem; margin-top: 0.4rem !important; min-width: 280px; }
+    .navbar .dropdown-menu .dropdown-item { border-radius: 10px; padding: 0.55rem 0.75rem; font-size: 0.88rem; font-weight: 500; color: var(--pw-dark, #1a1a2e); display: flex; align-items: center; gap: 0.7rem; transition: background 0.15s, color 0.15s; white-space: normal; }
+    .navbar .dropdown-menu .dropdown-item i { color: var(--pw-blue, #0088cc); font-size: 1.05rem; width: 20px; text-align: center; flex-shrink: 0; }
+    .navbar .dropdown-menu .dropdown-item:hover,
+    .navbar .dropdown-menu .dropdown-item:focus,
+    .navbar .dropdown-menu .dropdown-item.active { background: linear-gradient(135deg, rgba(0,136,204,0.08), rgba(37,163,97,0.06)); color: var(--pw-blue-dark, #006da3); }
+    .navbar .dropdown-menu .dd-t { font-size: 0.88rem; font-weight: 600; }
+    .navbar .dropdown-menu .dd-s { font-size: 0.72rem; color: #8993a3; font-weight: 400; }
+    @media (min-width: 992px) {
+      .navbar .dropdown-menu { opacity: 0; visibility: hidden; transform: translateY(4px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s; display: block; }
+      .navbar .dropdown:hover > .dropdown-menu, .navbar .dropdown-menu.show { opacity: 1; visibility: visible; transform: translateY(0); }
+    }
+
+    :root {
+      --pw-blue: #0088cc;
+      --pw-blue-dark: #006da3;
+      --pw-green: #25a361;
+      --pw-dark: #333333;
+      --pw-gray: #6c757d;
+      --pw-light: #f8f9fa;
+    }
+    * { font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { color: var(--pw-dark); overflow-x: hidden; padding-top: 70px; }
+    .navbar { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(0,0,0,0.06); padding: 0.6rem 0; transition: box-shadow 0.3s; }
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .navbar-brand img { height: 38px; }
+    .navbar .nav-link { font-size: 0.88rem; font-weight: 500; color: var(--pw-dark); padding: 0.5rem 0.75rem !important; transition: color 0.2s; }
+    .navbar .nav-link:hover { color: var(--pw-blue); }
+    .main_section { padding: 4rem 0; background: var(--pw-green); color: #fff; }
+    .main_section h1 { font-weight: 700; }
+    .background_gray { background: var(--pw-light); padding: 3rem 0; }
+    .background-green { background: linear-gradient(135deg, #1e8a51 0%, #25a361 100%); }
+    .featurette-heading { font-weight: 700; }
+    .text-muted { color: var(--pw-gray) !important; }
+    .text-justify { text-align: justify; }
+    .small { font-size: 0.88rem; }
+    img.img-fluid { max-width: 100%; height: auto; }
+    .shadow { box-shadow: 0 6px 20px rgba(0,0,0,0.08) !important; }
+    .border-gray { border: 1px solid #e9ecef; }
+    .card { border: 1px solid #e9ecef; border-radius: 10px; }
+    h1,h2,h3,h4 { letter-spacing: -0.01em; }
+    a { color: var(--pw-blue); text-decoration: none; }
+    a:hover { color: var(--pw-blue-dark); }
+    .btn-primary { background: var(--pw-blue); border-color: var(--pw-blue); }
+    .btn-primary:hover { background: var(--pw-blue-dark); border-color: var(--pw-blue-dark); }
+  </style>
+<!-- === SEO head (auto-generated, matches backup website_now) === -->
+  <link rel="canonical" href="https://particleworks-europe.com/recorded-webinars.html">
+  <meta name="author" content="Particleworks Europe">
+  <meta name="keywords" content="Particleworks, Particleworks Europe, Granuleworks, technologies, simulation">
+  <meta name="google-site-verification" content="13JcLKtEM_c2bcIc8ZMrIKncMjxxmwN5nmfLLs8WLQA">
+  <meta property="og:site_name" content="Particleworks Europe">
+  <meta property="og:title" content="Particleworks Europe - Recorded webinars">
+  <meta property="og:description" content="Particleworks is a CAE software for the simulation of liquid flows based on the Moving Particle Simulation method.">
+  <meta property="og:url" content="https://particleworks-europe.com/recorded-webinars.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Particleworks Europe - Recorded webinars">
+  <meta name="twitter:description" content="Particleworks is a CAE software for the simulation of liquid flows based on the Moving Particle Simulation method.">
+  <script type="text/javascript" src="https://embeds.iubenda.com/widgets/6c5fe0b3-dfc8-4f17-b2ec-91c28fe04e7c.js"></script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-58D7FHDF');</script>
+<!-- === /SEO head === -->
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58D7FHDF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><img src="images/PW_Europe_logo_small.png" alt="Particleworks Europe"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-lg-center gap-1">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="particleworks.html"><i class="bi bi-droplet"></i><span><div class="dd-t">Particleworks</div><div class="dd-s">Meshfree CFD fluid solver</div></span></a></li>
+              <li><a class="dropdown-item" href="granuleworks.html"><i class="bi bi-circle-fill"></i><span><div class="dd-t">Granuleworks</div><div class="dd-s">DEM granular simulation</div></span></a></li>
+              <li><a class="dropdown-item" href="particleworksforansys.html"><i class="bi bi-plug"></i><span><div class="dd-t">Particleworks for Ansys</div><div class="dd-s">Native Workbench integration</div></span></a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Applications</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="e-motors.html"><i class="bi bi-lightning-charge"></i><span><div class="dd-t">E-Motors</div><div class="dd-s">Oil-cooled electric drives</div></span></a></li>
+              <li><a class="dropdown-item" href="engines-and-pistons.html"><i class="bi bi-fuel-pump"></i><span><div class="dd-t">Engines &amp; Pistons</div><div class="dd-s">Combustion thermal</div></span></a></li>
+              <li><a class="dropdown-item" href="gearboxes-and-bearings.html"><i class="bi bi-gear-wide-connected"></i><span><div class="dd-t">Gearboxes &amp; Bearings</div><div class="dd-s">Oil jet lubrication</div></span></a></li>
+              <li><a class="dropdown-item" href="clutches-and-brakes.html"><i class="bi bi-disc"></i><span><div class="dd-t">Clutches &amp; Brakes</div><div class="dd-s">Disc cooling flows</div></span></a></li>
+              <li><a class="dropdown-item" href="cutting-tools.html"><i class="bi bi-scissors"></i><span><div class="dd-t">Cutting Tools</div><div class="dd-s">Machining coolant</div></span></a></li>
+              <li><a class="dropdown-item" href="mixing-and-separation.html"><i class="bi bi-hurricane"></i><span><div class="dd-t">Mixing &amp; Separation</div><div class="dd-s">Industrial processes</div></span></a></li>
+              <li><a class="dropdown-item" href="sterilization-food-and-consumer-goods.html"><i class="bi bi-droplet-half"></i><span><div class="dd-t">Sterilization &amp; Consumer Goods</div><div class="dd-s">Food and cleaning</div></span></a></li>
+              <li><a class="dropdown-item" href="vehicle-management.html"><i class="bi bi-truck"></i><span><div class="dd-t">Vehicle Management</div><div class="dd-s">Onboard fluid systems</div></span></a></li>
+              <li><a class="dropdown-item" href="civil-engineering-and-fire-prevention.html"><i class="bi bi-fire"></i><span><div class="dd-t">Civil Engineering &amp; Fire</div><div class="dd-s">Safety and infrastructure</div></span></a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="case-studies.html">Case Studies</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resources</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="resources.html"><i class="bi bi-file-earmark-pdf"></i><span><div class="dd-t">Resources &amp; Whitepapers</div><div class="dd-s">Technical documents</div></span></a></li>
+              <li><a class="dropdown-item" href="SPH-MPS.html"><i class="bi bi-braces"></i><span><div class="dd-t">FVM vs SPH vs MPS</div><div class="dd-s">Method comparison</div></span></a></li>
+              <li><a class="dropdown-item" href="glossary.html"><i class="bi bi-book"></i><span><div class="dd-t">Glossary</div><div class="dd-s">Meshfree CFD terminology</div></span></a></li>
+              <li><a class="dropdown-item" href="training.html"><i class="bi bi-mortarboard"></i><span><div class="dd-t">Training</div><div class="dd-s">Courses &amp; workshops</div></span></a></li>
+              <li><a class="dropdown-item" href="support.html"><i class="bi bi-life-preserver"></i><span><div class="dd-t">Support</div><div class="dd-s">Technical help</div></span></a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Company</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="recorded-webinars.html"><i class="bi bi-building"></i><span><div class="dd-t">About Particleworks Europe</div><div class="dd-s">Who we are</div></span></a></li>
+              <li><a class="dropdown-item" href="resellers.html"><i class="bi bi-globe-europe-africa"></i><span><div class="dd-t">Resellers</div><div class="dd-s">Global partner network</div></span></a></li>
+              <li><a class="dropdown-item" href="careers.html"><i class="bi bi-person-plus"></i><span><div class="dd-t">Careers</div><div class="dd-s">Join the team</div></span></a></li>
+              <li><a class="dropdown-item" href="consulting.html"><i class="bi bi-briefcase"></i><span><div class="dd-t">Consulting &amp; Services</div><div class="dd-s">Engineering support</div></span></a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item ms-lg-1"><a class="nav-link" href="https://www.linkedin.com/company/particleworks-europe/" target="_blank" rel="noopener" aria-label="LinkedIn" style="color:var(--pw-blue);font-size:1.15rem;"><i class="bi bi-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+<!-- company banner title -->
+      <section class="main_section background-blue">
+          <div class="container">
+              <div class="row">
+                  <div class="col-12">
+                      <h1 class="display-6 text-end text-uppercase text-white pt-2">Recorded Webinars</h1>
+                  </div></div></div>
+              </section>
+      
+  
+        <!-- recorded webinars  --> 
+    
+      
+      <section class="py-4">
+          <div class="container mb-3">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 g-4">
+
+        <!-- webinar 12 -->
+          <div class="col">
+            <div class="card h-100 shadow-lg">
+              <img src="images/webinar/webinar-11.png" class="card-img-top">
+              <div class="card-body">
+                <!-- <p class="type pt-3"> WEBINAR: Automatic Particleworks simulations to screen thousands of lubrication solution  </p> -->
+                <h4 class="card-title text-muted">Fluids and Powders: Many Physics, One Interface</h4>
+                <p class="card-text">Speaker: Michele Merelli</p>
+                <p class="small">
+                  When dealing with fluid-powder coupled simulations, traditional mesh-based methods are complex to setup and require long working days.
+                  With mesh-less Granuleworks and Particleworks, we provide a unique software solution for this multi-physics flow!
+                </p>
+                <p class="small">
+                  Agenda of the webinar:
+                  Advanced physical models (Van der Waals, liquid bridges, rolling resistance)
+                  Custom granulometry to match exact real-world particle morphologies 
+                  Multi-physics coupling (Fluids, Air, and Rigid Bodies)
+                </p>
+                <p class="small">
+                  If you are optimizing an industrial mixer, powder tableting or analyzing fluidized beds, you don't want to miss this short overview on the topic!
+                </p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Recorded webinar
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <iframe onload="javascript:parent.scrollTo(0,0);" height="664" allowTransparency="true" scrolling="no" frameborder="0" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation" style="width:100%;border:none" src="https://particleworks-europe.forms-eu.com/embed.php?id=30580" title="Watch the recording presentation"><a href="https://particleworks-europe.forms-eu.com/view.php?id=30580" title="Watch the recording presentation">Watch the recording presentation</a></iframe>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>       
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>   
+              </div>
+            </div>
+          </div>
+            
+                              <!-- webinar 11 -->
+            <div class="col">
+            <div class="card h-100 shadow-lg">
+              <img src="images/GPU-computing-explosion.png" class="card-img-top">
+              <div class="card-body">
+                <p class="type pt-3"> WEBINAR: Particle simulation and the GPU-computing explosion </p>
+                <h4 class="card-title text-muted">Particle simulation and the GPU-computing explosion</h4>
+                <p class="card-text">Speaker:  Michele Merelli - EnginSoft </p>
+                  <p class="small">Particle simulation methods use inherently parallelizable algorithms. Because of that, they can leverage recent advances in hardware with Graphic Computing Units (GPUs).
+On the software side, developments like multi-resolution allow particle simulations to provide engineering insights earlier in the design phase.
+In this keynote, we will discuss how, in our increasingly digital world, engineering is leveraging faster and simpler simulations thanks to mesh-less Computation Fluid Dynamics tools. </p>               
+               		         <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal200">
+ Recorded webinar
+</button>
+   
+<!-- Modal -->
+<div class="modal fade" id="exampleModal200" tabindex="-1" aria-labelledby="exampleModalLabel200" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel200"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe onload="javascript:parent.scrollTo(0,0);" height="792" allowTransparency="true" scrolling="no" frameborder="0" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation" style="width:100%;border:none" src="https://particleworks-europe.forms-eu.com/embed.php?id=17917" title=" Watch the recording webinar about Particle simulation and the GP..."><a href="https://particleworks-europe.forms-eu.com/view.php?id=17917" title=" Watch the recording webinar about Particle simulation and the GP..."> Watch the recording webinar about Particle simulation and the GP...</a></iframe>
+<!--         <iframe onload="javascript:parent.scrollTo(0,0);" height="673" allowTransparency="true" frameborder="0" scrolling="no" style="width:100%;border:none" src="https://forms.enginsoft.it/forms/embed.php?id=284644" title="Watch the recording webinar"><a href="https://forms.enginsoft.it/forms/view.php?id=284644" title="Watch the recording webinar">Watch the recording webinar</a></iframe>
+ -->      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>       
+      </div>
+    </div>
+  </div>
+</div>
+                </div>  
+              </div>
+            </div>
+          </div> 
+            
+                 <!-- webinar 10 -->
+            <div class="col">
+            <div class="card h-100 shadow-lg">
+              <img src="images/webinar/Dallara.jpg" class="card-img-top">
+              <div class="card-body">
+                <p class="type pt-3"> WEBINAR: Fuel tank sloshing in advanced motorsport </p>
+                <h4 class="card-title text-muted">Fuel tank sloshing in advanced motorsport: Dallara digital model with Particleworks</h4>
+                <p class="card-text">Speakers:  Giuseppe Usai, Massimo Stellato - Dallara, Michele Merelli - EnginSoft </p>
+                  <p class="small">The highly competitive nature of motorsports drives designers to seek even the slightest advantage over their rivals. One potential area for improvement lies in reducing fuel sloshing and optimizing fuel extraction from the tank.
+
+In this regard, a new approach to fuel tank optimization is proposed, aiming to streamline the workflow by significantly reducing computational time compared to traditional finite volume method (FVM) computational fluid dynamics (CFD) tools. Additionally, the proposed approach explores the use of free solid bodies within the tank to mitigate fuel sloshing. </p>               
+               		         <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal51">
+ Recorded webinar
+</button>
+   
+<!-- Modal -->
+<div class="modal fade" id="exampleModal51" tabindex="-1" aria-labelledby="exampleModalLabel40" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel51"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe onload="javascript:parent.scrollTo(0,0);" height="681" allowTransparency="true" scrolling="no" frameborder="0" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation" style="width:100%;border:none" src="https://particleworks-europe.forms-eu.com/embed.php?id=18261" title="Watch the recording webinar with Dallara"><a href="https://particleworks-europe.forms-eu.com/view.php?id=18261" title="Watch the recording webinar with Dallara">Watch the recording webinar with Dallara</a></iframe>
+<!--         <iframe onload="javascript:parent.scrollTo(0,0);" height="673" allowTransparency="true" frameborder="0" scrolling="no" style="width:100%;border:none" src="https://forms.enginsoft.it/forms/embed.php?id=281665" title="Watch the recording webinar"><a href="https://forms.enginsoft.it/forms/view.php?id=281665" title="Watch the recording webinar">Watch the recording webinar</a></iframe>
+ -->      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>       
+      </div>
+    </div>
+  </div>
+</div>
+                </div>  
+              </div>
+            </div>
+          </div> 
+            
+            <!-- webinar 9 -->
+            <div class="col">
+            <div class="card h-100 shadow-lg">
+              <img src="images/webinar/webinar-09.png" class="card-img-top">
+              <div class="card-body">
+                  <p class="type pt-3"> WEBINAR: Particleworks Thermal Simulations </p>
+                <h4 class="card-title text-muted">Tool cooling and temperatures in CNC and milling processes</h4>
+                <p class="card-text">Speakers: Massimo Galbiati, Michele Merelli </p>
+                  <p class="small">Want to predict temperature or jet-cooling efficiency in milling processes?<br>
+Join us and learn about the importance of mesh-less simulation in the industry!
+With Particleworks, you can handle both fluid and thermal simulations in solid materials with ease, giving you a comprehensive and accurate picture of your tool design.
+And that's why it is an increasingly popular choice in the industry.</p>               
+               		         <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal41">
+ Recorded webinar
+</button>
+   
+<!-- Modal -->
+<div class="modal fade" id="exampleModal41" tabindex="-1" aria-labelledby="exampleModalLabel40" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel41"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe onload="javascript:parent.scrollTo(0,0);" height="681" allowTransparency="true" scrolling="no" frameborder="0" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation" style="width:100%;border:none" src="https://particleworks-europe.forms-eu.com/embed.php?id=18716" title="Watch the recording webinar"><a href="https://particleworks-europe.forms-eu.com/view.php?id=18716" title="Watch the recording webinar">Watch the recording webinar</a></iframe>
+<!--         <iframe onload="javascript:parent.scrollTo(0,0);" height="673" allowTransparency="true" frameborder="0" scrolling="no" style="width:100%;border:none" src="https://forms.enginsoft.it/forms/embed.php?id=270500" title="Watch the recording webinar"><a href="https://forms.enginsoft.it/forms/view.php?id=270500" title="Watch the recording webinar">Watch the recording webinar</a></iframe>
+ -->      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>       
+      </div>
+    </div>
+  </div>
+</div>
+                  </div>  
+              </div>
+            </div>
+          </div> 
+             
+            <!-- webinar 1 -->
+            <div class="col">
+            <div class="card h-100 shadow-lg">
+              <img src="images/webinar/webinar-01.png" class="card-img-top">
+              <div class="card-body">
+                  <p class="type pt-3"> WEBINAR: Particleworks Thermal Capabilities </p>
+                <h4 class="card-title text-muted">Predicting gearbox / emotor temperature distribution in Particleworks</h4>
+                <p class="card-text">Speakers: Massimo Galbiati, Michele Merelli </p>
+                  <p class="small">In this video, we will present a short introduction on the thermal capabilities of Particleworks. A gearbox example is also discussed.</p>               
+               		         <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal40">
+ Recorded webinar
+</button>
+   
+<!-- Modal -->
+<div class="modal fade" id="exampleModal40" tabindex="-1" aria-labelledby="exampleModalLabel40" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel40"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe onload="javascript:parent.scrollTo(0,0);" height="664" allowTransparency="true" scrolling="no" frameborder="0" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation" style="width:100%;border:none" src="https://particleworks-europe.forms-eu.com/embed.php?id=19266" title="Watch the recording webinar"><a href="https://particleworks-europe.forms-eu.com/view.php?id=19266" title="Watch the recording webinar">Watch the recording webinar</a></iframe>
+<!--         <iframe onload="javascript:parent.scrollTo(0,0);" height="673" allowTransparency="true" frameborder="0" scrolling="no" style="width:100%;border:none" src="https://forms.enginsoft.it/forms/embed.php?id=269340" title="Watch the recording webinar"><a href="https://forms.enginsoft.it/forms/view.php?id=269340" title="Watch the recording webinar">Watch the recording webinar</a></iframe>
+ -->      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>       
+      </div>
+    </div>
+  </div>
+</div>
+                  </div>  
+              </div>
+            </div>
+          </div> 
+            
+            
+            <!-- webinar 2 -->
+            <div class="col">
+            <div class="card h-100 shadow-lg">
+              <img src="images/webinar/webinar-02.png" class="card-img-top">
+              <div class="card-body">
+                  <p class="type pt-3"> WEBINAR: Analyzing the process of filling a flexible pouch by coupling multi-flexible-body dynamics and particle-based CFD simulation </p>
+<!-- Modal -->
+                <h4 class="card-title text-muted">Flexible pouch filling and other F&B simulations</h4>
+                <p class="card-text">Speakers: Massimo Galbiati, Michele Merelli </p>
+                  <p class="small">In this webinar, we discuss how Coesia partnered with EnginSoft and the University of Trento’s Department of Industrial Engineering to digitally investigate and simulate the formation and filling of a stand-up pouch packaging machine (Doypack®). The approach combined mesh-less fluid dynamic (Particleworks) with a multibody software (RecurDyn) to achieve a fluid-structure fully coupled simulation.</p>
+               		         <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal4">
+ Recorded webinar
+</button>
+ 
+<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel4"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe onload="javascript:parent.scrollTo(0,0);" height="681" allowTransparency="true" scrolling="no" frameborder="0" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation" style="width:100%;border:none" src="https://particleworks-europe.forms-eu.com/embed.php?id=19460" title="Watch the recording webinar"><a href="https://particleworks-europe.forms-eu.com/view.php?id=19460" title="Watch the recording webinar">Watch the recording webinar</a></iframe>
+<!--         <iframe onload="javascript:parent.scrollTo(0,0);" height="673" allowTransparency="true" frameborder="0" scrolling="no" style="width:100%;border:none" src="https://forms.enginsoft.it/forms/embed.php?id=265032" title="Watch the recording webinar"><a href="https://forms.enginsoft.it/forms/view.php?id=265032" title="Watch the recording webinar">Watch the recording webinar</a></iframe>
+ -->      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>       
+      </div>
+    </div>
+  </div>
+</div>
+                  </div>  
+              </div>
+            </div>
+          </div> 
+            
+            <!-- webinar 3 -->
+    <div class="col">
+            <div class="card h-100 shadow-lg">
+              <img src="images/webinar/webinar-03.png" class="card-img-top">
+              <div class="card-body">
+                  <p class="type pt-3"> WEBINAR: Digital prototyping of electric vehicle transmissions and e-motors: a mesh-less simulation
+Improving the lubrication and the cooling of e-axles coupled with e-motors for the next generation of electric vehicles  </p>
+                <h4 class="card-title text-muted">e-Motor cooling: Ricardo, TotalEnergies and NIDEC-PSA validations</h4>
+                <p class="card-text">Speakers: Massimo Galbiati, Michele Merelli </p>
+                  <p class="small">In the webinar, we will discuss how a mesh-less approach (based on Moving Particle Simulation) is key for fast thermal and fluid dynamic improvements of e-axles.</p>
+                  		         <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal10">
+  Recorded webinar
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel10" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel10"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe onload="javascript:parent.scrollTo(0,0);" height="681" allowTransparency="true" scrolling="no" frameborder="0" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation" style="width:100%;border:none" src="https://particleworks-europe.forms-eu.com/embed.php?id=19875" title="Watch the recording presentation"><a href="https://particleworks-europe.forms-eu.com/view.php?id=19875" title="Watch the recording presentation">Watch the recording presentation</a></iframe>
+<!--         <iframe onload="javascript:parent.scrollTo(0,0);" height="673" allowTransparency="true" frameborder="0" scrolling="no" style="width:100%;border:none" src="https://forms.enginsoft.it/forms/embed.php?id=264197" title="Watch the recording presentation"><a href="https://forms.enginsoft.it/forms/view.php?id=264197" title="Watch the recording presentation">Watch the recording presentation</a></iframe>
+ -->      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>       
+      </div>
+    </div>
+  </div>
+</div>
+                  </div>  
+                  </div></div></div>
+            
+              <!-- webinar 5 -->
+            
+          <div class="col">
+            <div class="card h-100 shadow-lg">
+              <img src="images/webinar/webinar-05.png" class="card-img-top">
+              <div class="card-body">
+                  <p class="type pt-3"> WEBINAR: Simulation of hydraulic losses of a single-speed transmission in an Electric-Drive-Unit using Particleworks  </p>
+
+                <h4 class="card-title text-muted"> RWTH Aachen and Particleworks: churning losses prediction</h4>
+                <p class="card-text">Speakers: Tobias Moll (Institute for combustion engines – RWTH Aachen University), Simon Harbeke (EnginSoft GmbH) </p>
+                <p class="small">In this webinar EnginSoft welcomed Tobias Moll, research assistant from the Institute for combustion engines at RWTH Aachen University. He provided us with industry insights about the role of simulation for efficiency, lubrication and heat management for transmissions with Integrated electrical machines. </p>
+                           <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+   Recorded webinar
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe onload="javascript:parent.scrollTo(0,0);" height="681" allowTransparency="true" scrolling="no" frameborder="0" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation" style="width:100%;border:none" src="https://particleworks-europe.forms-eu.com/embed.php?id=20746" title="Watch the recording presentation"><a href="https://particleworks-europe.forms-eu.com/view.php?id=20746" title="Watch the recording presentation">Watch the recording presentation</a></iframe>
+<!--       <iframe onload="javascript:parent.scrollTo(0,0);" height="673" allowTransparency="true" frameborder="0" scrolling="no" style="width:100%;border:none" src="https://forms.enginsoft.it/forms/embed.php?id=259665" title="Watch the recording presentation"><a href="https://forms.enginsoft.it/forms/view.php?id=259665" title="Watch the recording presentation">Watch the recording presentation</a></iframe>
+ -->      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>       
+      </div>
+    </div>
+  </div>
+</div>       
+        </div> 
+              </div></div></div>
+            
+            <!-- webinar 6 -->
+            
+             <div class="col">
+            <div class="card h-100 shadow-lg">
+              <img src="images/webinar/webinar-06.png" class="card-img-top">
+              <div class="card-body">
+                  <p class="type pt-3"> WEBINAR: Water spray parameters optimization using 3D CFD Particle Simulation for an automotive anti-aquaplaning system  </p>
+
+                <h4 class="card-title text-muted">Solving aquaplaning with simulation: the EasyRain experience</h4>
+                <p class="card-text">Speakers: Paolo Alberto Fina, Silvestru Chiriches (Easyrain) and Michele Merelli (Particleworks Europe) </p>
+                  <p class="small">In this application, the objective is to study the effects of the jet against a puddle of water, simulating the conditions of aquaplaning during normal driving conditions. The role of the simulations is to eventually use the model for a best-case solution in a new vehicle application.</p>
+                  
+		         <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+  Recorded webinar
+</button>
+
+                  <!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel3"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe onload="javascript:parent.scrollTo(0,0);" height="681" allowTransparency="true" scrolling="no" frameborder="0" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation" style="width:100%;border:none" src="https://particleworks-europe.forms-eu.com/embed.php?id=20980" title="Watch the recording presentation"><a href="https://particleworks-europe.forms-eu.com/view.php?id=20980" title="Watch the recording presentation">Watch the recording presentation</a></iframe>
+<!--         <iframe onload="javascript:parent.scrollTo(0,0);" height="673" allowTransparency="true" frameborder="0" scrolling="no" style="width:100%;border:none" src="https://forms.enginsoft.it/forms/embed.php?id=263185" title="Watch the recording presentation"><a href="https://forms.enginsoft.it/forms/view.php?id=263185" title="Watch the recording presentation">Watch the recording presentation</a></iframe>
+ -->      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>       
+      </div>
+    </div>
+  </div>
+</div>
+                  </div>   
+                  </div></div></div>
+            
+              <!-- webinar 7 -->
+            
+             <div class="col">
+            <div class="card h-100 shadow-lg">
+              <img src="images/webinar/webinar-07.png" class="card-img-top">
+              <div class="card-body">
+                  <p class="type pt-3"> WEBINAR: Automatic Particleworks simulations to screen thousands of lubrication solution  </p>
+
+                <h4 class="card-title text-muted"> Python and Particleworks: automating every aspect of the simulation</h4>
+                <p class="card-text">Speaker: Michele Merelli </p>
+                  <p class="small"></p>
+                         <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Recorded webinar
+</button>
+
+                  <!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe onload="javascript:parent.scrollTo(0,0);" height="681" allowTransparency="true" scrolling="no" frameborder="0" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation" style="width:100%;border:none" src="https://particleworks-europe.forms-eu.com/embed.php?id=21904" title="Watch the recording presentation"><a href="https://particleworks-europe.forms-eu.com/view.php?id=21904" title="Watch the recording presentation">Watch the recording presentation</a></iframe>
+<!--         <iframe onload="javascript:parent.scrollTo(0,0);" height="673" allowTransparency="true" frameborder="0" scrolling="no" style="width:100%;border:none" src="https://forms.enginsoft.it/forms/embed.php?id=260309" title="Watch the recording presentation"><a href="https://forms.enginsoft.it/forms/view.php?id=260309" title="Watch the recording presentation">Watch the recording presentation</a></iframe>
+ -->      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>       
+      </div>
+    </div>
+  </div>
+</div>
+                </div>   
+              </div></div></div>
+            
+             <!-- webinar 8 -->
+            
+          <div class="col">
+            <div class="card h-100 shadow-lg">
+              <img src="images/webinar/webinar-08.png" class="card-img-top">
+              <div class="card-body">
+                <p class="type pt-3"> WEBINAR: Simulation of Oil Management for Transmissions using MPS  </p>  
+                <h4 class="card-title text-muted"> Simulation of Oil Management for Transmissions using MPS</h4>
+                <p class="card-text">Speakers: Simon Harbeke (EnginSoft GmbH), Mattia Porchetta (TREMEC) </p>
+                <p class="small">The Moving Particle Simulation is an efficient meshless CFD method to simulate sloshing, free-surface flows and liquid jets. 
+                                  In this webinar EnginSoft welcomed Mattia Porchetta, oil management engineer from Tremec in Belgium. He provided us with industry insights about the role of simulation on how to improve the oil management in transmissions for high performance applications.</p>
+                <a href="https://youtu.be/jzJe0NxQZxo" target="_blank" class="btn btn-primary">Recorded webinar </a>   
+              </div>
+            </div>
+          </div>
+          
+          
+              </div></div></section>
+  </main>
+
+  <!-- FOOTER -->
+  
+<!-- end FOOTER -->
+  </main>
+
+  <footer class="py-5 mt-5" style="background:#1a1a1a;color:#adb5bd;">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <img src="images/PWEurope_negativ-logo.png" alt="Particleworks Europe" style="height:34px;">
+          <p class="small mt-3" style="max-width:320px;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
+          <div class="d-flex gap-2 mt-3"><a href="https://www.linkedin.com/company/particleworks-europe/" class="text-white" target="_blank" style="font-size:1.2rem;"><i class="bi bi-linkedin"></i></a></div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Products</h6>
+          <ul class="list-unstyled small"><li class="mb-2"><a href="particleworks.html" class="text-reset">Particleworks</a></li><li class="mb-2"><a href="granuleworks.html" class="text-reset">Granuleworks</a></li></ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Services</h6>
+          <ul class="list-unstyled small"><li class="mb-2"><a href="consulting.html" class="text-reset">Consulting</a></li><li class="mb-2"><a href="training.html" class="text-reset">Training</a></li><li class="mb-2"><a href="support.html" class="text-reset">Support</a></li></ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Resources</h6>
+          <ul class="list-unstyled small"><li class="mb-2"><a href="case-studies.html" class="text-reset">Case Studies</a></li><li class="mb-2"><a href="resources.html" class="text-reset">Resources</a></li><li class="mb-2"><a href="glossary.html" class="text-reset">Glossary</a></li></ul>
+        </div>
+        <div class="col-lg-2">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Contact</h6>
+          <ul class="list-unstyled small"><li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li><li class="mb-2"><a href="mailto:info@particleworks-europe.com" class="text-reset"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li></ul>
+        </div>
+      </div>
+      <hr class="my-4" style="border-color:#2a2a2a;">
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
+        <p class="small mb-0"><a href="privacy.html" class="text-reset me-3">Privacy</a>Meshfree CFD simulation technology</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>window.addEventListener('scroll', function() { document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30); });</script>
+</body>
+</html>

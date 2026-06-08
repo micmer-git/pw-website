@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="favicon.ico">
-  <title>Particle flow simulation: the resourses of Particleworks Europe</title>
-  <meta name="description" content="Particle flow simulation: discover the variety of resourses to help you realize the potential of Particleworks software. See our website and contact us!">
+  <title>Particleworks Europe - Single-speed transmission webinar</title>
+  <meta name="description" content="Particleworks is a CAE software for the simulation of liquid flows based on the Moving Particle Simulation method.">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -59,18 +59,18 @@
     .btn-primary:hover { background: var(--pw-blue-dark); border-color: var(--pw-blue-dark); }
   </style>
 <!-- === SEO head (auto-generated, matches backup website_now) === -->
-  <link rel="canonical" href="https://particleworks-europe.com/resources.html">
+  <link rel="canonical" href="https://particleworks-europe.com/single-speed-transmission-webinar.html">
   <meta name="author" content="Particleworks Europe">
   <meta name="keywords" content="Particleworks, Particleworks Europe, Granuleworks, technologies, simulation">
   <meta name="google-site-verification" content="13JcLKtEM_c2bcIc8ZMrIKncMjxxmwN5nmfLLs8WLQA">
   <meta property="og:site_name" content="Particleworks Europe">
-  <meta property="og:title" content="Particle flow simulation: the resourses of Particleworks Europe">
-  <meta property="og:description" content="Particle flow simulation: discover the variety of resourses to help you realize the potential of Particleworks software. See our website and contact us!">
-  <meta property="og:url" content="https://particleworks-europe.com/resources.html">
+  <meta property="og:title" content="Particleworks Europe - Single-speed transmission webinar">
+  <meta property="og:description" content="Particleworks is a CAE software for the simulation of liquid flows based on the Moving Particle Simulation method.">
+  <meta property="og:url" content="https://particleworks-europe.com/single-speed-transmission-webinar.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Particle flow simulation: the resourses of Particleworks Europe">
-  <meta name="twitter:description" content="Particle flow simulation: discover the variety of resourses to help you realize the potential of Particleworks software. See our website and contact us!">
+  <meta name="twitter:title" content="Particleworks Europe - Single-speed transmission webinar">
+  <meta name="twitter:description" content="Particleworks is a CAE software for the simulation of liquid flows based on the Moving Particle Simulation method.">
   <script type="text/javascript" src="https://embeds.iubenda.com/widgets/6c5fe0b3-dfc8-4f17-b2ec-91c28fe04e7c.js"></script>
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -116,7 +116,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resources</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item active" href="resources.html"><i class="bi bi-file-earmark-pdf"></i><span><div class="dd-t">Resources &amp; Whitepapers</div><div class="dd-s">Technical documents</div></span></a></li>
+              <li><a class="dropdown-item" href="resources.html"><i class="bi bi-file-earmark-pdf"></i><span><div class="dd-t">Resources &amp; Whitepapers</div><div class="dd-s">Technical documents</div></span></a></li>
               <li><a class="dropdown-item" href="SPH-MPS.html"><i class="bi bi-braces"></i><span><div class="dd-t">FVM vs SPH vs MPS</div><div class="dd-s">Method comparison</div></span></a></li>
               <li><a class="dropdown-item" href="glossary.html"><i class="bi bi-book"></i><span><div class="dd-t">Glossary</div><div class="dd-s">Meshfree CFD terminology</div></span></a></li>
               <li><a class="dropdown-item" href="training.html"><i class="bi bi-mortarboard"></i><span><div class="dd-t">Training</div><div class="dd-s">Courses &amp; workshops</div></span></a></li>
@@ -126,7 +126,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Company</a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="company.html"><i class="bi bi-building"></i><span><div class="dd-t">About Particleworks Europe</div><div class="dd-s">Who we are</div></span></a></li>
+              <li><a class="dropdown-item" href="single-speed-transmission-webinar.html"><i class="bi bi-building"></i><span><div class="dd-t">About Particleworks Europe</div><div class="dd-s">Who we are</div></span></a></li>
               <li><a class="dropdown-item" href="resellers.html"><i class="bi bi-globe-europe-africa"></i><span><div class="dd-t">Resellers</div><div class="dd-s">Global partner network</div></span></a></li>
               <li><a class="dropdown-item" href="careers.html"><i class="bi bi-person-plus"></i><span><div class="dd-t">Careers</div><div class="dd-s">Join the team</div></span></a></li>
               <li><a class="dropdown-item" href="consulting.html"><i class="bi bi-briefcase"></i><span><div class="dd-t">Consulting &amp; Services</div><div class="dd-s">Engineering support</div></span></a></li>
@@ -140,107 +140,62 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </nav>
 
   <main>
-    <!-- company banner title -->
-      <section class="main_section background-green">
-          <div class="container">
-              <div class="row">
-                  <div class="col-12">
-                      <h1 class="display-6 text-end text-uppercase text-white pt-2">Resources</h1>
-                  </div></div></div>
-              </section>
-      
-   <!-- resources  -->      
-      
-      <section>
-          <div class="container"> 
-              <div class="row d-flex featurette align-items-center">         
-      <div class="col-md-7 pb-4 pe-4">
-        <h2 class="featurette-heading">A collection <span class="text-muted">exploring topics in Particleworks </span></h2>
-        <p class="lead pt-4">A collection of white papers, case examples, technical papers and testimonials exploring topics in Particleworks and that illustrate the use of our software are available on "case studies" area.</p>
-          <p class="lead">Our experts and our clients have gained extensive experience and know-how and are happy to share their insight and expertise.</p>
-           <div class="p-3 background_gray my-auto d-block">
-          <p >For information about us, please</p>
-              <a href="contact.html" class="btn btn-primary text-uppercase"> Contact us</a>
-              <a href="recorded-webinars.html" class="btn btn-outline-primary text-uppercase ms-2"> Recorded webinars</a>
-               </div>
-      </div>     
-    <div class="col-md-5">  
-         <img src="images/PW_Resourses.png" class="img-fluid rounded-circle box-icon-green bg-white float-end my-3">
-        <div id="carousel-consulting" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carousel-consulting" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carousel-consulting" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carousel-consulting" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="images/PW_consulting03.png" class="d-block w-100" alt="Exploring topics">
-    </div>
-    <div class="carousel-item">
-       <img src="images/PW_consulting02.png" class="d-block w-100" alt="White papers, case examples, technical papers and testimonials">
-    </div>
-    <div class="carousel-item">
-      <img src="images/PW_consulting01.png" class="d-block w-100" alt="Recorded webinars">
-    </div>
-  </div> 
-</div>
-        
-        
-        </div>
-        
-              </div>
-          
-          </div></section>
-      
-      <section class="py-4 text-center background_gray">
-          <div class="container">  
-               <h2 class="text-muted display-5">Case studies</h2>
-         <div class="row row-cols-1 row-cols-lg-3 align-items-center g-4 py-5">
-      <div class="col">
-        <div class="card h-100 overflow-hidden text-white border-gray">
-            <div class="card-img">
-                <img src="images/case-studies/MarelliMotori_01.png" class="img-fluid"></div>
-          <div class="d-flex flex-column h-100 p-2 overlay">
-              <div class="my-auto">
-            <h5>Oil lubricated bearing support analysis on electric generators with mesh-less CFD methods</h5> 
-              <p><a href="MarelliMotori-Oillubricatedbearings.html" class="text-white underline">Read more</a></p>
-              </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card h-100 overflow-hidden text-white border-gray">
-             <img src="images/case-studies/GIMATransmissionTechnology_02_1.png" class="img-fluid">
-            <div class="d-flex flex-column h-100 p-2 overlay">
-                 <div class="my-auto">
-            <h5>Gear oil jet lubrication efficiency </h5>  
-                      <p><a href="GIMATransmissionTechnology-Gearoiljetlubrication.html" class="text-white underline">Read more</a></p>
-                </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card h-100 overflow-hidden text-white border-gray">      
-            <img src="images/case-studies/Zeco_01.png" class="img-fluid">      
-       <div class="d-flex flex-column h-100 p-2 overlay">
-           <div class="my-auto">
-           <h5>Comparison between CFD and MPS Methods for Numerical Simulation of Pelton turbine</h5> 
-            <p><a href="ZECO-Peltonturbine.html" class="text-white underline">Read more</a></p>
-           </div>
-          </div>
-        </div>
-      </div>
-                       
-    </div>  
-               
-         <p class="pt-4"><a href="case-studies.html" class="btn btn-secondary">See all the available documentation</a></p>
-        </div>
-         
-       
-      </section>
+<!-- case studies  -->
   
+      
+        <section class="background_gray">
+          <div class="container"> 
+    <div class="row d-flex featurette align-items-center">         
+      <div class="col-lg-7 py-4">
+        <h2 class="featurette-heading"><span class="text-muted">Simulation of hydraulic losses of a single-speed transmission in an Electric-Drive-Unit using Particleworks</span></h2>
+        <p class="lead">Tobias Moll, Institute for combustion engines – RWTH Aachen University) | Simon Harbeke, EnginSoft GmbH</p>
+ 
+      </div>     
+    <div class="col-lg-5">
+<img src="images/case-studies/RWTHAachenUniversity_01.png" class="img-fluid mx-auto p-2">
+        </div>
+              </div>
+            </div></section>
+              <section class="py-4">
+          <div class="container"> 
+            <div class="row d-flex featurette  small"> 
+                 <div class="col-lg-5">
+                <script type="text/javascript">
+var __machform_url = 'https://forms.enginsoft.it/forms/embed.php?id=259665';
+var __machform_height = 636;
+</script>
+<!-- <div id="mf_placeholder"></div> -->
+ <div id="mf_placeholder" 
+     data-formurl="https://particleworks-europe.forms-eu.com/embed.php?id=16544" 
+     data-formheight="681"  
+     data-formtitle="Watch the recording presentation"  
+     data-paddingbottom="10">
+</div>
+<script>
+	(function(f,o,r,m){
+		r=f.createElement('script');r.async=1;r.src=o+'js/mf.js';
+		m=f.getElementById('mf_placeholder'); m.parentNode.insertBefore(r, m);
+	})(document,'https://assets.forms-eu.com/');
+</script>
+<script type="text/javascript" src="https://forms.enginsoft.it/forms/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://forms.enginsoft.it/forms/js/jquery.ba-postmessage.min.js"></script>
+<!-- <script type="text/javascript" src="https://forms.enginsoft.it/forms/js/machform_loader.js"></script> -->
+                </div>
+                <div class="col-md-7 pb-4">
+            <p><strong>Abstract</strong></p>
+<p>In this webinar Tobias Moll provide us with industry insights about the role of simulation for efficiency, lubrication and heat management for transmissions with Integrated electrical machines. The hydraulic losses of a single-speed transmission were simulated using Particleworks and validated against experiments.</p>
+                    <p>Watch the recording presentation</p>
+
+                    <p>Please fill out the form to see the recording webinar "Simulation of hydraulic losses of a single-speed transmission in an Electric-Drive-Unit using Particleworks"</p>
+<hr>
+<p class="pt-2">For more information please <a class="btn btn-primary ms-3" href="contact.php"> CONTACT OUR EXPERTS! </a></p>
+                </div>
+             
+              
+              </div>
+            </div>
+                </section>
+  </main>
 
   <!-- FOOTER -->
   

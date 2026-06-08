@@ -161,6 +161,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div class="p-3 background_gray my-auto d-block">
           <p >For information about us, please</p>
               <a href="contact.html" class="btn btn-primary text-uppercase"> Contact us</a>
+              <a href="recorded-webinars.html" class="btn btn-outline-primary text-uppercase ms-2"> Recorded webinars</a>
                </div>
       </div>     
     <div class="col-md-5">  
