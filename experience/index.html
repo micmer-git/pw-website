@@ -21,8 +21,9 @@
       --ev-accent:linear-gradient(135deg,#ef5c43 0%,#b51e23 100%);
     }
     * { font-family:'Inter',sans-serif; }
-    html { scroll-behavior:smooth; }
+    html { scroll-behavior:smooth; scroll-snap-type: y proximity; }
     body { color:var(--pw-dark); overflow-x:hidden; }
+    section { scroll-snap-align: start; scroll-margin-top: 60px; }
 
     .navbar { background:rgba(255,255,255,0.97); backdrop-filter:blur(12px); box-shadow:0 1px 0 rgba(0,0,0,0.06); padding:0.6rem 0; transition:box-shadow .3s; }
     .navbar.scrolled { box-shadow:0 2px 20px rgba(0,0,0,0.08); }
@@ -177,7 +178,7 @@
         <!-- Day 1 -->
         <div class="col-lg-5">
           <div class="day-card">
-            <div class="date-row"><span class="dnum">06</span><span class="dmon">October 2026 · Monday</span></div>
+            <div class="date-row"><span class="dnum">06</span><span class="dmon">October 2026 · Tuesday</span></div>
             <div class="time"><i class="bi bi-clock"></i> 14:00 — 18:00</div>
             <h3>Technical Workshop</h3>
             <p>Hands-on technical workshop and one-to-one support meetings with the Particleworks Europe engineering team.</p>
@@ -190,7 +191,7 @@
         <div class="col-lg-5">
           <a href="program.html" class="day-card conf">
             <span class="ribbon"><i class="bi bi-arrow-right-circle"></i> See program</span>
-            <div class="date-row"><span class="dnum">07</span><span class="dmon">October 2026 · Tuesday</span></div>
+            <div class="date-row"><span class="dnum">07</span><span class="dmon">October 2026 · Wednesday</span></div>
             <div class="time"><i class="bi bi-clock"></i> 09:00 — 17:00</div>
             <h3>Conference Day</h3>
             <p>Introduction to <strong>Particleworks 9.0</strong> and presentations from industry &amp; academia — shot peening, e-motor cooling, pumps and hydropower.</p>
@@ -213,31 +214,31 @@
       </div>
       <div class="row g-3 justify-content-center">
         <div class="col-md-6 col-lg-5">
-          <a href="program.html" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.html#talk-keynote" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic kn"><i class="bi bi-rocket-takeoff"></i></div>
             <div><h4>Particleworks 9.0 — Release &amp; Roadmap</h4><div class="org">Keynote · Prometech Software 🇯🇵</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.html#talk-shot-peening" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-bullseye"></i></div>
             <div><h4>Simulation of Shot Peening: A CFD-DEM Coupled Case Study</h4><div class="org">MTU Aero Engines AG 🇩🇪</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.html#talk-stator" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-lightning-charge"></i></div>
             <div><h4>Integrated Simulation of Stator Oil Jacket &amp; Jet Cooling</h4><div class="org">University of Modena and Reggio Emilia 🇮🇹</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.html#talk-pump" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-thermometer-half"></i></div>
             <div><h4>CHT Analysis of a Reciprocating Pump</h4><div class="org">R&amp;D CFD S.R.L. · Comet S.p.A. 🇮🇹</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.html#talk-pelton" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-water"></i></div>
             <div><h4>Moving Particle Simulation of Eroded Pelton Runners</h4><div class="org">HES-SO Valais//Wallis 🇨🇭</div></div>
           </div></a>

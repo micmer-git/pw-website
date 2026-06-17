@@ -19,7 +19,7 @@
       --pw-gray: #6c757d;
       --pw-light: #f8f9fa;
       --pw-gradient: linear-gradient(135deg, #0088cc 0%, #25a361 100%);
-      --pw-gradient-dark: linear-gradient(135deg, #04243a 0%, #0a3a5c 45%, #0d4a3a 100%);
+      --pw-gradient-dark: linear-gradient(135deg, #3d0e13 0%, #0a3a5c 45%, #0d4a3a 100%);
       /* 2026 European Edition theme */
       --ev-red: #d9503f; --ev-red-deep: #b51e23; --ev-red-dark: #8f161b; --ev-blue: #1983d0;
       --ev-crimson: #c01f24; --ev-vivid: #e0382a; --ev-coral: #ef5c43;
@@ -29,6 +29,9 @@
     * { font-family: 'Inter', sans-serif; }
     html { scroll-behavior: smooth; }
     body { color: var(--pw-dark); overflow-x: hidden; background:#fff; }
+    .talk { scroll-margin-top: 88px; }
+    /* highlight a talk arrived at via anchor */
+    .talk.anchored { border-color: var(--ev-crimson); box-shadow: 0 0 0 3px rgba(192,31,36,0.18), 0 18px 50px rgba(143,22,27,0.14); }
 
     /* Navbar */
     .navbar { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(0,0,0,0.06); padding: 0.6rem 0; transition: box-shadow 0.3s; }
@@ -87,7 +90,7 @@
     .talk:hover { box-shadow:0 18px 50px rgba(7,40,70,0.10); border-color: rgba(0,136,204,0.3); }
     .talk-grid { display:grid; grid-template-columns: 220px 1fr; }
     @media (max-width: 767px){ .talk-grid{ grid-template-columns:1fr; } }
-    .talk-art { position:relative; background: var(--pw-gradient-dark); display:flex; align-items:center; justify-content:center; padding:1.4rem; overflow:hidden; }
+    .talk-art { position:relative; background: linear-gradient(135deg,#3d0e13 0%,#6b1019 60%,#8f161b 100%); display:flex; align-items:center; justify-content:center; padding:1.4rem; overflow:hidden; }
     .talk-art svg { width:100%; height:auto; max-width:185px; }
     .talk-no { position:absolute; top:0.9rem; left:1.1rem; font-size:0.74rem; font-weight:800; letter-spacing:1px; color:rgba(255,255,255,0.55); }
     .talk-body { padding:1.7rem 1.9rem; }
@@ -116,7 +119,7 @@
     .authors b { color:var(--pw-dark); font-weight:600; }
 
     /* Keynote highlight */
-    .talk.keynote .talk-art { background: linear-gradient(135deg,#06243a,#0a5c7a 60%,#0d7a4a); }
+    .talk.keynote .talk-art { background: linear-gradient(135deg,#5c0f18,#a01f24 60%,#c0392a); }
     .talk.keynote { border:1.5px solid rgba(0,136,204,0.5); box-shadow:0 12px 40px rgba(0,136,204,0.12); }
     .kbadge { display:inline-flex; align-items:center; gap:0.4rem; background: var(--ev-accent); color:#fff; font-size:0.7rem; font-weight:800; letter-spacing:1px; text-transform:uppercase; padding:0.3rem 0.8rem; border-radius:50px; margin-bottom:0.8rem; }
 
@@ -179,7 +182,7 @@
       <h1>The <span class="accent">Program</span> is taking shape.</h1>
       <p class="lead">A full day of meshless CFD in production — the release of <strong>Particleworks&nbsp;9.0</strong> and validated case studies from aerospace, e-mobility, fluid machinery and hydropower.</p>
       <div class="hero-facts">
-        <span class="hero-fact"><i class="bi bi-calendar-event"></i> Conference — Tuesday, October 7, 2026</span>
+        <span class="hero-fact"><i class="bi bi-calendar-event"></i> Conference — Wednesday, October 7, 2026</span>
         <span class="hero-fact"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena (IT)</span>
         <span class="hero-fact"><i class="bi bi-mic"></i> 5 talks · 4 countries</span>
       </div>
@@ -196,7 +199,7 @@
       <div class="row g-3 justify-content-center">
         <div class="col-lg-5">
           <div class="agenda-card">
-            <div class="agenda-day"><div class="num">06</div><div class="mon">Oct · Mon</div></div>
+            <div class="agenda-day"><div class="num">06</div><div class="mon">Oct · Tue</div></div>
             <div>
               <div class="time"><i class="bi bi-clock"></i> 14:00 — 18:00</div>
               <h3>Technical Workshop</h3>
@@ -206,7 +209,7 @@
         </div>
         <div class="col-lg-5">
           <div class="agenda-card is-conf">
-            <div class="agenda-day"><div class="num">07</div><div class="mon">Oct · Tue</div></div>
+            <div class="agenda-day"><div class="num">07</div><div class="mon">Oct · Wed</div></div>
             <div>
               <div class="time"><i class="bi bi-clock"></i> 09:00 — 17:00</div>
               <h3>Conference Day</h3>
@@ -231,17 +234,17 @@
         <div class="col-lg-10 col-xl-9">
 
           <!-- KEYNOTE -->
-          <article class="talk keynote">
+          <article class="talk keynote" id="talk-keynote">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">KEYNOTE</span>
                 <!-- SVG: particle cloud forming 9.0 -->
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Particleworks 9.0 release">
                   <defs>
-                    <linearGradient id="kg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ee6a8"/><stop offset="1" stop-color="#39c6ff"/></linearGradient>
+                    <linearGradient id="kg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
                   </defs>
                   <text x="100" y="98" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="52" fill="url(#kg)">9.0</text>
-                  <g fill="#7fd3ff">
+                  <g fill="#ffb38f">
                     <circle cx="38" cy="40" r="3.2"><animate attributeName="cy" values="40;48;40" dur="3s" repeatCount="indefinite"/></circle>
                     <circle cx="160" cy="46" r="2.6" opacity="0.8"><animate attributeName="cy" values="46;38;46" dur="3.6s" repeatCount="indefinite"/></circle>
                     <circle cx="52" cy="128" r="2.8" opacity="0.8"><animate attributeName="cy" values="128;120;128" dur="3.2s" repeatCount="indefinite"/></circle>
@@ -270,15 +273,15 @@
           </article>
 
           <!-- TALK 1: Shot peening -->
-          <article class="talk">
+          <article class="talk" id="talk-shot-peening">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 01</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Shot peening CFD-DEM">
-                  <defs><linearGradient id="t1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#39c6ff"/><stop offset="1" stop-color="#5ee6a8"/></linearGradient></defs>
+                  <defs><linearGradient id="t1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a5c"/><stop offset="1" stop-color="#ffd27a"/></linearGradient></defs>
                   <!-- nozzle -->
-                  <path d="M70 18 H130 L116 50 H84 Z" fill="#cfe9ff" opacity="0.9"/>
-                  <rect x="92" y="8" width="16" height="14" rx="2" fill="#9fd6ff"/>
+                  <path d="M70 18 H130 L116 50 H84 Z" fill="#ffe0d2" opacity="0.9"/>
+                  <rect x="92" y="8" width="16" height="14" rx="2" fill="#ffc4a8"/>
                   <!-- workpiece surface with dimples -->
                   <path d="M24 132 Q40 122 56 132 Q72 142 88 132 Q104 122 120 132 Q136 142 152 132 Q168 122 184 132 L184 152 L24 152 Z" fill="url(#t1)" opacity="0.85"/>
                   <!-- shots -->
@@ -312,17 +315,17 @@
           </article>
 
           <!-- TALK 2: Stator cooling -->
-          <article class="talk">
+          <article class="talk" id="talk-stator">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 02</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stator oil jacket and jet cooling">
-                  <defs><linearGradient id="t2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#39c6ff"/><stop offset="1" stop-color="#5ee6a8"/></linearGradient></defs>
+                  <defs><linearGradient id="t2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a5c"/><stop offset="1" stop-color="#ffd27a"/></linearGradient></defs>
                   <!-- stator ring -->
                   <circle cx="100" cy="85" r="52" stroke="url(#t2)" stroke-width="10" opacity="0.9"/>
-                  <circle cx="100" cy="85" r="28" stroke="#cfe9ff" stroke-width="6" opacity="0.7"/>
+                  <circle cx="100" cy="85" r="28" stroke="#ffe0d2" stroke-width="6" opacity="0.7"/>
                   <!-- stator teeth -->
-                  <g stroke="#9fd6ff" stroke-width="3">
+                  <g stroke="#ffc4a8" stroke-width="3">
                     <line x1="100" y1="33" x2="100" y2="45"/><line x1="100" y1="125" x2="100" y2="137"/>
                     <line x1="48" y1="85" x2="60" y2="85"/><line x1="140" y1="85" x2="152" y2="85"/>
                     <line x1="63" y1="48" x2="71" y2="56"/><line x1="129" y1="114" x2="137" y2="122"/>
@@ -359,27 +362,27 @@
           </article>
 
           <!-- TALK 3: Reciprocating pump CHT -->
-          <article class="talk">
+          <article class="talk" id="talk-pump">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 03</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CHT analysis of a reciprocating pump">
                   <defs>
                     <linearGradient id="t3cht" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0" stop-color="#ff7a4d"/><stop offset="0.5" stop-color="#ffb347"/><stop offset="1" stop-color="#39c6ff"/>
+                      <stop offset="0" stop-color="#ff7a4d"/><stop offset="0.5" stop-color="#ffb347"/><stop offset="1" stop-color="#ff8a5c"/>
                     </linearGradient>
                     <radialGradient id="t3glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffb347" stop-opacity="0.8"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
                   </defs>
 
                   <!-- reciprocating piston rod -->
-                  <rect x="92" y="12" width="16" height="40" rx="4" fill="#eaf6ff">
+                  <rect x="92" y="12" width="16" height="40" rx="4" fill="#fff3ee">
                     <animate attributeName="y" values="12;26;12" dur="1.5s" repeatCount="indefinite"/>
                     <animate attributeName="height" values="40;26;40" dur="1.5s" repeatCount="indefinite"/>
                   </rect>
 
                   <!-- pump body = CHT thermal field -->
                   <rect x="48" y="48" width="104" height="92" rx="22" fill="url(#t3cht)" opacity="0.92"/>
-                  <rect x="48" y="48" width="104" height="92" rx="22" fill="none" stroke="#eaf6ff" stroke-width="2.5"/>
+                  <rect x="48" y="48" width="104" height="92" rx="22" fill="none" stroke="#fff3ee" stroke-width="2.5"/>
 
                   <!-- seal hot-spot -->
                   <circle cx="100" cy="84" r="30" fill="url(#t3glow)"><animate attributeName="r" values="24;32;24" dur="2.4s" repeatCount="indefinite"/></circle>
@@ -392,7 +395,7 @@
                   </g>
 
                   <!-- oil droplets -->
-                  <g fill="#cfe9ff">
+                  <g fill="#ffe0d2">
                     <circle cx="72" cy="120" r="4"><animate attributeName="cy" values="120;112;120" dur="2.4s" repeatCount="indefinite"/></circle>
                     <circle cx="100" cy="126" r="3"><animate attributeName="cy" values="126;118;126" dur="2.9s" repeatCount="indefinite"/></circle>
                     <circle cx="128" cy="120" r="4"><animate attributeName="cy" values="120;112;120" dur="2.2s" repeatCount="indefinite"/></circle>
@@ -419,20 +422,20 @@
           </article>
 
           <!-- TALK 4: Pelton runner erosion -->
-          <article class="talk">
+          <article class="talk" id="talk-pelton">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 04</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MPS of eroded Pelton runners">
                   <defs>
-                    <linearGradient id="t4hub" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ee6a8"/><stop offset="1" stop-color="#39c6ff"/></linearGradient>
+                    <linearGradient id="t4hub" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
                     <linearGradient id="t4jet" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0.95"/></linearGradient>
                   </defs>
 
                   <!-- rotating runner: hub + 8 twin-cup buckets on the pitch circle -->
                   <g>
                     <animateTransform attributeName="transform" type="rotate" from="0 110 85" to="360 110 85" dur="9s" repeatCount="indefinite"/>
-                    <g stroke="#7fd3ff" stroke-width="2.4" fill="rgba(127,211,255,0.10)" stroke-linejoin="round">
+                    <g stroke="#ffb38f" stroke-width="2.4" fill="rgba(127,211,255,0.10)" stroke-linejoin="round">
                       <g transform="rotate(0 110 85)   translate(110 41)"><path d="M-10 4 C-10 -7 -3 -9 0 -2 C3 -9 10 -7 10 4 C6 9 -6 9 -10 4 Z"/></g>
                       <g transform="rotate(45 110 85)  translate(110 41)"><path d="M-10 4 C-10 -7 -3 -9 0 -2 C3 -9 10 -7 10 4 C6 9 -6 9 -10 4 Z"/></g>
                       <g transform="rotate(90 110 85)  translate(110 41)"><path d="M-10 4 C-10 -7 -3 -9 0 -2 C3 -9 10 -7 10 4 C6 9 -6 9 -10 4 Z"/></g>
@@ -445,8 +448,8 @@
                     </g>
                     <!-- hub -->
                     <circle cx="110" cy="85" r="19" fill="url(#t4hub)" opacity="0.9"/>
-                    <circle cx="110" cy="85" r="8" fill="#04243a"/>
-                    <g stroke="#04243a" stroke-width="2"><line x1="110" y1="69" x2="110" y2="76"/><line x1="110" y1="94" x2="110" y2="101"/><line x1="94" y1="85" x2="101" y2="85"/><line x1="119" y1="85" x2="126" y2="85"/></g>
+                    <circle cx="110" cy="85" r="8" fill="#3d0e13"/>
+                    <g stroke="#3d0e13" stroke-width="2"><line x1="110" y1="69" x2="110" y2="76"/><line x1="110" y1="94" x2="110" y2="101"/><line x1="94" y1="85" x2="101" y2="85"/><line x1="119" y1="85" x2="126" y2="85"/></g>
                   </g>
 
                   <!-- stationary water jet hitting the bucket at the pitch circle (9 o'clock) -->
@@ -558,6 +561,22 @@
       entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
     }, { threshold: 0.12 });
     document.querySelectorAll('.talk').forEach(function(el){ io.observe(el); });
+
+    // open + scroll to a talk's abstract when linked from the front page (#talk-id)
+    function openHashTalk(){
+      var h = location.hash;
+      if(!h || h.length < 2) return;
+      var t;
+      try { t = document.querySelector(h); } catch(e){ return; }
+      if(!t || !t.classList.contains('talk')) return;
+      t.classList.add('in','open','anchored');
+      var tg = t.querySelector('.toggle');
+      if(tg) tg.childNodes[0].nodeValue = 'Hide abstract ';
+      setTimeout(function(){ t.scrollIntoView({ behavior:'smooth', block:'start' }); }, 80);
+      setTimeout(function(){ t.classList.remove('anchored'); }, 2600);
+    }
+    window.addEventListener('load', openHashTalk);
+    window.addEventListener('hashchange', openHashTalk);
   </script>
 </body>
 </html>
