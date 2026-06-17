@@ -15,6 +15,8 @@
       --pw-dark:#1a1a2e; --pw-gray:#6c757d; --pw-light:#f8f9fa;
       --pw-gradient:linear-gradient(135deg,#0088cc 0%,#25a361 100%);
       --pw-gradient-dark:linear-gradient(135deg,#04243a 0%,#0a3a5c 45%,#0d4a3a 100%);
+      --ev-red:#d9503f; --ev-red-deep:#b51e23; --ev-red-dark:#8f161b; --ev-blue:#1983d0;
+      --ev-gradient:linear-gradient(135deg,#d9503f 0%,#b51e23 58%,#8f161b 100%);
     }
     * { font-family:'Inter',sans-serif; }
     html { scroll-behavior:smooth; }
@@ -29,19 +31,22 @@
     .nav-register:hover { background:var(--pw-blue-dark); color:#fff !important; }
 
     /* Hero */
-    .hero { position:relative; padding:9rem 0 5rem; background:var(--pw-gradient-dark); overflow:hidden; }
+    .hero { position:relative; padding:8.5rem 0 5rem; background:linear-gradient(135deg, rgba(217,80,63,0.85), rgba(143,22,27,0.93)), url('img/theme-bg.jpg') center/cover no-repeat; overflow:hidden; }
     .hero::before { content:''; position:absolute; inset:0; background:
-        radial-gradient(ellipse 70% 60% at 12% 92%, rgba(37,163,97,0.22) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 55% at 88% 8%, rgba(0,136,204,0.30) 0%, transparent 60%); }
+        radial-gradient(ellipse 70% 60% at 12% 92%, rgba(255,180,150,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 55% at 88% 8%, rgba(255,255,255,0.12) 0%, transparent 60%); }
     .hero .container { position:relative; z-index:3; }
-    .hero-particles { position:absolute; inset:0; z-index:1; opacity:0.55; }
-    .badge-year { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.22); color:#cfeaff; padding:0.4rem 1rem; border-radius:50px; font-size:0.78rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1.4rem; }
+    .hero-particles { position:absolute; inset:0; z-index:1; opacity:0.35; }
+    .badge-year { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.32); color:#ffe6dd; padding:0.4rem 1rem; border-radius:50px; font-size:0.78rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1.4rem; }
     .hero h1 { font-size:clamp(2.4rem,5.6vw,4rem); font-weight:900; color:#fff; letter-spacing:-1.2px; line-height:1.05; }
-    .hero h1 .accent { background:linear-gradient(120deg,#39c6ff,#5ee6a8); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-    .hero .lead { font-size:1.18rem; color:rgba(255,255,255,0.84); max-width:620px; line-height:1.7; margin-top:1.3rem; }
+    .hero h1 .accent { background:linear-gradient(120deg,#fff,#ffd9c2); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .hero .lead { font-size:1.18rem; color:rgba(255,255,255,0.88); max-width:620px; line-height:1.7; margin-top:1.3rem; }
+    .hero-banner { margin-top:2.2rem; max-width:760px; border-radius:16px; overflow:hidden; box-shadow:0 22px 60px rgba(70,8,8,0.4); border:1px solid rgba(255,255,255,0.25); }
+    .hero-banner img { width:100%; display:block; }
     .hero-meta { display:flex; flex-wrap:wrap; gap:0.7rem; margin-top:2rem; }
-    .hero-meta .m { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.14); color:#eaf6ff; padding:0.55rem 1.05rem; border-radius:12px; font-size:0.92rem; font-weight:500; }
-    .hero-meta .m i { color:#5ee6a8; }
+    .hero-meta .m { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.20); color:#fff5f1; padding:0.55rem 1.05rem; border-radius:12px; font-size:0.92rem; font-weight:500; }
+    .hero-meta .m i { color:#ffd9c2; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
     .hero-cta { display:flex; flex-wrap:wrap; gap:0.8rem; margin-top:2.2rem; }
 
     .btn-pw { background:var(--pw-blue); color:#fff; border:none; padding:0.8rem 2rem; border-radius:50px; font-weight:600; font-size:0.95rem; transition:all .3s; display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; }
@@ -85,15 +90,15 @@
 
     /* venue */
     .venue { padding:4rem 0; }
-    .venue-box { background:var(--pw-gradient-dark); border-radius:24px; padding:3rem; color:#fff; position:relative; overflow:hidden; }
-    .venue-box::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 50% 80% at 90% 10%, rgba(37,163,97,0.25), transparent 60%); }
+    .venue-box { background:linear-gradient(135deg, rgba(217,80,63,0.92), rgba(143,22,27,0.96)), url('img/theme-bg.jpg') center/cover no-repeat; border-radius:24px; padding:3rem; color:#fff; position:relative; overflow:hidden; }
+    .venue-box::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 50% 80% at 90% 10%, rgba(255,255,255,0.14), transparent 60%); }
     .venue-box .container, .venue-box .row { position:relative; z-index:2; }
     .venue-box h3 { font-weight:800; font-size:1.6rem; }
     .venue-box p { color:rgba(255,255,255,0.82); }
 
     /* CTA */
-    .cta-final { padding:4.5rem 0; background:var(--pw-gradient-dark); position:relative; overflow:hidden; }
-    .cta-final::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 70% at 50% 120%, rgba(37,163,97,0.3), transparent 60%); }
+    .cta-final { padding:4.5rem 0; background:linear-gradient(135deg, rgba(217,80,63,0.90), rgba(143,22,27,0.95)), url('img/theme-bg.jpg') center/cover no-repeat; position:relative; overflow:hidden; }
+    .cta-final::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 70% at 50% 120%, rgba(255,200,170,0.22), transparent 60%); }
     .cta-final .container { position:relative; z-index:2; }
     .cta-final h2 { color:#fff; font-weight:900; font-size:clamp(1.8rem,3.6vw,2.6rem); letter-spacing:-0.5px; }
     .cta-final p { color:rgba(255,255,255,0.8); font-size:1.08rem; max-width:560px; margin:1rem auto 2rem; }
@@ -129,7 +134,7 @@
   <!-- Hero -->
   <section class="hero">
     <svg class="hero-particles" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 500" aria-hidden="true">
-      <g fill="#7fd3ff">
+      <g fill="#ffe2d4">
         <circle cx="120" cy="80" r="3"><animate attributeName="cy" values="80;120;80" dur="7s" repeatCount="indefinite"/></circle>
         <circle cx="300" cy="200" r="2.4" opacity="0.7"><animate attributeName="cy" values="200;160;200" dur="9s" repeatCount="indefinite"/></circle>
         <circle cx="540" cy="100" r="3.4" opacity="0.6"><animate attributeName="cy" values="100;140;100" dur="6s" repeatCount="indefinite"/></circle>
@@ -140,8 +145,9 @@
       </g>
     </svg>
     <div class="container">
-      <div class="badge-year"><i class="bi bi-stars"></i> 5th Edition · Now in Modena</div>
-      <h1>Particleworks<br><span class="accent">Experience 2026</span></h1>
+      <div class="badge-year"><i class="bi bi-stars"></i> European Edition · Modena 2026</div>
+      <h1 class="sr-only">Particleworks Experience 2026 — European Edition, Modena, October 6–7</h1>
+      <div class="hero-banner"><img src="img/banner-2026.jpg" alt="Particleworks Experience 2026 — European Edition · October 6-7, 2026 · Modena, Italy"></div>
       <p class="lead">The annual meeting of the meshless CFD community. Two days of hands-on workshops, the release of <strong>Particleworks&nbsp;9.0</strong>, and validated case studies from industry and academia.</p>
       <div class="hero-meta">
         <span class="m"><i class="bi bi-calendar-event"></i> October 6–7, 2026</span>
