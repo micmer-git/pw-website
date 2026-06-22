@@ -131,10 +131,8 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse justify-content-end" id="nav">
         <ul class="navbar-nav align-items-lg-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Experience 2026</a></li>
           <li class="nav-item"><a class="nav-link" href="program.html">Program</a></li>
-          <li class="nav-item"><a class="nav-link" href="../case-studies.html">Case Studies</a></li>
-          <li class="nav-item"><a class="nav-link" href="../particleworks.html">Particleworks</a></li>
-          <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -143,7 +141,8 @@
               <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2023.php"><i class="bi bi-calendar3"></i> Proceedings 2023</a></li>
             </ul>
           </li>
-          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="#register">Register</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://particleworks-europe.com/experience/contact.php">Contact</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.html">Register</a></li>
         </ul>
       </div>
     </div>
@@ -172,7 +171,7 @@
         <span class="m"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena · Italy</span>
       </div>
       <div class="hero-cta">
-        <a href="#register" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
+        <a href="registration.html" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
         <a href="program.html" class="btn-ghost"><i class="bi bi-calendar3"></i> View the program</a>
       </div>
     </div>
@@ -307,7 +306,7 @@
       <h2>Save your seat for Modena</h2>
       <p>Register for Particleworks Experience 2026 — or submit your own title and abstract before the call for papers closes.</p>
       <div class="hero-cta justify-content-center">
-        <a href="https://particleworks-europe.com/experience/registration.php" class="btn-pw"><i class="bi bi-pencil-square"></i> Register</a>
+        <a href="registration.html" class="btn-pw"><i class="bi bi-pencil-square"></i> Register</a>
         <a href="https://particleworks-europe.com/experience/call-for-abstract" class="btn-ghost"><i class="bi bi-file-earmark-text"></i> Submit your abstract</a>
       </div>
     </div>
@@ -328,7 +327,7 @@
           <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Experience 2026</h6>
           <ul class="list-unstyled small">
             <li class="mb-2"><a href="program.html">Program</a></li>
-            <li class="mb-2"><a href="https://particleworks-europe.com/experience/registration.php">Registration</a></li>
+            <li class="mb-2"><a href="registration.html">Registration</a></li>
             <li class="mb-2"><a href="https://particleworks-europe.com/experience/call-for-abstract">Call for papers</a></li>
           </ul>
         </div>

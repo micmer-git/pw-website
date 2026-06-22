@@ -93,9 +93,6 @@
         <ul class="navbar-nav align-items-lg-center gap-1">
           <li class="nav-item"><a class="nav-link" href="index.html">Experience 2026</a></li>
           <li class="nav-item"><a class="nav-link" href="program.html">Program</a></li>
-          <li class="nav-item"><a class="nav-link" href="../case-studies.html">Case Studies</a></li>
-          <li class="nav-item"><a class="nav-link" href="../particleworks.html">Particleworks</a></li>
-          <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -104,7 +101,8 @@
               <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2023.php"><i class="bi bi-calendar3"></i> Proceedings 2023</a></li>
             </ul>
           </li>
-          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="#form">Register</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://particleworks-europe.com/experience/contact.php">Contact</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.html">Register</a></li>
         </ul>
       </div>
     </div>

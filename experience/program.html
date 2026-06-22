@@ -159,9 +159,7 @@
       <div class="collapse navbar-collapse justify-content-end" id="nav">
         <ul class="navbar-nav align-items-lg-center gap-1">
           <li class="nav-item"><a class="nav-link" href="index.html">Experience 2026</a></li>
-          <li class="nav-item"><a class="nav-link" href="../case-studies.html">Case Studies</a></li>
-          <li class="nav-item"><a class="nav-link" href="../particleworks.html">Particleworks</a></li>
-          <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="program.html">Program</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -170,7 +168,8 @@
               <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2023.php"><i class="bi bi-calendar3"></i> Proceedings 2023</a></li>
             </ul>
           </li>
-          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="index.html#register">Register</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://particleworks-europe.com/experience/contact.php">Contact</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.html">Register</a></li>
         </ul>
       </div>
     </div>
@@ -200,36 +199,8 @@
         <span class="hero-fact"><i class="bi bi-mic"></i> 8 talks · 5 countries</span>
       </div>
       <div class="hero-cta-row">
-        <a href="index.html#register" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
+        <a href="registration.html" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
         <a href="#program" class="btn-ghost"><i class="bi bi-arrow-down"></i> See the talks</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Agenda -->
-  <section class="agenda">
-    <div class="container">
-      <div class="row g-3 justify-content-center">
-        <div class="col-lg-5">
-          <div class="agenda-card">
-            <div class="agenda-day"><div class="num">06</div><div class="mon">Oct · Tue</div></div>
-            <div>
-              <div class="time"><i class="bi bi-clock"></i> 14:00 — 18:00</div>
-              <h3>Technical Workshop</h3>
-              <p>Hands-on technical workshop and one-to-one support meetings with the Particleworks Europe engineering team.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-5">
-          <div class="agenda-card is-conf">
-            <div class="agenda-day"><div class="num">07</div><div class="mon">Oct · Wed</div></div>
-            <div>
-              <div class="time"><i class="bi bi-clock"></i> 09:00 — 17:00</div>
-              <h3>Conference Day</h3>
-              <p>Introduction to <strong>Particleworks 9.0</strong> and presentations from industry and academia. Full talk line-up below.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -664,7 +635,7 @@
       <h2>Join us in Modena</h2>
       <p>Two days, one community. Reserve your seat for Particleworks Experience 2026 — or submit your own abstract before the program closes.</p>
       <div class="hero-cta-row justify-content-center">
-        <a href="https://particleworks-europe.com/experience/registration.php" class="btn-pw"><i class="bi bi-pencil-square"></i> Register</a>
+        <a href="registration.html" class="btn-pw"><i class="bi bi-pencil-square"></i> Register</a>
         <a href="https://particleworks-europe.com/experience/call-for-abstract" class="btn-ghost"><i class="bi bi-file-earmark-text"></i> Submit your abstract</a>
       </div>
     </div>
@@ -686,7 +657,7 @@
           <ul class="list-unstyled small">
             <li class="mb-2"><a href="index.html">Conference overview</a></li>
             <li class="mb-2"><a href="program.html">Program</a></li>
-            <li class="mb-2"><a href="https://particleworks-europe.com/experience/registration.php">Registration</a></li>
+            <li class="mb-2"><a href="registration.html">Registration</a></li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-4">
@@ -709,7 +680,7 @@
     </div>
   </footer>
 
-  <a href="#register" class="btn-pw float-reg"><i class="bi bi-pencil-square"></i> Register</a>
+  <a href="registration.html" class="btn-pw float-reg"><i class="bi bi-pencil-square"></i> Register</a>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
