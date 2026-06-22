@@ -224,8 +224,8 @@ cards=[
 if __name__=="__main__":
     square_bg(os.path.join(PROC,"bg_square.png")); cal_icon(os.path.join(PROC,"cal.png"))
     for key,fn in PHOTOS.items():
-        seg_cutout(os.path.join(SPK,fn),os.path.join(PROC,key+"_cut.png"))
-        make_avatar("photo",os.path.join(PROC,key+"_cut.png")).save(os.path.join(PROC,"av_"+key+".png"))
+        # original photo, no background removal (handled downstream by the user)
+        make_avatar("photo",os.path.join(SPK,fn)).save(os.path.join(PROC,"av_"+key+".png"))
     for ini in ["LC","LT","RK"]: make_avatar("ini",ini).save(os.path.join(PROC,"av_"+ini+".png"))
     make_sim(os.path.join(PROC,"skf.png"),os.path.join(PROC,"sim_skf.png"))
     make_sim(os.path.join(PROC,"deepfluid.png"),os.path.join(PROC,"sim_deepfluid.png"))
