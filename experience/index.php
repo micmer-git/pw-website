@@ -216,7 +216,7 @@
         <div class="col-md-6 col-lg-5">
           <a href="program.html#talk-keynote" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic kn"><i class="bi bi-rocket-takeoff"></i></div>
-            <div><h4>Particleworks 9.0 — Release &amp; Roadmap</h4><div class="org">Keynote · Prometech Software 🇯🇵</div></div>
+            <div><h4>What's New in Particleworks 9.0 &amp; Granuleworks 4.0</h4><div class="org">Keynote · Iori Saigo · Prometech Software 🇯🇵</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
@@ -241,6 +241,24 @@
           <a href="program.html#talk-pelton" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-water"></i></div>
             <div><h4>Moving Particle Simulation of Eroded Pelton Runners</h4><div class="org">HES-SO Valais//Wallis 🇨🇭</div></div>
+          </div></a>
+        </div>
+        <div class="col-md-6 col-lg-5">
+          <a href="program.html#talk-skf-htc" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-record-circle"></i></div>
+            <div><h4>Verification of Heat Transfer Coefficient for Bearings</h4><div class="org">SKF 🇳🇱</div></div>
+          </div></a>
+        </div>
+        <div class="col-md-6 col-lg-5">
+          <a href="program.html#talk-air-in-oil" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-camera"></i></div>
+            <div><h4>Direct Optical Air-in-Oil Measurement for Gearings &amp; Hydraulics</h4><div class="org">deepfluid 🇩🇪</div></div>
+          </div></a>
+        </div>
+        <div class="col-md-6 col-lg-5">
+          <a href="program.html#talk-carrier-roller" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-truck"></i></div>
+            <div><h4>Lubrication of a Carrier Roller using CFD 3D-MPS</h4><div class="org">Track One SRL · Unimore 🇮🇹</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5 d-flex">

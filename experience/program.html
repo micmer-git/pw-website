@@ -184,7 +184,7 @@
       <div class="hero-facts">
         <span class="hero-fact"><i class="bi bi-calendar-event"></i> Conference — Wednesday, October 7, 2026</span>
         <span class="hero-fact"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena (IT)</span>
-        <span class="hero-fact"><i class="bi bi-mic"></i> 5 talks · 4 countries</span>
+        <span class="hero-fact"><i class="bi bi-mic"></i> 8 talks · 5 countries</span>
       </div>
       <div class="hero-cta-row">
         <a href="index.html#register" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
@@ -257,16 +257,20 @@
               </div>
               <div class="talk-body">
                 <span class="kbadge"><i class="bi bi-rocket-takeoff"></i> Software Release</span>
-                <h3>Particleworks 9.0 — Release &amp; Roadmap</h3>
+                <h3>What's New in Particleworks 9.0 and Granuleworks 4.0</h3>
                 <div class="speaker">
-                  <div class="avatar">P</div>
-                  <div><div class="nm">Prometech Software</div><div class="rl">Developer keynote · <span class="flag">🇯🇵 Japan</span></div></div>
+                  <div class="avatar"><img src="speakers/iori-saigo.jpg" alt="Iori Saigo" loading="lazy"></div>
+                  <div><div class="nm">Iori Saigo</div><div class="rl">Application Engineer · Prometech Software · <span class="flag">🇯🇵 Japan</span></div></div>
                 </div>
                 <div class="talk-tags">
                   <span class="chip chip-theme">Software release</span>
-                  <span class="chip chip-method">GPU</span>
+                  <span class="chip chip-method">Particleworks 9.0</span><span class="chip chip-method">Granuleworks 4.0</span><span class="chip chip-method">GPU</span>
                 </div>
-                <div class="abs"><p>Official release of <strong>Particleworks 9.0</strong>, the latest generation of Prometech's GPU-accelerated meshless CFD solver. The keynote introduces the new solver capabilities, performance improvements and physics modeling extensions of the 9.0 release.</p></div>
+                <div class="abs">
+                  <p>This presentation introduces the latest releases of <strong>Particleworks 9.0</strong> and <strong>Granuleworks 4.0</strong>. Featuring major advances in simulation performance and multi-physics capabilities, these new versions enable more accurate and efficient analysis of complex fluid dynamics.</p>
+                  <p>Application examples and case studies will also be presented to demonstrate the value of the latest developments. Join us to explore the new possibilities with Particleworks and Granuleworks.</p>
+                  <div class="authors"><b>Speaker:</b> Iori Saigo (Prometech Software, JP)</div>
+                </div>
                 <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
               </div>
             </div>
@@ -477,6 +481,111 @@
                   <p>Hydropower is essential for grid stability but faces growing challenges from increased sediment transport driven by climate change, which induces erosion affecting turbine efficiency, wear, and maintenance costs. Pelton turbines are particularly vulnerable, with nozzle tips and runner buckets suffering erosion-related efficiency losses. Predicting such losses with traditional CFD is difficult due to complex free-surface, high-velocity flows and rotating components.</p>
                   <p>Meshless methods, especially Moving Particle Simulation (MPS), offer promising alternatives enhanced by GPU computing. This study uses scans of real erosion geometries from runners at different life stages (new, mid-life, end-of-life). Simulations at best efficiency conditions with a single jet configuration show torque drops of <strong>6%</strong> and <strong>6.6%</strong> for mid-life and end-of-life runners. The findings confirm the capability of MPS to accurately capture performance losses due to realistic erosion patterns. Future work will focus on experimental validation and scaling the methodology to larger Pelton turbines.</p>
                   <div class="authors"><b>Authors:</b> Jean Decaix · Maxime Chiarelli · Cécile Münch-Alligné — Institute of Sustainable Energy, HES-SO Valais-Wallis, CH</div>
+                </div>
+                <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- TALK 5: SKF HTC verification -->
+          <article class="talk" id="talk-skf-htc">
+            <div class="talk-grid">
+              <div class="talk-art render">
+                <span class="talk-no">TALK 05</span>
+                <img src="img/skf-heatflux-sphere.jpg" alt="Particleworks heat flux on a sphere in uniform flow — SKF HTC benchmark" loading="lazy">
+              </div>
+              <div class="talk-body">
+                <h3>Integrating Particleworks into SKF Engineering Tools: Part I — Verification of Heat Transfer Coefficient</h3>
+                <div class="speaker">
+                  <div class="avatar">LC</div>
+                  <div><div class="nm">Lijun Cao</div><div class="rl">Project Engineer Specialist · SKF (Advanced Engineering Competence Centre) · <span class="flag">🇳🇱 Netherlands</span></div></div>
+                </div>
+                <div class="talk-tags">
+                  <span class="chip chip-theme">Bearings · Thermal modelling</span>
+                  <span class="chip chip-method">Heat transfer (HTC)</span><span class="chip chip-method">Validation</span>
+                </div>
+                <div class="abs">
+                  <p>The calculation of the heat transfer coefficient (HTC) in Particleworks provides a new way of quickly estimating convective HTCs on bearing components. These HTCs are coupled with SKF internal tools such as <strong>BEAST</strong> to calculate bearing temperatures, enhancing the accuracy and robustness of bearing thermal analysis.</p>
+                  <p>This work presents a detailed evaluation of Particleworks' capability to predict HTCs under flow conditions relevant to rolling-element bearings. Simplified benchmark cases were considered, including heat transfer on a sphere in a uniform flow and between rotating concentric cylinders (Taylor vortices). Particleworks results are compared with well-established HTC correlations from the literature as well as solutions from ANSYS Fluent. The findings contribute to SKF's ongoing efforts to improve the thermal modelling capabilities of rolling bearings.</p>
+                  <div class="authors"><b>Authors:</b> Lijun Cao (SKF, NL) · Mehul P. Pandya (SKF, SE)</div>
+                </div>
+                <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- TALK 6: deepfluid air-in-oil measurement -->
+          <article class="talk" id="talk-air-in-oil">
+            <div class="talk-grid">
+              <div class="talk-art render">
+                <span class="talk-no">TALK 06</span>
+                <img src="img/deepfluid-air-in-oil.jpg" alt="Optical microscopy of air bubbles entrained in oil — deepfluid air-in-oil measurement" loading="lazy">
+              </div>
+              <div class="talk-body">
+                <h3>Direct Optical Air-in-Oil Measurement as an Enabler for Accurate Simulation of Gearings and Hydraulic Systems</h3>
+                <div class="speaker">
+                  <div class="avatar"><img src="speakers/lukas-hafner.jpg" alt="Dr. Lukas Hafner" loading="lazy"></div>
+                  <div><div class="nm">Dr. Lukas Hafner</div><div class="rl">Technical Lead · deepfluid · <span class="flag">🇩🇪 Germany</span></div></div>
+                </div>
+                <div class="talk-tags">
+                  <span class="chip chip-theme">Gearings &amp; hydraulics · Aeration</span>
+                  <span class="chip chip-method">Optical measurement</span><span class="chip chip-method">Validation data</span>
+                </div>
+                <div class="abs">
+                  <p>Air entrainment in oils is a critical factor influencing the efficiency, reliability and lifetime of gearings and hydraulic systems. This contribution presents a direct air-in-oil measurement approach based on optical machine vision, enabling the direct detection and quantification of air bubbles in lubricants and hydraulic fluids. A central objective is to generate reliable measurement data that can be transferred from laboratory investigations to field applications — providing the physical input needed to describe real air-in-oil behavior in simulations more accurately.</p>
+                  <p>By connecting direct optical measurements with simulation models, uncertainties in assumptions and boundary conditions can be reduced, improving the prediction of system behavior under aerated oil conditions. The availability of validated measurement data can also reduce the number of required simulation and design-iteration steps, making development faster while supporting optimized efficiency and reliability. Overall, the approach highlights how direct air-in-oil measurement can serve as an enabler for accurate simulation, condition monitoring and system optimization.</p>
+                  <div class="authors"><b>Authors:</b> Dr. Lukas Hafner (deepfluid, DE) · David Placzek (deepfluid, DE)</div>
+                </div>
+                <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- TALK 7: Track One carrier roller lubrication -->
+          <article class="talk" id="talk-carrier-roller">
+            <div class="talk-grid">
+              <div class="talk-art">
+                <span class="talk-no">TALK 07</span>
+                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3D-MPS lubrication of a carrier roller">
+                  <defs>
+                    <linearGradient id="t7r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
+                    <radialGradient id="t7hot" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffb347" stop-opacity="0.85"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+                  </defs>
+                  <!-- track rail -->
+                  <rect x="20" y="120" width="160" height="14" rx="4" fill="#ffe0d2" opacity="0.85"/>
+                  <g stroke="#ffc4a8" stroke-width="2"><line x1="36" y1="134" x2="36" y2="146"/><line x1="68" y1="134" x2="68" y2="146"/><line x1="100" y1="134" x2="100" y2="146"/><line x1="132" y1="134" x2="132" y2="146"/><line x1="164" y1="134" x2="164" y2="146"/></g>
+                  <!-- rotating carrier roller -->
+                  <g>
+                    <animateTransform attributeName="transform" type="rotate" from="0 100 78" to="360 100 78" dur="6s" repeatCount="indefinite"/>
+                    <circle cx="100" cy="78" r="40" fill="url(#t7r)" opacity="0.92"/>
+                    <circle cx="100" cy="78" r="40" fill="none" stroke="#fff3ee" stroke-width="2.5"/>
+                    <circle cx="100" cy="78" r="14" fill="#3d0e13"/>
+                    <g stroke="#3d0e13" stroke-width="2.4"><line x1="100" y1="50" x2="100" y2="64"/><line x1="100" y1="92" x2="100" y2="106"/><line x1="72" y1="78" x2="86" y2="78"/><line x1="114" y1="78" x2="128" y2="78"/></g>
+                  </g>
+                  <!-- frictional hot-spot at contact -->
+                  <circle cx="100" cy="116" r="26" fill="url(#t7hot)"><animate attributeName="r" values="20;28;20" dur="2.2s" repeatCount="indefinite"/></circle>
+                  <!-- lubricant droplets thrown off -->
+                  <g fill="#fff">
+                    <circle cx="142" cy="58" r="3"><animate attributeName="cx" values="142;156;142" dur="1.6s" repeatCount="indefinite"/><animate attributeName="cy" values="58;46;58" dur="1.6s" repeatCount="indefinite"/></circle>
+                    <circle cx="58" cy="58" r="2.6"><animate attributeName="cx" values="58;44;58" dur="1.9s" repeatCount="indefinite"/><animate attributeName="cy" values="58;46;58" dur="1.9s" repeatCount="indefinite"/></circle>
+                    <circle cx="138" cy="98" r="2.4" opacity="0.85"><animate attributeName="cy" values="98;110;98" dur="2.1s" repeatCount="indefinite"/></circle>
+                  </g>
+                </svg>
+              </div>
+              <div class="talk-body">
+                <h3>Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method</h3>
+                <div class="speaker">
+                  <div class="avatar">LT</div>
+                  <div><div class="nm">Leonardo Tiberi</div><div class="rl">Component Design Engineer · Track One SRL · <span class="flag">🇮🇹 Italy</span></div></div>
+                </div>
+                <div class="talk-tags">
+                  <span class="chip chip-theme">Undercarriage · Lubrication</span>
+                  <span class="chip chip-method">3D-MPS</span><span class="chip chip-method">Thermal</span><span class="chip chip-method">Validation</span>
+                </div>
+                <div class="abs">
+                  <p>In the context of undercarriage systems engineering, the continuous increase in operational speeds and applied loads requires increasingly advanced design strategies to ensure maximum component reliability and operator safety. One of the most critical components is the track/carrier roller, which is subjected not only to severe mechanical wear but also to overheating induced by internal friction and interaction with adjacent components.</p>
+                  <p>This study presents an analysis model to evaluate the lubrication of a carrier roller, investigating both fluid-dynamic and thermal aspects. Field operating conditions were considered and replicated within the model to analyze the lubricant's behavior inside the roller layout. The model was validated through bench testing, where roller temperatures were monitored up to thermal convergence; a comparison between these experimental measurements and the proposed CFD model results showed good correlation.</p>
+                  <div class="authors"><b>Authors:</b> Leonardo Tiberi (Track One SRL, IT) · Giovanni Traina (Track One SRL, IT) · Fabio Berni (&ldquo;Enzo Ferrari&rdquo; Dept. of Engineering, University of Modena and Reggio Emilia, IT)</div>
                 </div>
                 <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
               </div>
