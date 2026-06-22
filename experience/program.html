@@ -196,7 +196,7 @@
       <div class="hero-facts">
         <span class="hero-fact"><i class="bi bi-calendar-event"></i> Conference — Wednesday, October 7, 2026</span>
         <span class="hero-fact"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena (IT)</span>
-        <span class="hero-fact"><i class="bi bi-mic"></i> 9 talks · 5 countries</span>
+        <span class="hero-fact"><i class="bi bi-mic"></i> 10 talks · 5 countries</span>
       </div>
       <div class="hero-cta-row">
         <a href="registration.html" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
@@ -686,6 +686,54 @@
                   <p>Particleworks is well suited for simulating free-surface flows and can effectively handle the oil churning behavior caused by gears. Taking advantage of this capability, it has been applied to lubrication studies in the early design phase. As a result, visualization of lubrication conditions and comparison between design options have become possible, contributing to improved evaluation efficiency.</p>
                   <p>In parallel with these applications, the effects of airflow on gear lubrication are being investigated as part of ongoing R&amp;D activities. In this presentation, the details of these efforts will be introduced.</p>
                   <div class="authors"><b>Authors:</b> Naohiro Fujita (Univance Corporation, JP) · Kensuke Suzuki (Univance Corporation, JP)</div>
+                </div>
+                <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- TALK 9: IAV air bubble dynamics -->
+          <article class="talk" id="talk-bubble-dynamics">
+            <div class="talk-grid">
+              <div class="talk-art">
+                <span class="talk-no">TALK 09</span>
+                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Air bubble dynamics in gear oil — formation to dissolution">
+                  <defs>
+                    <radialGradient id="t9b" cx="38%" cy="34%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity="0.95"/><stop offset="0.55" stop-color="#ffd9c2" stop-opacity="0.45"/><stop offset="1" stop-color="#ff8a5c" stop-opacity="0.22"/></radialGradient>
+                    <linearGradient id="t9g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
+                  </defs>
+                  <!-- gear churning the oil = bubble formation source -->
+                  <g>
+                    <animateTransform attributeName="transform" type="rotate" from="0 30 150" to="360 30 150" dur="6s" repeatCount="indefinite"/>
+                    <g stroke="#ffc4a8" stroke-width="5"><line x1="30" y1="126" x2="30" y2="136"/><line x1="6" y1="150" x2="16" y2="150"/><line x1="44" y1="150" x2="54" y2="150"/></g>
+                    <circle cx="30" cy="150" r="18" fill="url(#t9g)" opacity="0.9"/>
+                    <circle cx="30" cy="150" r="6" fill="#3d0e13"/>
+                  </g>
+                  <!-- bubbles: formation (bottom) -> rise -> dissolution (fade at top) -->
+                  <g stroke="#fff3ee" stroke-width="1.4">
+                    <circle cx="62" cy="140" r="5" fill="url(#t9b)"><animate attributeName="cy" values="148;30;148" dur="4.2s" repeatCount="indefinite"/><animate attributeName="r" values="3;8;2" dur="4.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;1;0" dur="4.2s" repeatCount="indefinite"/></circle>
+                    <circle cx="94" cy="132" r="7" fill="url(#t9b)"><animate attributeName="cy" values="150;26;150" dur="5s" repeatCount="indefinite"/><animate attributeName="r" values="3;10;2" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;1;0" dur="5s" repeatCount="indefinite"/></circle>
+                    <circle cx="122" cy="136" r="6" fill="url(#t9b)"><animate attributeName="cy" values="150;30;150" dur="3.6s" repeatCount="indefinite"/><animate attributeName="r" values="2;8;2" dur="3.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;1;0" dur="3.6s" repeatCount="indefinite"/></circle>
+                    <circle cx="150" cy="142" r="9" fill="url(#t9b)"><animate attributeName="cy" values="150;34;150" dur="5.6s" repeatCount="indefinite"/><animate attributeName="r" values="4;12;3" dur="5.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;1;0" dur="5.6s" repeatCount="indefinite"/></circle>
+                    <circle cx="172" cy="128" r="5" fill="url(#t9b)" opacity="0.85"><animate attributeName="cy" values="150;40;150" dur="4.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;0.9;0" dur="4.8s" repeatCount="indefinite"/></circle>
+                  </g>
+                </svg>
+              </div>
+              <div class="talk-body">
+                <h3>From Formation to Dissolution: Air Bubble Dynamics in Gear Oil of an Electric 3-Speed Commercial Vehicle Drivetrain</h3>
+                <div class="speaker">
+                  <div class="avatar">RK</div>
+                  <div><div class="nm">René Kockisch</div><div class="rl">Team Manager · IAV GmbH · <span class="flag">🇩🇪 Germany</span></div></div>
+                </div>
+                <div class="talk-tags">
+                  <span class="chip chip-theme">E-drivetrain · Aeration</span>
+                  <span class="chip chip-method">Bubble dynamics</span><span class="chip chip-method">High-speed imaging</span><span class="chip chip-method">IAV Particle Explorer</span>
+                </div>
+                <div class="abs">
+                  <p>Air entrainment in gear oils significantly affects lubrication performance, efficiency and durability in electric drivetrains. This study investigates the formation, transport, coalescence and dissolution of air bubbles in the gear oil of an electric 3-speed commercial vehicle drivetrain using the IAV Particle Explorer.</p>
+                  <p>High-speed imaging and particle-based analysis enable a detailed quantification of bubble dynamics under representative operating conditions. The results reveal characteristic bubble size distributions, preferred transport paths within the transmission and dissolution behavior.</p>
+                  <p>The findings provide valuable insights into air–oil interaction mechanisms and support the optimization of transmission design, lubrication systems and overall drivetrain efficiency.</p>
+                  <div class="authors"><b>Authors:</b> René Kockisch · Alexander Voigt · Guido Kutzke · Volker Helbig — IAV GmbH, DE</div>
                 </div>
                 <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
               </div>
