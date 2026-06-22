@@ -273,6 +273,12 @@
             <div><h4>Lubrication of a Carrier Roller using CFD 3D-MPS</h4><div class="org">Track One SRL · Unimore 🇮🇹</div></div>
           </div></a>
         </div>
+        <div class="col-md-6 col-lg-5">
+          <a href="program.html#talk-gear-airflow" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-gear-wide-connected"></i></div>
+            <div><h4>Gear Lubrication Analysis &amp; R&amp;D on Airflow Effects</h4><div class="org">Univance Corporation 🇯🇵</div></div>
+          </div></a>
+        </div>
         <div class="col-md-6 col-lg-5 d-flex">
           <a href="program.html" class="btn-pw w-100 justify-content-center align-self-stretch" style="border-radius:16px;"><i class="bi bi-calendar3"></i> See the full program</a>
         </div>

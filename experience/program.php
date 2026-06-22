@@ -196,7 +196,7 @@
       <div class="hero-facts">
         <span class="hero-fact"><i class="bi bi-calendar-event"></i> Conference — Wednesday, October 7, 2026</span>
         <span class="hero-fact"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena (IT)</span>
-        <span class="hero-fact"><i class="bi bi-mic"></i> 8 talks · 5 countries</span>
+        <span class="hero-fact"><i class="bi bi-mic"></i> 9 talks · 5 countries</span>
       </div>
       <div class="hero-cta-row">
         <a href="registration.html" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
@@ -616,6 +616,76 @@
                   <p>In the context of undercarriage systems engineering, the continuous increase in operational speeds and applied loads requires increasingly advanced design strategies to ensure maximum component reliability and operator safety. One of the most critical components is the track/carrier roller, which is subjected not only to severe mechanical wear but also to overheating induced by internal friction and interaction with adjacent components.</p>
                   <p>This study presents an analysis model to evaluate the lubrication of a carrier roller, investigating both fluid-dynamic and thermal aspects. Field operating conditions were considered and replicated within the model to analyze the lubricant's behavior inside the roller layout. The model was validated through bench testing, where roller temperatures were monitored up to thermal convergence; a comparison between these experimental measurements and the proposed CFD model results showed good correlation.</p>
                   <div class="authors"><b>Authors:</b> Leonardo Tiberi (Track One SRL, IT) · Giovanni Traina (Track One SRL, IT) · Fabio Berni (&ldquo;Enzo Ferrari&rdquo; Dept. of Engineering, University of Modena and Reggio Emilia, IT)</div>
+                </div>
+                <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- TALK 8: Univance gear lubrication + airflow -->
+          <article class="talk" id="talk-gear-airflow">
+            <div class="talk-grid">
+              <div class="talk-art">
+                <span class="talk-no">TALK 08</span>
+                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gear lubrication churning and airflow effects">
+                  <defs>
+                    <linearGradient id="t8g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
+                    <linearGradient id="t8oil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb38f"/><stop offset="1" stop-color="#ff7a4d"/></linearGradient>
+                  </defs>
+                  <!-- airflow streamlines (R&D) -->
+                  <g stroke="#ffe0d2" stroke-width="1.6" fill="none" opacity="0.5" stroke-linecap="round" stroke-dasharray="5 5">
+                    <path d="M14 26 Q70 14 132 26 T192 26"><animate attributeName="stroke-dashoffset" values="20;0" dur="1.4s" repeatCount="indefinite"/></path>
+                    <path d="M14 40 Q70 30 132 40 T192 40" opacity="0.7"><animate attributeName="stroke-dashoffset" values="20;0" dur="1.8s" repeatCount="indefinite"/></path>
+                  </g>
+                  <!-- big gear -->
+                  <g>
+                    <animateTransform attributeName="transform" type="rotate" from="0 76 92" to="360 76 92" dur="7s" repeatCount="indefinite"/>
+                    <g stroke="#ffc4a8" stroke-width="6">
+                      <line x1="76" y1="50" x2="76" y2="62"/><line x1="76" y1="122" x2="76" y2="134"/>
+                      <line x1="34" y1="92" x2="46" y2="92"/><line x1="106" y1="92" x2="118" y2="92"/>
+                      <line x1="46" y1="62" x2="54" y2="70"/><line x1="98" y1="114" x2="106" y2="122"/>
+                      <line x1="106" y1="62" x2="98" y2="70"/><line x1="54" y1="114" x2="46" y2="122"/>
+                    </g>
+                    <circle cx="76" cy="92" r="30" fill="url(#t8g)" opacity="0.92"/>
+                    <circle cx="76" cy="92" r="30" fill="none" stroke="#fff3ee" stroke-width="2"/>
+                    <circle cx="76" cy="92" r="10" fill="#3d0e13"/>
+                  </g>
+                  <!-- small meshing gear -->
+                  <g>
+                    <animateTransform attributeName="transform" type="rotate" from="360 138 100" to="0 138 100" dur="4.6s" repeatCount="indefinite"/>
+                    <g stroke="#ffc4a8" stroke-width="5">
+                      <line x1="138" y1="74" x2="138" y2="84"/><line x1="138" y1="116" x2="138" y2="126"/>
+                      <line x1="112" y1="100" x2="122" y2="100"/><line x1="154" y1="100" x2="164" y2="100"/>
+                    </g>
+                    <circle cx="138" cy="100" r="20" fill="url(#t8g)" opacity="0.9"/>
+                    <circle cx="138" cy="100" r="20" fill="none" stroke="#fff3ee" stroke-width="2"/>
+                    <circle cx="138" cy="100" r="7" fill="#3d0e13"/>
+                  </g>
+                  <!-- oil sump + churned droplets -->
+                  <path d="M8 150 Q100 138 192 150 L192 168 L8 168 Z" fill="url(#t8oil)" opacity="0.9"/>
+                  <g fill="#ffe0d2">
+                    <circle cx="60" cy="140" r="3"><animate attributeName="cy" values="148;126;148" dur="1.6s" repeatCount="indefinite"/></circle>
+                    <circle cx="104" cy="138" r="2.6"><animate attributeName="cy" values="150;120;150" dur="1.9s" repeatCount="indefinite"/></circle>
+                    <circle cx="150" cy="142" r="2.8"><animate attributeName="cy" values="150;128;150" dur="1.5s" repeatCount="indefinite"/></circle>
+                    <circle cx="84" cy="144" r="2.2" opacity="0.85"><animate attributeName="cy" values="150;132;150" dur="2.1s" repeatCount="indefinite"/></circle>
+                  </g>
+                </svg>
+              </div>
+              <div class="talk-body">
+                <h3>Application of Particleworks to Gear Lubrication Analysis and Its Expansion to R&amp;D on Airflow Effects</h3>
+                <div class="speaker">
+                  <div class="avatar"><img src="speakers/naohiro-fujita.jpg" alt="Naohiro Fujita" loading="lazy"></div>
+                  <div><div class="nm">Naohiro Fujita</div><div class="rl">Staff · Univance Corporation · <span class="flag">🇯🇵 Japan</span></div></div>
+                </div>
+                <div class="talk-tags">
+                  <span class="chip chip-theme">Gearboxes · Lubrication</span>
+                  <span class="chip chip-method">Free-surface</span><span class="chip chip-method">Churning</span><span class="chip chip-method">Airflow (R&amp;D)</span>
+                </div>
+                <div class="abs">
+                  <p>Gear lubrication in gearboxes is a critical design aspect; however, the oil behavior involving splashing and churning is highly complex, making it difficult to evaluate in the early design stage using conventional analytical approaches or CFD.</p>
+                  <p>Particleworks is well suited for simulating free-surface flows and can effectively handle the oil churning behavior caused by gears. Taking advantage of this capability, it has been applied to lubrication studies in the early design phase. As a result, visualization of lubrication conditions and comparison between design options have become possible, contributing to improved evaluation efficiency.</p>
+                  <p>In parallel with these applications, the effects of airflow on gear lubrication are being investigated as part of ongoing R&amp;D activities. In this presentation, the details of these efforts will be introduced.</p>
+                  <div class="authors"><b>Authors:</b> Naohiro Fujita (Univance Corporation, JP) · Kensuke Suzuki (Univance Corporation, JP)</div>
                 </div>
                 <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
               </div>
