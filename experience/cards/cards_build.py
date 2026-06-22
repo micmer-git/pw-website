@@ -15,8 +15,20 @@ SPK  = os.path.join(ROOT, "speakers")
 S=1200; M=90
 WHITE=(255,255,255); GREEN=(52,210,124); SUB=(255,224,216); SUBLOC=(255,217,207)
 C_IN=(220,96,78); C_OUT=(150,28,30)          # reddish avatar gradient
-TITLE_Y=246; CONTENT_TOP=566
-def f(sz): return ImageFont.truetype(FONT, sz)
+def f(sz): return ImageFont.truetype(FONT, int(sz))
+
+# ---- layout template, taken from the user-edited example slides 1-3 (px @120dpi) ----
+P2X=1.6667                                    # pt -> px at 120dpi  (px = pt*120/72)
+CAL_POS=(81,86); CAL_W=78; CAL_H=84
+DATE_POS=(168,86); DATE_PX=42                 # 25.2pt
+CAT_POS=(168,140); CAT_PX=26                  # 15.6pt
+TITLE_X,TITLE_Y,TITLE_W=90,238,1020
+TITLE_MAXPX,TITLE_MINPX,TITLE_MAXH=90,58,468  # 54pt, shrink long titles to fit
+AV_X,AV_Y,AV_D=106,702,209
+COMP_X,COMP_Y=345,734; PRES_X,PRES_Y=345,794; CP_PX=60   # 36pt company + presenter
+LOGO_X,LOGO_Y,LOGO_W=90,1009,348
+VEN_RIGHT=1110; VEN1_Y,VEN1_PX=1020,53; VEN2_Y,VEN2_PX=1072,33   # 32pt / 20pt
+SIM_X,SIM_Y,SIM_W,SIM_H=701,590,409,344
 
 # ---------- asset prep ----------
 def seg_cutout(path,out):
@@ -77,7 +89,7 @@ def square_bg(out):
     for y in range(S): d2.line([(0,y),(S,y)],fill=int(max(0,(y-820)/(S-820))*110) if y>820 else 0)
     Image.composite(Image.new("RGB",(S,S),(40,6,8)),im,sc2).save(out)
 
-def cal_icon(out,s=60,col=WHITE):
+def cal_icon(out,s=70,col=WHITE):
     im=Image.new("RGBA",(s+8,s+12),(0,0,0,0)); d=ImageDraw.Draw(im)
     d.rounded_rectangle([2,10,s+2,s+6],radius=7,outline=col,width=4); d.rectangle([2,10,s+2,26],fill=col)
     d.line([16,3,16,16],fill=col,width=4); d.line([s-12,3,s-12,16],fill=col,width=4)
@@ -103,40 +115,40 @@ def wrap(text,ft,max_w):
     if cur: out.append(cur)
     return out
 
+# ---------- shared text fitting ----------
+def fit_title(text):
+    px=TITLE_MAXPX
+    while px>=TITLE_MINPX:
+        ft=f(px); lines=wrap(text,ft,TITLE_W); lh=int(px*1.16)
+        if len(lines)*lh<=TITLE_MAXH: return ft,lines,lh
+        px-=3
+    ft=f(TITLE_MINPX); return ft,wrap(text,ft,TITLE_W),int(TITLE_MINPX*1.16)
+def comp_w(sim): return (SIM_X-COMP_X-20) if sim else (VEN_RIGHT-COMP_X)
+
 # ---------- flat PNG renderer ----------
 def render_png(c):
     im=Image.open(os.path.join(PROC,"bg_square.png")).convert("RGBA"); d=ImageDraw.Draw(im)
     d.rectangle([30,30,S-31,S-31],outline=WHITE,width=3); d.rectangle([48,48,S-49,S-49],outline=GREEN,width=5)
-    cal=Image.open(os.path.join(PROC,"cal.png")); im.alpha_composite(cal,(M,92)); d=ImageDraw.Draw(im)
-    d.text((M+78,90),c["date"],font=f(42),fill=WHITE); d.text((M+78,142),c["cat"],font=f(26),fill=SUB)
-    sim=c.get("sim")
-    # title full width on top
-    tw=S-2*M; tf=f(60); lines=wrap(c["title"],tf,tw)
-    if len(lines)>3: tf=f(50); lines=wrap(c["title"],tf,tw)
-    if len(lines)>4: tf=f(42); lines=wrap(c["title"],tf,tw)
-    y=TITLE_Y
-    for ln in lines: d.text((M,y),ln,font=tf,fill=WHITE); y+=tf.size+12
-    # sim panel on the side
-    if sim:
-        sp=Image.open(os.path.join(PROC,sim)).convert("RGBA"); pw,ph=462,372
-        sp=sp.resize((pw,ph),Image.LANCZOS)
-        sh=Image.new("RGBA",(S,S),(0,0,0,0)); ImageDraw.Draw(sh).rounded_rectangle([648,562+8,648+pw,562+ph+8],radius=40,fill=(0,0,0,95))
-        im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(12))); im.alpha_composite(sp,(648,562))
-    # avatar + company/presenter
-    av=Image.open(os.path.join(PROC,c["avatar"])).convert("RGBA"); ad=156
-    av=av.resize((ad,ad),Image.LANCZOS)
-    sh=Image.new("RGBA",(S,S),(0,0,0,0)); ImageDraw.Draw(sh).ellipse([M,CONTENT_TOP+6,M+ad,CONTENT_TOP+ad+6],fill=(0,0,0,90))
-    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(9))); im.alpha_composite(av,(M,CONTENT_TOP))
+    cal=Image.open(os.path.join(PROC,"cal.png")).resize((CAL_W,CAL_H),Image.LANCZOS); im.alpha_composite(cal,CAL_POS)
     d=ImageDraw.Draw(im)
-    txtx=M+ad+30; txtw=(620-txtx) if sim else (S-M-txtx)
-    cf=fit(c["company"],txtw,44); pf=fit(c["speakers"],txtw,40)
-    blk=cf.size+8+pf.size; ty=CONTENT_TOP+ad//2-blk//2
-    d.text((txtx,ty),c["company"],font=cf,fill=WHITE); d.text((txtx,ty+cf.size+8),c["speakers"],font=pf,fill=GREEN)
-    # original logo (transparent bg), bottom-left
-    lg=Image.open(LOGO).convert("RGBA"); lw=348; lg=lg.resize((lw,int(lg.size[1]*lw/lg.size[0])),Image.LANCZOS)
-    im.alpha_composite(lg,(M,S-96-lg.size[1]))
-    d.text((S-M-f(40).getlength(L1),S-152),L1,font=f(40),fill=WHITE)
-    d.text((S-M-f(27).getlength(L2),S-104),L2,font=f(27),fill=SUBLOC)
+    d.text(DATE_POS,c["date"],font=f(DATE_PX),fill=WHITE); d.text(CAT_POS,c["cat"],font=f(CAT_PX),fill=SUB)
+    sim=c.get("sim")
+    tf,lines,lh=fit_title(c["title"]); y=TITLE_Y
+    for ln in lines: d.text((TITLE_X,y),ln,font=tf,fill=WHITE); y+=lh
+    if sim:
+        sp=Image.open(os.path.join(PROC,sim)).convert("RGBA").resize((SIM_W,SIM_H),Image.LANCZOS)
+        sh=Image.new("RGBA",(S,S),(0,0,0,0)); ImageDraw.Draw(sh).rounded_rectangle([SIM_X,SIM_Y+8,SIM_X+SIM_W,SIM_Y+SIM_H+8],radius=40,fill=(0,0,0,95))
+        im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(12))); im.alpha_composite(sp,(SIM_X,SIM_Y))
+    av=Image.open(os.path.join(PROC,c["avatar"])).convert("RGBA").resize((AV_D,AV_D),Image.LANCZOS)
+    sh=Image.new("RGBA",(S,S),(0,0,0,0)); ImageDraw.Draw(sh).ellipse([AV_X,AV_Y+8,AV_X+AV_D,AV_Y+AV_D+8],fill=(0,0,0,90))
+    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(10))); im.alpha_composite(av,(AV_X,AV_Y))
+    d=ImageDraw.Draw(im); cw=comp_w(sim)
+    cf=fit(c["company"],cw,CP_PX); pf=fit(c["speakers"],cw,CP_PX)
+    d.text((COMP_X,COMP_Y),c["company"],font=cf,fill=WHITE); d.text((PRES_X,PRES_Y),c["speakers"],font=pf,fill=GREEN)
+    lg=Image.open(LOGO).convert("RGBA"); lg=lg.resize((LOGO_W,int(lg.size[1]*LOGO_W/lg.size[0])),Image.LANCZOS)
+    im.alpha_composite(lg,(LOGO_X,LOGO_Y))
+    d.text((VEN_RIGHT-f(VEN1_PX).getlength(L1),VEN1_Y),L1,font=f(VEN1_PX),fill=WHITE)
+    d.text((VEN_RIGHT-f(VEN2_PX).getlength(L2),VEN2_Y),L2,font=f(VEN2_PX),fill=SUBLOC)
     im.convert("RGB").save(os.path.join(OUT,c["file"]),"PNG"); print("png",c["file"])
 
 # ---------- editable PPTX ----------
@@ -164,20 +176,21 @@ def build_pptx(cards):
         for inset,col,wd in [(30,WHITE,2),(48,GREEN,3)]:
             fr=sl.shapes.add_shape(MSO_SHAPE.RECTANGLE,IN(inset),IN(inset),IN(S-2*inset),IN(S-2*inset))
             fr.fill.background(); fr.line.color.rgb=rgb(col); fr.line.width=Pt(wd); fr.shadow.inherit=False
-        sl.shapes.add_picture(os.path.join(PROC,"cal.png"),IN(M),IN(92),IN(56),IN(60))
-        tb(sl,M+78,86,520,52,c["date"],42,WHITE)
-        tb(sl,M+78,140,520,34,c["cat"],26,SUB)
+        sl.shapes.add_picture(os.path.join(PROC,"cal.png"),IN(CAL_POS[0]),IN(CAL_POS[1]),IN(CAL_W),IN(CAL_H))
+        tb(sl,DATE_POS[0],DATE_POS[1],520,52,c["date"],DATE_PX,WHITE)
+        tb(sl,CAT_POS[0],CAT_POS[1],520,34,c["cat"],CAT_PX,SUB)
         sim=c.get("sim")
-        tb(sl,M,TITLE_Y-8,S-2*M,300,c["title"],52 if not sim else 50,WHITE)
-        if sim: sl.shapes.add_picture(os.path.join(PROC,sim),IN(648),IN(562),IN(462),IN(372))
-        ad=156; sl.shapes.add_picture(os.path.join(PROC,c["avatar"]),IN(M),IN(CONTENT_TOP),IN(ad),IN(ad))
-        txtx=M+ad+30; txtw=(620-txtx) if sim else (S-M-txtx)
-        tb(sl,txtx,CONTENT_TOP+24,txtw,60,c["company"],42,WHITE)
-        tb(sl,txtx,CONTENT_TOP+84,txtw,54,c["speakers"],38,GREEN)
-        lg=Image.open(LOGO); lw=348; lh=int(lg.size[1]*lw/lg.size[0])
-        sl.shapes.add_picture(LOGO,IN(M),IN(S-96-lh),IN(lw),IN(lh))
-        tb(sl,S-M-560,S-156,560,52,L1,40,WHITE,align=PP_ALIGN.RIGHT)
-        tb(sl,S-M-560,S-104,560,36,L2,27,SUBLOC,align=PP_ALIGN.RIGHT)
+        tpx=fit_title(c["title"])[0].size
+        tb(sl,TITLE_X,TITLE_Y,TITLE_W,TITLE_MAXH,c["title"],tpx,WHITE)
+        if sim: sl.shapes.add_picture(os.path.join(PROC,sim),IN(SIM_X),IN(SIM_Y),IN(SIM_W),IN(SIM_H))
+        sl.shapes.add_picture(os.path.join(PROC,c["avatar"]),IN(AV_X),IN(AV_Y),IN(AV_D),IN(AV_D))
+        cw=comp_w(sim); cpx=fit(c["company"],cw,CP_PX).size; ppx=fit(c["speakers"],cw,CP_PX).size
+        tb(sl,COMP_X,COMP_Y,cw,73,c["company"],cpx,WHITE)
+        tb(sl,PRES_X,PRES_Y,cw,73,c["speakers"],ppx,GREEN)
+        lg=Image.open(LOGO); lh=int(lg.size[1]*LOGO_W/lg.size[0])
+        sl.shapes.add_picture(LOGO,IN(LOGO_X),IN(LOGO_Y),IN(LOGO_W),IN(lh))
+        tb(sl,VEN_RIGHT-560,VEN1_Y,560,65,L1,VEN1_PX,WHITE,align=PP_ALIGN.RIGHT)
+        tb(sl,VEN_RIGHT-560,VEN2_Y,560,40,L2,VEN2_PX,SUBLOC,align=PP_ALIGN.RIGHT)
     out=os.path.join(OUT,"particleworks-experience-2026-cards.pptx"); prs.save(out); print("pptx ->",out)
 
 # ---------- data ----------
