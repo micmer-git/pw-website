@@ -41,6 +41,11 @@
     .navbar .nav-link:hover { color: var(--pw-blue); }
     .nav-register { background: var(--pw-blue); color:#fff !important; border-radius: 50px; padding: 0.5rem 1.3rem !important; font-weight:600; }
     .nav-register:hover { background: var(--pw-blue-dark); color:#fff !important; }
+    .navbar .dropdown-toggle::after { margin-left:0.35rem; vertical-align:0.1em; }
+    .navbar .dropdown-menu { border:1px solid rgba(0,0,0,0.06); border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,0.10); padding:0.5rem; margin-top:0.4rem; min-width:210px; }
+    .navbar .dropdown-item { border-radius:8px; padding:0.5rem 0.7rem; font-size:0.86rem; font-weight:500; color:var(--pw-dark); display:flex; align-items:center; gap:0.6rem; }
+    .navbar .dropdown-item i { color:var(--ev-crimson); font-size:0.95rem; }
+    .navbar .dropdown-item:hover, .navbar .dropdown-item:focus { background:linear-gradient(135deg, rgba(217,80,63,0.10), rgba(143,22,27,0.06)); color:var(--ev-crimson); }
 
     /* Hero */
     .prog-hero { position: relative; padding: 8.5rem 0 4.5rem; background: linear-gradient(135deg, rgba(217,80,63,0.84), rgba(143,22,27,0.93)), url('img/theme-bg.jpg') center/cover no-repeat; overflow: hidden; }
@@ -149,7 +154,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="../index.html"><img src="../images/PW_Europe_logo_small.png" alt="Particleworks Europe"></a>
+      <a class="navbar-brand" href="https://particleworks-europe.com/"><img src="../images/PW_Europe_logo_small.png" alt="Particleworks Europe"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse justify-content-end" id="nav">
         <ul class="navbar-nav align-items-lg-center gap-1">
@@ -157,6 +162,14 @@
           <li class="nav-item"><a class="nav-link" href="../case-studies.html">Case Studies</a></li>
           <li class="nav-item"><a class="nav-link" href="../particleworks.html">Particleworks</a></li>
           <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2025.php"><i class="bi bi-calendar3"></i> Proceedings 2025</a></li>
+              <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2024.php"><i class="bi bi-calendar3"></i> Proceedings 2024</a></li>
+              <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2023.php"><i class="bi bi-calendar3"></i> Proceedings 2023</a></li>
+            </ul>
+          </li>
           <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="index.html#register">Register</a></li>
         </ul>
       </div>
@@ -490,9 +503,34 @@
           <!-- TALK 5: SKF HTC verification -->
           <article class="talk" id="talk-skf-htc">
             <div class="talk-grid">
-              <div class="talk-art render">
+              <div class="talk-art">
                 <span class="talk-no">TALK 05</span>
-                <img src="img/skf-heatflux-sphere.jpg" alt="Particleworks heat flux on a sphere in uniform flow — SKF HTC benchmark" loading="lazy">
+                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heat transfer coefficient — sphere in uniform flow">
+                  <defs>
+                    <linearGradient id="t5s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
+                    <radialGradient id="t5glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffb347" stop-opacity="0.9"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+                  </defs>
+                  <!-- uniform inflow streamlines -->
+                  <g stroke="#ffe0d2" stroke-width="1.6" opacity="0.45" stroke-linecap="round">
+                    <line x1="12" y1="52" x2="58" y2="52"/>
+                    <line x1="12" y1="85" x2="62" y2="85"/>
+                    <line x1="12" y1="118" x2="58" y2="118"/>
+                  </g>
+                  <!-- convective heat glow (HTC) -->
+                  <circle cx="106" cy="85" r="42" fill="url(#t5glow)"><animate attributeName="r" values="34;46;34" dur="2.6s" repeatCount="indefinite"/></circle>
+                  <!-- sphere -->
+                  <circle cx="106" cy="85" r="26" fill="url(#t5s)" opacity="0.95"/>
+                  <circle cx="106" cy="85" r="26" fill="none" stroke="#fff3ee" stroke-width="2"/>
+                  <circle cx="97" cy="76" r="7" fill="#fff" opacity="0.35"/>
+                  <!-- flow particles sweeping past the sphere -->
+                  <g fill="#fff">
+                    <circle cx="16" cy="52" r="2.6"><animate attributeName="cx" values="10;192;10" dur="2.2s" repeatCount="indefinite"/></circle>
+                    <circle cx="16" cy="118" r="2.6"><animate attributeName="cx" values="10;192;10" dur="2.5s" repeatCount="indefinite"/></circle>
+                    <circle cx="16" cy="68" r="2.2" opacity="0.85"><animate attributeName="cx" values="10;192;10" dur="2.0s" repeatCount="indefinite"/><animate attributeName="cy" values="68;56;68" dur="2.0s" repeatCount="indefinite"/></circle>
+                    <circle cx="16" cy="102" r="2.2" opacity="0.85"><animate attributeName="cx" values="10;192;10" dur="2.35s" repeatCount="indefinite"/><animate attributeName="cy" values="102;114;102" dur="2.35s" repeatCount="indefinite"/></circle>
+                    <circle cx="16" cy="85" r="2.4" opacity="0.9"><animate attributeName="cx" values="10;78;10" dur="1.7s" repeatCount="indefinite"/></circle>
+                  </g>
+                </svg>
               </div>
               <div class="talk-body">
                 <h3>Integrating Particleworks into SKF Engineering Tools: Part I — Verification of Heat Transfer Coefficient</h3>
@@ -517,9 +555,30 @@
           <!-- TALK 6: deepfluid air-in-oil measurement -->
           <article class="talk" id="talk-air-in-oil">
             <div class="talk-grid">
-              <div class="talk-art render">
+              <div class="talk-art">
                 <span class="talk-no">TALK 06</span>
-                <img src="img/deepfluid-air-in-oil.jpg" alt="Optical microscopy of air bubbles entrained in oil — deepfluid air-in-oil measurement" loading="lazy">
+                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Optical air-in-oil bubble measurement">
+                  <defs>
+                    <radialGradient id="t6b" cx="38%" cy="34%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity="0.95"/><stop offset="0.55" stop-color="#ffd9c2" stop-opacity="0.45"/><stop offset="1" stop-color="#ff8a5c" stop-opacity="0.22"/></radialGradient>
+                  </defs>
+                  <!-- optical viewfinder brackets -->
+                  <g stroke="#ffd27a" stroke-width="2.4" fill="none" opacity="0.85" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M24 42 V28 H38"/>
+                    <path d="M162 28 H176 V42"/>
+                    <path d="M176 128 V142 H162"/>
+                    <path d="M38 142 H24 V128"/>
+                  </g>
+                  <!-- rising air bubbles in oil -->
+                  <g stroke="#fff3ee" stroke-width="1.6">
+                    <circle cx="66" cy="120" r="16" fill="url(#t6b)"><animate attributeName="cy" values="130;52;130" dur="5s" repeatCount="indefinite"/></circle>
+                    <circle cx="120" cy="100" r="11" fill="url(#t6b)"><animate attributeName="cy" values="122;48;122" dur="4.2s" repeatCount="indefinite"/></circle>
+                    <circle cx="92" cy="128" r="7" fill="url(#t6b)"><animate attributeName="cy" values="138;42;138" dur="3.4s" repeatCount="indefinite"/></circle>
+                    <circle cx="140" cy="122" r="5" fill="url(#t6b)"><animate attributeName="cy" values="132;46;132" dur="3.0s" repeatCount="indefinite"/></circle>
+                    <circle cx="48" cy="96" r="6" fill="url(#t6b)" opacity="0.9"><animate attributeName="cy" values="124;44;124" dur="4.6s" repeatCount="indefinite"/></circle>
+                  </g>
+                  <!-- detection crosshair -->
+                  <g stroke="#fff" stroke-width="1.4" opacity="0.5"><line x1="100" y1="79" x2="100" y2="91"/><line x1="94" y1="85" x2="106" y2="85"/></g>
+                </svg>
               </div>
               <div class="talk-body">
                 <h3>Direct Optical Air-in-Oil Measurement as an Enabler for Accurate Simulation of Gearings and Hydraulic Systems</h3>

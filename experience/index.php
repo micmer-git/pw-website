@@ -32,6 +32,11 @@
     .navbar .nav-link:hover { color:var(--pw-blue); }
     .nav-register { background:var(--pw-blue); color:#fff !important; border-radius:50px; padding:0.5rem 1.3rem !important; font-weight:600; }
     .nav-register:hover { background:var(--pw-blue-dark); color:#fff !important; }
+    .navbar .dropdown-toggle::after { margin-left:0.35rem; vertical-align:0.1em; }
+    .navbar .dropdown-menu { border:1px solid rgba(0,0,0,0.06); border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,0.10); padding:0.5rem; margin-top:0.4rem; min-width:210px; }
+    .navbar .dropdown-item { border-radius:8px; padding:0.5rem 0.7rem; font-size:0.86rem; font-weight:500; color:var(--pw-dark); display:flex; align-items:center; gap:0.6rem; }
+    .navbar .dropdown-item i { color:var(--ev-crimson); font-size:0.95rem; }
+    .navbar .dropdown-item:hover, .navbar .dropdown-item:focus { background:linear-gradient(135deg, rgba(217,80,63,0.10), rgba(143,22,27,0.06)); color:var(--ev-crimson); }
 
     /* Hero */
     .hero { position:relative; padding:8.5rem 0 5rem; background:linear-gradient(135deg, rgba(217,80,63,0.85), rgba(143,22,27,0.93)), url('img/theme-bg.jpg') center/cover no-repeat; overflow:hidden; }
@@ -122,7 +127,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="../index.html"><img src="../images/PW_Europe_logo_small.png" alt="Particleworks Europe"></a>
+      <a class="navbar-brand" href="https://particleworks-europe.com/"><img src="../images/PW_Europe_logo_small.png" alt="Particleworks Europe"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse justify-content-end" id="nav">
         <ul class="navbar-nav align-items-lg-center gap-1">
@@ -130,6 +135,14 @@
           <li class="nav-item"><a class="nav-link" href="../case-studies.html">Case Studies</a></li>
           <li class="nav-item"><a class="nav-link" href="../particleworks.html">Particleworks</a></li>
           <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2025.php"><i class="bi bi-calendar3"></i> Proceedings 2025</a></li>
+              <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2024.php"><i class="bi bi-calendar3"></i> Proceedings 2024</a></li>
+              <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2023.php"><i class="bi bi-calendar3"></i> Proceedings 2023</a></li>
+            </ul>
+          </li>
           <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="#register">Register</a></li>
         </ul>
       </div>
@@ -277,7 +290,7 @@
             <div class="badge-year"><i class="bi bi-geo-alt"></i> Venue</div>
             <h3>BPER FORUM Monzani — Sala Bossoli</h3>
             <p>Via Aristotele 33, 41126 Modena (MO), Italy. In the heart of Italy's Motor Valley, a short trip from Bologna and Milan.</p>
-            <div><a href="https://maps.google.com/?q=BPER+FORUM+Monzani+Via+Aristotele+33+Modena" target="_blank" rel="noopener" class="btn-ghost"><i class="bi bi-map"></i> Open in Maps</a></div>
+            <div><a href="https://www.google.com/maps/search/?api=1&amp;query=BPER%20FORUM%20Monzani%2C%20Via%20Aristotele%2033%2C%2041126%20Modena" target="_blank" rel="noopener" class="btn-ghost"><i class="bi bi-map"></i> Open in Maps</a></div>
           </div>
         </div>
         <div class="col-lg-6">
