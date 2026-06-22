@@ -1,0 +1,223 @@
+# -*- coding: utf-8 -*-
+"""Build Particleworks Experience 2026 speaker cards: flat PNGs + editable square PPTX."""
+import os, numpy as np, cv2
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps, ImageChops
+
+DL   = r"C:\Users\e4user\Downloads"
+ROOT = r"C:\Users\e4user\Documents\ParticleworksProjects\pw-website\experience"
+OUT  = os.path.join(ROOT, "cards")
+PROC = os.path.join(DL, "_proc"); os.makedirs(PROC, exist_ok=True); os.makedirs(OUT, exist_ok=True)
+FONT = os.path.join(DL, "OfficinaSans-Bold.otf")
+BG   = os.path.join(DL, "backgroun_new.png")
+LOGO = os.path.join(DL, "experience_logo.png")
+SPK  = os.path.join(ROOT, "speakers")
+
+S=1200; M=90
+WHITE=(255,255,255); GREEN=(52,210,124); SUB=(255,224,216); SUBLOC=(255,217,207)
+C_IN=(220,96,78); C_OUT=(150,28,30)          # reddish avatar gradient
+TITLE_Y=246; CONTENT_TOP=566
+def f(sz): return ImageFont.truetype(FONT, sz)
+
+# ---------- asset prep ----------
+def seg_cutout(path,out):
+    img=cv2.imread(path); H0,W0=img.shape[:2]
+    sc=max(1,700//max(H0,W0));
+    work=cv2.resize(img,(W0*sc,H0*sc),interpolation=cv2.INTER_CUBIC) if sc>1 else img.copy()
+    h,w=work.shape[:2]
+    pil=Image.fromarray(cv2.cvtColor(work,cv2.COLOR_BGR2RGB)); flood=pil.copy(); sent=(0,255,1)
+    for s in [(0,0),(w-1,0),(0,h-1),(w-1,h-1),(w//2,0),(0,h//2),(w-1,h//2),(w//4,0),(3*w//4,0)]:
+        ImageDraw.floodfill(flood,s,sent,thresh=40)
+    defbg=np.all(np.asarray(flood)==sent,axis=-1)
+    gm=np.full((h,w),2,np.uint8); gm[defbg]=0
+    yy,xx=np.ogrid[:h,:w]; gm[((xx-w/2)/(w*0.32))**2+((yy-h*0.46)/(h*0.42))**2<=1]=3
+    cv2.grabCut(work,gm,None,np.zeros((1,65),np.float64),np.zeros((1,65),np.float64),7,cv2.GC_INIT_WITH_MASK)
+    m=np.where((gm==1)|(gm==3),255,0).astype('uint8')
+    m=cv2.morphologyEx(m,cv2.MORPH_CLOSE,np.ones((11,11),np.uint8))
+    m=cv2.morphologyEx(m,cv2.MORPH_OPEN,np.ones((5,5),np.uint8))
+    n,lab,st,_=cv2.connectedComponentsWithStats(m,8)
+    if n>1: m=np.where(lab==1+np.argmax(st[1:,cv2.CC_STAT_AREA]),255,0).astype('uint8')
+    m=cv2.GaussianBlur(m,(0,0),2.0)
+    m=cv2.resize(m,(W0,H0),interpolation=cv2.INTER_AREA)
+    base=Image.open(path).convert("RGB"); rgba=base.convert("RGBA"); rgba.putalpha(Image.fromarray(m))
+    rgba.save(out)
+
+def radial(dia,ci,co):
+    yy,xx=np.mgrid[0:dia,0:dia].astype(float)
+    r=np.clip(np.sqrt((xx-dia/2)**2+(yy-dia/2)**2)/(dia/2),0,1)[...,None]
+    return Image.fromarray((np.array(ci)*(1-r)+np.array(co)*r).astype('uint8'),"RGB")
+
+def make_avatar(kind,val,dia=320):
+    out=Image.new("RGBA",(dia,dia),(0,0,0,0))
+    cmask=Image.new("L",(dia,dia),0); ImageDraw.Draw(cmask).ellipse([0,0,dia-1,dia-1],fill=255)
+    out.paste(radial(dia,C_IN,C_OUT),(0,0),cmask)
+    if kind=="photo":
+        person=ImageOps.fit(Image.open(val).convert("RGBA"),(dia,dia),Image.LANCZOS,centering=(0.5,0.42))
+        person.putalpha(ImageChops.multiply(person.split()[3],cmask))
+        out.alpha_composite(person)
+    else:
+        d=ImageDraw.Draw(out); ft=f(int(dia*0.4)); bb=ft.getbbox(val)
+        d.text((dia/2-ft.getlength(val)/2, dia/2-(bb[3]-bb[1])/2-bb[1]),val,font=ft,fill=WHITE)
+    ImageDraw.Draw(out).ellipse([3,3,dia-4,dia-4],outline=WHITE,width=int(dia*0.03))
+    return out
+
+def make_sim(path,out,w=924,h=744):
+    img=ImageOps.fit(Image.open(path).convert("RGB"),(w,h),Image.LANCZOS)
+    mask=Image.new("L",(w,h),0); ImageDraw.Draw(mask).rounded_rectangle([0,0,w,h],radius=40,fill=255)
+    r=Image.new("RGBA",(w,h),(0,0,0,0)); r.paste(img,(0,0)); r.putalpha(mask)
+    ImageDraw.Draw(r).rounded_rectangle([2,2,w-3,h-3],radius=40,outline=WHITE,width=7)
+    r.save(out)
+
+def square_bg(out):
+    im=Image.open(BG).convert("RGB"); w,h=im.size; sc=S/w
+    im=im.resize((S,int(h*sc)),Image.LANCZOS); top=int((im.size[1]-S)*0.36); im=im.crop((0,top,S,top+S))
+    scrim=Image.new("L",(S,S),0); sd=ImageDraw.Draw(scrim)
+    for x in range(S): sd.line([(x,0),(x,S)],fill=max(45,int(120-55*(x/S))))
+    im=Image.composite(Image.new("RGB",(S,S),(60,8,10)),im,scrim)
+    sc2=Image.new("L",(S,S),0); d2=ImageDraw.Draw(sc2)
+    for y in range(S): d2.line([(0,y),(S,y)],fill=int(max(0,(y-820)/(S-820))*110) if y>820 else 0)
+    Image.composite(Image.new("RGB",(S,S),(40,6,8)),im,sc2).save(out)
+
+def cal_icon(out,s=60,col=WHITE):
+    im=Image.new("RGBA",(s+8,s+12),(0,0,0,0)); d=ImageDraw.Draw(im)
+    d.rounded_rectangle([2,10,s+2,s+6],radius=7,outline=col,width=4); d.rectangle([2,10,s+2,26],fill=col)
+    d.line([16,3,16,16],fill=col,width=4); d.line([s-12,3,s-12,16],fill=col,width=4)
+    for r in range(3):
+        for c in range(3): d.ellipse([14+c*16,33+r*9,19+c*16,38+r*9],fill=col)
+    im.save(out)
+
+# ---------- text helpers ----------
+def fit(text,max_w,start,lo=22):
+    sz=start
+    while sz>lo:
+        if f(sz).getlength(text)<=max_w: return f(sz)
+        sz-=2
+    return f(lo)
+def wrap(text,ft,max_w):
+    out=[]; cur=""
+    for w in text.split():
+        t=(cur+" "+w).strip()
+        if ft.getlength(t)<=max_w: cur=t
+        else:
+            if cur: out.append(cur)
+            cur=w
+    if cur: out.append(cur)
+    return out
+
+# ---------- flat PNG renderer ----------
+def render_png(c):
+    im=Image.open(os.path.join(PROC,"bg_square.png")).convert("RGBA"); d=ImageDraw.Draw(im)
+    d.rectangle([30,30,S-31,S-31],outline=WHITE,width=3); d.rectangle([48,48,S-49,S-49],outline=GREEN,width=5)
+    cal=Image.open(os.path.join(PROC,"cal.png")); im.alpha_composite(cal,(M,92)); d=ImageDraw.Draw(im)
+    d.text((M+78,90),c["date"],font=f(42),fill=WHITE); d.text((M+78,142),c["cat"],font=f(26),fill=SUB)
+    sim=c.get("sim")
+    # title full width on top
+    tw=S-2*M; tf=f(60); lines=wrap(c["title"],tf,tw)
+    if len(lines)>3: tf=f(50); lines=wrap(c["title"],tf,tw)
+    if len(lines)>4: tf=f(42); lines=wrap(c["title"],tf,tw)
+    y=TITLE_Y
+    for ln in lines: d.text((M,y),ln,font=tf,fill=WHITE); y+=tf.size+12
+    # sim panel on the side
+    if sim:
+        sp=Image.open(os.path.join(PROC,sim)).convert("RGBA"); pw,ph=462,372
+        sp=sp.resize((pw,ph),Image.LANCZOS)
+        sh=Image.new("RGBA",(S,S),(0,0,0,0)); ImageDraw.Draw(sh).rounded_rectangle([648,562+8,648+pw,562+ph+8],radius=40,fill=(0,0,0,95))
+        im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(12))); im.alpha_composite(sp,(648,562))
+    # avatar + company/presenter
+    av=Image.open(os.path.join(PROC,c["avatar"])).convert("RGBA"); ad=156
+    av=av.resize((ad,ad),Image.LANCZOS)
+    sh=Image.new("RGBA",(S,S),(0,0,0,0)); ImageDraw.Draw(sh).ellipse([M,CONTENT_TOP+6,M+ad,CONTENT_TOP+ad+6],fill=(0,0,0,90))
+    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(9))); im.alpha_composite(av,(M,CONTENT_TOP))
+    d=ImageDraw.Draw(im)
+    txtx=M+ad+30; txtw=(620-txtx) if sim else (S-M-txtx)
+    cf=fit(c["company"],txtw,44); pf=fit(c["speakers"],txtw,40)
+    blk=cf.size+8+pf.size; ty=CONTENT_TOP+ad//2-blk//2
+    d.text((txtx,ty),c["company"],font=cf,fill=WHITE); d.text((txtx,ty+cf.size+8),c["speakers"],font=pf,fill=GREEN)
+    # original logo (transparent bg), bottom-left
+    lg=Image.open(LOGO).convert("RGBA"); lw=348; lg=lg.resize((lw,int(lg.size[1]*lw/lg.size[0])),Image.LANCZOS)
+    im.alpha_composite(lg,(M,S-96-lg.size[1]))
+    d.text((S-M-f(40).getlength(L1),S-152),L1,font=f(40),fill=WHITE)
+    d.text((S-M-f(27).getlength(L2),S-104),L2,font=f(27),fill=SUBLOC)
+    im.convert("RGB").save(os.path.join(OUT,c["file"]),"PNG"); print("png",c["file"])
+
+# ---------- editable PPTX ----------
+def build_pptx(cards):
+    from pptx import Presentation
+    from pptx.util import Inches, Pt, Emu
+    from pptx.dml.color import RGBColor
+    from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+    from pptx.enum.shapes import MSO_SHAPE
+    from pptx.oxml.ns import qn
+    def IN(px): return Inches(px/120.0)
+    def PT(px): return Pt(px*0.6)
+    rgb=lambda t: RGBColor(*t)
+    prs=Presentation(); prs.slide_width=IN(S); prs.slide_height=IN(S)
+    blank=prs.slide_layouts[6]
+    def tb(sl,x,y,w,h,text,px,color,align=PP_ALIGN.LEFT,anchor=MSO_ANCHOR.TOP):
+        b=sl.shapes.add_textbox(IN(x),IN(y),IN(w),IN(h)); tf=b.text_frame; tf.word_wrap=True
+        tf.vertical_anchor=anchor; tf.margin_left=0; tf.margin_right=0; tf.margin_top=0; tf.margin_bottom=0
+        p=tf.paragraphs[0]; p.alignment=align; r=p.add_run(); r.text=text
+        r.font.size=PT(px); r.font.bold=True; r.font.name="Officina Sans Bold"; r.font.color.rgb=rgb(color)
+        return b
+    for c in cards:
+        sl=prs.slides.add_slide(blank)
+        sl.shapes.add_picture(os.path.join(PROC,"bg_square.png"),0,0,IN(S),IN(S))
+        for inset,col,wd in [(30,WHITE,2),(48,GREEN,3)]:
+            fr=sl.shapes.add_shape(MSO_SHAPE.RECTANGLE,IN(inset),IN(inset),IN(S-2*inset),IN(S-2*inset))
+            fr.fill.background(); fr.line.color.rgb=rgb(col); fr.line.width=Pt(wd); fr.shadow.inherit=False
+        sl.shapes.add_picture(os.path.join(PROC,"cal.png"),IN(M),IN(92),IN(56),IN(60))
+        tb(sl,M+78,86,520,52,c["date"],42,WHITE)
+        tb(sl,M+78,140,520,34,c["cat"],26,SUB)
+        sim=c.get("sim")
+        tb(sl,M,TITLE_Y-8,S-2*M,300,c["title"],52 if not sim else 50,WHITE)
+        if sim: sl.shapes.add_picture(os.path.join(PROC,sim),IN(648),IN(562),IN(462),IN(372))
+        ad=156; sl.shapes.add_picture(os.path.join(PROC,c["avatar"]),IN(M),IN(CONTENT_TOP),IN(ad),IN(ad))
+        txtx=M+ad+30; txtw=(620-txtx) if sim else (S-M-txtx)
+        tb(sl,txtx,CONTENT_TOP+24,txtw,60,c["company"],42,WHITE)
+        tb(sl,txtx,CONTENT_TOP+84,txtw,54,c["speakers"],38,GREEN)
+        lg=Image.open(LOGO); lw=348; lh=int(lg.size[1]*lw/lg.size[0])
+        sl.shapes.add_picture(LOGO,IN(M),IN(S-96-lh),IN(lw),IN(lh))
+        tb(sl,S-M-560,S-156,560,52,L1,40,WHITE,align=PP_ALIGN.RIGHT)
+        tb(sl,S-M-560,S-104,560,36,L2,27,SUBLOC,align=PP_ALIGN.RIGHT)
+    out=os.path.join(OUT,"particleworks-experience-2026-cards.pptx"); prs.save(out); print("pptx ->",out)
+
+# ---------- data ----------
+PHOTOS={"iori-saigo":"iori-saigo.jpg","alpcan-guray":"alpcan-guray.jpg","michelangelo-raimondo":"michelangelo-raimondo.jpg",
+        "leonardo-lanciotti":"leonardo-lanciotti.jpg","jean-decaix":"jean-decaix.jpg","lukas-hafner":"lukas-hafner.jpg",
+        "naohiro-fujita":"naohiro-fujita.jpg"}
+DATE="October 7, 2026"; L1="Modena, Italy"; L2="BPER FORUM Monzani"
+cards=[
+ dict(file="card-01-prometech.png",date=DATE,cat="Developer keynote",company="PROMETECH SOFTWARE",speakers="Iori Saigo",
+      title="What's New in Particleworks 9.0 and Granuleworks 4.0",avatar="av_iori-saigo.png"),
+ dict(file="card-02-mtu.png",date=DATE,cat="Industrial speaker",company="MTU AERO ENGINES",speakers="Alpcan Güray",
+      title="Simulation of Shot Peening: A CFD-DEM Coupled Case Study",avatar="av_alpcan-guray.png"),
+ dict(file="card-03-unimore-stator.png",date=DATE,cat="Academic speaker",company="UNIVERSITY OF MODENA AND REGGIO EMILIA",
+      speakers="Michelangelo Raimondo",title="An Integrated Simulation Approach for Stator Oil Jacket and Jet Cooling Systems",avatar="av_michelangelo-raimondo.png"),
+ dict(file="card-04-rdcfd-pump.png",date=DATE,cat="Industrial speaker",company="R&D CFD",speakers="Leonardo Lanciotti",
+      title="CHT Analysis of a Reciprocating Pump",avatar="av_leonardo-lanciotti.png"),
+ dict(file="card-05-hesso-pelton.png",date=DATE,cat="Academic speaker",company="HES-SO VALAIS//WALLIS",speakers="Jean Decaix",
+      title="Moving Particle Simulation of Eroded Pelton Runners",avatar="av_jean-decaix.png"),
+ dict(file="card-06-skf.png",date=DATE,cat="Industrial speaker",company="SKF",speakers="Lijun Cao",
+      title="Verification of Heat Transfer Coefficient in Particleworks for Bearings",avatar="av_LC.png",sim="sim_skf.png"),
+ dict(file="card-07-deepfluid.png",date=DATE,cat="Industrial speaker",company="DEEPFLUID",speakers="Dr. Lukas Hafner",
+      title="Direct Optical Air-in-Oil Measurement for Gearings and Hydraulic Systems",avatar="av_lukas-hafner.png",sim="sim_deepfluid.png"),
+ dict(file="card-08-trackone.png",date=DATE,cat="Industrial speaker",company="TRACK ONE",speakers="Leonardo Tiberi",
+      title="Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method",avatar="av_LT.png"),
+ dict(file="card-09-univance.png",date=DATE,cat="Industrial speaker",company="UNIVANCE CORPORATION",speakers="Naohiro Fujita",
+      title="Application of Particleworks to Gear Lubrication Analysis and Its Expansion to R&D on Airflow Effects",avatar="av_naohiro-fujita.png",sim="sim_univance.png"),
+ dict(file="card-10-iav.png",date=DATE,cat="Industrial speaker",company="IAV",speakers="René Kockisch",
+      title="From Formation to Dissolution: Air Bubble Dynamics in Gear Oil of an Electric 3-Speed Drivetrain",avatar="av_RK.png"),
+]
+
+if __name__=="__main__":
+    square_bg(os.path.join(PROC,"bg_square.png")); cal_icon(os.path.join(PROC,"cal.png"))
+    for key,fn in PHOTOS.items():
+        seg_cutout(os.path.join(SPK,fn),os.path.join(PROC,key+"_cut.png"))
+        make_avatar("photo",os.path.join(PROC,key+"_cut.png")).save(os.path.join(PROC,"av_"+key+".png"))
+    for ini in ["LC","LT","RK"]: make_avatar("ini",ini).save(os.path.join(PROC,"av_"+ini+".png"))
+    make_sim(os.path.join(PROC,"skf.png"),os.path.join(PROC,"sim_skf.png"))
+    make_sim(os.path.join(PROC,"deepfluid.png"),os.path.join(PROC,"sim_deepfluid.png"))
+    make_sim(os.path.join(PROC,"univance.png"),os.path.join(PROC,"sim_univance.png"))
+    print("assets ready")
+    for c in cards: render_png(c)
+    build_pptx(cards)
+    print("ALL DONE")
