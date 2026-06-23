@@ -243,6 +243,10 @@
                 <span class="kbadge"><i class="bi bi-rocket-takeoff"></i> Software Release</span>
                 <h3>What's New in Particleworks 9.0 and Granuleworks 4.0</h3>
                 <div class="speaker">
+                  <div class="avatar">IM</div>
+                  <div><div class="nm">Issei Masaie</div><div class="rl">General Manager · Prometech Software · <span class="flag">🇯🇵 Japan</span></div></div>
+                </div>
+                <div class="speaker">
                   <div class="avatar"><img src="speakers/iori-saigo.jpg" alt="Iori Saigo" loading="lazy"></div>
                   <div><div class="nm">Iori Saigo</div><div class="rl">Application Engineer · Prometech Software · <span class="flag">🇯🇵 Japan</span></div></div>
                 </div>
@@ -252,8 +256,8 @@
                 </div>
                 <div class="abs">
                   <p>This presentation introduces the latest releases of <strong>Particleworks 9.0</strong> and <strong>Granuleworks 4.0</strong>. Featuring major advances in simulation performance and multi-physics capabilities, these new versions enable more accurate and efficient analysis of complex fluid dynamics.</p>
-                  <p>Application examples and case studies will also be presented to demonstrate the value of the latest developments. Join us to explore the new possibilities with Particleworks and Granuleworks.</p>
-                  <div class="authors"><b>Speaker:</b> Iori Saigo (Prometech Software, JP)</div>
+                  <p>Application examples and case studies will also be presented to demonstrate the value of the latest developments. New capabilities will be presented live at the conference, in step with the release. Join us to explore the new possibilities with Particleworks and Granuleworks.</p>
+                  <div class="authors"><b>Speakers:</b> Issei Masaie, General Manager · Iori Saigo, Application Engineer — Prometech Software, JP</div>
                 </div>
                 <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
               </div>
