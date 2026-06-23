@@ -506,7 +506,7 @@
               <div class="talk-body">
                 <h3>Integrating Particleworks into SKF Engineering Tools: Part I — Verification of Heat Transfer Coefficient</h3>
                 <div class="speaker">
-                  <div class="avatar">LC</div>
+                  <div class="avatar"><img src="speakers/lijun-cao.jpg" alt="Lijun Cao" loading="lazy"></div>
                   <div><div class="nm">Lijun Cao</div><div class="rl">Project Engineer Specialist · SKF (Advanced Engineering Competence Centre) · <span class="flag">🇳🇱 Netherlands</span></div></div>
                 </div>
                 <div class="talk-tags">
@@ -605,7 +605,7 @@
               <div class="talk-body">
                 <h3>Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method</h3>
                 <div class="speaker">
-                  <div class="avatar">LT</div>
+                  <div class="avatar"><img src="speakers/leonardo-tiberi.jpg" alt="Leonardo Tiberi" loading="lazy"></div>
                   <div><div class="nm">Leonardo Tiberi</div><div class="rl">Component Design Engineer · Track One SRL · <span class="flag">🇮🇹 Italy</span></div></div>
                 </div>
                 <div class="talk-tags">
