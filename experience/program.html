@@ -474,34 +474,9 @@
           <!-- TALK 5: SKF HTC verification -->
           <article class="talk" id="talk-skf-htc">
             <div class="talk-grid">
-              <div class="talk-art">
+              <div class="talk-art render">
                 <span class="talk-no">TALK 05</span>
-                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heat transfer coefficient — sphere in uniform flow">
-                  <defs>
-                    <linearGradient id="t5s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
-                    <radialGradient id="t5glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffb347" stop-opacity="0.9"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
-                  </defs>
-                  <!-- uniform inflow streamlines -->
-                  <g stroke="#ffe0d2" stroke-width="1.6" opacity="0.45" stroke-linecap="round">
-                    <line x1="12" y1="52" x2="58" y2="52"/>
-                    <line x1="12" y1="85" x2="62" y2="85"/>
-                    <line x1="12" y1="118" x2="58" y2="118"/>
-                  </g>
-                  <!-- convective heat glow (HTC) -->
-                  <circle cx="106" cy="85" r="42" fill="url(#t5glow)"><animate attributeName="r" values="34;46;34" dur="2.6s" repeatCount="indefinite"/></circle>
-                  <!-- sphere -->
-                  <circle cx="106" cy="85" r="26" fill="url(#t5s)" opacity="0.95"/>
-                  <circle cx="106" cy="85" r="26" fill="none" stroke="#fff3ee" stroke-width="2"/>
-                  <circle cx="97" cy="76" r="7" fill="#fff" opacity="0.35"/>
-                  <!-- flow particles sweeping past the sphere -->
-                  <g fill="#fff">
-                    <circle cx="16" cy="52" r="2.6"><animate attributeName="cx" values="10;192;10" dur="2.2s" repeatCount="indefinite"/></circle>
-                    <circle cx="16" cy="118" r="2.6"><animate attributeName="cx" values="10;192;10" dur="2.5s" repeatCount="indefinite"/></circle>
-                    <circle cx="16" cy="68" r="2.2" opacity="0.85"><animate attributeName="cx" values="10;192;10" dur="2.0s" repeatCount="indefinite"/><animate attributeName="cy" values="68;56;68" dur="2.0s" repeatCount="indefinite"/></circle>
-                    <circle cx="16" cy="102" r="2.2" opacity="0.85"><animate attributeName="cx" values="10;192;10" dur="2.35s" repeatCount="indefinite"/><animate attributeName="cy" values="102;114;102" dur="2.35s" repeatCount="indefinite"/></circle>
-                    <circle cx="16" cy="85" r="2.4" opacity="0.9"><animate attributeName="cx" values="10;78;10" dur="1.7s" repeatCount="indefinite"/></circle>
-                  </g>
-                </svg>
+                <img src="img/sim-skf-htc.jpg" alt="Particleworks HTC verification — heat flux on a sphere (top) and Taylor vortices between rotating concentric cylinders (bottom)" loading="lazy">
               </div>
               <div class="talk-body">
                 <h3>Integrating Particleworks into SKF Engineering Tools: Part I — Verification of Heat Transfer Coefficient</h3>
