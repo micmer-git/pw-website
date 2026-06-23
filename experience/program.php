@@ -48,7 +48,7 @@
     .navbar .dropdown-item:hover, .navbar .dropdown-item:focus { background:linear-gradient(135deg, rgba(217,80,63,0.10), rgba(143,22,27,0.06)); color:var(--ev-crimson); }
 
     /* Hero */
-    .prog-hero { position: relative; padding: 8.5rem 0 4.5rem; background: linear-gradient(135deg, rgba(217,80,63,0.84), rgba(143,22,27,0.93)), url('img/theme-bg.jpg') center/cover no-repeat; overflow: hidden; }
+    .prog-hero { position: relative; padding: 8.5rem 0 4.5rem; background: linear-gradient(135deg, rgba(217,80,63,0.84), rgba(143,22,27,0.93)), url('../images/experience2026/theme-bg.jpg') center/cover no-repeat; overflow: hidden; }
     .prog-hero::before { content:''; position:absolute; inset:0; background:
         radial-gradient(ellipse 70% 60% at 12% 92%, rgba(255,180,150,0.18) 0%, transparent 60%),
         radial-gradient(ellipse 55% 55% at 88% 8%, rgba(255,255,255,0.12) 0%, transparent 60%); }
@@ -129,7 +129,7 @@
     .kbadge { display:inline-flex; align-items:center; gap:0.4rem; background: var(--ev-accent); color:#fff; font-size:0.7rem; font-weight:800; letter-spacing:1px; text-transform:uppercase; padding:0.3rem 0.8rem; border-radius:50px; margin-bottom:0.8rem; }
 
     /* CTA */
-    .cta-final { padding:4.5rem 0; background: linear-gradient(135deg, rgba(217,80,63,0.90), rgba(143,22,27,0.95)), url('img/theme-bg.jpg') center/cover no-repeat; position:relative; overflow:hidden; }
+    .cta-final { padding:4.5rem 0; background: linear-gradient(135deg, rgba(217,80,63,0.90), rgba(143,22,27,0.95)), url('../images/experience2026/theme-bg.jpg') center/cover no-repeat; position:relative; overflow:hidden; }
     .cta-final::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 70% at 50% 120%, rgba(255,200,170,0.22), transparent 60%); }
     .cta-final .container { position:relative; z-index:2; }
     .cta-final h2 { color:#fff; font-weight:900; font-size:clamp(1.8rem,3.6vw,2.6rem); letter-spacing:-0.5px; }
@@ -158,8 +158,8 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse justify-content-end" id="nav">
         <ul class="navbar-nav align-items-lg-center gap-1">
-          <li class="nav-item"><a class="nav-link" href="index.html">Experience 2026</a></li>
-          <li class="nav-item"><a class="nav-link" href="program.html">Program</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.php">Experience 2026</a></li>
+          <li class="nav-item"><a class="nav-link" href="program.php">Program</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -169,7 +169,7 @@
             </ul>
           </li>
           <li class="nav-item"><a class="nav-link" href="https://particleworks-europe.com/experience/contact.php">Contact</a></li>
-          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.html">Register</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.php">Register</a></li>
         </ul>
       </div>
     </div>
@@ -199,7 +199,7 @@
         <span class="hero-fact"><i class="bi bi-mic"></i> 10 talks · 5 countries</span>
       </div>
       <div class="hero-cta-row">
-        <a href="registration.html" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
+        <a href="registration.php" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
         <a href="#program" class="btn-ghost"><i class="bi bi-arrow-down"></i> See the talks</a>
       </div>
     </div>
@@ -247,7 +247,7 @@
                   <div><div class="nm">Issei Masaie</div><div class="rl">General Manager · Prometech Software · <span class="flag">🇯🇵 Japan</span></div></div>
                 </div>
                 <div class="speaker">
-                  <div class="avatar"><img src="speakers/iori-saigo.jpg" alt="Iori Saigo" loading="lazy"></div>
+                  <div class="avatar"><img src="../images/experience2026/iori-saigo.jpg" alt="Iori Saigo" loading="lazy"></div>
                   <div><div class="nm">Iori Saigo</div><div class="rl">Application Engineer · Prometech Software · <span class="flag">🇯🇵 Japan</span></div></div>
                 </div>
                 <div class="talk-tags">
@@ -289,7 +289,7 @@
               <div class="talk-body">
                 <h3>Simulation of Shot Peening: A CFD-DEM Coupled Case Study</h3>
                 <div class="speaker">
-                  <div class="avatar"><img src="speakers/alpcan-guray.jpg" alt="Alpcan Güray" loading="lazy"></div>
+                  <div class="avatar"><img src="../images/experience2026/alpcan-guray.jpg" alt="Alpcan Güray" loading="lazy"></div>
                   <div><div class="nm">Alpcan Güray</div><div class="rl">Project Manager · MTU Aero Engines AG · <span class="flag">🇩🇪 Germany</span></div></div>
                 </div>
                 <div class="talk-tags">
@@ -337,7 +337,7 @@
               <div class="talk-body">
                 <h3>An Integrated Simulation Approach for Stator Oil Jacket and Jet Cooling Systems</h3>
                 <div class="speaker">
-                  <div class="avatar"><img src="speakers/michelangelo-raimondo.jpg" alt="Michelangelo Raimondo" loading="lazy"></div>
+                  <div class="avatar"><img src="../images/experience2026/michelangelo-raimondo.jpg" alt="Michelangelo Raimondo" loading="lazy"></div>
                   <div><div class="nm">Michelangelo Raimondo</div><div class="rl">PhD Student · University of Modena and Reggio Emilia · <span class="flag">🇮🇹 Italy</span></div></div>
                 </div>
                 <div class="talk-tags">
@@ -397,7 +397,7 @@
               <div class="talk-body">
                 <h3>CHT Analysis of a Reciprocating Pump</h3>
                 <div class="speaker">
-                  <div class="avatar"><img src="speakers/leonardo-lanciotti.jpg" alt="Leonardo Lanciotti" loading="lazy"></div>
+                  <div class="avatar"><img src="../images/experience2026/leonardo-lanciotti.jpg" alt="Leonardo Lanciotti" loading="lazy"></div>
                   <div><div class="nm">Leonardo Lanciotti</div><div class="rl">CFD Analyst · R&amp;D CFD S.R.L. · <span class="flag">🇮🇹 Italy</span></div></div>
                 </div>
                 <div class="talk-tags">
@@ -458,7 +458,7 @@
               <div class="talk-body">
                 <h3>Moving Particle Simulation of Eroded Pelton Runners</h3>
                 <div class="speaker">
-                  <div class="avatar"><img src="speakers/jean-decaix.jpg" alt="Jean Decaix" loading="lazy"></div>
+                  <div class="avatar"><img src="../images/experience2026/jean-decaix.jpg" alt="Jean Decaix" loading="lazy"></div>
                   <div><div class="nm">Jean Decaix</div><div class="rl">Senior Researcher · HES-SO Valais//Wallis · <span class="flag">🇨🇭 Switzerland</span></div></div>
                 </div>
                 <div class="talk-tags">
@@ -510,7 +510,7 @@
               <div class="talk-body">
                 <h3>Integrating Particleworks into SKF Engineering Tools: Part I — Verification of Heat Transfer Coefficient</h3>
                 <div class="speaker">
-                  <div class="avatar"><img src="speakers/lijun-cao.jpg" alt="Lijun Cao" loading="lazy"></div>
+                  <div class="avatar"><img src="../images/experience2026/lijun-cao.jpg" alt="Lijun Cao" loading="lazy"></div>
                   <div><div class="nm">Lijun Cao</div><div class="rl">Project Engineer Specialist · SKF (Advanced Engineering Competence Centre) · <span class="flag">🇳🇱 Netherlands</span></div></div>
                 </div>
                 <div class="talk-tags">
@@ -558,7 +558,7 @@
               <div class="talk-body">
                 <h3>Direct Optical Air-in-Oil Measurement as an Enabler for Accurate Simulation of Gearings and Hydraulic Systems</h3>
                 <div class="speaker">
-                  <div class="avatar"><img src="speakers/lukas-hafner.jpg" alt="Dr. Lukas Hafner" loading="lazy"></div>
+                  <div class="avatar"><img src="../images/experience2026/lukas-hafner.jpg" alt="Dr. Lukas Hafner" loading="lazy"></div>
                   <div><div class="nm">Dr. Lukas Hafner</div><div class="rl">Technical Lead · deepfluid · <span class="flag">🇩🇪 Germany</span></div></div>
                 </div>
                 <div class="talk-tags">
@@ -609,7 +609,7 @@
               <div class="talk-body">
                 <h3>Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method</h3>
                 <div class="speaker">
-                  <div class="avatar"><img src="speakers/leonardo-tiberi.jpg" alt="Leonardo Tiberi" loading="lazy"></div>
+                  <div class="avatar"><img src="../images/experience2026/leonardo-tiberi.jpg" alt="Leonardo Tiberi" loading="lazy"></div>
                   <div><div class="nm">Leonardo Tiberi</div><div class="rl">Component Design Engineer · Track One SRL · <span class="flag">🇮🇹 Italy</span></div></div>
                 </div>
                 <div class="talk-tags">
@@ -678,7 +678,7 @@
               <div class="talk-body">
                 <h3>Application of Particleworks to Gear Lubrication Analysis and Its Expansion to R&amp;D on Airflow Effects</h3>
                 <div class="speaker">
-                  <div class="avatar"><img src="speakers/naohiro-fujita.jpg" alt="Naohiro Fujita" loading="lazy"></div>
+                  <div class="avatar"><img src="../images/experience2026/naohiro-fujita.jpg" alt="Naohiro Fujita" loading="lazy"></div>
                   <div><div class="nm">Naohiro Fujita</div><div class="rl">Staff · Univance Corporation · <span class="flag">🇯🇵 Japan</span></div></div>
                 </div>
                 <div class="talk-tags">
@@ -726,7 +726,7 @@
               <div class="talk-body">
                 <h3>From Formation to Dissolution: Air Bubble Dynamics in Gear Oil of an Electric 3-Speed Commercial Vehicle Drivetrain</h3>
                 <div class="speaker">
-                  <div class="avatar">RK</div>
+                  <div class="avatar"><img src="../images/experience2026/rene-kockisch.jpg" alt="René Kockisch" loading="lazy"></div>
                   <div><div class="nm">René Kockisch</div><div class="rl">Team Manager · IAV GmbH · <span class="flag">🇩🇪 Germany</span></div></div>
                 </div>
                 <div class="talk-tags">
@@ -757,7 +757,7 @@
       <h2>Join us in Modena</h2>
       <p>Two days, one community. Reserve your seat for Particleworks Experience 2026 — or submit your own abstract before the program closes.</p>
       <div class="hero-cta-row justify-content-center">
-        <a href="registration.html" class="btn-pw"><i class="bi bi-pencil-square"></i> Register</a>
+        <a href="registration.php" class="btn-pw"><i class="bi bi-pencil-square"></i> Register</a>
         <a href="https://particleworks-europe.com/experience/call-for-abstract" class="btn-ghost"><i class="bi bi-file-earmark-text"></i> Submit your abstract</a>
       </div>
     </div>
@@ -777,9 +777,9 @@
         <div class="col-lg-3 col-md-4">
           <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Experience 2026</h6>
           <ul class="list-unstyled small">
-            <li class="mb-2"><a href="index.html">Conference overview</a></li>
-            <li class="mb-2"><a href="program.html">Program</a></li>
-            <li class="mb-2"><a href="registration.html">Registration</a></li>
+            <li class="mb-2"><a href="index.php">Conference overview</a></li>
+            <li class="mb-2"><a href="program.php">Program</a></li>
+            <li class="mb-2"><a href="registration.php">Registration</a></li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-4">
@@ -795,14 +795,23 @@
         </div>
       </div>
       <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap gap-3 small mb-3" style="opacity:.85;">
+        <span class="text-white-50">Past editions:</span>
+        <a href="https://particleworks-europe.com/experience/proceedings2025.php">Proceedings 2025</a>
+        <a href="https://particleworks-europe.com/experience/proceedings2024.php">Proceedings 2024</a>
+        <a href="https://particleworks-europe.com/experience/gallery2024.php">Gallery 2024</a>
+        <a href="https://particleworks-europe.com/experience/proceedings2023.php">Proceedings 2023</a>
+        <a href="https://particleworks-europe.com/experience/speakers2023.php">Speakers 2023</a>
+        <a href="https://particleworks-europe.com/experience/gallery2023.php">Gallery 2023</a>
+      </div>
       <div class="d-flex flex-wrap justify-content-between align-items-center">
         <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
-        <p class="small mb-0">Meshfree CFD simulation technology</p>
+        <p class="small mb-0"><a href="../privacy.php" class="me-3">Privacy</a>Meshfree CFD simulation technology</p>
       </div>
     </div>
   </footer>
 
-  <a href="registration.html" class="btn-pw float-reg"><i class="bi bi-pencil-square"></i> Register</a>
+  <a href="registration.php" class="btn-pw float-reg"><i class="bi bi-pencil-square"></i> Register</a>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>

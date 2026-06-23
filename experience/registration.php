@@ -38,7 +38,7 @@
     .navbar .dropdown-item:hover, .navbar .dropdown-item:focus { background:linear-gradient(135deg, rgba(217,80,63,0.10), rgba(143,22,27,0.06)); color:var(--ev-crimson); }
 
     /* Hero */
-    .reg-hero { position:relative; padding:8.5rem 0 4rem; background:linear-gradient(135deg, rgba(217,80,63,0.85), rgba(143,22,27,0.93)), url('img/theme-bg.jpg') center/cover no-repeat; overflow:hidden; }
+    .reg-hero { position:relative; padding:8.5rem 0 4rem; background:linear-gradient(135deg, rgba(217,80,63,0.85), rgba(143,22,27,0.93)), url('../images/experience2026/theme-bg.jpg') center/cover no-repeat; overflow:hidden; }
     .reg-hero::before { content:''; position:absolute; inset:0; background:
         radial-gradient(ellipse 70% 60% at 12% 92%, rgba(255,180,150,0.18) 0%, transparent 60%),
         radial-gradient(ellipse 60% 55% at 88% 8%, rgba(255,255,255,0.12) 0%, transparent 60%); }
@@ -91,8 +91,8 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse justify-content-end" id="nav">
         <ul class="navbar-nav align-items-lg-center gap-1">
-          <li class="nav-item"><a class="nav-link" href="index.html">Experience 2026</a></li>
-          <li class="nav-item"><a class="nav-link" href="program.html">Program</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.php">Experience 2026</a></li>
+          <li class="nav-item"><a class="nav-link" href="program.php">Program</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -102,7 +102,7 @@
             </ul>
           </li>
           <li class="nav-item"><a class="nav-link" href="https://particleworks-europe.com/experience/contact.php">Contact</a></li>
-          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.html">Register</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.php">Register</a></li>
         </ul>
       </div>
     </div>
@@ -166,7 +166,7 @@
               <li><i class="bi bi-shield-check"></i><span><b>Your data</b>Processed in line with GDPR, solely for managing your participation.</span></li>
             </ul>
             <div class="d-flex flex-wrap gap-2 mt-3">
-              <a href="program.html" class="btn-ghost-red"><i class="bi bi-calendar3"></i> View the program</a>
+              <a href="program.php" class="btn-ghost-red"><i class="bi bi-calendar3"></i> View the program</a>
               <a href="https://particleworks-europe.com/experience/call-for-abstract" class="btn-ghost-red"><i class="bi bi-file-earmark-text"></i> Submit an abstract</a>
             </div>
           </div>
@@ -189,9 +189,9 @@
         <div class="col-lg-3 col-md-4">
           <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Experience 2026</h6>
           <ul class="list-unstyled small">
-            <li class="mb-2"><a href="index.html">Conference overview</a></li>
-            <li class="mb-2"><a href="program.html">Program</a></li>
-            <li class="mb-2"><a href="registration.html">Registration</a></li>
+            <li class="mb-2"><a href="index.php">Conference overview</a></li>
+            <li class="mb-2"><a href="program.php">Program</a></li>
+            <li class="mb-2"><a href="registration.php">Registration</a></li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-4">
@@ -207,9 +207,18 @@
         </div>
       </div>
       <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap gap-3 small mb-3" style="opacity:.85;">
+        <span class="text-white-50">Past editions:</span>
+        <a href="https://particleworks-europe.com/experience/proceedings2025.php">Proceedings 2025</a>
+        <a href="https://particleworks-europe.com/experience/proceedings2024.php">Proceedings 2024</a>
+        <a href="https://particleworks-europe.com/experience/gallery2024.php">Gallery 2024</a>
+        <a href="https://particleworks-europe.com/experience/proceedings2023.php">Proceedings 2023</a>
+        <a href="https://particleworks-europe.com/experience/speakers2023.php">Speakers 2023</a>
+        <a href="https://particleworks-europe.com/experience/gallery2023.php">Gallery 2023</a>
+      </div>
       <div class="d-flex flex-wrap justify-content-between align-items-center">
         <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
-        <p class="small mb-0">Meshfree CFD simulation technology</p>
+        <p class="small mb-0"><a href="../privacy.php" class="me-3">Privacy</a>Meshfree CFD simulation technology</p>
       </div>
     </div>
   </footer>

@@ -39,7 +39,7 @@
     .navbar .dropdown-item:hover, .navbar .dropdown-item:focus { background:linear-gradient(135deg, rgba(217,80,63,0.10), rgba(143,22,27,0.06)); color:var(--ev-crimson); }
 
     /* Hero */
-    .hero { position:relative; padding:8.5rem 0 5rem; background:linear-gradient(135deg, rgba(217,80,63,0.85), rgba(143,22,27,0.93)), url('img/theme-bg.jpg') center/cover no-repeat; overflow:hidden; }
+    .hero { position:relative; padding:8.5rem 0 5rem; background:linear-gradient(135deg, rgba(217,80,63,0.85), rgba(143,22,27,0.93)), url('../images/experience2026/theme-bg.jpg') center/cover no-repeat; overflow:hidden; }
     .hero::before { content:''; position:absolute; inset:0; background:
         radial-gradient(ellipse 70% 60% at 12% 92%, rgba(255,180,150,0.18) 0%, transparent 60%),
         radial-gradient(ellipse 60% 55% at 88% 8%, rgba(255,255,255,0.12) 0%, transparent 60%); }
@@ -99,7 +99,7 @@
 
     /* venue */
     .venue { padding:4rem 0; }
-    .venue-box { background:linear-gradient(135deg, rgba(217,80,63,0.92), rgba(143,22,27,0.96)), url('img/theme-bg.jpg') center/cover no-repeat; border-radius:24px; padding:3rem; color:#fff; position:relative; overflow:hidden; }
+    .venue-box { background:linear-gradient(135deg, rgba(217,80,63,0.92), rgba(143,22,27,0.96)), url('../images/experience2026/theme-bg.jpg') center/cover no-repeat; border-radius:24px; padding:3rem; color:#fff; position:relative; overflow:hidden; }
     .venue-box::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 50% 80% at 90% 10%, rgba(255,255,255,0.14), transparent 60%); }
     .venue-box .container, .venue-box .row { position:relative; z-index:2; }
     .venue-box h3 { font-weight:800; font-size:1.6rem; }
@@ -107,7 +107,7 @@
     .venue-map { width:100%; min-height:320px; height:100%; border:0; border-radius:24px; box-shadow:0 16px 44px rgba(7,40,70,0.14); display:block; }
 
     /* CTA */
-    .cta-final { padding:4.5rem 0; background:linear-gradient(135deg, rgba(217,80,63,0.90), rgba(143,22,27,0.95)), url('img/theme-bg.jpg') center/cover no-repeat; position:relative; overflow:hidden; }
+    .cta-final { padding:4.5rem 0; background:linear-gradient(135deg, rgba(217,80,63,0.90), rgba(143,22,27,0.95)), url('../images/experience2026/theme-bg.jpg') center/cover no-repeat; position:relative; overflow:hidden; }
     .cta-final::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 70% at 50% 120%, rgba(255,200,170,0.22), transparent 60%); }
     .cta-final .container { position:relative; z-index:2; }
     .cta-final h2 { color:#fff; font-weight:900; font-size:clamp(1.8rem,3.6vw,2.6rem); letter-spacing:-0.5px; }
@@ -131,8 +131,8 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse justify-content-end" id="nav">
         <ul class="navbar-nav align-items-lg-center gap-1">
-          <li class="nav-item"><a class="nav-link" href="index.html">Experience 2026</a></li>
-          <li class="nav-item"><a class="nav-link" href="program.html">Program</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.php">Experience 2026</a></li>
+          <li class="nav-item"><a class="nav-link" href="program.php">Program</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -142,7 +142,7 @@
             </ul>
           </li>
           <li class="nav-item"><a class="nav-link" href="https://particleworks-europe.com/experience/contact.php">Contact</a></li>
-          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.html">Register</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.php">Register</a></li>
         </ul>
       </div>
     </div>
@@ -164,15 +164,15 @@
     <div class="container">
       <div class="badge-year"><i class="bi bi-stars"></i> European Edition · Modena 2026</div>
       <h1 class="sr-only">Particleworks Experience 2026 — European Edition, Modena, October 6–7</h1>
-      <div class="hero-banner"><img src="img/banner-2026.jpg" alt="Particleworks Experience 2026 — European Edition · October 6-7, 2026 · Modena, Italy"></div>
+      <div class="hero-banner"><img src="../images/experience2026/banner-2026.jpg" alt="Particleworks Experience 2026 — European Edition · October 6-7, 2026 · Modena, Italy"></div>
       <p class="lead">The annual meeting of the meshless CFD community. Two days of hands-on workshops, the release of <strong>Particleworks&nbsp;9.0</strong>, and validated case studies from industry and academia.</p>
       <div class="hero-meta">
         <span class="m"><i class="bi bi-calendar-event"></i> October 6–7, 2026</span>
         <span class="m"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena · Italy</span>
       </div>
       <div class="hero-cta">
-        <a href="registration.html" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
-        <a href="program.html" class="btn-ghost"><i class="bi bi-calendar3"></i> View the program</a>
+        <a href="registration.php" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
+        <a href="program.php" class="btn-ghost"><i class="bi bi-calendar3"></i> View the program</a>
       </div>
     </div>
   </section>
@@ -201,7 +201,7 @@
 
         <!-- Day 2 — clickable to program -->
         <div class="col-lg-5">
-          <a href="program.html" class="day-card conf">
+          <a href="program.php" class="day-card conf">
             <span class="ribbon"><i class="bi bi-arrow-right-circle"></i> See program</span>
             <div class="date-row"><span class="dnum">07</span><span class="dmon">October 2026 · Wednesday</span></div>
             <div class="time"><i class="bi bi-clock"></i> 09:00 — 17:00</div>
@@ -226,67 +226,67 @@
       </div>
       <div class="row g-3 justify-content-center">
         <div class="col-md-6 col-lg-5">
-          <a href="program.html#talk-keynote" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.php#talk-keynote" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic kn"><i class="bi bi-rocket-takeoff"></i></div>
             <div><h4>What's New in Particleworks 9.0 &amp; Granuleworks 4.0</h4><div class="org">Keynote · Iori Saigo · Prometech Software 🇯🇵</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html#talk-shot-peening" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.php#talk-shot-peening" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-bullseye"></i></div>
             <div><h4>Simulation of Shot Peening: A CFD-DEM Coupled Case Study</h4><div class="org">MTU Aero Engines AG 🇩🇪</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html#talk-stator" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.php#talk-stator" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-lightning-charge"></i></div>
             <div><h4>Integrated Simulation of Stator Oil Jacket &amp; Jet Cooling</h4><div class="org">University of Modena and Reggio Emilia 🇮🇹</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html#talk-pump" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.php#talk-pump" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-thermometer-half"></i></div>
             <div><h4>CHT Analysis of a Reciprocating Pump</h4><div class="org">R&amp;D CFD S.R.L. · Comet S.p.A. 🇮🇹</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html#talk-pelton" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.php#talk-pelton" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-water"></i></div>
             <div><h4>Moving Particle Simulation of Eroded Pelton Runners</h4><div class="org">HES-SO Valais//Wallis 🇨🇭</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html#talk-skf-htc" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.php#talk-skf-htc" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-record-circle"></i></div>
             <div><h4>Verification of Heat Transfer Coefficient for Bearings</h4><div class="org">SKF 🇳🇱</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html#talk-air-in-oil" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.php#talk-air-in-oil" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-camera"></i></div>
             <div><h4>Direct Optical Air-in-Oil Measurement for Gearings &amp; Hydraulics</h4><div class="org">deepfluid 🇩🇪</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html#talk-carrier-roller" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.php#talk-carrier-roller" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-truck"></i></div>
             <div><h4>Lubrication of a Carrier Roller using CFD 3D-MPS</h4><div class="org">Track One SRL · Unimore 🇮🇹</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html#talk-gear-airflow" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.php#talk-gear-airflow" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-gear-wide-connected"></i></div>
             <div><h4>Gear Lubrication Analysis &amp; R&amp;D on Airflow Effects</h4><div class="org">Univance Corporation 🇯🇵</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.html#talk-bubble-dynamics" class="text-decoration-none text-reset"><div class="topic">
+          <a href="program.php#talk-bubble-dynamics" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-droplet-half"></i></div>
             <div><h4>Air Bubble Dynamics in Gear Oil of an Electric Drivetrain</h4><div class="org">IAV GmbH 🇩🇪</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5 d-flex">
-          <a href="program.html" class="btn-pw w-100 justify-content-center align-self-stretch" style="border-radius:16px;"><i class="bi bi-calendar3"></i> See the full program</a>
+          <a href="program.php" class="btn-pw w-100 justify-content-center align-self-stretch" style="border-radius:16px;"><i class="bi bi-calendar3"></i> See the full program</a>
         </div>
       </div>
     </div>
@@ -318,7 +318,7 @@
       <h2>Save your seat for Modena</h2>
       <p>Register for Particleworks Experience 2026 — or submit your own title and abstract before the call for papers closes.</p>
       <div class="hero-cta justify-content-center">
-        <a href="registration.html" class="btn-pw"><i class="bi bi-pencil-square"></i> Register</a>
+        <a href="registration.php" class="btn-pw"><i class="bi bi-pencil-square"></i> Register</a>
         <a href="https://particleworks-europe.com/experience/call-for-abstract" class="btn-ghost"><i class="bi bi-file-earmark-text"></i> Submit your abstract</a>
       </div>
     </div>
@@ -338,8 +338,8 @@
         <div class="col-lg-3 col-md-4">
           <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Experience 2026</h6>
           <ul class="list-unstyled small">
-            <li class="mb-2"><a href="program.html">Program</a></li>
-            <li class="mb-2"><a href="registration.html">Registration</a></li>
+            <li class="mb-2"><a href="program.php">Program</a></li>
+            <li class="mb-2"><a href="registration.php">Registration</a></li>
             <li class="mb-2"><a href="https://particleworks-europe.com/experience/call-for-abstract">Call for papers</a></li>
           </ul>
         </div>
@@ -356,9 +356,18 @@
         </div>
       </div>
       <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap gap-3 small mb-3" style="opacity:.85;">
+        <span class="text-white-50">Past editions:</span>
+        <a href="https://particleworks-europe.com/experience/proceedings2025.php">Proceedings 2025</a>
+        <a href="https://particleworks-europe.com/experience/proceedings2024.php">Proceedings 2024</a>
+        <a href="https://particleworks-europe.com/experience/gallery2024.php">Gallery 2024</a>
+        <a href="https://particleworks-europe.com/experience/proceedings2023.php">Proceedings 2023</a>
+        <a href="https://particleworks-europe.com/experience/speakers2023.php">Speakers 2023</a>
+        <a href="https://particleworks-europe.com/experience/gallery2023.php">Gallery 2023</a>
+      </div>
       <div class="d-flex flex-wrap justify-content-between align-items-center">
         <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
-        <p class="small mb-0">Meshfree CFD simulation technology</p>
+        <p class="small mb-0"><a href="../privacy.php" class="me-3">Privacy</a>Meshfree CFD simulation technology</p>
       </div>
     </div>
   </footer>
