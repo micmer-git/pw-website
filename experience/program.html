@@ -483,6 +483,69 @@
             </div>
           </article>
 
+          <!-- TALK 5: SKF bearing HTC -->
+          <article class="talk" id="talk-skf-htc">
+            <div class="talk-grid">
+              <div class="talk-art">
+                <span class="talk-no">TALK 05</span>
+                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heat transfer on a sphere and Taylor vortices between rotating cylinders">
+                  <defs>
+                    <radialGradient id="t5sph" cx="38%" cy="36%" r="68%">
+                      <stop offset="0" stop-color="#ffd27a"/><stop offset="0.55" stop-color="#ff8a5c"/><stop offset="1" stop-color="#ff5e3a"/>
+                    </radialGradient>
+                    <radialGradient id="t5glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffb347" stop-opacity="0.8"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+                    <linearGradient id="t5ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a5c"/><stop offset="1" stop-color="#ffd27a"/></linearGradient>
+                  </defs>
+
+                  <!-- left: heated sphere in uniform flow (Figure 1) -->
+                  <circle cx="58" cy="62" r="34" fill="url(#t5glow)"><animate attributeName="r" values="30;38;30" dur="2.6s" repeatCount="indefinite"/></circle>
+                  <circle cx="58" cy="62" r="22" fill="url(#t5sph)"/>
+                  <!-- incoming streamlines deflected around the sphere -->
+                  <g stroke="#fff3ee" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.85">
+                    <path d="M8 44 Q40 44 58 40"/>
+                    <path d="M8 62 Q34 62 36 62"/>
+                    <path d="M8 80 Q40 80 58 84"/>
+                  </g>
+                  <g fill="#fff">
+                    <circle cx="20" cy="44" r="2.2"><animate attributeName="cx" values="14;46;14" dur="2.2s" repeatCount="indefinite"/></circle>
+                    <circle cx="20" cy="80" r="2.2"><animate attributeName="cx" values="14;46;14" dur="2.5s" repeatCount="indefinite"/></circle>
+                  </g>
+
+                  <!-- right: Taylor vortices between rotating concentric cylinders (Figure 2) -->
+                  <g transform="translate(146 86)">
+                    <circle r="40" stroke="url(#t5ring)" stroke-width="3" opacity="0.55"/>
+                    <circle r="16" fill="none" stroke="url(#t5ring)" stroke-width="6">
+                      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="5s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- counter-rotating vortex cells in the annulus -->
+                    <g fill="none" stroke="#fff" stroke-width="1.8" opacity="0.9">
+                      <circle cx="0" cy="-28" r="5.5"/><circle cx="20" cy="-20" r="5.5"/><circle cx="28" cy="0" r="5.5"/>
+                      <circle cx="20" cy="20" r="5.5"/><circle cx="0" cy="28" r="5.5"/><circle cx="-20" cy="20" r="5.5"/>
+                      <circle cx="-28" cy="0" r="5.5"/><circle cx="-20" cy="-20" r="5.5"/>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+              <div class="talk-body">
+                <h3>Integrating Particleworks into SKF Engineering Tools: Part&nbsp;I — Verification of Heat Transfer Coefficients</h3>
+                <div class="speaker">
+                  <div class="avatar"><img src="speakers/lijun-cao.jpg" alt="Lijun Cao" loading="lazy"></div>
+                  <div><div class="nm">Lijun Cao</div><div class="rl">Project Engineer Specialist · SKF (AECC) · <span class="flag">🇳🇱 Netherlands</span></div></div>
+                </div>
+                <div class="talk-tags">
+                  <span class="chip chip-theme">Bearings · Thermal management</span>
+                  <span class="chip chip-method">Heat transfer coefficient</span><span class="chip chip-method">Fluent validation</span>
+                </div>
+                <div class="abs">
+                  <p>The calculation of the heat transfer coefficient (HTC) in Particleworks provides a new way of quickly estimating convective HTCs on bearing components. These HTCs are coupled with SKF internal tools such as <strong>BEAST</strong> to calculate bearing temperatures, enhancing the accuracy and robustness of bearing thermal analysis.</p>
+                  <p>This work presents a detailed evaluation of Particleworks&rsquo; capability to predict HTCs under flow conditions relevant to rolling-element bearings. To achieve this, simplified benchmark cases were considered, including heat transfer on a sphere in a uniform flow and between rotating concentric cylinders. Particleworks results are compared with well-established HTC correlations from the literature as well as solutions from <strong>ANSYS Fluent</strong>. The findings contribute to SKF&rsquo;s ongoing efforts to improve the thermal modelling capabilities of rolling bearings.</p>
+                  <div class="authors"><b>Authors:</b> Lijun Cao (SKF, NL) · Mehul P. Pandya (SKF, SE)</div>
+                </div>
+                <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
+              </div>
+            </div>
+          </article>
+
           <p class="text-center mt-4" style="color:var(--pw-gray);font-size:0.92rem;"><i class="bi bi-info-circle"></i> More talks to be announced — the program is being finalised.</p>
 
         </div>
