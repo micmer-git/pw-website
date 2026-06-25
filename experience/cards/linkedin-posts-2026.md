@@ -6,6 +6,26 @@ Register link: https://particleworks-europe.com/experience/registration.php
 
 ---
 
+## 📣 THE PROGRAM IS OUT
+
+The full programme for Particleworks Experience 2026 is online — 10 talks across two days in Modena, spanning e-drivetrains, e-motor cooling, bearings, gearboxes, gear lubrication, pumps, hydropower, aerospace and aeration.
+
+Join the meshless-CFD community on 6–7 October:
+- 10 validated industrial & academic case studies
+- The release of Particleworks 9.0 and Granuleworks 4.0
+- Hands-on workshops and networking at BPER FORUM Monzani
+
+📍 Modena, Italy 🇮🇹  
+📅 6-7 Oct 2026  
+See the full program and register for free: https://particleworks-europe.com/experience/program.php
+
+*Suggested image: `card-00-program.png`*
+
+**🏷️ 30 companies to tag / target with this post:**  
+ZF, Bosch, Schaeffler, Continental, Vitesco Technologies, BorgWarner, Magna, Dana, GKN Automotive, Valeo, Mahle, Marelli, Stellantis, Volkswagen Group, BMW Group, Mercedes-Benz, Renault Group, Volvo Cars, Ferrari, Toyota, Hyundai Motor Group, Nidec, AVL, FEV, Ricardo, MTU Aero Engines, Rolls-Royce, Safran, SKF, Comer Industries
+
+---
+
 ## 🚀 WHAT'S NEW IN PARTICLEWORKS 9.0 & GRANULEWORKS 4.0
 
 Iori Saigo from Prometech Software will unveil the latest Particleworks 9.0 and Granuleworks 4.0 releases.
@@ -20,6 +40,9 @@ Discover what's new in particle-based simulation:
 To attend Particleworks Experience 2026, register for free: https://particleworks-europe.com/experience/registration.php
 
 *Suggested image: `card-01-prometech.png`*
+
+**🏷️ 30 companies to tag / target with this post:**  
+Robert Bosch, ZF Friedrichshafen, Schaeffler, Continental, Vitesco Technologies, BorgWarner, Magna, Valeo, Mahle, Dana, GKN Automotive, IAV, AVL, FEV, Ricardo, hofer powertrain, Bertrandt, EDAG Engineering, Porsche Engineering, Stellantis, BMW Group, Mercedes-Benz, Volkswagen Group, Toyota, Honda, Hyundai Motor Group, Nidec, Marelli, Denso, Aisin
 
 ---
 
@@ -38,6 +61,9 @@ To attend Particleworks Experience 2026, register for free: https://particlework
 
 *Suggested image: `card-02-mtu.png`*
 
+**🏷️ 30 companies to tag / target with this post:**  
+Rolls-Royce, Safran, GE Aerospace, Pratt & Whitney, Honeywell Aerospace, Avio Aero, ITP Aero, GKN Aerospace, Collins Aerospace, Liebherr-Aerospace, Leonardo, Airbus, Boeing, Williams International, ArianeGroup, Curtiss-Wright Surface Technologies, Metal Improvement Company, Wheelabrator (Norican Group), Rösler Oberflächentechnik, Sintokogio, Sturm Maschinenbau, KSA Kugelstrahltechnik, Engineered Abrasives, Oerlikon Balzers, Bodycote, Doncasters Group, Howmet Aerospace, Rheinmetall, MTU Maintenance, Praxair Surface Technologies
+
 ---
 
 ## ⚡ E-MOTOR STATOR COOLING
@@ -54,6 +80,9 @@ Leveraging particle simulation, the study was able to achieve:
 To attend Particleworks Experience 2026, register for free: https://particleworks-europe.com/experience/registration.php
 
 *Suggested image: `card-03-unimore-stator.png`*
+
+**🏷️ 30 companies to tag / target with this post:**  
+Vitesco Technologies, BorgWarner, ZF, Bosch, Mahle, Valeo, Nidec, Magna Powertrain, Dana TM4, Schaeffler, hofer powertrain, Equipmake, YASA, Marelli, Hyundai Mobis, Hyundai Transys, Aisin, Denso, Tesla, Rivian, Lucid Motors, BMW Group, Mercedes-Benz, Volkswagen Group, Porsche, Stellantis, BYD, Rimac Technology, Drive System Design, AVL
 
 ---
 
@@ -72,6 +101,9 @@ To attend Particleworks Experience 2026, register for free: https://particlework
 
 *Suggested image: `card-04-rdcfd-pump.png`*
 
+**🏷️ 30 companies to tag / target with this post:**  
+KSB, Grundfos, Sulzer, Wilo, Bosch Rexroth, Parker Hannifin, Danfoss Power Solutions, Eaton, HAWE Hydraulik, Moog, Xylem, Flowserve, Weir Group, ITT, Pentair, Casappa, Bucher Hydraulics, Marzocchi Pompe, Kawasaki Precision Machinery, Bondioli & Pavesi, Interpump Group, HYDAC, Argo-Hytos, Graco, Pierburg, Continental, Caterpillar, Liebherr, Brevini, Duplomatic MS
+
 ---
 
 ## 💧 PELTON TURBINE EROSION
@@ -88,6 +120,9 @@ Leveraging GPU-accelerated MPS, the study was able to:
 To attend Particleworks Experience 2026, register for free: https://particleworks-europe.com/experience/registration.php
 
 *Suggested image: `card-05-hesso-pelton.png`*
+
+**🏷️ 30 companies to tag / target with this post:**  
+Voith Hydro, Andritz Hydro, GE Vernova Hydro, Gilkes, Litostroj Power, ZECO Hydropower, Canyon Hydro, Global Hydro Energy, Mavel, Rainpower, EDF, Statkraft, Verbund, Enel Green Power, Hydro-Québec, Axpo, Alpiq, BKW, Iberdrola, Vattenfall, Norconsult, Stucky (Gruner Group), AFRY, WWS Wasserkraft, Toshiba Energy Systems, Sulzer, Tractebel, SN Power, Troy Hydro, Mecamidi
 
 ---
 
@@ -106,6 +141,9 @@ To attend Particleworks Experience 2026, register for free: https://particlework
 
 *Suggested image: `card-06-skf.png`*
 
+**🏷️ 30 companies to tag / target with this post:**  
+Schaeffler, NSK, NTN, The Timken Company, JTEKT (Koyo), GMN Bearing, IKO Nippon Thompson, RBC Bearings, ZF, Bosch, Dana, GKN Automotive, BorgWarner, Comer Industries, Bonfiglioli, Carraro, Oerlikon Graziano, Allison Transmission, Eaton, Aisin, Voith, Flender, Siemens Gamesa, Vestas, Nordex, Liebherr, Caterpillar, Komatsu, Danfoss, Wittenstein
+
 ---
 
 ## 🫧 DIRECT AIR-IN-OIL MEASUREMENT
@@ -122,6 +160,9 @@ Leveraging optical measurement and particle simulation, deepfluid was able to:
 To attend Particleworks Experience 2026, register for free: https://particleworks-europe.com/experience/registration.php
 
 *Suggested image: `card-07-deepfluid.png`*
+
+**🏷️ 30 companies to tag / target with this post:**  
+FUCHS, Klüber Lubrication, Shell, TotalEnergies, Castrol (BP), ExxonMobil, Petronas Lubricants, Liqui Moly, Bosch Rexroth, Parker Hannifin, Danfoss, HAWE Hydraulik, HYDAC, Moog, ZF, Schaeffler, Flender, SEW-Eurodrive, Bonfiglioli, Wittenstein, Bosch, Eaton, Comer Industries, Voith, GKN Automotive, Dana, Argo-Hytos, Stauff, MAHLE, Mann+Hummel
 
 ---
 
@@ -140,6 +181,9 @@ To attend Particleworks Experience 2026, register for free: https://particlework
 
 *Suggested image: `card-08-trackone.png`*
 
+**🏷️ 30 companies to tag / target with this post:**  
+Caterpillar, Komatsu, Liebherr, John Deere, Hitachi Construction Machinery, Volvo CE, JCB, Develon (Doosan), Hyundai Construction Equipment, Kubota, CNH Industrial, Bobcat, Sany, XCMG, Zoomlion, Berco (thyssenkrupp), Italtractor ITM, Titan International, Camso (Michelin), USCO, Topy Industries, Prinoth, Kässbohrer (PistenBully), Claas, AGCO, Manitou, Terex, Wacker Neuson, Takeuchi, Yanmar
+
 ---
 
 ## ⚙️ GEAR LUBRICATION & AIRFLOW
@@ -157,6 +201,9 @@ To attend Particleworks Experience 2026, register for free: https://particlework
 
 *Suggested image: `card-09-univance.png`*
 
+**🏷️ 30 companies to tag / target with this post:**  
+Aisin, JTEKT, Hyundai Transys, ZF, GKN Automotive, Dana, BorgWarner, Schaeffler, Eaton, Allison Transmission, Oerlikon Graziano, Comer Industries, Bonfiglioli, Carraro, Brevini, Flender, SEW-Eurodrive, Wittenstein, Magna Powertrain, Marelli, Punch Powertrain, Vitesco Technologies, Drive System Design, Ricardo, AVL, FEV, Voith, Bharat Forge, Getrag, Bosch
+
 ---
 
 ## 🫧 AIR BUBBLE DYNAMICS IN E-DRIVETRAINS
@@ -173,5 +220,8 @@ Leveraging the IAV Particle Explorer and high-speed imaging, the team was able t
 To attend Particleworks Experience 2026, register for free: https://particleworks-europe.com/experience/registration.php
 
 *Suggested image: `card-10-iav.png`*
+
+**🏷️ 30 companies to tag / target with this post:**  
+Daimler Truck, Volvo Trucks, Scania, MAN Truck & Bus, Traton Group, Iveco Group, PACCAR (DAF), CNH Industrial, ZF, Bosch, Vitesco Technologies, BorgWarner, Dana, Allison Transmission, Eaton, Voith, Schaeffler, Magna, AVL, FEV, Ricardo, Cummins, Deutz, Bharat Forge, Meritor, Hyundai Motor, BYD, Punch Powertrain, hofer powertrain, Drive System Design
 
 ---

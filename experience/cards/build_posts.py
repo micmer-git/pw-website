@@ -73,6 +73,30 @@ posts = [
             "Support optimisation of transmission design and drivetrain efficiency"]),
 ]
 
+# announcement post (program release) — shown first, uses a program-link CTA
+posts.insert(0, dict(card="card-00-program.png", head="📣 THE PROGRAM IS OUT",
+   intro="The full programme for Particleworks Experience 2026 is online — 10 talks across two days in Modena, spanning e-drivetrains, e-motor cooling, bearings, gearboxes, gear lubrication, pumps, hydropower, aerospace and aeration.",
+   lead="Join the meshless-CFD community on 6–7 October:",
+   bullets=["10 validated industrial & academic case studies",
+            "The release of Particleworks 9.0 and Granuleworks 4.0",
+            "Hands-on workshops and networking at BPER FORUM Monzani"],
+   cta="See the full program and register for free: https://particleworks-europe.com/experience/program.php"))
+
+# 30 companies to tag / target per post, keyed by card (matched to each talk's industry)
+COMPANIES = {
+ "card-00-program.png": "ZF, Bosch, Schaeffler, Continental, Vitesco Technologies, BorgWarner, Magna, Dana, GKN Automotive, Valeo, Mahle, Marelli, Stellantis, Volkswagen Group, BMW Group, Mercedes-Benz, Renault Group, Volvo Cars, Ferrari, Toyota, Hyundai Motor Group, Nidec, AVL, FEV, Ricardo, MTU Aero Engines, Rolls-Royce, Safran, SKF, Comer Industries",
+ "card-01-prometech.png": "Robert Bosch, ZF Friedrichshafen, Schaeffler, Continental, Vitesco Technologies, BorgWarner, Magna, Valeo, Mahle, Dana, GKN Automotive, IAV, AVL, FEV, Ricardo, hofer powertrain, Bertrandt, EDAG Engineering, Porsche Engineering, Stellantis, BMW Group, Mercedes-Benz, Volkswagen Group, Toyota, Honda, Hyundai Motor Group, Nidec, Marelli, Denso, Aisin",
+ "card-02-mtu.png": "Rolls-Royce, Safran, GE Aerospace, Pratt & Whitney, Honeywell Aerospace, Avio Aero, ITP Aero, GKN Aerospace, Collins Aerospace, Liebherr-Aerospace, Leonardo, Airbus, Boeing, Williams International, ArianeGroup, Curtiss-Wright Surface Technologies, Metal Improvement Company, Wheelabrator (Norican Group), Rösler Oberflächentechnik, Sintokogio, Sturm Maschinenbau, KSA Kugelstrahltechnik, Engineered Abrasives, Oerlikon Balzers, Bodycote, Doncasters Group, Howmet Aerospace, Rheinmetall, MTU Maintenance, Praxair Surface Technologies",
+ "card-03-unimore-stator.png": "Vitesco Technologies, BorgWarner, ZF, Bosch, Mahle, Valeo, Nidec, Magna Powertrain, Dana TM4, Schaeffler, hofer powertrain, Equipmake, YASA, Marelli, Hyundai Mobis, Hyundai Transys, Aisin, Denso, Tesla, Rivian, Lucid Motors, BMW Group, Mercedes-Benz, Volkswagen Group, Porsche, Stellantis, BYD, Rimac Technology, Drive System Design, AVL",
+ "card-04-rdcfd-pump.png": "KSB, Grundfos, Sulzer, Wilo, Bosch Rexroth, Parker Hannifin, Danfoss Power Solutions, Eaton, HAWE Hydraulik, Moog, Xylem, Flowserve, Weir Group, ITT, Pentair, Casappa, Bucher Hydraulics, Marzocchi Pompe, Kawasaki Precision Machinery, Bondioli & Pavesi, Interpump Group, HYDAC, Argo-Hytos, Graco, Pierburg, Continental, Caterpillar, Liebherr, Brevini, Duplomatic MS",
+ "card-05-hesso-pelton.png": "Voith Hydro, Andritz Hydro, GE Vernova Hydro, Gilkes, Litostroj Power, ZECO Hydropower, Canyon Hydro, Global Hydro Energy, Mavel, Rainpower, EDF, Statkraft, Verbund, Enel Green Power, Hydro-Québec, Axpo, Alpiq, BKW, Iberdrola, Vattenfall, Norconsult, Stucky (Gruner Group), AFRY, WWS Wasserkraft, Toshiba Energy Systems, Sulzer, Tractebel, SN Power, Troy Hydro, Mecamidi",
+ "card-06-skf.png": "Schaeffler, NSK, NTN, The Timken Company, JTEKT (Koyo), GMN Bearing, IKO Nippon Thompson, RBC Bearings, ZF, Bosch, Dana, GKN Automotive, BorgWarner, Comer Industries, Bonfiglioli, Carraro, Oerlikon Graziano, Allison Transmission, Eaton, Aisin, Voith, Flender, Siemens Gamesa, Vestas, Nordex, Liebherr, Caterpillar, Komatsu, Danfoss, Wittenstein",
+ "card-07-deepfluid.png": "FUCHS, Klüber Lubrication, Shell, TotalEnergies, Castrol (BP), ExxonMobil, Petronas Lubricants, Liqui Moly, Bosch Rexroth, Parker Hannifin, Danfoss, HAWE Hydraulik, HYDAC, Moog, ZF, Schaeffler, Flender, SEW-Eurodrive, Bonfiglioli, Wittenstein, Bosch, Eaton, Comer Industries, Voith, GKN Automotive, Dana, Argo-Hytos, Stauff, MAHLE, Mann+Hummel",
+ "card-08-trackone.png": "Caterpillar, Komatsu, Liebherr, John Deere, Hitachi Construction Machinery, Volvo CE, JCB, Develon (Doosan), Hyundai Construction Equipment, Kubota, CNH Industrial, Bobcat, Sany, XCMG, Zoomlion, Berco (thyssenkrupp), Italtractor ITM, Titan International, Camso (Michelin), USCO, Topy Industries, Prinoth, Kässbohrer (PistenBully), Claas, AGCO, Manitou, Terex, Wacker Neuson, Takeuchi, Yanmar",
+ "card-09-univance.png": "Aisin, JTEKT, Hyundai Transys, ZF, GKN Automotive, Dana, BorgWarner, Schaeffler, Eaton, Allison Transmission, Oerlikon Graziano, Comer Industries, Bonfiglioli, Carraro, Brevini, Flender, SEW-Eurodrive, Wittenstein, Magna Powertrain, Marelli, Punch Powertrain, Vitesco Technologies, Drive System Design, Ricardo, AVL, FEV, Voith, Bharat Forge, Getrag, Bosch",
+ "card-10-iav.png": "Daimler Truck, Volvo Trucks, Scania, MAN Truck & Bus, Traton Group, Iveco Group, PACCAR (DAF), CNH Industrial, ZF, Bosch, Vitesco Technologies, BorgWarner, Dana, Allison Transmission, Eaton, Voith, Schaeffler, Magna, AVL, FEV, Ricardo, Cummins, Deutz, Bharat Forge, Meritor, Hyundai Motor, BYD, Punch Powertrain, hofer powertrain, Drive System Design",
+}
+
 # ---------- DOCX ----------
 doc = Document()
 st = doc.styles["Normal"].font; st.name="Calibri"; st.size=Pt(11)
@@ -89,8 +113,10 @@ for i,po in enumerate(posts):
         doc.add_paragraph(b, style="List Bullet")
     doc.add_paragraph(LOC)
     doc.add_paragraph(DATE)
-    doc.add_paragraph(CTA)
+    doc.add_paragraph(po.get("cta", CTA))
     note=doc.add_paragraph(); rn=note.add_run(f"🖼️ Suggested image: {po['card']}"); rn.italic=True; rn.font.color.rgb=RGBColor(0x6c,0x75,0x7d)
+    cp=doc.add_paragraph(); rc=cp.add_run("🏷️ 30 companies to tag / target: "); rc.bold=True
+    cp.add_run(COMPANIES[po["card"]])
     if i<len(posts)-1:
         sep=doc.add_paragraph("— — — — — — — — — — — — — — — — — — — —"); sep.alignment=WD_ALIGN_PARAGRAPH.CENTER
 doc.save(os.path.join(OUT,"linkedin-posts-2026.docx"))
@@ -106,9 +132,12 @@ for po in posts:
     md.append(po["lead"])
     for b in po["bullets"]: md.append(f"- {b}")
     md.append("")
-    md.append(LOC+"  "); md.append(DATE+"  "); md.append(CTA)
+    md.append(LOC+"  "); md.append(DATE+"  "); md.append(po.get("cta", CTA))
     md.append("")
     md.append(f"*Suggested image: `{po['card']}`*")
+    md.append("")
+    md.append("**🏷️ 30 companies to tag / target with this post:**  ")
+    md.append(COMPANIES[po["card"]])
     md.append(""); md.append("---"); md.append("")
 open(os.path.join(OUT,"linkedin-posts-2026.md"),"w",encoding="utf-8").write("\n".join(md))
 print("wrote docx + md ->", OUT)

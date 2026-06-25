@@ -116,13 +116,17 @@ def wrap(text,ft,max_w):
     return out
 
 # ---------- shared text fitting ----------
-def fit_title(text):
+def fit_title(text,maxh=TITLE_MAXH,minpx=TITLE_MINPX):
     px=TITLE_MAXPX
-    while px>=TITLE_MINPX:
+    while px>=minpx:
         ft=f(px); lines=wrap(text,ft,TITLE_W); lh=int(px*1.16)
-        if len(lines)*lh<=TITLE_MAXH: return ft,lines,lh
+        if len(lines)*lh<=maxh: return ft,lines,lh
         px-=3
-    ft=f(TITLE_MINPX); return ft,wrap(text,ft,TITLE_W),int(TITLE_MINPX*1.16)
+    ft=f(minpx); return ft,wrap(text,ft,TITLE_W),int(minpx*1.16)
+def title_box(c):
+    # when a sim panel sits lower-right (top at SIM_Y), keep the title above it
+    if c.get("sim"): return dict(maxh=SIM_Y-TITLE_Y-14, minpx=46)
+    return dict(maxh=TITLE_MAXH, minpx=TITLE_MINPX)
 def comp_w(sim): return (SIM_X-COMP_X-20) if sim else (VEN_RIGHT-COMP_X)
 
 # ---------- flat PNG renderer ----------
@@ -133,7 +137,7 @@ def render_png(c):
     d=ImageDraw.Draw(im)
     d.text(DATE_POS,c["date"],font=f(DATE_PX),fill=WHITE); d.text(CAT_POS,c["cat"],font=f(CAT_PX),fill=SUB)
     sim=c.get("sim")
-    tf,lines,lh=fit_title(c["title"]); y=TITLE_Y
+    tf,lines,lh=fit_title(c["title"],**title_box(c)); y=TITLE_Y
     for ln in lines: d.text((TITLE_X,y),ln,font=tf,fill=WHITE); y+=lh
     if sim:
         sp=Image.open(os.path.join(PROC,sim)).convert("RGBA").resize((SIM_W,SIM_H),Image.LANCZOS)
@@ -150,6 +154,39 @@ def render_png(c):
     d.text((VEN_RIGHT-f(VEN1_PX).getlength(L1),VEN1_Y),L1,font=f(VEN1_PX),fill=WHITE)
     d.text((VEN_RIGHT-f(VEN2_PX).getlength(L2),VEN2_Y),L2,font=f(VEN2_PX),fill=SUBLOC)
     im.convert("RGB").save(os.path.join(OUT,c["file"]),"PNG"); print("png",c["file"])
+
+# ---------- general "program is out" announcement card ----------
+GEN_TAGS=["E-Drivetrains","E-Motor Cooling","Bearings","Gearboxes","Gear Lubrication",
+          "Pumps & CHT","Hydropower","Aerospace","Aeration"]
+def draw_tags(im,tags,x0,y0,maxw,fs=40,gap=18,vgap=20,padx=32,pady=15):
+    # draw on a separate RGBA layer so the translucent pill fill blends instead of overwriting
+    ov=Image.new("RGBA",im.size,(0,0,0,0)); d=ImageDraw.Draw(ov)
+    ft=f(fs); ph=fs+pady*2; x=x0; y=y0
+    for t in tags:
+        pw=ft.getlength(t)+padx*2
+        if x+pw>x0+maxw: x=x0; y+=ph+vgap
+        d.rounded_rectangle([x,y,x+pw,y+ph],radius=ph//2,fill=(255,255,255,38),outline=GREEN,width=3)
+        d.text((x+padx,y+ph/2),t,font=ft,fill=WHITE,anchor="lm")
+        x+=pw+gap
+    im.alpha_composite(ov)
+    return y+ph
+def render_general(fname="card-00-program.png"):
+    im=Image.open(os.path.join(PROC,"bg_square.png")).convert("RGBA"); d=ImageDraw.Draw(im)
+    d.rectangle([30,30,S-31,S-31],outline=WHITE,width=3); d.rectangle([48,48,S-49,S-49],outline=GREEN,width=5)
+    cal=Image.open(os.path.join(PROC,"cal.png")).resize((CAL_W,CAL_H),Image.LANCZOS); im.alpha_composite(cal,CAL_POS)
+    d=ImageDraw.Draw(im)
+    d.text(DATE_POS,"October 6–7, 2026",font=f(DATE_PX),fill=WHITE)
+    d.text(CAT_POS,"Conference programme",font=f(CAT_PX),fill=SUB)
+    d.text((90,250),"THE PROGRAM",font=f(118),fill=WHITE)
+    d.text((90,392),"IS OUT",font=f(118),fill=GREEN)
+    d.text((92,556),"Particleworks Experience 2026 — 10 talks across two days",font=f(40),fill=SUBLOC)
+    yend=draw_tags(im,GEN_TAGS,92,648,1016); d=ImageDraw.Draw(im)
+    d.text((92,yend+30),"Full agenda online · register free",font=f(44),fill=WHITE)
+    lg=Image.open(LOGO).convert("RGBA"); lg=lg.resize((LOGO_W,int(lg.size[1]*LOGO_W/lg.size[0])),Image.LANCZOS)
+    im.alpha_composite(lg,(LOGO_X,LOGO_Y))
+    d.text((VEN_RIGHT-f(VEN1_PX).getlength(L1),VEN1_Y),L1,font=f(VEN1_PX),fill=WHITE)
+    d.text((VEN_RIGHT-f(VEN2_PX).getlength(L2),VEN2_Y),L2,font=f(VEN2_PX),fill=SUBLOC)
+    im.convert("RGB").save(os.path.join(OUT,fname),"PNG"); print("png",fname)
 
 # ---------- editable PPTX ----------
 def build_pptx(cards):
@@ -180,7 +217,7 @@ def build_pptx(cards):
         tb(sl,DATE_POS[0],DATE_POS[1],520,52,c["date"],DATE_PX,WHITE)
         tb(sl,CAT_POS[0],CAT_POS[1],520,34,c["cat"],CAT_PX,SUB)
         sim=c.get("sim")
-        tpx=fit_title(c["title"])[0].size
+        tpx=fit_title(c["title"],**title_box(c))[0].size
         tb(sl,TITLE_X,TITLE_Y,TITLE_W,TITLE_MAXH,c["title"],tpx,WHITE)
         if sim: sl.shapes.add_picture(os.path.join(PROC,sim),IN(SIM_X),IN(SIM_Y),IN(SIM_W),IN(SIM_H))
         sl.shapes.add_picture(os.path.join(PROC,c["avatar"]),IN(AV_X),IN(AV_Y),IN(AV_D),IN(AV_D))
@@ -231,6 +268,7 @@ if __name__=="__main__":
     make_sim(os.path.join(PROC,"deepfluid.png"),os.path.join(PROC,"sim_deepfluid.png"))
     make_sim(os.path.join(PROC,"univance.png"),os.path.join(PROC,"sim_univance.png"))
     print("assets ready")
+    render_general()
     for c in cards: render_png(c)
     build_pptx(cards)
     print("ALL DONE")
