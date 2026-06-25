@@ -228,7 +228,7 @@
         <div class="col-md-6 col-lg-5">
           <a href="program.php#talk-keynote" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic kn"><i class="bi bi-rocket-takeoff"></i></div>
-            <div><h4>What's New in Particleworks 9.0 &amp; Granuleworks 4.0</h4><div class="org">Keynote · Iori Saigo · Prometech Software 🇯🇵</div></div>
+            <div><h4>What's New in Particleworks 9.0 &amp; Granuleworks 4.0</h4><div class="org">Keynote · Issei Masaie &amp; Iori Saigo · Prometech Software 🇯🇵</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
