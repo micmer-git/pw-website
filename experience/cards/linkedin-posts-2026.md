@@ -19,7 +19,7 @@ Join the meshless-CFD community on 6–7 October:
 📅 6-7 Oct 2026  
 See the full program and register for free: https://particleworks-europe.com/experience/program.php
 
-*Suggested image: `card-00-program.png`*
+*Suggested carousel: card-00-program.png  →  card-00b-speakers.png  (2-slide carousel)*
 
 **🏷️ 30 companies to tag / target with this post:**  
 ZF, Bosch, Schaeffler, Continental, Vitesco Technologies, BorgWarner, Magna, Dana, GKN Automotive, Valeo, Mahle, Marelli, Stellantis, Volkswagen Group, BMW Group, Mercedes-Benz, Renault Group, Volvo Cars, Ferrari, Toyota, Hyundai Motor Group, Nidec, AVL, FEV, Ricardo, MTU Aero Engines, Rolls-Royce, Safran, SKF, Comer Industries

@@ -80,6 +80,7 @@ posts.insert(0, dict(card="card-00-program.png", head="📣 THE PROGRAM IS OUT",
    bullets=["10 validated industrial & academic case studies",
             "The release of Particleworks 9.0 and Granuleworks 4.0",
             "Hands-on workshops and networking at BPER FORUM Monzani"],
+   imgs="card-00-program.png  →  card-00b-speakers.png  (2-slide carousel)",
    cta="See the full program and register for free: https://particleworks-europe.com/experience/program.php"))
 
 # 30 companies to tag / target per post, keyed by card (matched to each talk's industry)
@@ -114,7 +115,7 @@ for i,po in enumerate(posts):
     doc.add_paragraph(LOC)
     doc.add_paragraph(DATE)
     doc.add_paragraph(po.get("cta", CTA))
-    note=doc.add_paragraph(); rn=note.add_run(f"🖼️ Suggested image: {po['card']}"); rn.italic=True; rn.font.color.rgb=RGBColor(0x6c,0x75,0x7d)
+    note=doc.add_paragraph(); rn=note.add_run(f"🖼️ Suggested image: {po.get('imgs', po['card'])}"); rn.italic=True; rn.font.color.rgb=RGBColor(0x6c,0x75,0x7d)
     cp=doc.add_paragraph(); rc=cp.add_run("🏷️ 30 companies to tag / target: "); rc.bold=True
     cp.add_run(COMPANIES[po["card"]])
     if i<len(posts)-1:
@@ -134,7 +135,7 @@ for po in posts:
     md.append("")
     md.append(LOC+"  "); md.append(DATE+"  "); md.append(po.get("cta", CTA))
     md.append("")
-    md.append(f"*Suggested image: `{po['card']}`*")
+    md.append(f"*Suggested carousel: {po['imgs']}*" if po.get("imgs") else f"*Suggested image: `{po['card']}`*")
     md.append("")
     md.append("**🏷️ 30 companies to tag / target with this post:**  ")
     md.append(COMPANIES[po["card"]])

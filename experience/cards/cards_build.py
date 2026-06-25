@@ -188,6 +188,43 @@ def render_general(fname="card-00-program.png"):
     d.text((VEN_RIGHT-f(VEN2_PX).getlength(L2),VEN2_Y),L2,font=f(VEN2_PX),fill=SUBLOC)
     im.convert("RGB").save(os.path.join(OUT,fname),"PNG"); print("png",fname)
 
+# ---------- carousel slide 2: speaker profiles + company tags ----------
+SPEAKERS=[("iori-saigo","Iori Saigo","Prometech Software"),
+ ("alpcan-guray","Alpcan Güray","MTU Aero Engines"),
+ ("michelangelo-raimondo","Michelangelo Raimondo","UNIMORE"),
+ ("leonardo-lanciotti","Leonardo Lanciotti","R&D CFD"),
+ ("jean-decaix","Jean Decaix","HES-SO Valais"),
+ ("lijun-cao","Lijun Cao","SKF"),
+ ("lukas-hafner","Dr. Lukas Hafner","deepfluid"),
+ ("leonardo-tiberi","Leonardo Tiberi","Track One"),
+ ("naohiro-fujita","Naohiro Fujita","Univance"),
+ ("rene-kockisch","René Kockisch","IAV")]
+def render_speakers(fname="card-00b-speakers.png"):
+    im=Image.open(os.path.join(PROC,"bg_square.png")).convert("RGBA"); d=ImageDraw.Draw(im)
+    d.rectangle([30,30,S-31,S-31],outline=WHITE,width=3); d.rectangle([48,48,S-49,S-49],outline=GREEN,width=5)
+    cal=Image.open(os.path.join(PROC,"cal.png")).resize((CAL_W,CAL_H),Image.LANCZOS); im.alpha_composite(cal,CAL_POS)
+    d=ImageDraw.Draw(im)
+    d.text(DATE_POS,"October 6–7, 2026",font=f(DATE_PX),fill=WHITE)
+    d.text(CAT_POS,"Conference speakers",font=f(CAT_PX),fill=SUB)
+    d.text((90,228),"MEET THE SPEAKERS",font=f(80),fill=WHITE)
+    d.text((92,326),"10 industrial & academic talks · 6–7 Oct, Modena",font=f(34),fill=SUBLOC)
+    AVD=96; cols=[92,612]; rows=[400,520,640,760,880]
+    ov=Image.new("RGBA",im.size,(0,0,0,0)); od=ImageDraw.Draw(ov)
+    for idx,(key,name,comp) in enumerate(SPEAKERS):
+        cx=cols[idx//5]; cy=rows[idx%5]
+        av=Image.open(os.path.join(PROC,"av_"+key+".png")).convert("RGBA").resize((AVD,AVD),Image.LANCZOS)
+        im.alpha_composite(av,(cx,cy)); tx=cx+AVD+22
+        d.text((tx,cy+10),name,font=fit(name,388,40,lo=27),fill=WHITE)
+        cf=f(26); ph=26+16
+        od.rounded_rectangle([tx,cy+56,tx+cf.getlength(comp)+36,cy+56+ph],radius=ph//2,fill=(255,255,255,38),outline=GREEN,width=2)
+        od.text((tx+18,cy+56+ph/2),comp,font=cf,fill=WHITE,anchor="lm")
+    im.alpha_composite(ov)
+    lg=Image.open(LOGO).convert("RGBA"); lg=lg.resize((LOGO_W,int(lg.size[1]*LOGO_W/lg.size[0])),Image.LANCZOS)
+    im.alpha_composite(lg,(LOGO_X,LOGO_Y))
+    d.text((VEN_RIGHT-f(VEN1_PX).getlength(L1),VEN1_Y),L1,font=f(VEN1_PX),fill=WHITE)
+    d.text((VEN_RIGHT-f(VEN2_PX).getlength(L2),VEN2_Y),L2,font=f(VEN2_PX),fill=SUBLOC)
+    im.convert("RGB").save(os.path.join(OUT,fname),"PNG"); print("png",fname)
+
 # ---------- editable PPTX ----------
 def build_pptx(cards):
     from pptx import Presentation
@@ -269,6 +306,7 @@ if __name__=="__main__":
     make_sim(os.path.join(PROC,"univance.png"),os.path.join(PROC,"sim_univance.png"))
     print("assets ready")
     render_general()
+    render_speakers()
     for c in cards: render_png(c)
     build_pptx(cards)
     print("ALL DONE")
