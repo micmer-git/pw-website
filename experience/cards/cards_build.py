@@ -196,10 +196,11 @@ def build_pptx(cards):
 # ---------- data ----------
 PHOTOS={"iori-saigo":"iori-saigo.jpg","alpcan-guray":"alpcan-guray.jpg","michelangelo-raimondo":"michelangelo-raimondo.jpg",
         "leonardo-lanciotti":"leonardo-lanciotti.jpg","jean-decaix":"jean-decaix.jpg","lukas-hafner":"lukas-hafner.jpg",
-        "naohiro-fujita":"naohiro-fujita.jpg"}
+        "naohiro-fujita":"naohiro-fujita.jpg","lijun-cao":"lijun-cao.jpg","leonardo-tiberi":"leonardo-tiberi.jpg",
+        "rene-kockisch":"rene-kockisch.jpg"}
 DATE="October 7, 2026"; L1="Modena, Italy"; L2="BPER FORUM Monzani"
 cards=[
- dict(file="card-01-prometech.png",date=DATE,cat="Developer keynote",company="PROMETECH SOFTWARE",speakers="Iori Saigo",
+ dict(file="card-01-prometech.png",date=DATE,cat="Developer keynote",company="PROMETECH SOFTWARE",speakers="Issei Masaie · Iori Saigo",
       title="What's New in Particleworks 9.0 and Granuleworks 4.0",avatar="av_iori-saigo.png"),
  dict(file="card-02-mtu.png",date=DATE,cat="Industrial speaker",company="MTU AERO ENGINES",speakers="Alpcan Güray",
       title="Simulation of Shot Peening: A CFD-DEM Coupled Case Study",avatar="av_alpcan-guray.png"),
@@ -210,15 +211,15 @@ cards=[
  dict(file="card-05-hesso-pelton.png",date=DATE,cat="Academic speaker",company="HES-SO VALAIS//WALLIS",speakers="Jean Decaix",
       title="Moving Particle Simulation of Eroded Pelton Runners",avatar="av_jean-decaix.png"),
  dict(file="card-06-skf.png",date=DATE,cat="Industrial speaker",company="SKF",speakers="Lijun Cao",
-      title="Verification of Heat Transfer Coefficient in Particleworks for Bearings",avatar="av_LC.png",sim="sim_skf.png"),
+      title="Integrating Particleworks into SKF Engineering Tools: Part I — Verification of Heat Transfer Coefficient",avatar="av_lijun-cao.png",sim="sim_skf.png"),
  dict(file="card-07-deepfluid.png",date=DATE,cat="Industrial speaker",company="DEEPFLUID",speakers="Dr. Lukas Hafner",
       title="Direct Optical Air-in-Oil Measurement for Gearings and Hydraulic Systems",avatar="av_lukas-hafner.png",sim="sim_deepfluid.png"),
  dict(file="card-08-trackone.png",date=DATE,cat="Industrial speaker",company="TRACK ONE",speakers="Leonardo Tiberi",
-      title="Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method",avatar="av_LT.png"),
+      title="Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method",avatar="av_leonardo-tiberi.png"),
  dict(file="card-09-univance.png",date=DATE,cat="Industrial speaker",company="UNIVANCE CORPORATION",speakers="Naohiro Fujita",
       title="Application of Particleworks to Gear Lubrication Analysis and Its Expansion to R&D on Airflow Effects",avatar="av_naohiro-fujita.png",sim="sim_univance.png"),
  dict(file="card-10-iav.png",date=DATE,cat="Industrial speaker",company="IAV",speakers="René Kockisch",
-      title="From Formation to Dissolution: Air Bubble Dynamics in Gear Oil of an Electric 3-Speed Drivetrain",avatar="av_RK.png"),
+      title="From Formation to Dissolution: Air Bubble Dynamics in Gear Oil of an Electric 3-Speed Drivetrain",avatar="av_rene-kockisch.png"),
 ]
 
 if __name__=="__main__":
@@ -226,7 +227,6 @@ if __name__=="__main__":
     for key,fn in PHOTOS.items():
         # original photo, no background removal (handled downstream by the user)
         make_avatar("photo",os.path.join(SPK,fn)).save(os.path.join(PROC,"av_"+key+".png"))
-    for ini in ["LC","LT","RK"]: make_avatar("ini",ini).save(os.path.join(PROC,"av_"+ini+".png"))
     make_sim(os.path.join(PROC,"skf.png"),os.path.join(PROC,"sim_skf.png"))
     make_sim(os.path.join(PROC,"deepfluid.png"),os.path.join(PROC,"sim_deepfluid.png"))
     make_sim(os.path.join(PROC,"univance.png"),os.path.join(PROC,"sim_univance.png"))
