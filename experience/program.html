@@ -127,6 +127,8 @@
     .talk.keynote .talk-art { background: linear-gradient(135deg,#5c0f18,#a01f24 60%,#c0392a); }
     .talk.keynote { border:1.5px solid rgba(0,136,204,0.5); box-shadow:0 12px 40px rgba(0,136,204,0.12); }
     .kbadge { display:inline-flex; align-items:center; gap:0.4rem; background: var(--ev-accent); color:#fff; font-size:0.7rem; font-weight:800; letter-spacing:1px; text-transform:uppercase; padding:0.3rem 0.8rem; border-radius:50px; margin-bottom:0.8rem; }
+    .kn-seg { margin-bottom:0.9rem; }
+    .kn-seg-title { font-size:0.78rem; font-weight:800; letter-spacing:0.6px; text-transform:uppercase; color:var(--ev-crimson); margin-bottom:0.45rem; }
 
     /* CTA */
     .cta-final { padding:4.5rem 0; background: linear-gradient(135deg, rgba(217,80,63,0.90), rgba(143,22,27,0.95)), url('../images/experience2026/theme-bg.jpg') center/cover no-repeat; position:relative; overflow:hidden; }
@@ -241,14 +243,20 @@
               </div>
               <div class="talk-body">
                 <span class="kbadge"><i class="bi bi-rocket-takeoff"></i> Software Release</span>
-                <h3>What's New in Particleworks 9.0 and Granuleworks 4.0</h3>
-                <div class="speaker">
-                  <div class="avatar">IM</div>
-                  <div><div class="nm">Issei Masaie</div><div class="rl">General Manager · Prometech Software · <span class="flag">🇯🇵 Japan</span></div></div>
+                <h3>Particleworks 9.0 &amp; Granuleworks 4.0</h3>
+                <div class="kn-seg">
+                  <div class="kn-seg-title">What's New</div>
+                  <div class="speaker">
+                    <div class="avatar">IM</div>
+                    <div><div class="nm">Issei Masaie</div><div class="rl">General Manager · Prometech Software · <span class="flag">🇯🇵 Japan</span></div></div>
+                  </div>
                 </div>
-                <div class="speaker">
-                  <div class="avatar"><img src="../images/experience2026/iori-saigo.jpg" alt="Iori Saigo" loading="lazy"></div>
-                  <div><div class="nm">Iori Saigo</div><div class="rl">Application Engineer · Prometech Software · <span class="flag">🇯🇵 Japan</span></div></div>
+                <div class="kn-seg">
+                  <div class="kn-seg-title">New Enabled Industrial Applications</div>
+                  <div class="speaker">
+                    <div class="avatar"><img src="../images/experience2026/iori-saigo.jpg" alt="Iori Saigo" loading="lazy"></div>
+                    <div><div class="nm">Iori Saigo</div><div class="rl">Application Engineer · Prometech Software · <span class="flag">🇯🇵 Japan</span></div></div>
+                  </div>
                 </div>
                 <div class="talk-tags">
                   <span class="chip chip-theme">Software release</span>
