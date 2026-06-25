@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="../favicon.ico">
-  <title>Program — Particleworks Experience 2026 | Modena, October 6-7</title>
+  <title>Program — Particleworks Experience 2026 | Modena, October 7</title>
   <meta name="description" content="The full program of Particleworks Experience 2026 — Modena, October 7. Keynote release of Particleworks 9.0 plus industry and academic talks on shot peening, e-motor cooling, reciprocating pumps and eroded Pelton runners.">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -252,7 +252,7 @@
                   </div>
                 </div>
                 <div class="kn-seg">
-                  <div class="kn-seg-title">New Enabled Industrial Applications</div>
+                  <div class="kn-seg-title">Application Examples &amp; Case Studies</div>
                   <div class="speaker">
                     <div class="avatar"><img src="../images/experience2026/iori-saigo.jpg" alt="Iori Saigo" loading="lazy"></div>
                     <div><div class="nm">Iori Saigo</div><div class="rl">Application Engineer · Prometech Software · <span class="flag">🇯🇵 Japan</span></div></div>
@@ -301,7 +301,7 @@
                   <div><div class="nm">Alpcan Güray</div><div class="rl">Project Manager · MTU Aero Engines AG · <span class="flag">🇩🇪 Germany</span></div></div>
                 </div>
                 <div class="talk-tags">
-                  <span class="chip chip-theme">Aerospace · Surface treatment</span>
+                  <span class="chip chip-theme">Surface treatment · CFD-DEM</span>
                   <span class="chip chip-method">CFD-DEM coupling</span><span class="chip chip-method">DEM</span>
                 </div>
                 <div class="abs">
@@ -409,7 +409,7 @@
                   <div><div class="nm">Leonardo Lanciotti</div><div class="rl">CFD Analyst · R&amp;D CFD S.R.L. · <span class="flag">🇮🇹 Italy</span></div></div>
                 </div>
                 <div class="talk-tags">
-                  <span class="chip chip-theme">Pumps · Conjugate heat transfer</span>
+                  <span class="chip chip-theme">Reciprocating pumps</span>
                   <span class="chip chip-method">Sloshing</span><span class="chip chip-method">CHT</span>                </div>
                 <div class="abs">
                   <p>Thermal analysis of a reciprocating pump operating at a fixed working point. The objective is to identify potential hot spots within the system and to verify that the resulting thermal levels remain within acceptable limits for the piston seals.</p>
@@ -522,7 +522,7 @@
                   <div><div class="nm">Lijun Cao</div><div class="rl">Project Engineer Specialist · SKF (Advanced Engineering Competence Centre) · <span class="flag">🇳🇱 Netherlands</span></div></div>
                 </div>
                 <div class="talk-tags">
-                  <span class="chip chip-theme">Bearings · Thermal modelling</span>
+                  <span class="chip chip-theme">Thermal simulations</span>
                   <span class="chip chip-method">Heat transfer (HTC)</span><span class="chip chip-method">Validation</span>
                 </div>
                 <div class="abs">
@@ -570,7 +570,7 @@
                   <div><div class="nm">Dr. Lukas Hafner</div><div class="rl">Technical Lead · deepfluid · <span class="flag">🇩🇪 Germany</span></div></div>
                 </div>
                 <div class="talk-tags">
-                  <span class="chip chip-theme">Gearings &amp; hydraulics · Aeration</span>
+                  <span class="chip chip-theme">Gearings &amp; hydraulics · Oil aeration</span>
                   <span class="chip chip-method">Optical measurement</span><span class="chip chip-method">Validation data</span>
                 </div>
                 <div class="abs">
@@ -690,7 +690,7 @@
                   <div><div class="nm">Naohiro Fujita</div><div class="rl">Staff · Univance Corporation · <span class="flag">🇯🇵 Japan</span></div></div>
                 </div>
                 <div class="talk-tags">
-                  <span class="chip chip-theme">Gearboxes · Lubrication</span>
+                  <span class="chip chip-theme">Lubrication</span>
                   <span class="chip chip-method">Free-surface</span><span class="chip chip-method">Churning</span><span class="chip chip-method">Airflow (R&amp;D)</span>
                 </div>
                 <div class="abs">
@@ -738,7 +738,7 @@
                   <div><div class="nm">René Kockisch</div><div class="rl">Team Manager · IAV GmbH · <span class="flag">🇩🇪 Germany</span></div></div>
                 </div>
                 <div class="talk-tags">
-                  <span class="chip chip-theme">E-drivetrain · Aeration</span>
+                  <span class="chip chip-theme">Oil aeration</span>
                   <span class="chip chip-method">Bubble dynamics</span><span class="chip chip-method">High-speed imaging</span><span class="chip chip-method">IAV Particle Explorer</span>
                 </div>
                 <div class="abs">
