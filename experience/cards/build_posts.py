@@ -12,11 +12,11 @@ CTA = f"To attend Particleworks Experience 2026, register for free: {REG}"
 
 posts = [
  dict(card="card-01-prometech.png", head="🚀 WHAT'S NEW IN PARTICLEWORKS 9.0 & GRANULEWORKS 4.0",
-   intro="Iori Saigo from Prometech Software will unveil the latest Particleworks 9.0 and Granuleworks 4.0 releases.",
+   intro="Issei Masaie and Iori Saigo from Prometech Software will unveil the latest Particleworks 9.0 and Granuleworks 4.0 releases — in two parts: what's new, then application examples and case studies.",
    lead="Discover what's new in particle-based simulation:",
-   bullets=["Major gains in simulation performance and GPU efficiency",
+   bullets=["Issei Masaie — What's New: major gains in simulation performance and GPU efficiency",
             "Extended multi-physics capabilities for complex fluid dynamics",
-            "Application examples and case studies from the latest developments"]),
+            "Iori Saigo — Application Examples & Case Studies from the latest developments"]),
  dict(card="card-02-mtu.png", head="🎯 SHOT PEENING SIMULATION",
    intro="Alpcan Güray from MTU Aero Engines AG will show how Particleworks models the shot peening of fatigue-critical aerospace components.",
    lead="Leveraging coupled CFD-DEM simulation, the team was able to:",

@@ -137,8 +137,16 @@ def render_png(c):
     d=ImageDraw.Draw(im)
     d.text(DATE_POS,c["date"],font=f(DATE_PX),fill=WHITE); d.text(CAT_POS,c["cat"],font=f(CAT_PX),fill=SUB)
     sim=c.get("sim")
-    tf,lines,lh=fit_title(c["title"],**title_box(c)); y=TITLE_Y
-    for ln in lines: d.text((TITLE_X,y),ln,font=tf,fill=WHITE); y+=lh
+    if c.get("title2"):
+        # two stacked titles (keynote): part 1 on top (white), part 2 below (green), divider between
+        tf,lines,lh=fit_title(c["title"],maxh=212,minpx=48); y=TITLE_Y
+        for ln in lines: d.text((TITLE_X,y),ln,font=tf,fill=WHITE); y+=lh
+        y+=14; d.line([(TITLE_X,y),(TITLE_X+130,y)],fill=GREEN,width=5); y+=30
+        t2=fit(c["title2"],TITLE_W,60,lo=40); lh2=int(t2.size*1.16)
+        for ln in wrap(c["title2"],t2,TITLE_W): d.text((TITLE_X,y),ln,font=t2,fill=GREEN); y+=lh2
+    else:
+        tf,lines,lh=fit_title(c["title"],**title_box(c)); y=TITLE_Y
+        for ln in lines: d.text((TITLE_X,y),ln,font=tf,fill=WHITE); y+=lh
     if sim:
         sp=Image.open(os.path.join(PROC,sim)).convert("RGBA").resize((SIM_W,SIM_H),Image.LANCZOS)
         sh=Image.new("RGBA",(S,S),(0,0,0,0)); ImageDraw.Draw(sh).rounded_rectangle([SIM_X,SIM_Y+8,SIM_X+SIM_W,SIM_Y+SIM_H+8],radius=40,fill=(0,0,0,95))
@@ -156,8 +164,8 @@ def render_png(c):
     im.convert("RGB").save(os.path.join(OUT,c["file"]),"PNG"); print("png",c["file"])
 
 # ---------- general "program is out" announcement card ----------
-GEN_TAGS=["E-Drivetrains","E-Motor Cooling","Bearings","Gearboxes","Gear Lubrication",
-          "Pumps & CHT","Hydropower","Aerospace","Aeration"]
+GEN_TAGS=["Surface Treatment","CFD-DEM","E-Motor Cooling","Reciprocating Pumps","Hydropower",
+          "Thermal Simulation","Oil Aeration","Gear Lubrication","Undercarriage"]
 def draw_tags(im,tags,x0,y0,maxw,fs=40,gap=18,vgap=20,padx=32,pady=15):
     # draw on a separate RGBA layer so the translucent pill fill blends instead of overwriting
     ov=Image.new("RGBA",im.size,(0,0,0,0)); d=ImageDraw.Draw(ov)
@@ -254,8 +262,14 @@ def build_pptx(cards):
         tb(sl,DATE_POS[0],DATE_POS[1],520,52,c["date"],DATE_PX,WHITE)
         tb(sl,CAT_POS[0],CAT_POS[1],520,34,c["cat"],CAT_PX,SUB)
         sim=c.get("sim")
-        tpx=fit_title(c["title"],**title_box(c))[0].size
-        tb(sl,TITLE_X,TITLE_Y,TITLE_W,TITLE_MAXH,c["title"],tpx,WHITE)
+        if c.get("title2"):
+            tpx=fit_title(c["title"],maxh=212,minpx=48)[0].size
+            tb(sl,TITLE_X,TITLE_Y,TITLE_W,236,c["title"],tpx,WHITE)
+            t2px=fit(c["title2"],TITLE_W,60,lo=40).size
+            tb(sl,TITLE_X,TITLE_Y+250,TITLE_W,180,c["title2"],t2px,GREEN)
+        else:
+            tpx=fit_title(c["title"],**title_box(c))[0].size
+            tb(sl,TITLE_X,TITLE_Y,TITLE_W,TITLE_MAXH,c["title"],tpx,WHITE)
         if sim: sl.shapes.add_picture(os.path.join(PROC,sim),IN(SIM_X),IN(SIM_Y),IN(SIM_W),IN(SIM_H))
         sl.shapes.add_picture(os.path.join(PROC,c["avatar"]),IN(AV_X),IN(AV_Y),IN(AV_D),IN(AV_D))
         cw=comp_w(sim); cpx=fit(c["company"],cw,CP_PX).size; ppx=fit(c["speakers"],cw,CP_PX).size
@@ -275,7 +289,8 @@ PHOTOS={"iori-saigo":"iori-saigo.jpg","alpcan-guray":"alpcan-guray.jpg","michela
 DATE="October 7, 2026"; L1="Modena, Italy"; L2="BPER FORUM Monzani"
 cards=[
  dict(file="card-01-prometech.png",date=DATE,cat="Developer keynote",company="PROMETECH SOFTWARE",speakers="Issei Masaie · Iori Saigo",
-      title="What's New in Particleworks 9.0 and Granuleworks 4.0",avatar="av_iori-saigo.png"),
+      title="What's New in Particleworks 9.0 & Granuleworks 4.0",
+      title2="Application Examples & Case Studies",avatar="av_iori-saigo.png"),
  dict(file="card-02-mtu.png",date=DATE,cat="Industrial speaker",company="MTU AERO ENGINES",speakers="Alpcan Güray",
       title="Simulation of Shot Peening: A CFD-DEM Coupled Case Study",avatar="av_alpcan-guray.png"),
  dict(file="card-03-unimore-stator.png",date=DATE,cat="Academic speaker",company="UNIVERSITY OF MODENA AND REGGIO EMILIA",
