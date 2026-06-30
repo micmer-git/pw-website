@@ -196,6 +196,32 @@ def render_general(fname="card-00-program.png"):
     d.text((VEN_RIGHT-f(VEN2_PX).getlength(L2),VEN2_Y),L2,font=f(VEN2_PX),fill=SUBLOC)
     im.convert("RGB").save(os.path.join(OUT,fname),"PNG"); print("png",fname)
 
+# ---------- Prometech keynote: two title+speaker segments ----------
+def render_keynote(c):
+    im=Image.open(os.path.join(PROC,"bg_square.png")).convert("RGBA"); d=ImageDraw.Draw(im)
+    d.rectangle([30,30,S-31,S-31],outline=WHITE,width=3); d.rectangle([48,48,S-49,S-49],outline=GREEN,width=5)
+    cal=Image.open(os.path.join(PROC,"cal.png")).resize((CAL_W,CAL_H),Image.LANCZOS); im.alpha_composite(cal,CAL_POS)
+    d=ImageDraw.Draw(im)
+    d.text(DATE_POS,c["date"],font=f(DATE_PX),fill=WHITE); d.text(CAT_POS,c["cat"],font=f(CAT_PX),fill=SUB)
+    segs=[("PART 1 · SOFTWARE RELEASE",c["title"],"av_IM.png","Issei Masaie","General Manager · Prometech Software",WHITE),
+          ("PART 2 · APPLICATIONS",c["title2"],"av_iori-saigo.png","Iori Saigo","Application Engineer · Prometech Software",GREEN)]
+    starts=[202,560]
+    for (kick,title,av,name,role,col),sy in zip(segs,starts):
+        d.text((92,sy),kick,font=f(27),fill=SUB)
+        tf,lines,lh=fit_title(title,maxh=150,minpx=44); ty=sy+40
+        for ln in lines: d.text((92,ty),ln,font=tf,fill=col); ty+=lh
+        avd=92; ay=ty+16
+        avi=Image.open(os.path.join(PROC,av)).convert("RGBA").resize((avd,avd),Image.LANCZOS); im.alpha_composite(avi,(92,ay))
+        tx=92+avd+20
+        d.text((tx,ay+6),name,font=fit(name,360,40,lo=30),fill=WHITE)
+        d.text((tx,ay+52),role,font=f(25),fill=SUBLOC)
+    d.line([(92,524),(232,524)],fill=GREEN,width=5)
+    lg=Image.open(LOGO).convert("RGBA"); lg=lg.resize((LOGO_W,int(lg.size[1]*LOGO_W/lg.size[0])),Image.LANCZOS)
+    im.alpha_composite(lg,(LOGO_X,LOGO_Y))
+    d.text((VEN_RIGHT-f(VEN1_PX).getlength(L1),VEN1_Y),L1,font=f(VEN1_PX),fill=WHITE)
+    d.text((VEN_RIGHT-f(VEN2_PX).getlength(L2),VEN2_Y),L2,font=f(VEN2_PX),fill=SUBLOC)
+    im.convert("RGB").save(os.path.join(OUT,c["file"]),"PNG"); print("png",c["file"],"(keynote)")
+
 # ---------- carousel slide 2: speaker profiles + company tags ----------
 SPEAKERS=[("iori-saigo","Iori Saigo","Prometech Software"),
  ("alpcan-guray","Alpcan Güray","MTU Aero Engines"),
@@ -316,12 +342,13 @@ if __name__=="__main__":
     for key,fn in PHOTOS.items():
         # original photo, no background removal (handled downstream by the user)
         make_avatar("photo",os.path.join(SPK,fn)).save(os.path.join(PROC,"av_"+key+".png"))
+    make_avatar("ini","IM").save(os.path.join(PROC,"av_IM.png"))   # Issei Masaie — initials avatar
     make_sim(os.path.join(PROC,"skf.png"),os.path.join(PROC,"sim_skf.png"))
     make_sim(os.path.join(PROC,"deepfluid.png"),os.path.join(PROC,"sim_deepfluid.png"))
     make_sim(os.path.join(PROC,"univance.png"),os.path.join(PROC,"sim_univance.png"))
     print("assets ready")
     render_general()
     render_speakers()
-    for c in cards: render_png(c)
+    for c in cards: (render_keynote(c) if c["file"]=="card-01-prometech.png" else render_png(c))
     build_pptx(cards)
     print("ALL DONE")
