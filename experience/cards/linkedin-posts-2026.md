@@ -28,12 +28,12 @@ ZF, Bosch, Schaeffler, Continental, Vitesco Technologies, BorgWarner, Magna, Dan
 
 ## 🚀 WHAT'S NEW IN PARTICLEWORKS 9.0 & GRANULEWORKS 4.0
 
-Iori Saigo from Prometech Software will unveil the latest Particleworks 9.0 and Granuleworks 4.0 releases.
+Issei Masaie and Iori Saigo from Prometech Software will unveil the latest Particleworks 9.0 and Granuleworks 4.0 releases — in two parts: what's new, then application examples and case studies.
 
 Discover what's new in particle-based simulation:
-- Major gains in simulation performance and GPU efficiency
+- Issei Masaie — What's New: major gains in simulation performance and GPU efficiency
 - Extended multi-physics capabilities for complex fluid dynamics
-- Application examples and case studies from the latest developments
+- Iori Saigo — Application Examples & Case Studies from the latest developments
 
 📍 Modena, Italy 🇮🇹  
 📅 6-7 Oct 2026  
