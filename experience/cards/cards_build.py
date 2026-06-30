@@ -287,6 +287,25 @@ def build_pptx(cards):
         sl.shapes.add_picture(os.path.join(PROC,"cal.png"),IN(CAL_POS[0]),IN(CAL_POS[1]),IN(CAL_W),IN(CAL_H))
         tb(sl,DATE_POS[0],DATE_POS[1],520,52,c["date"],DATE_PX,WHITE)
         tb(sl,CAT_POS[0],CAT_POS[1],520,34,c["cat"],CAT_PX,SUB)
+        if c["file"]=="card-01-prometech.png":
+            segs=[("PART 1 · SOFTWARE RELEASE",c["title"],"av_IM.png","Issei Masaie","General Manager · Prometech Software",WHITE),
+                  ("PART 2 · APPLICATIONS",c["title2"],"av_iori-saigo.png","Iori Saigo","Application Engineer · Prometech Software",GREEN)]
+            for (kick,title,av,name,role,col),sy in zip(segs,[202,560]):
+                tb(sl,92,sy,900,34,kick,27,SUB)
+                tf2,lines,lh=fit_title(title,maxh=150,minpx=44)
+                tb(sl,TITLE_X,sy+40,TITLE_W,len(lines)*lh+10,title,tf2.size,col)
+                ay=sy+40+len(lines)*lh+16
+                sl.shapes.add_picture(os.path.join(PROC,av),IN(92),IN(ay),IN(92),IN(92))
+                tx=92+92+20
+                tb(sl,tx,ay+6,360,52,name,fit(name,360,40,lo=30).size,WHITE)
+                tb(sl,tx,ay+52,880,40,role,25,SUBLOC)
+            dv=sl.shapes.add_shape(MSO_SHAPE.RECTANGLE,IN(92),IN(524),IN(140),IN(6))
+            dv.fill.solid(); dv.fill.fore_color.rgb=rgb(GREEN); dv.line.fill.background(); dv.shadow.inherit=False
+            lg=Image.open(LOGO); lh0=int(lg.size[1]*LOGO_W/lg.size[0])
+            sl.shapes.add_picture(LOGO,IN(LOGO_X),IN(LOGO_Y),IN(LOGO_W),IN(lh0))
+            tb(sl,VEN_RIGHT-560,VEN1_Y,560,65,L1,VEN1_PX,WHITE,align=PP_ALIGN.RIGHT)
+            tb(sl,VEN_RIGHT-560,VEN2_Y,560,40,L2,VEN2_PX,SUBLOC,align=PP_ALIGN.RIGHT)
+            continue
         sim=c.get("sim")
         if c.get("title2"):
             tpx=fit_title(c["title"],maxh=212,minpx=48)[0].size
