@@ -285,6 +285,12 @@
             <div><h4>Air Bubble Dynamics in Gear Oil of an Electric Drivetrain</h4><div class="org">IAV GmbH 🇩🇪</div></div>
           </div></a>
         </div>
+        <div class="col-md-6 col-lg-5">
+          <a href="program.php#talk-flowsep" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-funnel"></i></div>
+            <div><h4>Sand Separation &amp; Wear in the Börger FlowSep</h4><div class="org">Börger GmbH 🇩🇪 · EnginSoft 🇮🇹</div></div>
+          </div></a>
+        </div>
         <div class="col-md-6 col-lg-5 d-flex">
           <a href="program.php" class="btn-pw w-100 justify-content-center align-self-stretch" style="border-radius:16px;"><i class="bi bi-calendar3"></i> See the full program</a>
         </div>

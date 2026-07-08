@@ -8,10 +8,10 @@ Register link: https://particleworks-europe.com/experience/registration.php
 
 ## 📣 THE PROGRAM IS OUT
 
-The full programme for Particleworks Experience 2026 is online — 10 talks across two days in Modena, spanning e-drivetrains, e-motor cooling, bearings, gearboxes, gear lubrication, pumps, hydropower, aerospace and aeration.
+The full programme for Particleworks Experience 2026 is online — 11 talks across two days in Modena, spanning e-drivetrains, e-motor cooling, bearings, gearboxes, gear lubrication, pumps, hydropower, aerospace, aeration and solid–liquid separation.
 
 Join the meshless-CFD community on 6–7 October:
-- 10 validated industrial & academic case studies
+- 11 validated industrial & academic case studies
 - The release of Particleworks 9.0 and Granuleworks 4.0
 - Hands-on workshops and networking at BPER FORUM Monzani
 
@@ -223,5 +223,25 @@ To attend Particleworks Experience 2026, register for free: https://particlework
 
 **🏷️ 30 companies to tag / target with this post:**  
 Daimler Truck, Volvo Trucks, Scania, MAN Truck & Bus, Traton Group, Iveco Group, PACCAR (DAF), CNH Industrial, ZF, Bosch, Vitesco Technologies, BorgWarner, Dana, Allison Transmission, Eaton, Voith, Schaeffler, Magna, AVL, FEV, Ricardo, Cummins, Deutz, Bharat Forge, Meritor, Hyundai Motor, BYD, Punch Powertrain, hofer powertrain, Drive System Design
+
+---
+
+## ⚙️ SAND SEPARATION & WEAR IN THE BÖRGER FLOWSEP
+
+Bernd Valtwies from Börger GmbH — together with Riccardo Sala from EnginSoft — will show how Particleworks simulates centrifugal sand separation and the wear it drives inside the Börger FlowSep.
+
+Leveraging particle simulation, the team was able to:
+- Resolve how abrasive sand particles are spun out of the fluid using centrifugal force
+- Predict where wear concentrates on the wetted surfaces, ahead of physical prototyping
+- Guide geometry and material choices to protect downstream pumps and extend service life
+
+📍 Modena, Italy 🇮🇹  
+📅 6-7 Oct 2026  
+To attend Particleworks Experience 2026, register for free: https://particleworks-europe.com/experience/registration.php
+
+*Suggested image: `card-11-boerger.png`*
+
+**🏷️ 30 companies to tag / target with this post:**  
+Xylem, Sulzer, KSB, Grundfos, Wilo, Flowserve, Weir Group (Warman), GEA, Alfa Laval, Andritz Separation, Flottweg, Hiller Separation & Process, Vogelsang, NETZSCH Pumps & Systems, SEEPEX, WANGEN PUMPEN, Veolia Water Technologies, SUEZ, Huber SE, Nijhuis Saur Industries, Metso, FLSmidth, Weir Minerals, Royal IHC, Van Oord, Boskalis, DEME Group, Ebara, ProMinent, Börger
 
 ---

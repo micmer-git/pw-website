@@ -198,7 +198,7 @@
       <div class="hero-facts">
         <span class="hero-fact"><i class="bi bi-calendar-event"></i> Conference — Wednesday, October 7, 2026</span>
         <span class="hero-fact"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena (IT)</span>
-        <span class="hero-fact"><i class="bi bi-mic"></i> 10 talks · 5 countries</span>
+        <span class="hero-fact"><i class="bi bi-mic"></i> 11 talks · 5 countries</span>
       </div>
       <div class="hero-cta-row">
         <a href="registration.php" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
@@ -746,6 +746,66 @@
                   <p>High-speed imaging and particle-based analysis enable a detailed quantification of bubble dynamics under representative operating conditions. The results reveal characteristic bubble size distributions, preferred transport paths within the transmission and dissolution behavior.</p>
                   <p>The findings provide valuable insights into air–oil interaction mechanisms and support the optimization of transmission design, lubrication systems and overall drivetrain efficiency.</p>
                   <div class="authors"><b>Authors:</b> René Kockisch · Alexander Voigt · Guido Kutzke · Volker Helbig — IAV GmbH, DE</div>
+                </div>
+                <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- TALK 10: Börger FlowSep sand separation & wear -->
+          <article class="talk" id="talk-flowsep">
+            <div class="talk-grid">
+              <div class="talk-art">
+                <span class="talk-no">TALK 10</span>
+                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Centrifugal separation of sand from fluid">
+                  <defs>
+                    <linearGradient id="t10c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a5c"/><stop offset="1" stop-color="#ffd27a"/></linearGradient>
+                    <radialGradient id="t10s" cx="50%" cy="35%" r="65%"><stop offset="0" stop-color="#fff" stop-opacity="0.9"/><stop offset="1" stop-color="#ffb347" stop-opacity="0.15"/></radialGradient>
+                  </defs>
+                  <!-- cyclone / centrifuge body -->
+                  <path d="M56 26 H144 L118 118 H82 Z" fill="url(#t10c)" opacity="0.9"/>
+                  <path d="M56 26 H144 L118 118 H82 Z" fill="none" stroke="#fff3ee" stroke-width="2.5"/>
+                  <ellipse cx="100" cy="26" rx="44" ry="9" fill="url(#t10s)"/>
+                  <!-- clean fluid outlet at top -->
+                  <rect x="92" y="6" width="16" height="16" rx="3" fill="#ffe0d2"/>
+                  <!-- swirling fluid inside -->
+                  <g stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.85">
+                    <path d="M70 44 Q100 58 130 44"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="1.8s" repeatCount="indefinite"/></path>
+                    <path d="M76 64 Q100 78 124 64"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.8s" repeatCount="indefinite"/></path>
+                  </g>
+                  <!-- sand particles spun outward and dropping through the apex -->
+                  <g fill="#6b4a2b">
+                    <circle cx="86" cy="60" r="3"><animate attributeName="cy" values="46;120;46" dur="2.2s" repeatCount="indefinite"/><animate attributeName="cx" values="100;82;100" dur="2.2s" repeatCount="indefinite"/></circle>
+                    <circle cx="114" cy="72" r="2.6"><animate attributeName="cy" values="50;122;50" dur="2.6s" repeatCount="indefinite"/><animate attributeName="cx" values="100;118;100" dur="2.6s" repeatCount="indefinite"/></circle>
+                    <circle cx="100" cy="90" r="2.8"><animate attributeName="cy" values="60;126;60" dur="2s" repeatCount="indefinite"/></circle>
+                  </g>
+                  <!-- sand discharge pile -->
+                  <path d="M84 118 H116 L108 138 H92 Z" fill="#8a6236" opacity="0.9"/>
+                  <g fill="#6b4a2b">
+                    <circle cx="100" cy="146" r="2.6"><animate attributeName="cy" values="132;150;132" dur="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.6s" repeatCount="indefinite"/></circle>
+                    <circle cx="94" cy="150" r="2"><animate attributeName="cy" values="134;154;134" dur="1.9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.9s" repeatCount="indefinite"/></circle>
+                    <circle cx="107" cy="150" r="2"><animate attributeName="cy" values="136;156;136" dur="1.7s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.7s" repeatCount="indefinite"/></circle>
+                  </g>
+                </svg>
+              </div>
+              <div class="talk-body">
+                <h3>Simulation of Sand Separation and Wear in the Börger FlowSep</h3>
+                <div class="speaker">
+                  <div class="avatar"><img src="../images/experience2026/bernd-valtwies.jpg" alt="Bernd Valtwies" loading="lazy"></div>
+                  <div><div class="nm">Bernd Valtwies</div><div class="rl">Head of Development · Börger GmbH · <span class="flag">🇩🇪 Germany</span></div></div>
+                </div>
+                <div class="speaker">
+                  <div class="avatar"><img src="../images/experience2026/riccardo-sala.png" alt="Riccardo Sala" loading="lazy"></div>
+                  <div><div class="nm">Riccardo Sala</div><div class="rl">EnginSoft SpA · <span class="flag">🇮🇹 Italy</span></div></div>
+                </div>
+                <div class="talk-tags">
+                  <span class="chip chip-theme">Solid–liquid separation · Wear prediction</span>
+                  <span class="chip chip-method">Centrifugal separation</span><span class="chip chip-method">Particle tracking</span><span class="chip chip-method">Abrasive wear</span>
+                </div>
+                <div class="abs">
+                  <p>The Börger FlowSep is a compact separation unit that removes abrasive sand and grit from process fluids using centrifugal force, protecting downstream pumps and equipment from premature wear. This study applies Particleworks to simulate the separation process — resolving how sand particles are driven out of the fluid stream inside the unit.</p>
+                  <p>Beyond separation efficiency, the simulation is used to anticipate where abrasive wear is likely to concentrate on the wetted surfaces, so that geometry and material choices can be optimised for a longer service life. Coupling the particle-laden flow with the expected wear patterns gives Börger's engineers a predictive view of both performance and durability ahead of physical prototyping.</p>
+                  <div class="authors"><b>Authors:</b> Bernd Valtwies (Börger GmbH, DE) · Riccardo Sala (EnginSoft SpA, IT)</div>
                 </div>
                 <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
               </div>

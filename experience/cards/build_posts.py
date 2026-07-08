@@ -71,13 +71,19 @@ posts = [
    bullets=["Quantify bubble formation, transport, coalescence and dissolution",
             "Reveal characteristic bubble size distributions and preferred transport paths",
             "Support optimisation of transmission design and drivetrain efficiency"]),
+ dict(card="card-11-boerger.png", head="⚙️ SAND SEPARATION & WEAR IN THE BÖRGER FLOWSEP",
+   intro="Bernd Valtwies from Börger GmbH — together with Riccardo Sala from EnginSoft — will show how Particleworks simulates centrifugal sand separation and the wear it drives inside the Börger FlowSep.",
+   lead="Leveraging particle simulation, the team was able to:",
+   bullets=["Resolve how abrasive sand particles are spun out of the fluid using centrifugal force",
+            "Predict where wear concentrates on the wetted surfaces, ahead of physical prototyping",
+            "Guide geometry and material choices to protect downstream pumps and extend service life"]),
 ]
 
 # announcement post (program release) — shown first, uses a program-link CTA
 posts.insert(0, dict(card="card-00-program.png", head="📣 THE PROGRAM IS OUT",
-   intro="The full programme for Particleworks Experience 2026 is online — 10 talks across two days in Modena, spanning e-drivetrains, e-motor cooling, bearings, gearboxes, gear lubrication, pumps, hydropower, aerospace and aeration.",
+   intro="The full programme for Particleworks Experience 2026 is online — 11 talks across two days in Modena, spanning e-drivetrains, e-motor cooling, bearings, gearboxes, gear lubrication, pumps, hydropower, aerospace, aeration and solid–liquid separation.",
    lead="Join the meshless-CFD community on 6–7 October:",
-   bullets=["10 validated industrial & academic case studies",
+   bullets=["11 validated industrial & academic case studies",
             "The release of Particleworks 9.0 and Granuleworks 4.0",
             "Hands-on workshops and networking at BPER FORUM Monzani"],
    imgs="card-00-program.png  →  card-00b-speakers.png  (2-slide carousel)",
@@ -96,6 +102,7 @@ COMPANIES = {
  "card-08-trackone.png": "Caterpillar, Komatsu, Liebherr, John Deere, Hitachi Construction Machinery, Volvo CE, JCB, Develon (Doosan), Hyundai Construction Equipment, Kubota, CNH Industrial, Bobcat, Sany, XCMG, Zoomlion, Berco (thyssenkrupp), Italtractor ITM, Titan International, Camso (Michelin), USCO, Topy Industries, Prinoth, Kässbohrer (PistenBully), Claas, AGCO, Manitou, Terex, Wacker Neuson, Takeuchi, Yanmar",
  "card-09-univance.png": "Aisin, JTEKT, Hyundai Transys, ZF, GKN Automotive, Dana, BorgWarner, Schaeffler, Eaton, Allison Transmission, Oerlikon Graziano, Comer Industries, Bonfiglioli, Carraro, Brevini, Flender, SEW-Eurodrive, Wittenstein, Magna Powertrain, Marelli, Punch Powertrain, Vitesco Technologies, Drive System Design, Ricardo, AVL, FEV, Voith, Bharat Forge, Getrag, Bosch",
  "card-10-iav.png": "Daimler Truck, Volvo Trucks, Scania, MAN Truck & Bus, Traton Group, Iveco Group, PACCAR (DAF), CNH Industrial, ZF, Bosch, Vitesco Technologies, BorgWarner, Dana, Allison Transmission, Eaton, Voith, Schaeffler, Magna, AVL, FEV, Ricardo, Cummins, Deutz, Bharat Forge, Meritor, Hyundai Motor, BYD, Punch Powertrain, hofer powertrain, Drive System Design",
+ "card-11-boerger.png": "Xylem, Sulzer, KSB, Grundfos, Wilo, Flowserve, Weir Group (Warman), GEA, Alfa Laval, Andritz Separation, Flottweg, Hiller Separation & Process, Vogelsang, NETZSCH Pumps & Systems, SEEPEX, WANGEN PUMPEN, Veolia Water Technologies, SUEZ, Huber SE, Nijhuis Saur Industries, Metso, FLSmidth, Weir Minerals, Royal IHC, Van Oord, Boskalis, DEME Group, Ebara, ProMinent, Börger",
 }
 
 # ---------- DOCX ----------

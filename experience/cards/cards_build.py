@@ -29,6 +29,8 @@ COMP_X,COMP_Y=345,734; PRES_X,PRES_Y=345,794; CP_PX=60   # 36pt company + presen
 LOGO_X,LOGO_Y,LOGO_W=90,1009,348
 VEN_RIGHT=1110; VEN1_Y,VEN1_PX=1020,53; VEN2_Y,VEN2_PX=1072,33   # 32pt / 20pt
 SIM_X,SIM_Y,SIM_W,SIM_H=701,590,409,344
+# two-speaker footer (co-presenters stacked bottom-left, e.g. Börger + EnginSoft)
+DUO_AVD=150; DUO_AX=106; DUO_TX=276; DUO_Y1=648; DUO_Y2=812
 
 # ---------- asset prep ----------
 def seg_cutout(path,out):
@@ -129,6 +131,12 @@ def title_box(c):
     return dict(maxh=TITLE_MAXH, minpx=TITLE_MINPX)
 def comp_w(sim): return (SIM_X-COMP_X-20) if sim else (VEN_RIGHT-COMP_X)
 
+# ---------- avatar paste (circular PNG + soft shadow) ----------
+def paste_av(im,fname,x,y,d):
+    av=Image.open(os.path.join(PROC,fname)).convert("RGBA").resize((d,d),Image.LANCZOS)
+    sh=Image.new("RGBA",(S,S),(0,0,0,0)); ImageDraw.Draw(sh).ellipse([x,y+8,x+d,y+d+8],fill=(0,0,0,90))
+    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(10))); im.alpha_composite(av,(x,y))
+
 # ---------- flat PNG renderer ----------
 def render_png(c):
     im=Image.open(os.path.join(PROC,"bg_square.png")).convert("RGBA"); d=ImageDraw.Draw(im)
@@ -151,12 +159,19 @@ def render_png(c):
         sp=Image.open(os.path.join(PROC,sim)).convert("RGBA").resize((SIM_W,SIM_H),Image.LANCZOS)
         sh=Image.new("RGBA",(S,S),(0,0,0,0)); ImageDraw.Draw(sh).rounded_rectangle([SIM_X,SIM_Y+8,SIM_X+SIM_W,SIM_Y+SIM_H+8],radius=40,fill=(0,0,0,95))
         im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(12))); im.alpha_composite(sp,(SIM_X,SIM_Y))
-    av=Image.open(os.path.join(PROC,c["avatar"])).convert("RGBA").resize((AV_D,AV_D),Image.LANCZOS)
-    sh=Image.new("RGBA",(S,S),(0,0,0,0)); ImageDraw.Draw(sh).ellipse([AV_X,AV_Y+8,AV_X+AV_D,AV_Y+AV_D+8],fill=(0,0,0,90))
-    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(10))); im.alpha_composite(av,(AV_X,AV_Y))
-    d=ImageDraw.Draw(im); cw=comp_w(sim)
-    cf=fit(c["company"],cw,CP_PX); pf=fit(c["speakers"],cw,CP_PX)
-    d.text((COMP_X,COMP_Y),c["company"],font=cf,fill=WHITE); d.text((PRES_X,PRES_Y),c["speakers"],font=pf,fill=GREEN)
+    if c.get("avatar2"):
+        # two stacked co-presenters — name (white) over company (green)
+        tw=(SIM_X if sim else VEN_RIGHT)-DUO_TX-12
+        for (avf,nm,cp),ay in [((c["avatar"],c["speakers"],c["company"]),DUO_Y1),
+                               ((c["avatar2"],c["speaker2"],c["company2"]),DUO_Y2)]:
+            paste_av(im,avf,DUO_AX,ay,DUO_AVD); d=ImageDraw.Draw(im)
+            d.text((DUO_TX,ay+34),nm,font=fit(nm,tw,54,lo=32),fill=WHITE)
+            d.text((DUO_TX,ay+98),cp,font=fit(cp,tw,42,lo=26),fill=GREEN)
+    else:
+        paste_av(im,c["avatar"],AV_X,AV_Y,AV_D)
+        d=ImageDraw.Draw(im); cw=comp_w(sim)
+        cf=fit(c["company"],cw,CP_PX); pf=fit(c["speakers"],cw,CP_PX)
+        d.text((COMP_X,COMP_Y),c["company"],font=cf,fill=WHITE); d.text((PRES_X,PRES_Y),c["speakers"],font=pf,fill=GREEN)
     lg=Image.open(LOGO).convert("RGBA"); lg=lg.resize((LOGO_W,int(lg.size[1]*LOGO_W/lg.size[0])),Image.LANCZOS)
     im.alpha_composite(lg,(LOGO_X,LOGO_Y))
     d.text((VEN_RIGHT-f(VEN1_PX).getlength(L1),VEN1_Y),L1,font=f(VEN1_PX),fill=WHITE)
@@ -165,7 +180,7 @@ def render_png(c):
 
 # ---------- general "program is out" announcement card ----------
 GEN_TAGS=["Surface Treatment","CFD-DEM","E-Motor Cooling","Reciprocating Pumps","Hydropower",
-          "Thermal Simulation","Oil Aeration","Gear Lubrication","Undercarriage"]
+          "Thermal Simulation","Oil Aeration","Gear Lubrication","Undercarriage","Solid–Liquid Separation","Wear & Erosion"]
 def draw_tags(im,tags,x0,y0,maxw,fs=40,gap=18,vgap=20,padx=32,pady=15):
     # draw on a separate RGBA layer so the translucent pill fill blends instead of overwriting
     ov=Image.new("RGBA",im.size,(0,0,0,0)); d=ImageDraw.Draw(ov)
@@ -187,7 +202,7 @@ def render_general(fname="card-00-program.png"):
     d.text(CAT_POS,"Conference programme",font=f(CAT_PX),fill=SUB)
     d.text((90,250),"THE PROGRAM",font=f(118),fill=WHITE)
     d.text((90,392),"IS OUT",font=f(118),fill=GREEN)
-    d.text((92,556),"Particleworks Experience 2026 — 10 talks across two days",font=f(40),fill=SUBLOC)
+    d.text((92,556),"Particleworks Experience 2026 — 11 talks across two days",font=f(40),fill=SUBLOC)
     yend=draw_tags(im,GEN_TAGS,92,616,1016,fs=37,gap=16,vgap=16,padx=28,pady=13); d=ImageDraw.Draw(im)
     d.text((92,min(yend+24,952)),"Full agenda online · register free",font=f(42),fill=WHITE)
     lg=Image.open(LOGO).convert("RGBA"); lg=lg.resize((LOGO_W,int(lg.size[1]*LOGO_W/lg.size[0])),Image.LANCZOS)
@@ -227,6 +242,8 @@ SPEAKERS=[("iori-saigo","Iori Saigo","Prometech Software"),
  ("alpcan-guray","Alpcan Güray","MTU Aero Engines"),
  ("michelangelo-raimondo","Michelangelo Raimondo","UNIMORE"),
  ("leonardo-lanciotti","Leonardo Lanciotti","R&D CFD"),
+ ("bernd-valtwies","Bernd Valtwies","Börger"),
+ ("riccardo-sala","Riccardo Sala","EnginSoft"),
  ("jean-decaix","Jean Decaix","HES-SO Valais"),
  ("lijun-cao","Lijun Cao","SKF"),
  ("lukas-hafner","Dr. Lukas Hafner","deepfluid"),
@@ -241,11 +258,11 @@ def render_speakers(fname="card-00b-speakers.png"):
     d.text(DATE_POS,"October 6–7, 2026",font=f(DATE_PX),fill=WHITE)
     d.text(CAT_POS,"Conference speakers",font=f(CAT_PX),fill=SUB)
     d.text((90,228),"MEET THE SPEAKERS",font=f(80),fill=WHITE)
-    d.text((92,326),"10 industrial & academic talks · 6–7 Oct, Modena",font=f(34),fill=SUBLOC)
-    AVD=96; cols=[92,612]; rows=[400,520,640,760,880]
+    d.text((92,326),"11 industrial & academic talks · 6–7 Oct, Modena",font=f(34),fill=SUBLOC)
+    AVD=92; cols=[92,612]; rows=[392,496,600,704,808,912]
     ov=Image.new("RGBA",im.size,(0,0,0,0)); od=ImageDraw.Draw(ov)
     for idx,(key,name,comp) in enumerate(SPEAKERS):
-        cx=cols[idx//5]; cy=rows[idx%5]
+        cx=cols[idx//6]; cy=rows[idx%6]
         av=Image.open(os.path.join(PROC,"av_"+key+".png")).convert("RGBA").resize((AVD,AVD),Image.LANCZOS)
         im.alpha_composite(av,(cx,cy)); tx=cx+AVD+22
         d.text((tx,cy+10),name,font=fit(name,388,40,lo=27),fill=WHITE)
@@ -316,10 +333,18 @@ def build_pptx(cards):
             tpx=fit_title(c["title"],**title_box(c))[0].size
             tb(sl,TITLE_X,TITLE_Y,TITLE_W,TITLE_MAXH,c["title"],tpx,WHITE)
         if sim: sl.shapes.add_picture(os.path.join(PROC,sim),IN(SIM_X),IN(SIM_Y),IN(SIM_W),IN(SIM_H))
-        sl.shapes.add_picture(os.path.join(PROC,c["avatar"]),IN(AV_X),IN(AV_Y),IN(AV_D),IN(AV_D))
-        cw=comp_w(sim); cpx=fit(c["company"],cw,CP_PX).size; ppx=fit(c["speakers"],cw,CP_PX).size
-        tb(sl,COMP_X,COMP_Y,cw,73,c["company"],cpx,WHITE)
-        tb(sl,PRES_X,PRES_Y,cw,73,c["speakers"],ppx,GREEN)
+        if c.get("avatar2"):
+            tw=(SIM_X if sim else VEN_RIGHT)-DUO_TX-12
+            for (avf,nm,cp),ay in [((c["avatar"],c["speakers"],c["company"]),DUO_Y1),
+                                   ((c["avatar2"],c["speaker2"],c["company2"]),DUO_Y2)]:
+                sl.shapes.add_picture(os.path.join(PROC,avf),IN(DUO_AX),IN(ay),IN(DUO_AVD),IN(DUO_AVD))
+                tb(sl,DUO_TX,ay+34,tw,60,nm,fit(nm,tw,54,lo=32).size,WHITE)
+                tb(sl,DUO_TX,ay+98,tw,48,cp,fit(cp,tw,42,lo=26).size,GREEN)
+        else:
+            sl.shapes.add_picture(os.path.join(PROC,c["avatar"]),IN(AV_X),IN(AV_Y),IN(AV_D),IN(AV_D))
+            cw=comp_w(sim); cpx=fit(c["company"],cw,CP_PX).size; ppx=fit(c["speakers"],cw,CP_PX).size
+            tb(sl,COMP_X,COMP_Y,cw,73,c["company"],cpx,WHITE)
+            tb(sl,PRES_X,PRES_Y,cw,73,c["speakers"],ppx,GREEN)
         lg=Image.open(LOGO); lh=int(lg.size[1]*LOGO_W/lg.size[0])
         sl.shapes.add_picture(LOGO,IN(LOGO_X),IN(LOGO_Y),IN(LOGO_W),IN(lh))
         tb(sl,VEN_RIGHT-560,VEN1_Y,560,65,L1,VEN1_PX,WHITE,align=PP_ALIGN.RIGHT)
@@ -330,7 +355,7 @@ def build_pptx(cards):
 PHOTOS={"iori-saigo":"iori-saigo.jpg","alpcan-guray":"alpcan-guray.jpg","michelangelo-raimondo":"michelangelo-raimondo.jpg",
         "leonardo-lanciotti":"leonardo-lanciotti.jpg","jean-decaix":"jean-decaix.jpg","lukas-hafner":"lukas-hafner.jpg",
         "naohiro-fujita":"naohiro-fujita.jpg","lijun-cao":"lijun-cao.jpg","leonardo-tiberi":"leonardo-tiberi.jpg",
-        "rene-kockisch":"rene-kockisch.jpg"}
+        "rene-kockisch":"rene-kockisch.jpg","bernd-valtwies":"bernd-valtwies.jpg","riccardo-sala":"riccardo-sala.png"}
 DATE="October 7, 2026"; L1="Modena, Italy"; L2="BPER FORUM Monzani"
 cards=[
  dict(file="card-01-prometech.png",date=DATE,cat="Developer keynote",company="PROMETECH SOFTWARE",speakers="Issei Masaie · Iori Saigo",
@@ -354,6 +379,9 @@ cards=[
       title="Application of Particleworks to Gear Lubrication Analysis and Its Expansion to R&D on Airflow Effects",avatar="av_naohiro-fujita.png",sim="sim_univance.png"),
  dict(file="card-10-iav.png",date=DATE,cat="Industrial speaker",company="IAV",speakers="René Kockisch",
       title="From Formation to Dissolution: Air Bubble Dynamics in Gear Oil of an Electric 3-Speed Drivetrain",avatar="av_rene-kockisch.png"),
+ dict(file="card-11-boerger.png",date=DATE,cat="Industrial speaker",company="BÖRGER GMBH",speakers="Bernd Valtwies",
+      title="Simulation of Sand Separation and Wear in the Börger FlowSep",avatar="av_bernd-valtwies.png",sim="sim_flowsep.png",
+      speaker2="Riccardo Sala",company2="ENGINSOFT",avatar2="av_riccardo-sala.png"),
 ]
 
 if __name__=="__main__":
@@ -365,6 +393,7 @@ if __name__=="__main__":
     make_sim(os.path.join(PROC,"skf.png"),os.path.join(PROC,"sim_skf.png"))
     make_sim(os.path.join(PROC,"deepfluid.png"),os.path.join(PROC,"sim_deepfluid.png"))
     make_sim(os.path.join(PROC,"univance.png"),os.path.join(PROC,"sim_univance.png"))
+    make_sim(os.path.join(PROC,"flowsep.png"),os.path.join(PROC,"sim_flowsep.png"))
     print("assets ready")
     render_general()
     render_speakers()
