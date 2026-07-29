@@ -391,7 +391,7 @@
               <div class="talk-body">
                 <h3>Fluid–Structure Interaction: Modeling Deformable Bodies Under Fluid Action</h3>
                 <div class="speaker">
-                  <div class="avatar">FG</div>
+                  <div class="avatar"><img src="../images/experience2026/federica-galbiati.jpg" alt="Federica Galbiati" loading="lazy"></div>
                   <div><div class="nm">Federica Galbiati</div><div class="rl">Particleworks Europe · EnginSoft SpA · <span class="flag">🇮🇹 Italy</span></div></div>
                 </div>
                 <div class="talk-tags">
@@ -472,7 +472,7 @@
               <div class="talk-body">
                 <h3>Multi-Level Resolution and Particle Refinement Methods</h3>
                 <div class="speaker">
-                  <div class="avatar">FG</div>
+                  <div class="avatar"><img src="../images/experience2026/federica-galbiati.jpg" alt="Federica Galbiati" loading="lazy"></div>
                   <div><div class="nm">Federica Galbiati</div><div class="rl">Particleworks Europe · EnginSoft SpA · <span class="flag">🇮🇹 Italy</span></div></div>
                 </div>
                 <div class="talk-tags">
