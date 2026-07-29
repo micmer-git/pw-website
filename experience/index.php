@@ -132,7 +132,8 @@
       <div class="collapse navbar-collapse justify-content-end" id="nav">
         <ul class="navbar-nav align-items-lg-center gap-1">
           <li class="nav-item"><a class="nav-link" href="index.php">Experience 2026</a></li>
-          <li class="nav-item"><a class="nav-link" href="program.php">Program</a></li>
+          <li class="nav-item"><a class="nav-link" href="workshop.php">Oct 6 · Technical Session</a></li>
+          <li class="nav-item"><a class="nav-link" href="program.php">Oct 7 · Program</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -183,20 +184,21 @@
       <div class="sec-head">
         <div class="kick">Two days · Modena</div>
         <h2>Pick your day</h2>
-        <p>A working afternoon of technical support, then a full conference day. Click <strong>October 7</strong> to explore the talks.</p>
+        <p>A technical afternoon on Particleworks 9.0, then a full conference day. Click either day to explore its program.</p>
       </div>
       <div class="row g-4 justify-content-center">
 
-        <!-- Day 1 -->
+        <!-- Day 1 — clickable to technical session -->
         <div class="col-lg-5">
-          <div class="day-card">
+          <a href="workshop.php" class="day-card conf">
+            <span class="ribbon"><i class="bi bi-arrow-right-circle"></i> See program</span>
             <div class="date-row"><span class="dnum">06</span><span class="dmon">October 2026 · Tuesday</span></div>
             <div class="time"><i class="bi bi-clock"></i> 14:00 — 18:00</div>
-            <h3>Technical Workshop</h3>
-            <p>Hands-on technical workshop and one-to-one support meetings with the Particleworks Europe engineering team.</p>
-            <span class="go">Workshop &amp; 1:1 support</span>
+            <h3>Technical Session</h3>
+            <p>What's new in <strong>Particleworks 9.0</strong>, advanced modeling techniques and use cases — AI-driven automation, CHT, multi-phase, FSI, CFD+DEM — plus 1:1 support meetings.</p>
+            <span class="go">Explore the six topics <i class="bi bi-arrow-right"></i></span>
             <svg class="corner-svg" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="40" stroke="#c01f24" stroke-width="6"/><circle cx="50" cy="50" r="18" stroke="#c01f24" stroke-width="6"/></svg>
-          </div>
+          </a>
         </div>
 
         <!-- Day 2 — clickable to program -->
@@ -344,7 +346,8 @@
         <div class="col-lg-3 col-md-4">
           <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Experience 2026</h6>
           <ul class="list-unstyled small">
-            <li class="mb-2"><a href="program.php">Program</a></li>
+            <li class="mb-2"><a href="workshop.php">Technical Session (Oct 6)</a></li>
+            <li class="mb-2"><a href="program.php">Program (Oct 7)</a></li>
             <li class="mb-2"><a href="registration.php">Registration</a></li>
             <li class="mb-2"><a href="https://particleworks-europe.com/experience/call-for-abstract">Call for papers</a></li>
           </ul>

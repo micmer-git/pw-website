@@ -92,7 +92,8 @@
       <div class="collapse navbar-collapse justify-content-end" id="nav">
         <ul class="navbar-nav align-items-lg-center gap-1">
           <li class="nav-item"><a class="nav-link" href="index.php">Experience 2026</a></li>
-          <li class="nav-item"><a class="nav-link" href="program.php">Program</a></li>
+          <li class="nav-item"><a class="nav-link" href="workshop.php">Oct 6 · Technical Session</a></li>
+          <li class="nav-item"><a class="nav-link" href="program.php">Oct 7 · Program</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -190,7 +191,8 @@
           <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Experience 2026</h6>
           <ul class="list-unstyled small">
             <li class="mb-2"><a href="index.php">Conference overview</a></li>
-            <li class="mb-2"><a href="program.php">Program</a></li>
+            <li class="mb-2"><a href="workshop.php">Technical Session (Oct 6)</a></li>
+            <li class="mb-2"><a href="program.php">Program (Oct 7)</a></li>
             <li class="mb-2"><a href="registration.php">Registration</a></li>
           </ul>
         </div>
