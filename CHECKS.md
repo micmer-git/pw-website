@@ -78,6 +78,24 @@ byte-identici. ✅
 il commit `f203ea7` (08/07/2026) lo aveva già aggiunto. È un buco di deploy sul solo host di
 produzione, aperto da almeno sette settimane.
 
+### H. Deploy GitHub Pages — verificato dopo il push `c387369`
+
+`micmer-git.github.io/pw-website` ricostruito e servito:
+
+- `program.html` — griglia oraria completa e contigua letta dalla pagina pubblicata:
+  `08:45—09:00 · 09:00—10:00 · 10:00—10:30 · 10:30—11:00 · 11:00—11:45 · 11:45—12:15 ·
+  12:15—12:45 · 12:45—13:15 · 13:15—14:30 · 14:30—15:00 · 15:00—15:30 · 15:30—16:00 ·
+  16:00—16:30 · 16:30—17:00 · 17:00—17:30` ✅
+- `registration.html` — "11 talks · 5 countries" ✅
+- Differenza di byte fra Pages e working tree (es. program 85.874 vs 86.852) = **CRLF**:
+  `core.autocrlf=true`, i blob in git sono LF, il checkout Linux di Actions serve LF.
+  Non è un disallineamento di contenuto.
+
+Bundle `deploy-prod/` riallineato al checkout corrente dopo la conversione CRLF —
+i 4 `.php` del bundle sono `diff`-identici a quelli del repo. ✅
+
+**Resta aperto:** l'host di produzione. Vedi §F.
+
 ### G. Non verificato
 
 - **Resa grafica reale**: nessuno screenshot. L'estensione Chrome non è installata in questa
