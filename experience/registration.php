@@ -161,9 +161,9 @@
           <div class="aside-card">
             <h3>Good to know</h3>
             <ul class="aside-list">
-              <li><i class="bi bi-calendar2-week"></i><span><b>Two days</b>Workshop on Oct 6 (14:00–18:00) and the full conference day on Oct 7 (09:00–17:00).</span></li>
+              <li><i class="bi bi-calendar2-week"></i><span><b>Two days</b>Workshop on Oct 6 (14:00–18:00) and the full conference day on Oct 7 (08:45–17:30).</span></li>
               <li><i class="bi bi-geo-alt"></i><span><b>Venue</b>BPER FORUM Monzani – Sala Bossoli, Via Aristotele 33, 41126 Modena (MO), Italy.</span></li>
-              <li><i class="bi bi-mic"></i><span><b>8 talks · 5 countries</b>Including the release of Particleworks 9.0 and Granuleworks 4.0.</span></li>
+              <li><i class="bi bi-mic"></i><span><b>11 talks · 5 countries</b>Including the release of Particleworks 9.0 and Granuleworks 4.0.</span></li>
               <li><i class="bi bi-shield-check"></i><span><b>Your data</b>Processed in line with GDPR, solely for managing your participation.</span></li>
             </ul>
             <div class="d-flex flex-wrap gap-2 mt-3">

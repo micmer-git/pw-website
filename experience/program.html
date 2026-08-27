@@ -95,9 +95,28 @@
     .talk:hover { box-shadow:0 18px 50px rgba(7,40,70,0.10); border-color: rgba(0,136,204,0.3); }
     .talk-grid { display:grid; grid-template-columns: 220px 1fr; }
     @media (max-width: 767px){ .talk-grid{ grid-template-columns:1fr; } }
-    .talk-art { position:relative; background: linear-gradient(135deg,#3d0e13 0%,#6b1019 60%,#8f161b 100%); display:flex; align-items:center; justify-content:center; padding:1.4rem; overflow:hidden; }
+    .talk-art { position:relative; background: linear-gradient(135deg,#3d0e13 0%,#6b1019 60%,#8f161b 100%); display:flex; align-items:center; justify-content:center; padding:3.4rem 1.4rem 1.4rem; overflow:hidden; }
     .talk-art svg { width:100%; height:auto; max-width:185px; }
     .talk-no { position:absolute; top:0.9rem; left:1.1rem; font-size:0.74rem; font-weight:800; letter-spacing:1px; color:rgba(255,255,255,0.55); }
+    .talk-time { position:absolute; top:2.05rem; left:1.1rem; font-size:0.9rem; font-weight:800; letter-spacing:0.3px; color:#fff; white-space:nowrap; text-shadow:0 1px 6px rgba(0,0,0,0.45); }
+    @media (max-width: 767px){ .talk-time{ font-size:0.84rem; } }
+    /* Timetable rows — welcome, breaks, lunch */
+    .break-row { display:flex; align-items:center; gap:0.85rem; margin:0 0 1.6rem; padding:0.8rem 1.4rem; border:1px dashed rgba(192,31,36,0.35); border-radius:16px; background:linear-gradient(135deg, rgba(239,92,67,0.06), rgba(181,30,35,0.035)); }
+    .break-row i { font-size:1.1rem; color:var(--ev-crimson); line-height:1; }
+    .break-row .lbl { font-weight:800; font-size:0.95rem; color:var(--pw-dark); }
+    .break-row .hrs { margin-left:auto; font-weight:800; font-size:0.9rem; color:var(--ev-crimson); letter-spacing:0.3px; white-space:nowrap; }
+    .break-row.opening { border-style:solid; border-color:rgba(192,31,36,0.45); background:linear-gradient(135deg, rgba(239,92,67,0.13), rgba(181,30,35,0.07)); }
+    /* At-a-glance timetable */
+    .tt { max-width:780px; margin:0 auto 3.2rem; border:1px solid rgba(0,0,0,0.08); border-radius:22px; overflow:hidden; background:#fff; box-shadow:0 10px 34px rgba(7,40,70,0.06); }
+    .tt-row { display:grid; grid-template-columns:136px 1fr; gap:0.9rem; align-items:baseline; padding:0.68rem 1.35rem; border-top:1px solid rgba(0,0,0,0.05); text-decoration:none; color:inherit; }
+    .tt-row:first-child { border-top:0; }
+    a.tt-row:hover { background:rgba(192,31,36,0.05); }
+    .tt-row .h { font-weight:800; font-size:0.85rem; color:var(--ev-crimson); letter-spacing:0.3px; white-space:nowrap; }
+    .tt-row .t { font-size:0.94rem; font-weight:600; color:var(--pw-dark); }
+    .tt-row .o { display:block; font-size:0.83rem; font-weight:500; color:var(--pw-gray); margin-top:0.12rem; }
+    .tt-row.pause { background:#f6fafd; }
+    .tt-row.pause .t { font-weight:800; color:var(--pw-gray); }
+    @media (max-width: 575px){ .tt-row{ grid-template-columns:1fr; gap:0.1rem; } }
     .talk-body { padding:1.7rem 1.9rem; }
     .talk-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.8rem; }
     .chip { font-size:0.68rem; font-weight:700; letter-spacing:0.4px; text-transform:uppercase; padding:0.28rem 0.7rem; border-radius:50px; }
@@ -194,11 +213,12 @@
     </svg>
     <div class="container">
       <div class="eyebrow"><i class="bi bi-stars"></i> Particleworks Experience 2026</div>
-      <h1>The <span class="accent">Program</span> is taking shape.</h1>
+      <h1>The <span class="accent">Program</span> is final.</h1>
       <p class="lead">A full day of meshless CFD in production — the release of <strong>Particleworks&nbsp;9.0</strong> and validated case studies from aerospace, e-mobility, fluid machinery and hydropower.</p>
       <div class="hero-facts">
         <span class="hero-fact"><i class="bi bi-calendar-event"></i> Conference — Wednesday, October 7, 2026</span>
         <span class="hero-fact"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena (IT)</span>
+        <span class="hero-fact"><i class="bi bi-clock"></i> 08:45 — 17:30</span>
         <span class="hero-fact"><i class="bi bi-mic"></i> 11 talks · 5 countries</span>
       </div>
       <div class="hero-cta-row">
@@ -214,17 +234,38 @@
       <div class="sec-head">
         <div class="kick">Conference Day · October 7</div>
         <h2>Talks &amp; Speakers</h2>
-        <p>Preliminary line-up — the program is being finalised. Tap any talk to read the full abstract.</p>
+        <p>Final program — doors open at 08:45. Tap any talk to read the full abstract.</p>
       </div>
 
       <div class="row justify-content-center">
         <div class="col-lg-10 col-xl-9">
+
+          <div class="tt">
+            <div class="tt-row pause"><span class="h">08:45 — 09:00</span><span class="t">Welcome and introduction</span></div>
+            <a class="tt-row" href="#talk-keynote"><span class="h">09:00 — 10:00</span><span class="t">Particleworks 9.0 &amp; Granuleworks 4.0<span class="o">Issei Masaie &amp; Iori Saigo — Prometech Software 🇯🇵</span></span></a>
+            <a class="tt-row" href="#talk-shot-peening"><span class="h">10:00 — 10:30</span><span class="t">Simulation of Shot Peening: A CFD-DEM Coupled Case Study<span class="o">Alpcan Güray — MTU Aero Engines AG 🇩🇪</span></span></a>
+            <a class="tt-row" href="#talk-stator"><span class="h">10:30 — 11:00</span><span class="t">An Integrated Simulation Approach for Stator Oil Jacket and Jet Cooling Systems<span class="o">Michelangelo Raimondo — University of Modena and Reggio Emilia 🇮🇹</span></span></a>
+            <div class="tt-row pause"><span class="h">11:00 — 11:45</span><span class="t">Break</span></div>
+            <a class="tt-row" href="#talk-pump"><span class="h">11:45 — 12:15</span><span class="t">CHT Analysis of a Reciprocating Pump<span class="o">Leonardo Lanciotti — R&amp;D CFD S.R.L. · Comet S.p.A. 🇮🇹</span></span></a>
+            <a class="tt-row" href="#talk-pelton"><span class="h">12:15 — 12:45</span><span class="t">Moving Particle Simulation of Eroded Pelton Runners<span class="o">Jean Decaix — HES-SO Valais//Wallis 🇨🇭</span></span></a>
+            <a class="tt-row" href="#talk-skf-htc"><span class="h">12:45 — 13:15</span><span class="t">Integrating Particleworks into SKF Engineering Tools: Part I<span class="o">Lijun Cao — SKF 🇳🇱</span></span></a>
+            <div class="tt-row pause"><span class="h">13:15 — 14:30</span><span class="t">Lunch</span></div>
+            <a class="tt-row" href="#talk-air-in-oil"><span class="h">14:30 — 15:00</span><span class="t">Direct Optical Air-in-Oil Measurement as an Enabler for Accurate Simulation<span class="o">Dr. Lukas Hafner — deepfluid 🇩🇪</span></span></a>
+            <a class="tt-row" href="#talk-bubble-dynamics"><span class="h">15:00 — 15:30</span><span class="t">From Formation to Dissolution: Air Bubble Dynamics in Gear Oil<span class="o">René Kockisch — IAV GmbH 🇩🇪</span></span></a>
+            <a class="tt-row" href="#talk-gear-airflow"><span class="h">15:30 — 16:00</span><span class="t">Application of Particleworks to Gear Lubrication Analysis and Airflow Effects<span class="o">Naohiro Fujita — Univance Corporation 🇯🇵</span></span></a>
+            <div class="tt-row pause"><span class="h">16:00 — 16:30</span><span class="t">Break</span></div>
+            <a class="tt-row" href="#talk-carrier-roller"><span class="h">16:30 — 17:00</span><span class="t">Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method<span class="o">Leonardo Tiberi — Track One SRL · Unimore 🇮🇹</span></span></a>
+            <a class="tt-row" href="#talk-flowsep"><span class="h">17:00 — 17:30</span><span class="t">Simulation of Sand Separation and Wear in the Börger FlowSep<span class="o">Bernd Valtwies — Börger GmbH 🇩🇪 · Riccardo Sala — EnginSoft SpA 🇮🇹</span></span></a>
+          </div>
+
+          <div class="break-row opening"><i class="bi bi-mic"></i><span class="lbl">Welcome and introduction</span><span class="hrs">08:45 — 09:00</span></div>
 
           <!-- KEYNOTE -->
           <article class="talk keynote" id="talk-keynote">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">KEYNOTE</span>
+                <span class="talk-time">09:00 — 10:00</span>
                 <!-- SVG: particle cloud forming 9.0 -->
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Particleworks 9.0 release">
                   <defs>
@@ -273,11 +314,12 @@
             </div>
           </article>
 
-          <!-- TALK 1: Shot peening -->
+          <!-- TALK 01: Shot peening -->
           <article class="talk" id="talk-shot-peening">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 01</span>
+                <span class="talk-time">10:00 — 10:30</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Shot peening CFD-DEM">
                   <defs><linearGradient id="t1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a5c"/><stop offset="1" stop-color="#ffd27a"/></linearGradient></defs>
                   <!-- nozzle -->
@@ -315,11 +357,12 @@
             </div>
           </article>
 
-          <!-- TALK 2: Stator cooling -->
+          <!-- TALK 02: Stator cooling -->
           <article class="talk" id="talk-stator">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 02</span>
+                <span class="talk-time">10:30 — 11:00</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stator oil jacket and jet cooling">
                   <defs><linearGradient id="t2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a5c"/><stop offset="1" stop-color="#ffd27a"/></linearGradient></defs>
                   <!-- stator ring -->
@@ -362,11 +405,14 @@
             </div>
           </article>
 
-          <!-- TALK 3: Reciprocating pump CHT -->
+          <div class="break-row"><i class="bi bi-cup-hot"></i><span class="lbl">Break</span><span class="hrs">11:00 — 11:45</span></div>
+
+          <!-- TALK 03: Reciprocating pump CHT -->
           <article class="talk" id="talk-pump">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 03</span>
+                <span class="talk-time">11:45 — 12:15</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CHT analysis of a reciprocating pump">
                   <defs>
                     <linearGradient id="t3cht" x1="0" y1="0" x2="0" y2="1">
@@ -422,11 +468,12 @@
             </div>
           </article>
 
-          <!-- TALK 4: Pelton runner erosion -->
+          <!-- TALK 04: Pelton runner erosion -->
           <article class="talk" id="talk-pelton">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 04</span>
+                <span class="talk-time">12:15 — 12:45</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MPS of eroded Pelton runners">
                   <defs>
                     <linearGradient id="t4hub" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
@@ -484,11 +531,12 @@
             </div>
           </article>
 
-          <!-- TALK 5: SKF HTC verification -->
+          <!-- TALK 05: SKF HTC verification -->
           <article class="talk" id="talk-skf-htc">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 05</span>
+                <span class="talk-time">12:45 — 13:15</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heat transfer coefficient — sphere in uniform flow">
                   <defs>
                     <linearGradient id="t5s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
@@ -536,11 +584,14 @@
             </div>
           </article>
 
-          <!-- TALK 6: deepfluid air-in-oil measurement -->
+          <div class="break-row"><i class="bi bi-egg-fried"></i><span class="lbl">Lunch</span><span class="hrs">13:15 — 14:30</span></div>
+
+          <!-- TALK 06: deepfluid air-in-oil measurement -->
           <article class="talk" id="talk-air-in-oil">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 06</span>
+                <span class="talk-time">14:30 — 15:00</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Optical air-in-oil bubble measurement">
                   <defs>
                     <radialGradient id="t6b" cx="38%" cy="34%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity="0.95"/><stop offset="0.55" stop-color="#ffd9c2" stop-opacity="0.45"/><stop offset="1" stop-color="#ff8a5c" stop-opacity="0.22"/></radialGradient>
@@ -584,62 +635,61 @@
             </div>
           </article>
 
-          <!-- TALK 7: Track One carrier roller lubrication -->
-          <article class="talk" id="talk-carrier-roller">
+          <!-- TALK 07: IAV air bubble dynamics -->
+          <article class="talk" id="talk-bubble-dynamics">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 07</span>
-                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3D-MPS lubrication of a carrier roller">
+                <span class="talk-time">15:00 — 15:30</span>
+                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Air bubble dynamics in gear oil — formation to dissolution">
                   <defs>
-                    <linearGradient id="t7r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
-                    <radialGradient id="t7hot" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffb347" stop-opacity="0.85"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+                    <radialGradient id="t9b" cx="38%" cy="34%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity="0.95"/><stop offset="0.55" stop-color="#ffd9c2" stop-opacity="0.45"/><stop offset="1" stop-color="#ff8a5c" stop-opacity="0.22"/></radialGradient>
+                    <linearGradient id="t9g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
                   </defs>
-                  <!-- track rail -->
-                  <rect x="20" y="120" width="160" height="14" rx="4" fill="#ffe0d2" opacity="0.85"/>
-                  <g stroke="#ffc4a8" stroke-width="2"><line x1="36" y1="134" x2="36" y2="146"/><line x1="68" y1="134" x2="68" y2="146"/><line x1="100" y1="134" x2="100" y2="146"/><line x1="132" y1="134" x2="132" y2="146"/><line x1="164" y1="134" x2="164" y2="146"/></g>
-                  <!-- rotating carrier roller -->
+                  <!-- gear churning the oil = bubble formation source -->
                   <g>
-                    <animateTransform attributeName="transform" type="rotate" from="0 100 78" to="360 100 78" dur="6s" repeatCount="indefinite"/>
-                    <circle cx="100" cy="78" r="40" fill="url(#t7r)" opacity="0.92"/>
-                    <circle cx="100" cy="78" r="40" fill="none" stroke="#fff3ee" stroke-width="2.5"/>
-                    <circle cx="100" cy="78" r="14" fill="#3d0e13"/>
-                    <g stroke="#3d0e13" stroke-width="2.4"><line x1="100" y1="50" x2="100" y2="64"/><line x1="100" y1="92" x2="100" y2="106"/><line x1="72" y1="78" x2="86" y2="78"/><line x1="114" y1="78" x2="128" y2="78"/></g>
+                    <animateTransform attributeName="transform" type="rotate" from="0 30 150" to="360 30 150" dur="6s" repeatCount="indefinite"/>
+                    <g stroke="#ffc4a8" stroke-width="5"><line x1="30" y1="126" x2="30" y2="136"/><line x1="6" y1="150" x2="16" y2="150"/><line x1="44" y1="150" x2="54" y2="150"/></g>
+                    <circle cx="30" cy="150" r="18" fill="url(#t9g)" opacity="0.9"/>
+                    <circle cx="30" cy="150" r="6" fill="#3d0e13"/>
                   </g>
-                  <!-- frictional hot-spot at contact -->
-                  <circle cx="100" cy="116" r="26" fill="url(#t7hot)"><animate attributeName="r" values="20;28;20" dur="2.2s" repeatCount="indefinite"/></circle>
-                  <!-- lubricant droplets thrown off -->
-                  <g fill="#fff">
-                    <circle cx="142" cy="58" r="3"><animate attributeName="cx" values="142;156;142" dur="1.6s" repeatCount="indefinite"/><animate attributeName="cy" values="58;46;58" dur="1.6s" repeatCount="indefinite"/></circle>
-                    <circle cx="58" cy="58" r="2.6"><animate attributeName="cx" values="58;44;58" dur="1.9s" repeatCount="indefinite"/><animate attributeName="cy" values="58;46;58" dur="1.9s" repeatCount="indefinite"/></circle>
-                    <circle cx="138" cy="98" r="2.4" opacity="0.85"><animate attributeName="cy" values="98;110;98" dur="2.1s" repeatCount="indefinite"/></circle>
+                  <!-- bubbles: formation (bottom) -> rise -> dissolution (fade at top) -->
+                  <g stroke="#fff3ee" stroke-width="1.4">
+                    <circle cx="62" cy="140" r="5" fill="url(#t9b)"><animate attributeName="cy" values="148;30;148" dur="4.2s" repeatCount="indefinite"/><animate attributeName="r" values="3;8;2" dur="4.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;1;0" dur="4.2s" repeatCount="indefinite"/></circle>
+                    <circle cx="94" cy="132" r="7" fill="url(#t9b)"><animate attributeName="cy" values="150;26;150" dur="5s" repeatCount="indefinite"/><animate attributeName="r" values="3;10;2" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;1;0" dur="5s" repeatCount="indefinite"/></circle>
+                    <circle cx="122" cy="136" r="6" fill="url(#t9b)"><animate attributeName="cy" values="150;30;150" dur="3.6s" repeatCount="indefinite"/><animate attributeName="r" values="2;8;2" dur="3.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;1;0" dur="3.6s" repeatCount="indefinite"/></circle>
+                    <circle cx="150" cy="142" r="9" fill="url(#t9b)"><animate attributeName="cy" values="150;34;150" dur="5.6s" repeatCount="indefinite"/><animate attributeName="r" values="4;12;3" dur="5.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;1;0" dur="5.6s" repeatCount="indefinite"/></circle>
+                    <circle cx="172" cy="128" r="5" fill="url(#t9b)" opacity="0.85"><animate attributeName="cy" values="150;40;150" dur="4.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;0.9;0" dur="4.8s" repeatCount="indefinite"/></circle>
                   </g>
                 </svg>
               </div>
               <div class="talk-body">
-                <h3>Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method</h3>
+                <h3>From Formation to Dissolution: Air Bubble Dynamics in Gear Oil of an Electric 3-Speed Commercial Vehicle Drivetrain</h3>
                 <div class="speaker">
-                  <div class="avatar"><img src="../images/experience2026/leonardo-tiberi.jpg" alt="Leonardo Tiberi" loading="lazy"></div>
-                  <div><div class="nm">Leonardo Tiberi</div><div class="rl">Component Design Engineer · Track One SRL · <span class="flag">🇮🇹 Italy</span></div></div>
+                  <div class="avatar"><img src="../images/experience2026/rene-kockisch.jpg" alt="René Kockisch" loading="lazy"></div>
+                  <div><div class="nm">René Kockisch</div><div class="rl">Team Manager · IAV GmbH · <span class="flag">🇩🇪 Germany</span></div></div>
                 </div>
                 <div class="talk-tags">
-                  <span class="chip chip-theme">Undercarriage · Lubrication</span>
-                  <span class="chip chip-method">3D-MPS</span><span class="chip chip-method">Thermal</span><span class="chip chip-method">Validation</span>
+                  <span class="chip chip-theme">Oil aeration</span>
+                  <span class="chip chip-method">Bubble dynamics</span><span class="chip chip-method">High-speed imaging</span><span class="chip chip-method">IAV Particle Explorer</span>
                 </div>
                 <div class="abs">
-                  <p>In the context of undercarriage systems engineering, the continuous increase in operational speeds and applied loads requires increasingly advanced design strategies to ensure maximum component reliability and operator safety. One of the most critical components is the track/carrier roller, which is subjected not only to severe mechanical wear but also to overheating induced by internal friction and interaction with adjacent components.</p>
-                  <p>This study presents an analysis model to evaluate the lubrication of a carrier roller, investigating both fluid-dynamic and thermal aspects. Field operating conditions were considered and replicated within the model to analyze the lubricant's behavior inside the roller layout. The model was validated through bench testing, where roller temperatures were monitored up to thermal convergence; a comparison between these experimental measurements and the proposed CFD model results showed good correlation.</p>
-                  <div class="authors"><b>Authors:</b> Leonardo Tiberi (Track One SRL, IT) · Giovanni Traina (Track One SRL, IT) · Fabio Berni (&ldquo;Enzo Ferrari&rdquo; Dept. of Engineering, University of Modena and Reggio Emilia, IT)</div>
+                  <p>Air entrainment in gear oils significantly affects lubrication performance, efficiency and durability in electric drivetrains. This study investigates the formation, transport, coalescence and dissolution of air bubbles in the gear oil of an electric 3-speed commercial vehicle drivetrain using the IAV Particle Explorer.</p>
+                  <p>High-speed imaging and particle-based analysis enable a detailed quantification of bubble dynamics under representative operating conditions. The results reveal characteristic bubble size distributions, preferred transport paths within the transmission and dissolution behavior.</p>
+                  <p>The findings provide valuable insights into air–oil interaction mechanisms and support the optimization of transmission design, lubrication systems and overall drivetrain efficiency.</p>
+                  <div class="authors"><b>Authors:</b> René Kockisch · Alexander Voigt · Guido Kutzke · Volker Helbig — IAV GmbH, DE</div>
                 </div>
                 <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
               </div>
             </div>
           </article>
 
-          <!-- TALK 8: Univance gear lubrication + airflow -->
+          <!-- TALK 08: Univance gear lubrication + airflow -->
           <article class="talk" id="talk-gear-airflow">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 08</span>
+                <span class="talk-time">15:30 — 16:00</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gear lubrication churning and airflow effects">
                   <defs>
                     <linearGradient id="t8g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
@@ -705,48 +755,54 @@
             </div>
           </article>
 
-          <!-- TALK 9: IAV air bubble dynamics -->
-          <article class="talk" id="talk-bubble-dynamics">
+          <div class="break-row"><i class="bi bi-cup-hot"></i><span class="lbl">Break</span><span class="hrs">16:00 — 16:30</span></div>
+
+          <!-- TALK 09: Track One carrier roller lubrication -->
+          <article class="talk" id="talk-carrier-roller">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 09</span>
-                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Air bubble dynamics in gear oil — formation to dissolution">
+                <span class="talk-time">16:30 — 17:00</span>
+                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3D-MPS lubrication of a carrier roller">
                   <defs>
-                    <radialGradient id="t9b" cx="38%" cy="34%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity="0.95"/><stop offset="0.55" stop-color="#ffd9c2" stop-opacity="0.45"/><stop offset="1" stop-color="#ff8a5c" stop-opacity="0.22"/></radialGradient>
-                    <linearGradient id="t9g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
+                    <linearGradient id="t7r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient>
+                    <radialGradient id="t7hot" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffb347" stop-opacity="0.85"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
                   </defs>
-                  <!-- gear churning the oil = bubble formation source -->
+                  <!-- track rail -->
+                  <rect x="20" y="120" width="160" height="14" rx="4" fill="#ffe0d2" opacity="0.85"/>
+                  <g stroke="#ffc4a8" stroke-width="2"><line x1="36" y1="134" x2="36" y2="146"/><line x1="68" y1="134" x2="68" y2="146"/><line x1="100" y1="134" x2="100" y2="146"/><line x1="132" y1="134" x2="132" y2="146"/><line x1="164" y1="134" x2="164" y2="146"/></g>
+                  <!-- rotating carrier roller -->
                   <g>
-                    <animateTransform attributeName="transform" type="rotate" from="0 30 150" to="360 30 150" dur="6s" repeatCount="indefinite"/>
-                    <g stroke="#ffc4a8" stroke-width="5"><line x1="30" y1="126" x2="30" y2="136"/><line x1="6" y1="150" x2="16" y2="150"/><line x1="44" y1="150" x2="54" y2="150"/></g>
-                    <circle cx="30" cy="150" r="18" fill="url(#t9g)" opacity="0.9"/>
-                    <circle cx="30" cy="150" r="6" fill="#3d0e13"/>
+                    <animateTransform attributeName="transform" type="rotate" from="0 100 78" to="360 100 78" dur="6s" repeatCount="indefinite"/>
+                    <circle cx="100" cy="78" r="40" fill="url(#t7r)" opacity="0.92"/>
+                    <circle cx="100" cy="78" r="40" fill="none" stroke="#fff3ee" stroke-width="2.5"/>
+                    <circle cx="100" cy="78" r="14" fill="#3d0e13"/>
+                    <g stroke="#3d0e13" stroke-width="2.4"><line x1="100" y1="50" x2="100" y2="64"/><line x1="100" y1="92" x2="100" y2="106"/><line x1="72" y1="78" x2="86" y2="78"/><line x1="114" y1="78" x2="128" y2="78"/></g>
                   </g>
-                  <!-- bubbles: formation (bottom) -> rise -> dissolution (fade at top) -->
-                  <g stroke="#fff3ee" stroke-width="1.4">
-                    <circle cx="62" cy="140" r="5" fill="url(#t9b)"><animate attributeName="cy" values="148;30;148" dur="4.2s" repeatCount="indefinite"/><animate attributeName="r" values="3;8;2" dur="4.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;1;0" dur="4.2s" repeatCount="indefinite"/></circle>
-                    <circle cx="94" cy="132" r="7" fill="url(#t9b)"><animate attributeName="cy" values="150;26;150" dur="5s" repeatCount="indefinite"/><animate attributeName="r" values="3;10;2" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;1;0" dur="5s" repeatCount="indefinite"/></circle>
-                    <circle cx="122" cy="136" r="6" fill="url(#t9b)"><animate attributeName="cy" values="150;30;150" dur="3.6s" repeatCount="indefinite"/><animate attributeName="r" values="2;8;2" dur="3.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;1;0" dur="3.6s" repeatCount="indefinite"/></circle>
-                    <circle cx="150" cy="142" r="9" fill="url(#t9b)"><animate attributeName="cy" values="150;34;150" dur="5.6s" repeatCount="indefinite"/><animate attributeName="r" values="4;12;3" dur="5.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;1;0" dur="5.6s" repeatCount="indefinite"/></circle>
-                    <circle cx="172" cy="128" r="5" fill="url(#t9b)" opacity="0.85"><animate attributeName="cy" values="150;40;150" dur="4.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;0.9;0" dur="4.8s" repeatCount="indefinite"/></circle>
+                  <!-- frictional hot-spot at contact -->
+                  <circle cx="100" cy="116" r="26" fill="url(#t7hot)"><animate attributeName="r" values="20;28;20" dur="2.2s" repeatCount="indefinite"/></circle>
+                  <!-- lubricant droplets thrown off -->
+                  <g fill="#fff">
+                    <circle cx="142" cy="58" r="3"><animate attributeName="cx" values="142;156;142" dur="1.6s" repeatCount="indefinite"/><animate attributeName="cy" values="58;46;58" dur="1.6s" repeatCount="indefinite"/></circle>
+                    <circle cx="58" cy="58" r="2.6"><animate attributeName="cx" values="58;44;58" dur="1.9s" repeatCount="indefinite"/><animate attributeName="cy" values="58;46;58" dur="1.9s" repeatCount="indefinite"/></circle>
+                    <circle cx="138" cy="98" r="2.4" opacity="0.85"><animate attributeName="cy" values="98;110;98" dur="2.1s" repeatCount="indefinite"/></circle>
                   </g>
                 </svg>
               </div>
               <div class="talk-body">
-                <h3>From Formation to Dissolution: Air Bubble Dynamics in Gear Oil of an Electric 3-Speed Commercial Vehicle Drivetrain</h3>
+                <h3>Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method</h3>
                 <div class="speaker">
-                  <div class="avatar"><img src="../images/experience2026/rene-kockisch.jpg" alt="René Kockisch" loading="lazy"></div>
-                  <div><div class="nm">René Kockisch</div><div class="rl">Team Manager · IAV GmbH · <span class="flag">🇩🇪 Germany</span></div></div>
+                  <div class="avatar"><img src="../images/experience2026/leonardo-tiberi.jpg" alt="Leonardo Tiberi" loading="lazy"></div>
+                  <div><div class="nm">Leonardo Tiberi</div><div class="rl">Component Design Engineer · Track One SRL · <span class="flag">🇮🇹 Italy</span></div></div>
                 </div>
                 <div class="talk-tags">
-                  <span class="chip chip-theme">Oil aeration</span>
-                  <span class="chip chip-method">Bubble dynamics</span><span class="chip chip-method">High-speed imaging</span><span class="chip chip-method">IAV Particle Explorer</span>
+                  <span class="chip chip-theme">Undercarriage · Lubrication</span>
+                  <span class="chip chip-method">3D-MPS</span><span class="chip chip-method">Thermal</span><span class="chip chip-method">Validation</span>
                 </div>
                 <div class="abs">
-                  <p>Air entrainment in gear oils significantly affects lubrication performance, efficiency and durability in electric drivetrains. This study investigates the formation, transport, coalescence and dissolution of air bubbles in the gear oil of an electric 3-speed commercial vehicle drivetrain using the IAV Particle Explorer.</p>
-                  <p>High-speed imaging and particle-based analysis enable a detailed quantification of bubble dynamics under representative operating conditions. The results reveal characteristic bubble size distributions, preferred transport paths within the transmission and dissolution behavior.</p>
-                  <p>The findings provide valuable insights into air–oil interaction mechanisms and support the optimization of transmission design, lubrication systems and overall drivetrain efficiency.</p>
-                  <div class="authors"><b>Authors:</b> René Kockisch · Alexander Voigt · Guido Kutzke · Volker Helbig — IAV GmbH, DE</div>
+                  <p>In the context of undercarriage systems engineering, the continuous increase in operational speeds and applied loads requires increasingly advanced design strategies to ensure maximum component reliability and operator safety. One of the most critical components is the track/carrier roller, which is subjected not only to severe mechanical wear but also to overheating induced by internal friction and interaction with adjacent components.</p>
+                  <p>This study presents an analysis model to evaluate the lubrication of a carrier roller, investigating both fluid-dynamic and thermal aspects. Field operating conditions were considered and replicated within the model to analyze the lubricant's behavior inside the roller layout. The model was validated through bench testing, where roller temperatures were monitored up to thermal convergence; a comparison between these experimental measurements and the proposed CFD model results showed good correlation.</p>
+                  <div class="authors"><b>Authors:</b> Leonardo Tiberi (Track One SRL, IT) · Giovanni Traina (Track One SRL, IT) · Fabio Berni (&ldquo;Enzo Ferrari&rdquo; Dept. of Engineering, University of Modena and Reggio Emilia, IT)</div>
                 </div>
                 <button class="toggle">Read abstract <i class="bi bi-chevron-down"></i></button>
               </div>
@@ -758,6 +814,7 @@
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TALK 10</span>
+                <span class="talk-time">17:00 — 17:30</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Centrifugal separation of sand from fluid">
                   <defs>
                     <linearGradient id="t10c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a5c"/><stop offset="1" stop-color="#ffd27a"/></linearGradient>
@@ -813,7 +870,6 @@
             </div>
           </article>
 
-          <p class="text-center mt-4" style="color:var(--pw-gray);font-size:0.92rem;"><i class="bi bi-info-circle"></i> More talks to be announced — the program is being finalised.</p>
 
         </div>
       </div>

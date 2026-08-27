@@ -206,7 +206,7 @@
           <a href="program.php" class="day-card conf">
             <span class="ribbon"><i class="bi bi-arrow-right-circle"></i> See program</span>
             <div class="date-row"><span class="dnum">07</span><span class="dmon">October 2026 · Wednesday</span></div>
-            <div class="time"><i class="bi bi-clock"></i> 09:00 — 17:00</div>
+            <div class="time"><i class="bi bi-clock"></i> 08:45 — 17:30</div>
             <h3>Conference Day</h3>
             <p>Introduction to <strong>Particleworks 9.0</strong> and presentations from industry &amp; academia — shot peening, e-motor cooling, pumps and hydropower.</p>
             <span class="go">Explore the full program <i class="bi bi-arrow-right"></i></span>
@@ -270,9 +270,9 @@
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-carrier-roller" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic"><i class="bi bi-truck"></i></div>
-            <div><h4>Lubrication of a Carrier Roller using CFD 3D-MPS</h4><div class="org">Track One SRL · Unimore 🇮🇹</div></div>
+          <a href="program.php#talk-bubble-dynamics" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-droplet-half"></i></div>
+            <div><h4>Air Bubble Dynamics in Gear Oil of an Electric Drivetrain</h4><div class="org">IAV GmbH 🇩🇪</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
@@ -282,9 +282,9 @@
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-bubble-dynamics" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic"><i class="bi bi-droplet-half"></i></div>
-            <div><h4>Air Bubble Dynamics in Gear Oil of an Electric Drivetrain</h4><div class="org">IAV GmbH 🇩🇪</div></div>
+          <a href="program.php#talk-carrier-roller" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-truck"></i></div>
+            <div><h4>Lubrication of a Carrier Roller using CFD 3D-MPS</h4><div class="org">Track One SRL · Unimore 🇮🇹</div></div>
           </div></a>
         </div>
         <div class="col-md-6 col-lg-5">

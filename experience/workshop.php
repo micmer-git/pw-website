@@ -229,7 +229,7 @@
             <div class="agenda-day"><div class="num">07</div><div class="mon">Oct · Wed</div></div>
             <div>
               <h3>Conference Day</h3>
-              <div class="time">09:00 — 17:00</div>
+              <div class="time">08:45 — 17:30</div>
               <p>Keynote release of Particleworks 9.0 and validated case studies from industry &amp; academia. <span style="color:var(--ev-crimson);font-weight:600;">See the full program <i class="bi bi-arrow-right"></i></span></p>
             </div>
           </a>
