@@ -129,6 +129,8 @@
     .kbadge { display:inline-flex; align-items:center; gap:0.4rem; background: var(--ev-accent); color:#fff; font-size:0.7rem; font-weight:800; letter-spacing:1px; text-transform:uppercase; padding:0.3rem 0.8rem; border-radius:50px; margin-bottom:0.8rem; }
     .kn-seg { margin-bottom:0.9rem; }
     .kn-seg-title { font-size:0.78rem; font-weight:800; letter-spacing:0.6px; text-transform:uppercase; color:var(--ev-crimson); margin-bottom:0.45rem; }
+    .kn-seg + .kn-seg { border-top:1px dashed rgba(0,0,0,0.08); padding-top:0.9rem; }
+    .seg-h { font-size:1.02rem; font-weight:700; line-height:1.3; color:var(--pw-dark); margin:0 0 0.55rem; }
 
     /* CTA */
     .cta-final { padding:4.5rem 0; background: linear-gradient(135deg, rgba(217,80,63,0.90), rgba(143,22,27,0.95)), url('../images/experience2026/theme-bg.jpg') center/cover no-repeat; position:relative; overflow:hidden; }
@@ -244,7 +246,7 @@
       <div class="sec-head">
         <div class="kick">Technical Session · October 6</div>
         <h2>Key Topics Covered</h2>
-        <p>Six focused talks by the Particleworks Europe engineering team. Tap any topic to read more.</p>
+        <p>Six focused topics from the Particleworks Europe engineering team, opening with a guest contribution from Univance Corporation. Tap any topic to read more.</p>
       </div>
 
       <div class="row justify-content-center">
@@ -275,18 +277,34 @@
               <div class="talk-body">
                 <span class="kbadge"><i class="bi bi-cpu"></i> Opening topic</span>
                 <h3>AI-Driven Particleworks: Automating and Optimizing Simulation Processes</h3>
-                <div class="speaker">
-                  <div class="avatar"><img src="../images/team/MicheleMerelli.png" alt="Michele Merelli" loading="lazy"></div>
-                  <div><div class="nm">Michele Merelli</div><div class="rl">Particleworks Europe · EnginSoft SpA · <span class="flag">🇮🇹 Italy</span></div></div>
+
+                <div class="kn-seg">
+                  <div class="kn-seg-title">14:10 — 14:25 · Guest contribution</div>
+                  <h4 class="seg-h">Examples of Python Automation and Industrial Applications</h4>
+                  <div class="speaker">
+                    <div class="avatar"><img src="../images/experience2026/naohiro-fujita.jpg" alt="Naohiro Fujita" loading="lazy"></div>
+                    <div><div class="nm">Naohiro Fujita</div><div class="rl">Staff · Univance Corporation · <span class="flag">🇯🇵 Japan</span></div></div>
+                  </div>
                 </div>
+
+                <div class="kn-seg">
+                  <div class="kn-seg-title">From 14:25 · Particleworks Europe</div>
+                  <h4 class="seg-h">AI and Scripting as a Simulation Engine</h4>
+                  <div class="speaker">
+                    <div class="avatar"><img src="../images/team/MicheleMerelli.png" alt="Michele Merelli" loading="lazy"></div>
+                    <div><div class="nm">Michele Merelli</div><div class="rl">Particleworks Europe · EnginSoft SpA · <span class="flag">🇮🇹 Italy</span></div></div>
+                  </div>
+                </div>
+
                 <div class="talk-tags">
                   <span class="chip chip-theme">AI &amp; automation</span>
                   <span class="chip chip-method">Python API</span><span class="chip chip-method">DoE</span><span class="chip chip-method">Optimization</span>
                 </div>
                 <div class="abs">
-                  <p>Simulation is moving from a single-run activity to an automated, data-generating process. This talk shows how AI and scripting turn Particleworks into an engine that runs, monitors and post-processes itself — from parametric setup and design-of-experiments to automatic reporting.</p>
+                  <p>The session opens with the user's point of view. Naohiro Fujita (Univance Corporation) presents concrete examples of Python automation around Particleworks — scripted set-up, batch execution and post-processing — and the industrial cases where that automation has changed how the analysis work is organised.</p>
+                  <p>Simulation is moving from a single-run activity to an automated, data-generating process. The second part shows how AI and scripting turn Particleworks into an engine that runs, monitors and post-processes itself — from parametric setup and design-of-experiments to automatic reporting.</p>
                   <p>We look at where AI genuinely adds value in a meshless CFD workflow: driving parametric studies, accelerating the exploration of the design space, extracting the right quantities from large result sets, and connecting simulation output to the engineering decisions that follow.</p>
-                  <div class="authors"><b>Speaker:</b> Michele Merelli — Particleworks Europe / EnginSoft SpA, IT</div>
+                  <div class="authors"><b>Speakers:</b> Naohiro Fujita — Univance Corporation, JP · Michele Merelli — Particleworks Europe / EnginSoft SpA, IT</div>
                 </div>
                 <button class="toggle">Read more <i class="bi bi-chevron-down"></i></button>
               </div>
