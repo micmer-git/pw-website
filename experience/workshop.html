@@ -98,6 +98,12 @@
     .talk-art { position:relative; background: linear-gradient(135deg,#3d0e13 0%,#6b1019 60%,#8f161b 100%); display:flex; align-items:center; justify-content:center; padding:1.4rem; overflow:hidden; }
     .talk-art svg { width:100%; height:auto; max-width:185px; }
     .talk-no { position:absolute; top:0.9rem; left:1.1rem; font-size:0.74rem; font-weight:800; letter-spacing:1px; color:rgba(255,255,255,0.55); }
+    .talk-time { position:absolute; top:2.05rem; left:1.1rem; font-size:0.9rem; font-weight:800; letter-spacing:0.3px; color:#fff; white-space:nowrap; text-shadow:0 1px 6px rgba(0,0,0,0.45); }
+    @media (max-width: 767px){ .talk-time{ font-size:0.84rem; } }
+    .break-row { display:flex; align-items:center; gap:0.85rem; margin:0 0 1.6rem; padding:0.8rem 1.4rem; border:1px dashed rgba(192,31,36,0.35); border-radius:16px; background:linear-gradient(135deg, rgba(239,92,67,0.06), rgba(181,30,35,0.035)); }
+    .break-row i { font-size:1.1rem; color:var(--ev-crimson); line-height:1; }
+    .break-row .lbl { font-weight:800; font-size:0.95rem; color:var(--pw-dark); }
+    .break-row .hrs { margin-left:auto; font-weight:800; font-size:0.9rem; color:var(--ev-crimson); letter-spacing:0.3px; white-space:nowrap; }
     .talk-body { padding:1.7rem 1.9rem; }
     .talk-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.8rem; }
     .chip { font-size:0.68rem; font-weight:700; letter-spacing:0.4px; text-transform:uppercase; padding:0.28rem 0.7rem; border-radius:50px; }
@@ -257,6 +263,7 @@
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TOPIC 01</span>
+                <span class="talk-time">14:10 — 15:00</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI-driven simulation workflow">
                   <defs><linearGradient id="w1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient></defs>
                   <g stroke="url(#w1)" stroke-width="1.6" opacity="0.75">
@@ -288,7 +295,7 @@
                 </div>
 
                 <div class="kn-seg">
-                  <div class="kn-seg-title">From 14:25 · Particleworks Europe</div>
+                  <div class="kn-seg-title">14:25 — 15:00 · Particleworks Europe</div>
                   <h4 class="seg-h">AI and Scripting as a Simulation Engine</h4>
                   <div class="speaker">
                     <div class="avatar"><img src="../images/team/MicheleMerelli.png" alt="Michele Merelli" loading="lazy"></div>
@@ -311,38 +318,39 @@
             </div>
           </article>
 
-          <!-- TOPIC 2: Conjugate Heat Transfer -->
-          <article class="talk" id="talk-cht">
+          <!-- TOPIC 2: FSI -->
+          <article class="talk" id="talk-fsi">
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TOPIC 02</span>
-                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Conjugate heat transfer">
-                  <defs><linearGradient id="w2" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff5c3a"/></linearGradient></defs>
-                  <rect x="30" y="96" width="140" height="42" rx="8" fill="url(#w2)" opacity="0.9"/>
-                  <g stroke="#ffe0d2" stroke-width="3" stroke-linecap="round" opacity="0.9">
-                    <path d="M56 88 C50 76 62 70 56 58 C50 46 62 40 56 30"><animate attributeName="opacity" values="0.9;0.4;0.9" dur="3s" repeatCount="indefinite"/></path>
-                    <path d="M100 88 C94 76 106 70 100 58 C94 46 106 40 100 30"><animate attributeName="opacity" values="0.5;1;0.5" dur="3.4s" repeatCount="indefinite"/></path>
-                    <path d="M144 88 C138 76 150 70 144 58 C138 46 150 40 144 30"><animate attributeName="opacity" values="0.9;0.4;0.9" dur="2.8s" repeatCount="indefinite"/></path>
-                  </g>
-                  <g fill="#fff" opacity="0.85">
-                    <circle cx="62" cy="150" r="3"/><circle cx="90" cy="152" r="2.4"/><circle cx="118" cy="150" r="2.8"/><circle cx="146" cy="152" r="2.4"/>
+                <span class="talk-time">15:00 — 15:25</span>
+                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fluid structure interaction">
+                  <defs><linearGradient id="w4" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient></defs>
+                  <rect x="24" y="30" width="12" height="110" rx="4" fill="#ffc4a8" opacity="0.9"/>
+                  <path d="M36 60 Q100 60 168 90" stroke="url(#w4)" stroke-width="12" stroke-linecap="round" fill="none">
+                    <animate attributeName="d" values="M36 60 Q100 60 168 90;M36 60 Q100 60 168 58;M36 60 Q100 60 168 90" dur="3.6s" repeatCount="indefinite"/>
+                  </path>
+                  <g fill="#fff" opacity="0.9">
+                    <circle cx="70" cy="120" r="4"><animate attributeName="cx" values="50;180;50" dur="2.6s" repeatCount="indefinite"/></circle>
+                    <circle cx="90" cy="134" r="3.2"><animate attributeName="cx" values="46;184;46" dur="3.1s" repeatCount="indefinite"/></circle>
+                    <circle cx="120" cy="108" r="3.6"><animate attributeName="cx" values="52;186;52" dur="2.9s" repeatCount="indefinite"/></circle>
                   </g>
                 </svg>
               </div>
               <div class="talk-body">
-                <h3>Conjugate Heat Transfer: What's New in Version 9.0 and Applications</h3>
+                <h3>Fluid–Structure Interaction: Modeling Deformable Bodies Under Fluid Action</h3>
                 <div class="speaker">
-                  <div class="avatar"><img src="../images/experience2026/riccardo-sala.png" alt="Riccardo Sala" loading="lazy"></div>
-                  <div><div class="nm">Riccardo Sala</div><div class="rl">Particleworks Europe · EnginSoft SpA · <span class="flag">🇮🇹 Italy</span></div></div>
+                  <div class="avatar"><img src="../images/experience2026/federica-galbiati.jpg" alt="Federica Galbiati" loading="lazy"></div>
+                  <div><div class="nm">Federica Galbiati</div><div class="rl">Particleworks Europe · EnginSoft SpA · <span class="flag">🇮🇹 Italy</span></div></div>
                 </div>
                 <div class="talk-tags">
-                  <span class="chip chip-theme">Thermal management</span>
-                  <span class="chip chip-method">CHT</span><span class="chip chip-method">Solid conduction</span><span class="chip chip-method">HTC mapping</span>
+                  <span class="chip chip-theme">FSI</span>
+                  <span class="chip chip-method">Deformable bodies</span><span class="chip chip-method">Coupled solvers</span><span class="chip chip-method">Multibody</span>
                 </div>
                 <div class="abs">
-                  <p>Conjugate heat transfer couples the thermal behaviour of the fluid with conduction inside the solid parts it touches — the key ingredient when cooling performance, not just flow distribution, is what has to be predicted.</p>
-                  <p>This talk covers what version 9.0 brings to CHT modelling, how to set it up correctly, and where it pays off: e-motor oil cooling, piston and gearbox thermal management, machine-tool cooling and other applications where local temperature and heat transfer coefficients drive the design.</p>
-                  <div class="authors"><b>Speaker:</b> Riccardo Sala — Particleworks Europe / EnginSoft SpA, IT</div>
+                  <p>When a component is flexible, the flow shapes the structure and the deformed structure changes the flow. This talk presents how Particleworks models deformable bodies under fluid action, and what the coupling strategy means in practice for set-up, stability and computational cost.</p>
+                  <p>Typical applications include flexible films and packaging, seals and membranes, wipers and blades, and compliant components in fluid machinery — cases where a rigid-wall assumption would miss the physics that matters.</p>
+                  <div class="authors"><b>Speaker:</b> Federica Galbiati — Particleworks Europe / EnginSoft SpA, IT</div>
                 </div>
                 <button class="toggle">Read more <i class="bi bi-chevron-down"></i></button>
               </div>
@@ -354,6 +362,7 @@
             <div class="talk-grid">
               <div class="talk-art">
                 <span class="talk-no">TOPIC 03</span>
+                <span class="talk-time">15:25 — 15:50</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Air and liquid multi-phase flow">
                   <defs><linearGradient id="w3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a5c"/><stop offset="1" stop-color="#ffd27a"/></linearGradient></defs>
                   <path d="M20 78 Q50 62 80 78 Q110 94 140 78 Q170 62 190 78 L190 160 L20 160 Z" fill="url(#w3)" opacity="0.85"/>
@@ -388,49 +397,14 @@
             </div>
           </article>
 
-          <!-- TOPIC 4: FSI -->
-          <article class="talk" id="talk-fsi">
-            <div class="talk-grid">
-              <div class="talk-art">
-                <span class="talk-no">TOPIC 04</span>
-                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fluid structure interaction">
-                  <defs><linearGradient id="w4" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient></defs>
-                  <rect x="24" y="30" width="12" height="110" rx="4" fill="#ffc4a8" opacity="0.9"/>
-                  <path d="M36 60 Q100 60 168 90" stroke="url(#w4)" stroke-width="12" stroke-linecap="round" fill="none">
-                    <animate attributeName="d" values="M36 60 Q100 60 168 90;M36 60 Q100 60 168 58;M36 60 Q100 60 168 90" dur="3.6s" repeatCount="indefinite"/>
-                  </path>
-                  <g fill="#fff" opacity="0.9">
-                    <circle cx="70" cy="120" r="4"><animate attributeName="cx" values="50;180;50" dur="2.6s" repeatCount="indefinite"/></circle>
-                    <circle cx="90" cy="134" r="3.2"><animate attributeName="cx" values="46;184;46" dur="3.1s" repeatCount="indefinite"/></circle>
-                    <circle cx="120" cy="108" r="3.6"><animate attributeName="cx" values="52;186;52" dur="2.9s" repeatCount="indefinite"/></circle>
-                  </g>
-                </svg>
-              </div>
-              <div class="talk-body">
-                <h3>Fluid–Structure Interaction: Modeling Deformable Bodies Under Fluid Action</h3>
-                <div class="speaker">
-                  <div class="avatar"><img src="../images/experience2026/federica-galbiati.jpg" alt="Federica Galbiati" loading="lazy"></div>
-                  <div><div class="nm">Federica Galbiati</div><div class="rl">Particleworks Europe · EnginSoft SpA · <span class="flag">🇮🇹 Italy</span></div></div>
-                </div>
-                <div class="talk-tags">
-                  <span class="chip chip-theme">FSI</span>
-                  <span class="chip chip-method">Deformable bodies</span><span class="chip chip-method">Coupled solvers</span><span class="chip chip-method">Multibody</span>
-                </div>
-                <div class="abs">
-                  <p>When a component is flexible, the flow shapes the structure and the deformed structure changes the flow. This talk presents how Particleworks models deformable bodies under fluid action, and what the coupling strategy means in practice for set-up, stability and computational cost.</p>
-                  <p>Typical applications include flexible films and packaging, seals and membranes, wipers and blades, and compliant components in fluid machinery — cases where a rigid-wall assumption would miss the physics that matters.</p>
-                  <div class="authors"><b>Speaker:</b> Federica Galbiati — Particleworks Europe / EnginSoft SpA, IT</div>
-                </div>
-                <button class="toggle">Read more <i class="bi bi-chevron-down"></i></button>
-              </div>
-            </div>
-          </article>
+          <div class="break-row"><i class="bi bi-cup-hot"></i><span class="lbl">Break</span><span class="hrs">15:50 — 16:30</span></div>
 
-          <!-- TOPIC 5: CFD + DEM -->
+          <!-- TOPIC 4: CFD + DEM -->
           <article class="talk" id="talk-cfd-dem">
             <div class="talk-grid">
               <div class="talk-art">
-                <span class="talk-no">TOPIC 05</span>
+                <span class="talk-no">TOPIC 04</span>
+                <span class="talk-time">16:30 — 16:55</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CFD DEM coupled simulation">
                   <defs><linearGradient id="w5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a5c"/><stop offset="1" stop-color="#ffd27a"/></linearGradient></defs>
                   <path d="M28 96 Q64 78 100 96 Q136 114 172 96 L172 150 L28 150 Z" fill="url(#w5)" opacity="0.75"/>
@@ -464,11 +438,12 @@
             </div>
           </article>
 
-          <!-- TOPIC 6: Multi-level resolution -->
+          <!-- TOPIC 5: Multi-level resolution -->
           <article class="talk" id="talk-refinement">
             <div class="talk-grid">
               <div class="talk-art">
-                <span class="talk-no">TOPIC 06</span>
+                <span class="talk-no">TOPIC 05</span>
+                <span class="talk-time">16:55 — 17:20</span>
                 <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Multi-level resolution and particle refinement">
                   <defs><linearGradient id="w6" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff8a5c"/></linearGradient></defs>
                   <rect x="20" y="26" width="160" height="118" rx="10" stroke="url(#w6)" stroke-width="3" opacity="0.7"/>
@@ -493,14 +468,58 @@
                   <div class="avatar"><img src="../images/experience2026/federica-galbiati.jpg" alt="Federica Galbiati" loading="lazy"></div>
                   <div><div class="nm">Federica Galbiati</div><div class="rl">Particleworks Europe · EnginSoft SpA · <span class="flag">🇮🇹 Italy</span></div></div>
                 </div>
+                <div class="speaker">
+                  <div class="avatar"><img src="../images/experience2026/iori-saigo.jpg" alt="Iori Saigo" loading="lazy"></div>
+                  <div><div class="nm">Iori Saigo</div><div class="rl">Application Engineer · Prometech Software · <span class="flag">🇯🇵 Japan</span></div></div>
+                </div>
                 <div class="talk-tags">
                   <span class="chip chip-theme">Accuracy vs. cost</span>
-                  <span class="chip chip-method">Multi-resolution</span><span class="chip chip-method">Local refinement</span><span class="chip chip-method">GPU efficiency</span>
+                  <span class="chip chip-method">Multi-resolution</span><span class="chip chip-method">Local refinement</span><span class="chip chip-method">Restart</span><span class="chip chip-method">GPU efficiency</span>
                 </div>
                 <div class="abs">
                   <p>Particle size drives both accuracy and run time. Multi-level resolution lets you spend particles where the physics happens — thin films, jets, gaps and impingement zones — and coarsen everywhere else, without giving up the free-surface detail the method is chosen for.</p>
                   <p>This talk covers the refinement strategies available in Particleworks, how to choose and place the refinement regions, the practical rules for keeping the solution stable across resolution levels, and the speed-up that can realistically be expected on GPU.</p>
-                  <div class="authors"><b>Speaker:</b> Federica Galbiati — Particleworks Europe / EnginSoft SpA, IT</div>
+                  <p>Iori Saigo (Prometech Software) joins for the restart capability: how a simulation is stopped and resumed, and how restart is used together with multi-level resolution to continue a run without repeating what has already been computed.</p>
+                  <div class="authors"><b>Speakers:</b> Federica Galbiati — Particleworks Europe / EnginSoft SpA, IT · Iori Saigo — Prometech Software, JP</div>
+                </div>
+                <button class="toggle">Read more <i class="bi bi-chevron-down"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- TOPIC 6: Conjugate Heat Transfer -->
+          <article class="talk" id="talk-cht">
+            <div class="talk-grid">
+              <div class="talk-art">
+                <span class="talk-no">TOPIC 06</span>
+                <span class="talk-time">17:20 — 17:45</span>
+                <svg viewBox="0 0 200 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Conjugate heat transfer">
+                  <defs><linearGradient id="w2" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff5c3a"/></linearGradient></defs>
+                  <rect x="30" y="96" width="140" height="42" rx="8" fill="url(#w2)" opacity="0.9"/>
+                  <g stroke="#ffe0d2" stroke-width="3" stroke-linecap="round" opacity="0.9">
+                    <path d="M56 88 C50 76 62 70 56 58 C50 46 62 40 56 30"><animate attributeName="opacity" values="0.9;0.4;0.9" dur="3s" repeatCount="indefinite"/></path>
+                    <path d="M100 88 C94 76 106 70 100 58 C94 46 106 40 100 30"><animate attributeName="opacity" values="0.5;1;0.5" dur="3.4s" repeatCount="indefinite"/></path>
+                    <path d="M144 88 C138 76 150 70 144 58 C138 46 150 40 144 30"><animate attributeName="opacity" values="0.9;0.4;0.9" dur="2.8s" repeatCount="indefinite"/></path>
+                  </g>
+                  <g fill="#fff" opacity="0.85">
+                    <circle cx="62" cy="150" r="3"/><circle cx="90" cy="152" r="2.4"/><circle cx="118" cy="150" r="2.8"/><circle cx="146" cy="152" r="2.4"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="talk-body">
+                <h3>Conjugate Heat Transfer: What's New in Version 9.0 and Applications</h3>
+                <div class="speaker">
+                  <div class="avatar"><img src="../images/experience2026/riccardo-sala.png" alt="Riccardo Sala" loading="lazy"></div>
+                  <div><div class="nm">Riccardo Sala</div><div class="rl">Particleworks Europe · EnginSoft SpA · <span class="flag">🇮🇹 Italy</span></div></div>
+                </div>
+                <div class="talk-tags">
+                  <span class="chip chip-theme">Thermal management</span>
+                  <span class="chip chip-method">CHT</span><span class="chip chip-method">Solid conduction</span><span class="chip chip-method">HTC mapping</span>
+                </div>
+                <div class="abs">
+                  <p>Conjugate heat transfer couples the thermal behaviour of the fluid with conduction inside the solid parts it touches — the key ingredient when cooling performance, not just flow distribution, is what has to be predicted.</p>
+                  <p>This talk covers what version 9.0 brings to CHT modelling, how to set it up correctly, and where it pays off: e-motor oil cooling, piston and gearbox thermal management, machine-tool cooling and other applications where local temperature and heat transfer coefficients drive the design.</p>
+                  <div class="authors"><b>Speaker:</b> Riccardo Sala — Particleworks Europe / EnginSoft SpA, IT</div>
                 </div>
                 <button class="toggle">Read more <i class="bi bi-chevron-down"></i></button>
               </div>

@@ -5,6 +5,35 @@ the verdict, the date. A check that exists only in terminal scrollback did not h
 
 ---
 
+## 2026-09-10 · claude · Oct 6 — full timetable, chronological order, Saigo on multi-resolution
+
+Client grid (as given): 15:00–15:25 Structures/Federica · 15:25–15:50 Air/Gianluca ·
+15:50–16:30 break · 16:30–16:55 MPS+DEM/Riccardo · 16:55–17:20 Multi-resolution/Federica + Iori
+(restart) · 17:20–17:45 CHT/Riccardo. Michele's segment closes at 15:00 by subtraction.
+
+| check | expected | got | verdict |
+|---|---|---|---|
+| card times | 6 `.talk-time` | 14:10—15:00 · 15:00—15:25 · 15:25—15:50 · 16:30—16:55 · 16:55—17:20 · 17:20—17:45 | ✅ |
+| break rows | 1 | 15:50 — 16:30 | ✅ |
+| contiguity | no gap, no overlap 14:10 → 17:45 (segments + break included) | contiguous | ✅ |
+| card order | chronological | talk-ai · talk-fsi · talk-multiphase · **break** · talk-cfd-dem · talk-refinement · talk-cht | ✅ |
+| labels | TOPIC 01…06 once each, matching the new order | idem | ✅ |
+| Saigo | headshot + speaker row + Restart chip on Topic 05 | `iori-saigo.jpg` referenced & on disk, 1 Restart chip, `Speakers:` line with both | ✅ |
+| tag balance | balanced | div 120/120 · a 29/29 · span 56/56 · article 6/6 · section 4/4 · p 24/24 · h3 8/8 · h4 2/2 | ✅ |
+| twins | `diff -q` silent | silent, 50 448 B each | ✅ |
+| render | Edge headless 1280 px | `scratchpad/oct6-times.png` — badges, break row and both speaker rows on Topic 05 all render | ✅ |
+
+CSS lifted verbatim from `program.php`: `.talk-time` (+ its 767 px rule) and the four `.break-row`
+rules. Anchors (`#talk-cht` …) were **not** renamed, so any external link still lands on the right
+card; nothing else in the repo links to them (`grep -rn 'workshop.php#'` → no hits).
+
+**Unverified:** the 14:00 — 18:00 in the hero and in `index.php` is unchanged — the talks now run
+14:10 → 17:45 and the 1:1 meetings fill the rest; nobody confirmed the 14:00–14:10 opening or the
+17:45–18:00 tail. The restart sentence added to Topic 05's abstract is my wording, not the
+speaker's — "iori restart" was all the brief said.
+
+---
+
 ## 2026-09-10 · claude · Oct 6 — Univance guest contribution in the AI session
 
 Change: `experience/workshop.php` + `.html` — Topic 01 (AI-driven Particleworks) split into two
