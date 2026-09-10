@@ -3,6 +3,19 @@
 Append-only, **newest block on top**. One block whenever an agent stops, hands over, or gets
 blocked. Format and rules: `AGENTS.md` §5.
 
+## 2026-09-10 · claude · Oct 6 — orari su tutti i topic + ordine cronologico
+- **Did:** `experience/workshop.php` + gemello — orario su tutti e 6 i topic, riga break
+  15:50 — 16:30, card riordinate in sequenza cronologica e rinumerate (l'ordine degli id ora è
+  ai · fsi · multiphase · break · cfd-dem · refinement · cht), segmento di Michele chiuso a 15:00,
+  **Iori Saigo (Prometech, JP)** aggiunto al Topic 05 con chip "Restart" e frase di abstract.
+  CSS `.talk-time` e `.break-row` presi identici da `program.php`.
+- **Evidence:** `CHECKS.md`, blocco 2026-09-10 (secondo) — griglia contigua 14:10 → 17:45, tag
+  bilanciati, gemelli identici (50.448 B), screenshot `scratchpad/oct6-times.png`.
+- **Unverified:** l'apertura 14:00 — 14:10 e la coda 17:45 — 18:00 (hero e `index.php` dicono
+  ancora 14:00 — 18:00); il contenuto reale della parte "restart" di Saigo.
+- **Next:** produzione ancora ferma — `particleworks-europe.com` non ha `/images/experience2026/`
+  (404 anche su `naohiro-fujita.jpg` e `iori-saigo.jpg`): caricare prima le immagini, poi le pagine.
+
 ## 2026-09-10 · claude · Oct 6 — Univance nella sessione AI
 - **Did:** `experience/workshop.php` + gemello `.html` — il Topic 01 (AI-driven Particleworks) è
   ora una sessione in due segmenti: **Naohiro Fujita (Univance Corporation, JP) 14:10 — 14:25**,
