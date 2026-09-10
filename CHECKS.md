@@ -5,6 +5,38 @@ the verdict, the date. A check that exists only in terminal scrollback did not h
 
 ---
 
+## 2026-09-10 · claude · Oct 6 — Univance guest contribution in the AI session
+
+Change: `experience/workshop.php` + `.html` — Topic 01 (AI-driven Particleworks) split into two
+timed segments, Naohiro Fujita (Univance Corporation, JP) **before** Michele Merelli.
+
+| check | command | expected | got | verdict |
+|---|---|---|---|---|
+| talk articles | `grep -c '<article class="talk'` | 6 | 6 | ✅ |
+| topic labels | `grep -o 'talk-no">[^<]*'` | TOPIC 01…06, once each | idem | ✅ |
+| segments | `grep -c 'class="kn-seg"'` | 2 | 2 | ✅ |
+| segment times | `grep -o 'kn-seg-title">[^<]*'` | 14:10 — 14:25 · Guest contribution / From 14:25 · Particleworks Europe | idem | ✅ |
+| headshot | `images/experience2026/naohiro-fujita.jpg` | referenced + on disk | both true | ✅ |
+| tag balance (SVG + head excluded) | python count | balanced | div 114/114 · a 29/29 · span 46/46 · article 6/6 · section 4/4 · p 23/23 · h3 8/8 · h4 2/2 | ✅ |
+| twins | `diff -q workshop.php workshop.html` | no output | no output | ✅ |
+| encoding | `head -c3` / `cat -v` | no BOM, UTF-8 em-dash `M-bM-^@M-^T` | idem, CRLF preserved | ✅ |
+| diff size | `git diff --stat` | localised | 30 lines changed per twin (48+/12-) | ✅ |
+
+Rendered check — Edge headless (`--headless=new`, `#talk-ai` so the abstract is open):
+`scratchpad/oct6.png` at 1280 px and `scratchpad/oct6-mobile.png` at 390 px. Topic 01 shows the
+two segments with a dashed separator, both headshots load, tags/abstract/`Speakers:` line intact.
+**Note:** at 390 px the card overflows the right edge in the capture — the *untouched* Topic 02
+overflows identically, so it is a headless-without-mobile-emulation artifact, not a regression.
+
+Copy also touched: section intro now "Six focused topics … opening with a guest contribution from
+Univance Corporation"; hero still reads "6 technical topics" (still true — Univance sits inside
+Topic 01, no renumbering). `index.php` "Explore the six topics" left unchanged, still correct.
+
+**Unverified:** Michele's end time — the client gave only 14:10 — 14:25, so segment 2 reads
+"From 14:25" rather than an invented closing time. The other five topics remain untimed.
+
+---
+
 ## 2026-08-27 · claude · Experience 2026 — programma definitivo (orari + break)
 
 ### A. Struttura di `experience/program.php` dopo la riscrittura
