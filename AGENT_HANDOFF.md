@@ -3,6 +3,12 @@
 Append-only, **newest block on top**. One block whenever an agent stops, hands over, or gets
 blocked. Format and rules: `AGENTS.md` §5.
 
+## 2026-10-12 · claude · AI-acceleration webinar + custom training pages
+- **Did:** `_gen_ai_events.py` generates `webinar-ai-particleworks` (Thu 26 Nov 2026, 15:00-15:45 CET, 5 topics + Q&A) and `training-ai-acceleration` (1 day; Claude Code Desktop / Codex / local AI tool required), each .php + identical .html; 5 GIFs in `images/events/`; sitemap entries added by hand (did not run `_seo_sync.py`).
+- **Evidence:** Edge headless 1280 px screenshots; twins `cmp`-identical.
+- **Unverified:** the webinar has NO MachForm yet (mailto card shown) - set `WEBINAR_FORM_URL` in the generator and re-run; training embeds the existing Contact form (id 22527). Mobile not verified at real 390 px. GIFs are existing demo renders, not workshop footage.
+- **Next:** create the webinar MachForm; upload to the Apache prod (not GitHub Pages) with `images/events/*.gif`.
+
 ## 2026-09-10 · claude · Oct 6 — orari su tutti i topic + ordine cronologico
 - **Did:** `experience/workshop.php` + gemello — orario su tutti e 6 i topic, riga break
   15:50 — 16:30, card riordinate in sequenza cronologica e rinumerate (l'ordine degli id ora è
