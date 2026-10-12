@@ -59,14 +59,14 @@
     .btn-primary:hover { background: var(--pw-blue-dark); border-color: var(--pw-blue-dark); }
   </style>
 <!-- === SEO head (auto-generated, matches backup website_now) === -->
-  <link rel="canonical" href="https://particleworks-europe.com/webinar-ai-particleworks.html">
+  <link rel="canonical" href="https://particleworks-europe.com/webinar-ai-particleworks.php">
   <meta name="author" content="Particleworks Europe">
   <meta name="keywords" content="Particleworks, Particleworks Europe, Granuleworks, technologies, simulation">
   <meta name="google-site-verification" content="13JcLKtEM_c2bcIc8ZMrIKncMjxxmwN5nmfLLs8WLQA">
   <meta property="og:site_name" content="Particleworks Europe">
   <meta property="og:title" content="Webinar: AI-accelerated Particleworks – 26 November 2026 – Particleworks Europe">
   <meta property="og:description" content="45-minute live webinar on 26 November 2026: AI and scripting, FSI, multi-phase, CFD+DEM, refinement and CHT in Particleworks – the Experience 2026 workshop in one session.">
-  <meta property="og:url" content="https://particleworks-europe.com/webinar-ai-particleworks.html">
+  <meta property="og:url" content="https://particleworks-europe.com/webinar-ai-particleworks.php">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Webinar: AI-accelerated Particleworks – 26 November 2026 – Particleworks Europe">
@@ -123,6 +123,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .gifgrid figcaption { padding:.8rem 1rem 1rem; font-size:.86rem; color:#4a5562; }
     .gifgrid figcaption b { display:block; color:var(--pw-dark); margin-bottom:.15rem; }
     .ev-cta { background:linear-gradient(135deg,#0b3d5c,#0088cc); color:#fff; border-radius:18px; padding:2rem; }
+    .take { background:#fff; border:1px solid #e3ecf1; border-top:4px solid var(--pw-blue); border-radius:14px; padding:1.4rem; height:100%; box-shadow:0 4px 16px rgba(0,0,0,.04); }
+    .take i { font-size:1.7rem; color:var(--pw-blue); }
+    .take h3 { font-size:1.15rem; font-weight:800; margin:.5rem 0 .3rem; }
+    .take p { margin:0; color:#4a5562; font-size:.92rem; }
+    .ins { display:flex; gap:1rem; background:#fff; border:1px solid #e3ecf1; border-radius:14px; padding:1.1rem 1.2rem; height:100%; }
+    .ins span { flex:0 0 2rem; height:2rem; border-radius:50%; background:var(--pw-green); color:#fff; font-weight:800; display:grid; place-items:center; }
+    .ins h3 { font-size:1rem; font-weight:700; margin:0 0 .2rem; }
+    .ins p { margin:0; font-size:.9rem; color:#4a5562; }
+    .agenda .b { display:flex; gap:1.2rem; align-items:flex-start; justify-content:space-between; }
+    .agenda .bt { flex:1 1 auto; }
+    .agenda .am { flex:0 0 220px; }
+    .agenda .gifbox { margin:0; }
+    .agenda .gifbox img { max-height:150px; }
+    @media (max-width: 767px) { .agenda .b { flex-direction:column; align-items:flex-start; } .agenda .am { flex-basis:auto; } }
     @media (max-width: 575px) {
       .agenda > li { grid-template-columns: 1fr; gap:.3rem; }
       .agenda > li::before, .agenda .dot { display:none; }
@@ -195,12 +209,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <section class="ev-hero">
     <div class="container"><div class="row g-4 align-items-center">
       <div class="col-lg-7">
-        <span class="ev-kicker"><i class="bi bi-broadcast me-1"></i> Live webinar &middot; 45 minutes</span>
-        <h1>AI-accelerated Particleworks: the workshop, in 45 minutes</h1>
-        <p class="lead mt-3">The key results from our Particleworks Experience 2026 workshop &mdash; AI and scripting, fluid&ndash;structure
-          interaction, multi-phase flow, CFD&nbsp;+&nbsp;DEM, refinement and heat transfer &mdash; condensed into one live session.</p>
+        <span class="ev-kicker"><i class="bi bi-broadcast me-1"></i> Live webinar &middot; 45 min</span>
+        <h1>Particleworks, accelerated by AI</h1>
+        <p class="lead mt-3">What we showed at the Experience 2026 workshop, in 45 minutes: gearbox studies, DoE and post-processing automated, and the engineering checks that keep results honest.</p>
         <ul class="ev-facts">
-          <li><i class="bi bi-calendar-event"></i>Thursday 26 November 2026</li>
+          <li><i class="bi bi-calendar-event"></i>Thu 26 November 2026</li>
           <li><i class="bi bi-clock"></i>15:00 &ndash; 15:45 CET</li>
           <li><i class="bi bi-camera-video"></i>Online</li>
         </ul>
@@ -217,67 +230,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div></div>
   </section>
 
+  <section class="ev-sec pb-0">
+    <div class="container">
+      <h2 class="sec">Three take-homes</h2>
+      <div class="mt-4"><div class="row g-3"><div class="col-md-4"><div class="take"><i class="bi bi-gear-wide-connected"></i><h3>Gearbox, scripted</h3><p>Churning run, loss torque, heat-transfer map and thermal model chained in one script.</p></div></div><div class="col-md-4"><div class="take"><i class="bi bi-grid-3x3-gap"></i><h3>DoE that finishes</h3><p>rpm &times; oil matrices that launch, resume and compare themselves.</p></div></div><div class="col-md-4"><div class="take"><i class="bi bi-bar-chart-line"></i><h3>Post-processing on autopilot</h3><p>Torque, averaged windows, figures and report &mdash; same output for every run.</p></div></div></div></div>
+    </div>
+  </section>
+
   <section class="ev-sec">
     <div class="container">
       <h2 class="sec">Agenda</h2>
-      <p class="sub">Five focused topics and a short Q&amp;A. Every topic comes from a talk of the workshop; simulations shown are real Particleworks runs.</p>
-      <ol class="agenda">
+      <ol class="agenda mt-4">
 
         <li><div class="t">15:00<small>10 min</small></div><span class="dot"></span>
-          <div class="b"><h3><span class="num">01</span>AI and scripting as a simulation engine</h3><p>How an AI coding agent drives Particleworks through its Python API: scene set-up, pre-processing, batch runs, monitoring and automatic reporting &mdash; and where AI genuinely adds value in a meshless CFD workflow.</p>
-            <div class="chips"><span>AI agents</span><span>Python API</span><span>DoE</span></div>
-            <div><div class="gifbox"><img src="images/events/ai-chemistry-mixing.gif" alt="Pasta-dough mixing with water content computed on every particle" loading="lazy"></div><span class="gifcap">Scripted solver extension: hydration computed on every particle and fed back into the flow.</span></div></div></li>
+          <div class="b"><div class="bt"><h3><span class="num">01</span>Gearbox, end to end</h3><p>Churning-loss run, loss torque, heat-transfer map, steady thermal model &mdash; one chain instead of four manual steps.</p></div></div></li>
         <li><div class="t">15:10<small>8 min</small></div><span class="dot"></span>
-          <div class="b"><h3><span class="num">02</span>Fluid&ndash;structure interaction</h3><p>Deformable bodies under fluid action: how the pressure load is passed to a structural model and the deformed shape returned to the flow, step after step.</p>
-            <div class="chips"><span>Two-way coupling</span><span>Flexible walls</span></div>
-            <div><div class="gifbox"><img src="images/events/fsi-flexible-array.gif" alt="Four flexible sheets deforming under a falling liquid" loading="lazy"></div><span class="gifcap">Flexible sheets deforming under impact &mdash; a parametric array run from one script.</span></div></div></li>
+          <div class="b"><div class="bt"><h3><span class="num">02</span>DoE without babysitting</h3><p>A speed &times; oil matrix as a single study: launch, monitor, resume, compare.</p></div><div class="am"><div class="gifbox"><img src="images/events/fsi-flexible-array.gif" alt="A study array set up and run from one script." loading="lazy"></div><span class="gifcap">A study array set up and run from one script.</span></div></div></li>
         <li><div class="t">15:18<small>8 min</small></div><span class="dot"></span>
-          <div class="b"><h3><span class="num">03</span>Multi-phase flow: air and liquid</h3><p>Methods for air&ndash;liquid flows and free-surface problems, with practical use cases and the modelling choices that decide whether a result can be trusted.</p>
-            <div class="chips"><span>Air &amp; liquid</span><span>Non-Newtonian</span><span>Free surface</span></div>
-            <div><div class="gifbox"><img src="images/events/multiphase-viscous-pour.gif" alt="Two viscous sauces pouring onto stuffed pasta" loading="lazy"></div><span class="gifcap">Two non-Newtonian fluids pouring and mixing on a shared surface.</span></div></div></li>
-        <li><div class="t">15:26<small>7 min</small></div><span class="dot"></span>
-          <div class="b"><h3><span class="num">04</span>CFD + DEM: fluid meets granular media</h3><p>Coupling fluid flow with particles and powders &mdash; where the two solvers exchange momentum and how to set up a coupled case without losing the physics.</p>
-            <div class="chips"><span>Particleworks</span><span>Granuleworks</span><span>Coupling</span></div>
-            </div></li>
-        <li><div class="t">15:33<small>7 min</small></div><span class="dot"></span>
-          <div class="b"><h3><span class="num">05</span>Multi-level resolution and conjugate heat transfer</h3><p>Particle refinement where it matters, plus what's new for conjugate heat transfer in Particleworks 9.0 and the applications it opens.</p>
-            <div class="chips"><span>Refinement</span><span>CHT</span><span>Version 9.0</span></div>
-            </div></li>
+          <div class="b"><div class="bt"><h3><span class="num">03</span>Post-processing, automated</h3><p>Torque curves, steady-state windows, renders and the report, generated the same way every time.</p></div><div class="am"><div class="gifbox"><img src="images/events/ai-omelette-pour.gif" alt="Scene, solve and render driven by script." loading="lazy"></div><span class="gifcap">Scene, solve and render driven by script.</span></div></div></li>
+        <li><div class="t">15:26<small>8 min</small></div><span class="dot"></span>
+          <div class="b"><div class="bt"><h3><span class="num">04</span>Engineering insights</h3><p>The checks that separate a plausible result from a correct one. Four of them, from real studies.</p></div><div class="am"><div class="gifbox"><img src="images/events/ai-chemistry-mixing.gif" alt="A solver extended from Python: hydration computed per particle." loading="lazy"></div><span class="gifcap">A solver extended from Python: hydration computed per particle.</span></div></div></li>
+        <li><div class="t">15:34<small>6 min</small></div><span class="dot"></span>
+          <div class="b"><div class="bt"><h3><span class="num">05</span>Beyond gearboxes</h3><p>Fluid&ndash;structure interaction, multi-phase, CFD + DEM and refinement: what to take from the workshop.</p></div><div class="am"><div class="gifbox"><img src="images/events/multiphase-viscous-pour.gif" alt="Two non-Newtonian fluids on a shared surface." loading="lazy"></div><span class="gifcap">Two non-Newtonian fluids on a shared surface.</span></div></div></li>
         <li class="qa"><div class="t">15:40<small>5 min</small></div><span class="dot"></span>
-          <div class="b"><h3><i class="bi bi-chat-dots me-2 text-success"></i>Live Q&amp;A</h3><p>Bring your own case: we answer on the spot.</p></div></li>
+          <div class="b"><div class="bt"><h3><i class="bi bi-chat-dots me-2 text-success"></i>Q&amp;A</h3><p>Bring your own case.</p></div></div></li>
       </ol>
     </div>
   </section>
 
   <section class="ev-sec alt">
-    <div class="container"><div class="row g-4">
-      <div class="col-lg-6">
-        <h2 class="sec">Who should attend</h2>
-        <ul class="tick mt-3">
-          <li>CFD and simulation engineers already using, or evaluating, Particleworks</li>
-          <li>Team leaders who want to see where AI and automation save real simulation time</li>
-          <li>Anyone who missed the workshop in Modena and wants the essentials</li>
-        </ul>
-      </div>
-      <div class="col-lg-6">
-        <h2 class="sec">What you take home</h2>
-        <ul class="tick mt-3">
-          <li>A clear picture of what AI-driven Particleworks workflows can do today</li>
-          <li>The modelling choices behind coupled FSI, multi-phase and CFD&nbsp;+&nbsp;DEM cases</li>
-          <li>The recording and the slides, sent to every registrant</li>
-        </ul>
-      </div>
-    </div></div>
+    <div class="container">
+      <h2 class="sec">Four checks worth the 45 minutes</h2>
+      <p class="sub">A taste of the engineering insights section.</p>
+      <div class="row g-3"><div class="col-md-6"><div class="ins"><span>1</span><div><h3>Short runs lie</h3><p>Below ~0.5 s the fluctuation is as large as the mean. Average over the developed window, not the whole run.</p></div></div></div><div class="col-md-6"><div class="ins"><span>2</span><div><h3>No heat in an adiabatic run</h3><p>A churning run with adiabatic walls holds no heat-transfer coefficient. The thermal map needs a real re-run.</p></div></div></div><div class="col-md-6"><div class="ins"><span>3</span><div><h3>Scripted defaults bite</h3><p>A scene built from scratch can default to a 1 m coarse distance. Pin it, and check it before spending GPU time.</p></div></div></div><div class="col-md-6"><div class="ins"><span>4</span><div><h3>Resume, never re-run</h3><p>Re-launching a batch to &ldquo;continue&rdquo; wipes the finished runs. Resume them.</p></div></div></div></div>
+    </div>
   </section>
 
   <section class="ev-sec">
     <div class="container">
       <div class="ev-cta"><div class="row align-items-center g-3">
-        <div class="col-lg-8"><h2 class="h3 fw-bold mb-1">Want to go deeper?</h2>
-          <p class="mb-0 opacity-90">Take the one-day custom training on AI acceleration of Particleworks &mdash; the workshop content, plus scripts and automation built around your own cases.</p></div>
-        <div class="col-lg-4 text-lg-end"><a class="btn btn-light fw-semibold" href="training-ai-acceleration.html">Custom AI training <i class="bi bi-arrow-right ms-1"></i></a></div>
+        <div class="col-lg-8"><h2 class="h3 fw-bold mb-1">Want it on your own cases?</h2>
+          <p class="mb-0 opacity-90">One-day custom training: the method in the morning, your scripts in the afternoon.</p></div>
+        <div class="col-lg-4 text-lg-end"><a class="btn btn-light fw-semibold" href="training-ai-acceleration.php">Custom AI training <i class="bi bi-arrow-right ms-1"></i></a></div>
       </div></div>
-      <p class="small text-muted mt-4 mb-0">Based on the <a href="experience/workshop.html">Particleworks Experience 2026 workshop</a>. Presented by Michele Merelli, Particleworks Europe / EnginSoft.</p>
+      <p class="small text-muted mt-4 mb-0">Based on the <a href="experience/workshop.php">Particleworks Experience 2026 workshop</a>. Presented by Michele Merelli, Particleworks Europe / EnginSoft.</p>
     </div>
   </section>
 </main>

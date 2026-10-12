@@ -59,14 +59,14 @@
     .btn-primary:hover { background: var(--pw-blue-dark); border-color: var(--pw-blue-dark); }
   </style>
 <!-- === SEO head (auto-generated, matches backup website_now) === -->
-  <link rel="canonical" href="https://particleworks-europe.com/training-ai-acceleration.html">
+  <link rel="canonical" href="https://particleworks-europe.com/training-ai-acceleration.php">
   <meta name="author" content="Particleworks Europe">
   <meta name="keywords" content="Particleworks, Particleworks Europe, Granuleworks, technologies, simulation">
   <meta name="google-site-verification" content="13JcLKtEM_c2bcIc8ZMrIKncMjxxmwN5nmfLLs8WLQA">
   <meta property="og:site_name" content="Particleworks Europe">
   <meta property="og:title" content="Custom training: AI acceleration of Particleworks – Particleworks Europe">
   <meta property="og:description" content="One-day custom training on AI acceleration of Particleworks: workshop content in the morning, custom scripts and automation on your cases in the afternoon.">
-  <meta property="og:url" content="https://particleworks-europe.com/training-ai-acceleration.html">
+  <meta property="og:url" content="https://particleworks-europe.com/training-ai-acceleration.php">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Custom training: AI acceleration of Particleworks – Particleworks Europe">
@@ -123,6 +123,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .gifgrid figcaption { padding:.8rem 1rem 1rem; font-size:.86rem; color:#4a5562; }
     .gifgrid figcaption b { display:block; color:var(--pw-dark); margin-bottom:.15rem; }
     .ev-cta { background:linear-gradient(135deg,#0b3d5c,#0088cc); color:#fff; border-radius:18px; padding:2rem; }
+    .take { background:#fff; border:1px solid #e3ecf1; border-top:4px solid var(--pw-blue); border-radius:14px; padding:1.4rem; height:100%; box-shadow:0 4px 16px rgba(0,0,0,.04); }
+    .take i { font-size:1.7rem; color:var(--pw-blue); }
+    .take h3 { font-size:1.15rem; font-weight:800; margin:.5rem 0 .3rem; }
+    .take p { margin:0; color:#4a5562; font-size:.92rem; }
+    .ins { display:flex; gap:1rem; background:#fff; border:1px solid #e3ecf1; border-radius:14px; padding:1.1rem 1.2rem; height:100%; }
+    .ins span { flex:0 0 2rem; height:2rem; border-radius:50%; background:var(--pw-green); color:#fff; font-weight:800; display:grid; place-items:center; }
+    .ins h3 { font-size:1rem; font-weight:700; margin:0 0 .2rem; }
+    .ins p { margin:0; font-size:.9rem; color:#4a5562; }
+    .agenda .b { display:flex; gap:1.2rem; align-items:flex-start; justify-content:space-between; }
+    .agenda .bt { flex:1 1 auto; }
+    .agenda .am { flex:0 0 220px; }
+    .agenda .gifbox { margin:0; }
+    .agenda .gifbox img { max-height:150px; }
+    @media (max-width: 767px) { .agenda .b { flex-direction:column; align-items:flex-start; } .agenda .am { flex-basis:auto; } }
     @media (max-width: 575px) {
       .agenda > li { grid-template-columns: 1fr; gap:.3rem; }
       .agenda > li::before, .agenda .dot { display:none; }
@@ -197,10 +211,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="col-lg-7">
         <span class="ev-kicker"><i class="bi bi-mortarboard me-1"></i> Custom training &middot; 1 day</span>
         <h1>AI acceleration of Particleworks</h1>
-        <p class="lead mt-3">A one-day training built on what we presented at the Particleworks Experience 2026 workshop:
-          the morning gives you the method, the afternoon turns it into scripts and automation for <em>your</em> simulations.</p>
+        <p class="lead mt-3">The workshop method in the morning. Scripts and automation for your own simulations in the afternoon.</p>
         <ul class="ev-facts">
-          <li><i class="bi bi-calendar-check"></i>1 day &middot; dates agreed with you</li>
+          <li><i class="bi bi-calendar-check"></i>1 day</li>
           <li><i class="bi bi-people"></i>Tailored to your team</li>
           <li><i class="bi bi-laptop"></i>Hands-on</li>
         </ul>
@@ -208,25 +221,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
       <div class="col-lg-5">
         <div class="gifgrid"><figure><img src="images/events/ai-omelette-pour.gif" alt="Automated Particleworks pour simulation rendered end to end" style="height:auto;max-height:330px;">
-          <figcaption><b>Automation in action</b>Set-up, solve and render, driven by script.</figcaption></figure></div>
+          <figcaption><b>Set-up to render</b>Driven by script.</figcaption></figure></div>
       </div>
     </div></div>
   </section>
 
+  <section class="ev-sec pb-0">
+    <div class="container">
+      <h2 class="sec">Three take-homes</h2>
+      <div class="mt-4"><div class="row g-3"><div class="col-md-4"><div class="take"><i class="bi bi-gear-wide-connected"></i><h3>Gearbox, scripted</h3><p>Churning run, loss torque, heat-transfer map and thermal model chained in one script.</p></div></div><div class="col-md-4"><div class="take"><i class="bi bi-grid-3x3-gap"></i><h3>DoE that finishes</h3><p>rpm &times; oil matrices that launch, resume and compare themselves.</p></div></div><div class="col-md-4"><div class="take"><i class="bi bi-bar-chart-line"></i><h3>Post-processing on autopilot</h3><p>Torque, averaged windows, figures and report &mdash; same output for every run.</p></div></div></div></div>
+    </div>
+  </section>
+
   <section class="ev-sec">
     <div class="container">
-      <h2 class="sec">One day, two halves</h2>
-      <p class="sub">Method in the morning, your own automation in the afternoon.</p>
-      <div class="row g-4">
+      <h2 class="sec">The day</h2>
+      <div class="row g-4 mt-1">
         <div class="col-lg-6"><div class="daycard">
-          <div class="when">Morning &middot; the workshop content</div>
-          <h3>AI-driven Particleworks</h3>
-          <ul class="tick"><li><b>AI as a simulation engine</b> &mdash; what to delegate to an agent, what to keep, and how to brief it</li><li><b>Python API in practice</b> &mdash; scenes, pre-processing, GPU solve and post-processing, headless</li><li><b>Parametric studies &amp; DoE</b> &mdash; batches that run, resume and report on their own</li><li><b>Advanced physics from a script</b> &mdash; fluid&ndash;structure interaction, multi-phase, CFD&nbsp;+&nbsp;DEM, refinement and heat transfer</li><li><b>Automatic reporting</b> &mdash; from raw results to figures and a readable summary</li></ul>
+          <div class="when">Morning &middot; method</div>
+          <h3>From the workshop</h3>
+          <ul class="tick"><li><b>Gearbox workflow</b> &mdash; churning run to loss torque to thermal model</li><li><b>DoE</b> &mdash; study matrices that launch, resume and compare</li><li><b>Post-processing</b> &mdash; torque, windows, figures, report</li><li><b>Engineering insights</b> &mdash; the checks that catch silent errors</li></ul>
         </div></div>
         <div class="col-lg-6"><div class="daycard">
-          <div class="when">Afternoon &middot; custom scripts &amp; automation</div>
-          <h3>Built around your cases</h3>
-          <ul class="tick"><li><b>Your case, your scripts</b> &mdash; we start from a model you bring and automate its set-up and runs</li><li><b>Custom automation</b> &mdash; post-processing, reports and study sweeps tailored to your workflow</li><li><b>Hands-on, side by side</b> &mdash; you drive the AI tool, we steer and unblock</li><li><b>Hand-over</b> &mdash; the scripts stay with you, documented, ready to reuse</li></ul>
+          <div class="when">Afternoon &middot; your cases</div>
+          <h3>Custom scripts &amp; automation</h3>
+          <ul class="tick"><li><b>Your model</b> &mdash; we start from a case you bring</li><li><b>Your scripts</b> &mdash; set-up, study sweep and post-processing built together</li><li><b>Hand-over</b> &mdash; documented scripts that stay with you</li></ul>
         </div></div>
       </div>
     </div>
@@ -234,48 +253,54 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <section class="ev-sec alt">
     <div class="container">
-      <h2 class="sec">What the automations look like</h2>
-      <p class="sub">Real Particleworks runs produced with the same approach you will learn.</p>
-      <div class="row g-4 gifgrid">
-        <div class="col-md-4"><figure><img src="images/events/ai-chemistry-mixing.gif" alt="Solver extended from Python" loading="lazy"><figcaption><b>Solver extended from Python</b>Pasta-dough hydration computed on every particle and fed back into the flow &mdash; a physics model added by script.</figcaption></figure></div>
-        <div class="col-md-4"><figure><img src="images/events/ai-omelette-pour.gif" alt="Scene to render, end to end" loading="lazy"><figcaption><b>Scene to render, end to end</b>A pour built, solved and rendered through an automated pipeline driven by an AI agent.</figcaption></figure></div>
-        <div class="col-md-4"><figure><img src="images/events/fsi-flexible-array.gif" alt="A study array from one script" loading="lazy"><figcaption><b>A study array from one script</b>Several flexible-sheet configurations set up, run and post-processed together.</figcaption></figure></div>
-      </div>
+      <h2 class="sec">Checks you will not forget</h2>
+      <p class="sub">Four of the engineering insights from the morning.</p>
+      <div class="row g-3"><div class="col-md-6"><div class="ins"><span>1</span><div><h3>Short runs lie</h3><p>Below ~0.5 s the fluctuation is as large as the mean. Average over the developed window, not the whole run.</p></div></div></div><div class="col-md-6"><div class="ins"><span>2</span><div><h3>No heat in an adiabatic run</h3><p>A churning run with adiabatic walls holds no heat-transfer coefficient. The thermal map needs a real re-run.</p></div></div></div><div class="col-md-6"><div class="ins"><span>3</span><div><h3>Scripted defaults bite</h3><p>A scene built from scratch can default to a 1 m coarse distance. Pin it, and check it before spending GPU time.</p></div></div></div><div class="col-md-6"><div class="ins"><span>4</span><div><h3>Resume, never re-run</h3><p>Re-launching a batch to &ldquo;continue&rdquo; wipes the finished runs. Resume them.</p></div></div></div></div>
     </div>
   </section>
 
   <section class="ev-sec">
+    <div class="container">
+      <h2 class="sec">Automations, running</h2>
+      <div class="row g-4 gifgrid mt-1">
+        <div class="col-md-4"><figure><img src="images/events/fsi-flexible-array.gif" alt="DoE from one script" loading="lazy"><figcaption><b>DoE from one script</b>A configuration array launched and run together.</figcaption></figure></div>
+        <div class="col-md-4"><figure><img src="images/events/ai-omelette-pour.gif" alt="Set-up to render" loading="lazy"><figcaption><b>Set-up to render</b>Scene, solve and render driven by script.</figcaption></figure></div>
+        <div class="col-md-4"><figure><img src="images/events/ai-chemistry-mixing.gif" alt="Solver extended" loading="lazy"><figcaption><b>Solver extended</b>Physics added from Python, per particle.</figcaption></figure></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ev-sec alt">
     <div class="container"><div class="row g-4">
       <div class="col-lg-6">
-        <h2 class="sec">Requirements</h2>
-        <p class="sub mb-3">Please bring a laptop or workstation with:</p>
-        <div class="req">
-          <p class="fw-semibold mb-2">One AI coding tool, installed locally</p>
-          <div class="tool"><i class="bi bi-terminal"></i><div><b>Claude Code Desktop (Anthropic)</b></div></div><div class="tool"><i class="bi bi-code-slash"></i><div><b>Codex (OpenAI)</b></div></div><div class="tool"><i class="bi bi-cpu"></i><div><b>Any other AI coding tool installed on your local machine</b> &mdash; including local models.</div></div>
-          <p class="fw-semibold mb-1 mt-3">Particleworks, on the same machine</p>
-          <p class="small mb-0 text-muted">So scripts can be tested live. Not sure your set-up qualifies? Ask us in the request below.</p>
+        <h2 class="sec">Bring</h2>
+        <div class="req mt-3">
+          <p class="fw-semibold mb-2">One AI tool, installed locally</p>
+          <div class="tool"><i class="bi bi-terminal"></i><div><b>Claude Code Desktop (Anthropic)</b></div></div><div class="tool"><i class="bi bi-code-slash"></i><div><b>Codex (OpenAI)</b></div></div><div class="tool"><i class="bi bi-cpu"></i><div><b>Any other AI tool installed locally</b> &mdash; local models included.</div></div>
+          <p class="fw-semibold mb-1 mt-3">Particleworks on the same machine</p>
+          <p class="small mb-0 text-muted">So scripts can be tested live. Unsure about your set-up? Ask below.</p>
         </div>
       </div>
       <div class="col-lg-6">
-        <h2 class="sec">Who it is for</h2>
+        <h2 class="sec">Good fit if</h2>
         <ul class="tick mt-3">
-          <li>Simulation engineers who run many similar Particleworks cases</li>
-          <li>Teams that want a repeatable, scripted workflow instead of manual set-up</li>
-          <li>Companies that want the scripts and know-how to stay in-house</li>
+          <li>You run many similar Particleworks cases</li>
+          <li>You want a scripted workflow, not manual set-up</li>
+          <li>You want scripts and know-how to stay in-house</li>
         </ul>
-        <p class="small text-muted mt-3">Prefer a short introduction first? Join the <a href="webinar-ai-particleworks.html">45-minute webinar on 26 November</a>.</p>
+        <p class="small text-muted mt-3">Want a taste first? <a href="webinar-ai-particleworks.php">45-minute webinar, 26 November</a>.</p>
       </div>
     </div></div>
   </section>
 
-  <section class="ev-sec alt" id="request">
+  <section class="ev-sec" id="request">
     <div class="container"><div class="row g-4">
       <div class="col-lg-5">
         <h2 class="sec">Request this training</h2>
-        <p class="sub">Tell us about your team, your cases and your preferred period. In the message, please mention <b>&ldquo;AI acceleration training&rdquo;</b> and the AI tool you plan to use. We come back with a proposal.</p>
-        <p class="small">Or write directly to <a href="mailto:info@particleworks-europe.com?subject=Custom%20training%20%E2%80%93%20AI%20acceleration%20of%20Particleworks">info@particleworks-europe.com</a>.</p>
+        <p class="sub">Tell us your team, cases and preferred period. Mention <b>&ldquo;AI acceleration training&rdquo;</b> and your AI tool.</p>
+        <p class="small">Or write to <a href="mailto:info@particleworks-europe.com?subject=Custom%20training%20%E2%80%93%20AI%20acceleration%20of%20Particleworks">info@particleworks-europe.com</a>.</p>
       </div>
-      <div class="col-lg-7"><div class="ev-card">
+      <div class="col-lg-7"><div class="ev-card" style="box-shadow:0 8px 30px rgba(0,0,0,.08);border:1px solid #e3ecf1">
 <div id="mf_placeholder"
      data-formurl="https://particleworks-europe.forms-eu.com/embed.php?id=22527"
      data-formheight="681"
