@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="favicon.ico">
   <title>Custom training: AI acceleration of Particleworks – Particleworks Europe</title>
-  <meta name="description" content="One-day custom training on AI acceleration of Particleworks: workshop content in the morning, custom scripts and automation on your cases in the afternoon.">
+  <meta name="description" content="One-day custom training: the workshop method in the morning, custom scripts and automation on your own Particleworks cases in the afternoon.">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -65,12 +65,12 @@
   <meta name="google-site-verification" content="13JcLKtEM_c2bcIc8ZMrIKncMjxxmwN5nmfLLs8WLQA">
   <meta property="og:site_name" content="Particleworks Europe">
   <meta property="og:title" content="Custom training: AI acceleration of Particleworks – Particleworks Europe">
-  <meta property="og:description" content="One-day custom training on AI acceleration of Particleworks: workshop content in the morning, custom scripts and automation on your cases in the afternoon.">
+  <meta property="og:description" content="One-day custom training: the workshop method in the morning, custom scripts and automation on your own Particleworks cases in the afternoon.">
   <meta property="og:url" content="https://particleworks-europe.com/training-ai-acceleration.php">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Custom training: AI acceleration of Particleworks – Particleworks Europe">
-  <meta name="twitter:description" content="One-day custom training on AI acceleration of Particleworks: workshop content in the morning, custom scripts and automation on your cases in the afternoon.">
+  <meta name="twitter:description" content="One-day custom training: the workshop method in the morning, custom scripts and automation on your own Particleworks cases in the afternoon.">
   <script type="text/javascript" src="https://embeds.iubenda.com/widgets/6c5fe0b3-dfc8-4f17-b2ec-91c28fe04e7c.js"></script>
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -78,70 +78,102 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-58D7FHDF');</script>
 <!-- === /SEO head === -->
-
   <style>
-    .ev-hero { background: linear-gradient(135deg, #0b3d5c 0%, #0088cc 55%, #25a361 120%); color:#fff; padding: 3.5rem 0 3rem; }
-    .ev-hero h1 { font-weight: 800; font-size: clamp(1.9rem, 4vw, 2.9rem); line-height: 1.12; }
-    .ev-hero .lead { opacity: .92; max-width: 40rem; }
-    .ev-kicker { display:inline-block; background: rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.3); border-radius: 999px; padding:.25rem .85rem; font-size:.78rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; margin-bottom:1rem; }
-    .ev-facts { display:flex; flex-wrap:wrap; gap:.6rem; margin:1.4rem 0 0; padding:0; list-style:none; }
-    .ev-facts li { background:#fff; color: var(--pw-dark); border-radius: 12px; padding:.55rem .9rem; font-size:.88rem; font-weight:600; box-shadow:0 6px 20px rgba(0,0,0,.14); }
-    .ev-facts i { color: var(--pw-blue); margin-right:.4rem; }
-    .ev-card { background:#fff; color:var(--pw-dark); border-radius:16px; padding:1.4rem; box-shadow:0 14px 40px rgba(0,0,0,.2); }
-    .ev-card h2 { font-size:1.15rem; font-weight:700; }
-    .ev-sec { padding: 3.5rem 0; }
-    .ev-sec.alt { background: var(--pw-light); }
-    .ev-sec h2.sec { font-weight:800; font-size:1.7rem; margin-bottom:.4rem; }
-    .ev-sec .sub { color: var(--pw-gray); margin-bottom:2rem; max-width:44rem; }
-    .agenda { position:relative; margin:0; padding:0; list-style:none; }
-    .agenda > li { display:grid; grid-template-columns: 4rem 1fr; gap:1.9rem; padding:0 0 1.8rem; position:relative; }
-    .agenda > li::before { content:""; position:absolute; left:5.3rem; top:.4rem; bottom:-.4rem; width:2px; background:#dbe7ee; }
-    .agenda > li:last-child::before { display:none; }
-    .agenda .t { text-align:right; font-weight:700; color:var(--pw-blue-dark); font-size:.95rem; padding-top:.15rem; }
-    .agenda .t small { display:block; color:var(--pw-gray); font-weight:500; font-size:.74rem; }
-    .agenda .dot { position:absolute; left:5.0rem; top:.45rem; width:.65rem; height:.65rem; border-radius:50%; background:var(--pw-blue); box-shadow:0 0 0 4px #fff, 0 0 0 5px #bcd9e8; }
-    .agenda .b { background:#fff; border:1px solid #e3ecf1; border-radius:14px; padding:1.1rem 1.2rem; box-shadow:0 4px 16px rgba(0,0,0,.04); }
-    .agenda .b h3 { font-size:1.08rem; font-weight:700; margin:0 0 .35rem; }
-    .agenda .b p { margin:0; color:#4a5562; font-size:.93rem; }
-    .agenda .num { color:var(--pw-green); font-weight:800; margin-right:.35rem; }
-    .agenda .qa .b { background:linear-gradient(135deg, rgba(0,136,204,.07), rgba(37,163,97,.07)); border-style:dashed; }
-    .gifbox { margin-top:.9rem; border-radius:12px; overflow:hidden; background:#101820; display:inline-block; max-width:100%; line-height:0; }
-    .gifbox img { max-width:100%; height:auto; max-height:300px; width:auto; display:block; }
-    .gifcap { display:block; line-height:1.35; font-size:.76rem; color:#6c757d; margin-top:.35rem; }
-    .chips span { display:inline-block; background:#eef6fb; color:var(--pw-blue-dark); border-radius:999px; padding:.15rem .65rem; font-size:.74rem; font-weight:600; margin:.5rem .3rem 0 0; }
-    .tick { list-style:none; padding:0; margin:0; }
-    .tick li { padding-left:1.7rem; position:relative; margin-bottom:.6rem; }
-    .tick li::before { content:"\F26A"; font-family:"bootstrap-icons"; position:absolute; left:0; top:0; color:var(--pw-green); }
-    .req { border-left:4px solid var(--pw-blue); background:#fff; border-radius:0 14px 14px 0; padding:1.2rem 1.4rem; box-shadow:0 4px 16px rgba(0,0,0,.05); }
-    .req .tool { display:flex; gap:.8rem; align-items:flex-start; margin-bottom:.8rem; }
-    .req .tool i { font-size:1.4rem; color:var(--pw-blue); }
-    .daycard { background:#fff; border:1px solid #e3ecf1; border-radius:16px; padding:1.4rem; height:100%; box-shadow:0 4px 16px rgba(0,0,0,.04); }
-    .daycard .when { font-size:.78rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--pw-green); }
-    .daycard h3 { font-weight:800; font-size:1.25rem; margin:.2rem 0 1rem; }
-    .gifgrid figure { margin:0; background:#fff; border:1px solid #e3ecf1; border-radius:14px; overflow:hidden; height:100%; box-shadow:0 4px 16px rgba(0,0,0,.04); }
-    .gifgrid img { width:100%; height:240px; object-fit:cover; background:#101820; display:block; }
-    .gifgrid figcaption { padding:.8rem 1rem 1rem; font-size:.86rem; color:#4a5562; }
-    .gifgrid figcaption b { display:block; color:var(--pw-dark); margin-bottom:.15rem; }
-    .ev-cta { background:linear-gradient(135deg,#0b3d5c,#0088cc); color:#fff; border-radius:18px; padding:2rem; }
-    .take { background:#fff; border:1px solid #e3ecf1; border-top:4px solid var(--pw-blue); border-radius:14px; padding:1.4rem; height:100%; box-shadow:0 4px 16px rgba(0,0,0,.04); }
-    .take i { font-size:1.7rem; color:var(--pw-blue); }
-    .take h3 { font-size:1.15rem; font-weight:800; margin:.5rem 0 .3rem; }
-    .take p { margin:0; color:#4a5562; font-size:.92rem; }
-    .ins { display:flex; gap:1rem; background:#fff; border:1px solid #e3ecf1; border-radius:14px; padding:1.1rem 1.2rem; height:100%; }
-    .ins span { flex:0 0 2rem; height:2rem; border-radius:50%; background:var(--pw-green); color:#fff; font-weight:800; display:grid; place-items:center; }
-    .ins h3 { font-size:1rem; font-weight:700; margin:0 0 .2rem; }
-    .ins p { margin:0; font-size:.9rem; color:#4a5562; }
-    .agenda .b { display:flex; gap:1.2rem; align-items:flex-start; justify-content:space-between; }
-    .agenda .bt { flex:1 1 auto; }
-    .agenda .am { flex:0 0 220px; }
-    .agenda .gifbox { margin:0; }
-    .agenda .gifbox img { max-height:150px; }
-    @media (max-width: 767px) { .agenda .b { flex-direction:column; align-items:flex-start; } .agenda .am { flex-basis:auto; } }
-    @media (max-width: 575px) {
-      .agenda > li { grid-template-columns: 1fr; gap:.3rem; }
-      .agenda > li::before, .agenda .dot { display:none; }
-      .agenda .t { text-align:left; }
-    }
+body{margin:0}
+.ev{--ink:#0a1f33;--blue:#0088cc;--blue-d:#006da3;--green:#25a361;--paper:#f4f8fb;--text:#1b2733;--mute:#566574;--line:#dce6ee;font-family:'Inter',system-ui,sans-serif;color:var(--text);background:#fff;line-height:1.5}
+.ev *{box-sizing:border-box}
+.ev h1,.ev h2,.ev h3,.ev p{margin:0}
+.ev a{text-decoration:none}
+.ev .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.ev-top{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
+.ev-top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.ev-logo{font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--ink)}
+.ev-logo b{color:var(--blue)}
+.ev-top .when{font-size:13px;color:var(--mute);font-weight:500}
+.ev-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 22px;border-radius:10px;font-weight:700;font-size:15px;border:2px solid transparent}
+.btn-p{background:var(--blue);color:#fff}
+.btn-p:hover{background:var(--blue-d)}
+.btn-g{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+.btn-g:hover{border-color:#fff}
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden;padding:72px 0 80px;background-image:radial-gradient(rgba(127,208,255,.22) 1.4px,transparent 1.6px);background-size:28px 28px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:center}
+.kick{display:inline-flex;gap:10px;align-items:center;font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#7fd0ff}
+.kick i{width:8px;height:8px;border-radius:50%;background:#3ddc84;display:inline-block}
+.hero h1{font-size:clamp(36px,5.2vw,64px);line-height:1.04;font-weight:800;letter-spacing:-.025em;margin-top:18px}
+.hero h1 em{font-style:normal;color:#7fd0ff}
+.hero .lead{font-size:19px;color:#c4d4e2;margin-top:20px;max-width:34em}
+.facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin:28px 0 0;padding:0;list-style:none}
+.facts li{font-weight:700;font-size:15px}
+.facts small{display:block;font-weight:500;font-size:12px;color:#8fa6ba;letter-spacing:.06em;text-transform:uppercase}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.shot{margin:0;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 30px 70px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12)}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{padding:12px 16px;font-size:13px;color:#c4d4e2;background:#10283f}
+.sec{padding:84px 0}
+.sec.alt{background:var(--paper)}
+.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green)}
+.sec h2{font-size:clamp(28px,3.4vw,42px);line-height:1.1;font-weight:800;letter-spacing:-.02em;margin-top:10px;max-width:20em}
+.sec .sub{color:var(--mute);font-size:17px;margin-top:14px;max-width:40em}
+.day{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;margin-top:44px}
+.half{border:1px solid var(--line);border-radius:18px;padding:30px;background:#fff}
+.half.pm{background:var(--ink);border-color:var(--ink);color:#fff}
+.half .when{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green)}
+.half.pm .when{color:#7fd0ff}
+.half h3{font-size:26px;font-weight:800;letter-spacing:-.015em;margin-top:8px}
+.half ol{list-style:none;margin:22px 0 0;padding:0;counter-reset:s}
+.half li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.half.pm li{border-color:rgba(255,255,255,.18)}
+.half li::before{content:counter(s);font-weight:800;color:var(--blue);font-size:15px}
+.half.pm li::before{color:#7fd0ff}
+.half li b{display:block;font-size:16px}
+.half li span{display:block;color:var(--mute);font-size:14.5px;margin-top:2px}
+.half.pm li span{color:#c4d4e2}
+.stairs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:end;margin-top:52px}
+.step{border-radius:16px;padding:24px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.step:nth-child(1){min-height:200px}
+.step:nth-child(2){min-height:250px}
+.step:nth-child(3){min-height:300px}
+.step:nth-child(4){min-height:350px;background:var(--ink);border-color:var(--ink);color:#fff}
+.step .n{font-size:13px;font-weight:800;color:var(--blue);letter-spacing:.06em}
+.step:nth-child(4) .n{color:#7fd0ff}
+.step h3{font-size:21px;font-weight:800;letter-spacing:-.01em}
+.step p{font-size:14.5px;color:var(--mute)}
+.step:nth-child(4) p{color:#c4d4e2}
+.build{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.build ul{list-style:none;margin:28px 0 0;padding:0}
+.build li{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:13px 0;border-top:1px solid var(--line);font-size:16px}
+.build li:last-child{border-bottom:1px solid var(--line)}
+.build li::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--green);margin-top:7px}
+.build li b{font-weight:700}
+.build li span{color:var(--mute)}
+.build .shot{box-shadow:0 18px 44px rgba(10,31,51,.18);border-color:var(--line)}
+.build .shot figcaption{background:#fff;color:var(--mute)}
+.need{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:44px}
+.need div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
+.need h3{font-size:18px;font-weight:700}
+.need p{color:var(--mute);font-size:15px;margin-top:6px}
+.reg{background:var(--ink);color:#fff;padding:84px 0;background-image:radial-gradient(rgba(127,208,255,.18) 1.4px,transparent 1.6px);background-size:28px 28px}
+.reg .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:56px;align-items:center}
+.reg h2{font-size:clamp(30px,4vw,48px);line-height:1.08;font-weight:800;letter-spacing:-.02em}
+.reg p{color:#c4d4e2;font-size:17px;margin-top:14px}
+.reg p a{color:#7fd0ff;font-weight:600}
+.ev-card{background:#fff;color:var(--text);border-radius:18px;padding:28px;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+.ev-card h3{font-size:20px;font-weight:700}
+.ev-card .slot{margin-top:16px;border:2px dashed var(--line);border-radius:12px;padding:56px 28px;text-align:center;color:var(--mute);font-size:14px}
+.next{padding:36px 0;background:var(--paper)}
+.next .wrap{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.next p{font-size:17px;font-weight:600}
+.next p span{color:var(--mute);font-weight:500}
+.next .ev-btn{border-color:var(--ink);color:var(--ink)}
+.foot{padding:26px 0;font-size:13px;color:var(--mute)}
+@media (max-width:900px){
+.hero .wrap,.day,.build,.reg .wrap{grid-template-columns:minmax(0,1fr);gap:36px}
+.stairs,.need{grid-template-columns:minmax(0,1fr)}
+.step:nth-child(n){min-height:0}
+.ev-top .when{display:none}
+.sec,.reg{padding:56px 0}
+.hero{padding:48px 0 56px}
+}
   </style>
 </head>
 <body>
@@ -204,120 +236,124 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </nav>
 
-  
-<main>
-  <section class="ev-hero">
-    <div class="container"><div class="row g-4 align-items-center">
-      <div class="col-lg-7">
-        <span class="ev-kicker"><i class="bi bi-mortarboard me-1"></i> Custom training &middot; 1 day</span>
-        <h1>AI acceleration of Particleworks</h1>
-        <p class="lead mt-3">The workshop method in the morning. Scripts and automation for your own simulations in the afternoon.</p>
-        <ul class="ev-facts">
-          <li><i class="bi bi-calendar-check"></i>1 day</li>
-          <li><i class="bi bi-people"></i>Tailored to your team</li>
-          <li><i class="bi bi-laptop"></i>Hands-on</li>
-        </ul>
-        <a class="btn btn-light fw-semibold mt-4" href="#request"><i class="bi bi-send me-1"></i> Request this training</a>
-      </div>
-      <div class="col-lg-5">
-        <div class="gifgrid"><figure><img src="images/events/ai-omelette-pour.gif" alt="Automated Particleworks pour simulation rendered end to end" style="height:auto;max-height:330px;">
-          <figcaption><b>Set-up to render</b>Driven by script.</figcaption></figure></div>
-      </div>
-    </div></div>
-  </section>
+  <main>
+<div class="ev">
 
-  <section class="ev-sec pb-0">
-    <div class="container">
-      <h2 class="sec">Three take-homes</h2>
-      <div class="mt-4"><div class="row g-3"><div class="col-md-4"><div class="take"><i class="bi bi-gear-wide-connected"></i><h3>Gearbox, scripted</h3><p>Churning run, loss torque, heat-transfer map and thermal model chained in one script.</p></div></div><div class="col-md-4"><div class="take"><i class="bi bi-grid-3x3-gap"></i><h3>DoE that finishes</h3><p>rpm &times; oil matrices that launch, resume and compare themselves.</p></div></div><div class="col-md-4"><div class="take"><i class="bi bi-bar-chart-line"></i><h3>Post-processing on autopilot</h3><p>Torque, averaged windows, figures and report &mdash; same output for every run.</p></div></div></div></div>
+<section class="hero"><div class="wrap">
+  <div>
+    <span class="kick"><i></i>Custom training · 1 day</span>
+    <h1>One day to make Particleworks <em>run itself</em></h1>
+    <p class="lead">The workshop method in the morning. In the afternoon we build the scripts and automation for your own simulations, and they stay with you.</p>
+    <ul class="facts">
+      <li><small>Length</small>1 day</li>
+      <li><small>Format</small>Your team, your cases</li>
+      <li><small>You bring</small>A local AI tool</li>
+    </ul>
+    <div class="cta">
+      <a class="ev-btn btn-p" href="#request">Request this training</a>
+      <a class="ev-btn btn-g" href="#day">See the day</a>
     </div>
-  </section>
+  </div>
+  <figure class="shot">
+    <img src="images/events/multiphase-viscous-pour.gif" loading="lazy" alt="Two viscous sauces pouring onto stuffed pasta in a simulation render" width="440" height="275">
+    <figcaption>Two fluids, one study definition: materials compared by script.</figcaption>
+  </figure>
+</div></section>
 
-  <section class="ev-sec">
-    <div class="container">
-      <h2 class="sec">The day</h2>
-      <div class="row g-4 mt-1">
-        <div class="col-lg-6"><div class="daycard">
-          <div class="when">Morning &middot; method</div>
-          <h3>From the workshop</h3>
-          <ul class="tick"><li><b>Gearbox workflow</b> &mdash; churning run to loss torque to thermal model</li><li><b>DoE</b> &mdash; study matrices that launch, resume and compare</li><li><b>Post-processing</b> &mdash; torque, windows, figures, report</li><li><b>Engineering insights</b> &mdash; the checks that catch silent errors</li></ul>
-        </div></div>
-        <div class="col-lg-6"><div class="daycard">
-          <div class="when">Afternoon &middot; your cases</div>
-          <h3>Custom scripts &amp; automation</h3>
-          <ul class="tick"><li><b>Your model</b> &mdash; we start from a case you bring</li><li><b>Your scripts</b> &mdash; set-up, study sweep and post-processing built together</li><li><b>Hand-over</b> &mdash; documented scripts that stay with you</li></ul>
-        </div></div>
-      </div>
+<section class="sec" id="day"><div class="wrap">
+  <span class="eyebrow">The day</span>
+  <h2>Method in the morning, your automation in the afternoon</h2>
+  <div class="day">
+    <div class="half">
+      <span class="when">Morning · the workshop</span>
+      <h3>What really can be done</h3>
+      <ol>
+        <li><div><b>From script to agent</b><span>pwpy, AI chat with the API in context, agents that run the machine.</span></div></li>
+        <li><div><b>Gearbox, end to end</b><span>Churning loss, HTC map, steady thermal model, each step gated.</span></div></li>
+        <li><div><b>DoE on materials and post-processing</b><span>Rheology laws, wetting and force maps, automatic reports.</span></div></li>
+        <li><div><b>Blender in the loop</b><span>Particles to cinematic renders from the same pipeline.</span></div></li>
+        <li><div><b>Complex workflows and checks</b><span>Temperature-driven viscosity, per-particle history, and the insights that keep results honest.</span></div></li>
+      </ol>
     </div>
-  </section>
-
-  <section class="ev-sec alt">
-    <div class="container">
-      <h2 class="sec">Checks you will not forget</h2>
-      <p class="sub">Four of the engineering insights from the morning.</p>
-      <div class="row g-3"><div class="col-md-6"><div class="ins"><span>1</span><div><h3>Short runs lie</h3><p>Below ~0.5 s the fluctuation is as large as the mean. Average over the developed window, not the whole run.</p></div></div></div><div class="col-md-6"><div class="ins"><span>2</span><div><h3>No heat in an adiabatic run</h3><p>A churning run with adiabatic walls holds no heat-transfer coefficient. The thermal map needs a real re-run.</p></div></div></div><div class="col-md-6"><div class="ins"><span>3</span><div><h3>Scripted defaults bite</h3><p>A scene built from scratch can default to a 1 m coarse distance. Pin it, and check it before spending GPU time.</p></div></div></div><div class="col-md-6"><div class="ins"><span>4</span><div><h3>Resume, never re-run</h3><p>Re-launching a batch to &ldquo;continue&rdquo; wipes the finished runs. Resume them.</p></div></div></div></div>
+    <div class="half pm">
+      <span class="when">Afternoon · your cases</span>
+      <h3>Custom scripts and automation</h3>
+      <ol>
+        <li><div><b>Bring a model</b><span>We start from a case of yours and automate its set-up and runs.</span></div></li>
+        <li><div><b>Build the post-processing</b><span>The outputs and the report your team actually needs.</span></div></li>
+        <li><div><b>Add one extension</b><span>A scripted motion, a custom viscosity law, or a first SDK hook.</span></div></li>
+        <li><div><b>Hand-over</b><span>Documented scripts that stay in-house.</span></div></li>
+      </ol>
     </div>
-  </section>
+  </div>
+</div></section>
 
-  <section class="ev-sec">
-    <div class="container">
-      <h2 class="sec">Automations, running</h2>
-      <div class="row g-4 gifgrid mt-1">
-        <div class="col-md-4"><figure><img src="images/events/fsi-flexible-array.gif" alt="DoE from one script" loading="lazy"><figcaption><b>DoE from one script</b>A configuration array launched and run together.</figcaption></figure></div>
-        <div class="col-md-4"><figure><img src="images/events/ai-omelette-pour.gif" alt="Set-up to render" loading="lazy"><figcaption><b>Set-up to render</b>Scene, solve and render driven by script.</figcaption></figure></div>
-        <div class="col-md-4"><figure><img src="images/events/ai-chemistry-mixing.gif" alt="Solver extended" loading="lazy"><figcaption><b>Solver extended</b>Physics added from Python, per particle.</figcaption></figure></div>
-      </div>
-    </div>
-  </section>
+<section class="sec alt" id="ladder"><div class="wrap">
+  <span class="eyebrow">From script to SDK</span>
+  <h2>Four levels of control. Take as many as you need.</h2>
+  <p class="sub">Each level builds on the one before. The last one changes what the software can do.</p>
+  <div class="stairs">
+    <article class="step"><span class="n">LEVEL 1</span><h3>Your script</h3><p>Rigid Python for pre and post-processing and DoE. Reproducible, and it runs overnight.</p></article>
+    <article class="step"><span class="n">LEVEL 2</span><h3>AI chat</h3><p>Writes pwpy code with the API documents and examples in context.</p></article>
+    <article class="step"><span class="n">LEVEL 3</span><h3>AI agent</h3><p>Claude Code or Codex runs the machine, folders and GPU jobs, iterates, remembers your best practices, and calls Blender or Paraview.</p></article>
+    <article class="step"><span class="n">LEVEL 4</span><h3>SDK</h3><p>Hooks inside the solver: viscosity per particle, new physics that did not exist before.</p></article>
+  </div>
+</div></section>
 
-  <section class="ev-sec alt">
-    <div class="container"><div class="row g-4">
-      <div class="col-lg-6">
-        <h2 class="sec">Bring</h2>
-        <div class="req mt-3">
-          <p class="fw-semibold mb-2">One AI tool, installed locally</p>
-          <div class="tool"><i class="bi bi-terminal"></i><div><b>Claude Code Desktop (Anthropic)</b></div></div><div class="tool"><i class="bi bi-code-slash"></i><div><b>Codex (OpenAI)</b></div></div><div class="tool"><i class="bi bi-cpu"></i><div><b>Any other AI tool installed locally</b> &mdash; local models included.</div></div>
-          <p class="fw-semibold mb-1 mt-3">Particleworks on the same machine</p>
-          <p class="small mb-0 text-muted">So scripts can be tested live. Unsure about your set-up? Ask below.</p>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <h2 class="sec">Good fit if</h2>
-        <ul class="tick mt-3">
-          <li>You run many similar Particleworks cases</li>
-          <li>You want a scripted workflow, not manual set-up</li>
-          <li>You want scripts and know-how to stay in-house</li>
-        </ul>
-        <p class="small text-muted mt-3">Want a taste first? <a href="webinar-ai-particleworks.php">45-minute webinar, 26 November</a>.</p>
-      </div>
-    </div></div>
-  </section>
+<section class="sec" id="build"><div class="wrap build">
+  <div>
+    <span class="eyebrow">What you leave with</span>
+    <h2>Six working pieces, not slides</h2>
+    <ul>
+      <li><div><b>A gearbox thermal chain</b> <span>from churning run to temperatures</span></div></li>
+      <li><div><b>A materials DoE</b> <span>across Newtonian, Bingham and shear-thinning laws</span></div></li>
+      <li><div><b>An automatic report</b> <span>same format for every run</span></div></li>
+      <li><div><b>A Blender render pipeline</b> <span>particles to beauty frames</span></div></li>
+      <li><div><b>A scripted motion</b> <span>keyframes without clicking</span></div></li>
+      <li><div><b>A custom viscosity law</b> <span>up to an SDK hook in the solver</span></div></li>
+    </ul>
+  </div>
+  <figure class="shot">
+    <img src="images/events/ai-omelette-pour.gif" loading="lazy" alt="Simulated egg pour into a pan, rendered from Particleworks particles" width="520" height="293">
+    <figcaption>The omelette: viscosity follows temperature, cooking history per particle, Blender render.</figcaption>
+  </figure>
+</div></section>
 
-  <section class="ev-sec" id="request">
-    <div class="container"><div class="row g-4">
-      <div class="col-lg-5">
-        <h2 class="sec">Request this training</h2>
-        <p class="sub">Tell us your team, cases and preferred period. Mention <b>&ldquo;AI acceleration training&rdquo;</b> and your AI tool.</p>
-        <p class="small">Or write to <a href="mailto:info@particleworks-europe.com?subject=Custom%20training%20%E2%80%93%20AI%20acceleration%20of%20Particleworks">info@particleworks-europe.com</a>.</p>
-      </div>
-      <div class="col-lg-7"><div class="ev-card" style="box-shadow:0 8px 30px rgba(0,0,0,.08);border:1px solid #e3ecf1">
-<div id="mf_placeholder"
-     data-formurl="https://particleworks-europe.forms-eu.com/embed.php?id=22527"
-     data-formheight="681"
-     data-formtitle="Request a custom training"
-     data-paddingbottom="10">
-</div>
+<section class="sec alt" id="need"><div class="wrap">
+  <span class="eyebrow">Requirements</span>
+  <h2>Bring a laptop and an AI tool</h2>
+  <div class="need">
+    <div><h3>An AI coding tool, installed locally</h3><p>Claude Code Desktop (Anthropic), Codex (OpenAI), or any other AI tool on your own machine.</p></div>
+    <div><h3>Particleworks, same machine</h3><p>So every script is tested live, on your own installation.</p></div>
+    <div><h3>No training data needed</h3><p>Agents work like a junior engineer reading the documentation. Your data stays on your machine.</p></div>
+  </div>
+</div></section>
+
+<section class="reg" id="request"><div class="wrap">
+  <div>
+    <span class="kick"><i></i>We reply with a proposal</span>
+    <h2>Tell us your team and your cases.</h2>
+    <p>Mention “AI acceleration training” and the AI tool you plan to use. Or write to <a href="mailto:info@particleworks-europe.com">info@particleworks-europe.com</a>.</p>
+  </div>
+  <div class="ev-card">
+    <h3>Request this training</h3>
+    <div id="mf_placeholder" data-formurl="https://particleworks-europe.forms-eu.com/embed.php?id=22527" data-formheight="681" data-formtitle="Request a custom training" data-paddingbottom="10"></div>
 <script>
   (function(f,o,r,m){
     r=f.createElement('script');r.async=1;r.src=o+'js/mf.js';
     m=f.getElementById('mf_placeholder'); m.parentNode.insertBefore(r, m);
   })(document,'https://assets.forms-eu.com/');
 </script>
-      </div></div>
-    </div></div>
-  </section>
-</main>
+  </div>
+</div></section>
 
+<section class="next"><div class="wrap">
+  <p>Want a taste first? <span>45-minute live webinar, Thu 26 November 2026, 15:00 CET.</span></p>
+  <a class="ev-btn" href="webinar-ai-particleworks.php">See the webinar</a>
+</div></section>
+
+</div>
+</main>
 
   <footer class="py-5 mt-5" style="background:#1a1a1a;color:#adb5bd;">
     <div class="container">

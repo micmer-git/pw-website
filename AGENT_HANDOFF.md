@@ -3,6 +3,12 @@
 Append-only, **newest block on top**. One block whenever an agent stops, hands over, or gets
 blocked. Format and rules: `AGENTS.md` §5.
 
+## 2026-10-12 · claude · AI events pages rebuilt as one-pagers from the workshop deck
+- **Did:** both pages redesigned from zero (design canvas -> `design/ai-events/*.dc.html`, lifted by `_gen_ai_events.py`), content from `Particleworks-PWEXP26-full-workshop_ai_automation.pptx` (gearbox CHT chain, 16x9 materials DoE, post-processing, Blender, omelette, pwpy/agent/SDK ladder). 2 GIFs per page.
+- **Evidence:** Edge headless 1280 px; the three stats (2.1x ISO, 3-6x HTC, 0 HTC adiabatic) are slides 26-31 of the deck.
+- **Unverified:** real 390 px mobile render; webinar MachForm still missing (mailto card).
+- **Next:** create the webinar MachForm, set `WEBINAR_FORM_URL`, re-run the generator, FTP the zip.
+
 ## 2026-10-12 · claude · AI-acceleration webinar + custom training pages
 - **Did:** `_gen_ai_events.py` generates `webinar-ai-particleworks` (Thu 26 Nov 2026, 15:00-15:45 CET, 5 topics + Q&A) and `training-ai-acceleration` (1 day; Claude Code Desktop / Codex / local AI tool required), each .php + identical .html; 5 GIFs in `images/events/`; sitemap entries added by hand (did not run `_seo_sync.py`).
 - **Evidence:** Edge headless 1280 px screenshots; twins `cmp`-identical.
