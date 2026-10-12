@@ -1,3 +1,9 @@
+<?php
+// MachForm embed URL for the form in the top-right card.
+// Paste the form's embed URL between the quotes; leave empty to show the e-mail fallback.
+$machform_url = 'https://particleworks-europe.forms-eu.com/embed.php?id=22527';
+$machform_height = 681;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,6 +166,8 @@ body{margin:0}
 .ev-card{background:#fff;color:var(--text);border-radius:18px;padding:28px;box-shadow:0 30px 70px rgba(0,0,0,.4)}
 .ev-card h3{font-size:20px;font-weight:700}
 .ev-card .slot{margin-top:16px;border:2px dashed var(--line);border-radius:12px;padding:56px 28px;text-align:center;color:var(--mute);font-size:14px}
+.ev-card .mini{font-size:13px;color:var(--mute);margin-top:8px}
+.build .side{display:grid;gap:20px}
 .next{padding:36px 0;background:var(--paper)}
 .next .wrap{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
 .next p{font-size:17px;font-weight:600}
@@ -254,10 +262,22 @@ body{margin:0}
       <a class="ev-btn btn-g" href="#day">See the day</a>
     </div>
   </div>
-  <figure class="shot">
-    <img src="images/events/multiphase-viscous-pour.gif" loading="lazy" alt="Two viscous sauces pouring onto stuffed pasta in a simulation render" width="440" height="275">
-    <figcaption>Two fluids, one study definition: materials compared by script.</figcaption>
-  </figure>
+  <div class="ev-card" id="request">
+    <h3>Request this training</h3>
+    <p class="mini">Tell us your team and cases. We reply with a proposal.</p>
+    <?php if ($machform_url !== ''): ?>
+<div id="mf_placeholder" data-formurl="<?= htmlspecialchars($machform_url) ?>" data-formheight="<?= (int)$machform_height ?>" data-formtitle="Request a custom training" data-paddingbottom="10"></div>
+<script>
+  (function(f,o,r,m){
+    r=f.createElement('script');r.async=1;r.src=o+'js/mf.js';
+    m=f.getElementById('mf_placeholder'); m.parentNode.insertBefore(r, m);
+  })(document,'https://assets.forms-eu.com/');
+</script>
+<?php else: ?>
+<div class="slot">Request form<br>loads here</div><a class="ev-btn btn-p" style="width:100%;margin-top:14px" href="mailto:info@particleworks-europe.com?subject=Custom%20training%20%E2%80%93%20AI%20acceleration%20of%20Particleworks&amp;body=Name%3A%0ACompany%3A%0AJob%20title%3A%0ACountry%3A%0A">Or write to us by e-mail</a>
+<?php endif; ?>
+    <p class="mini">Mention “AI acceleration training” and your AI tool.</p>
+  </div>
 </div></section>
 
 <section class="sec" id="day"><div class="wrap">
@@ -313,10 +333,16 @@ body{margin:0}
       <li><div><b>A custom viscosity law</b> <span>up to an SDK hook in the solver</span></div></li>
     </ul>
   </div>
-  <figure class="shot">
-    <img src="images/events/ai-omelette-pour.gif" loading="lazy" alt="Simulated egg pour into a pan, rendered from Particleworks particles" width="520" height="293">
-    <figcaption>The omelette: viscosity follows temperature, cooking history per particle, Blender render.</figcaption>
-  </figure>
+  <div class="side">
+    <figure class="shot">
+      <img src="images/events/ai-omelette-pour.gif" loading="lazy" alt="Simulated egg pour into a pan, rendered from Particleworks particles" width="520" height="293">
+      <figcaption>The omelette: viscosity follows temperature, cooking history per particle, Blender render.</figcaption>
+    </figure>
+    <figure class="shot">
+      <img src="images/events/multiphase-viscous-pour.gif" loading="lazy" alt="Two viscous sauces pouring onto stuffed pasta in a simulation render" width="440" height="275">
+      <figcaption>Two fluids, one study definition: materials compared by script.</figcaption>
+    </figure>
+  </div>
 </div></section>
 
 <section class="sec alt" id="need"><div class="wrap">
@@ -329,22 +355,13 @@ body{margin:0}
   </div>
 </div></section>
 
-<section class="reg" id="request"><div class="wrap">
+<section class="reg"><div class="wrap">
   <div>
     <span class="kick"><i></i>We reply with a proposal</span>
     <h2>Tell us your team and your cases.</h2>
-    <p>Mention “AI acceleration training” and the AI tool you plan to use. Or write to <a href="mailto:info@particleworks-europe.com">info@particleworks-europe.com</a>.</p>
+    <p>Or write to <a href="mailto:info@particleworks-europe.com">info@particleworks-europe.com</a>.</p>
   </div>
-  <div class="ev-card">
-    <h3>Request this training</h3>
-    <div id="mf_placeholder" data-formurl="https://particleworks-europe.forms-eu.com/embed.php?id=22527" data-formheight="681" data-formtitle="Request a custom training" data-paddingbottom="10"></div>
-<script>
-  (function(f,o,r,m){
-    r=f.createElement('script');r.async=1;r.src=o+'js/mf.js';
-    m=f.getElementById('mf_placeholder'); m.parentNode.insertBefore(r, m);
-  })(document,'https://assets.forms-eu.com/');
-</script>
-  </div>
+  <div class="cta" style="margin:0;justify-content:flex-end"><a class="ev-btn btn-p" href="#request">Request this training</a></div>
 </div></section>
 
 <section class="next"><div class="wrap">

@@ -91,6 +91,8 @@ body{margin:0}
 .card{background:#fff;color:var(--text);border-radius:18px;padding:28px;box-shadow:0 30px 70px rgba(0,0,0,.4)}
 .card h3{font-size:20px;font-weight:700}
 .card .slot{margin-top:16px;border:2px dashed var(--line);border-radius:12px;padding:56px 28px;text-align:center;color:var(--mute);font-size:14px}
+.card .mini{font-size:13px;color:var(--mute);margin-top:8px}
+.build .side{display:grid;gap:20px}
 .next{padding:36px 0;background:var(--paper)}
 .next .wrap{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
 .next p{font-size:17px;font-weight:600}
@@ -130,10 +132,12 @@ body{margin:0}
       <a class="btn btn-g" href="#day">See the day</a>
     </div>
   </div>
-  <figure class="shot">
-    <img data-site="images/events/multiphase-viscous-pour.gif" src="/_blob/a3aac1392658bd2bbf0eea9f0e120435" alt="Two viscous sauces pouring onto stuffed pasta in a simulation render" width="440" height="275">
-    <figcaption>Two fluids, one study definition: materials compared by script.</figcaption>
-  </figure>
+  <div class="card" id="request">
+    <h3>Request this training</h3>
+    <p class="mini">Tell us your team and cases. We reply with a proposal.</p>
+    <div class="slot" data-site-slot="contact-form">Request form (MachForm)</div>
+    <p class="mini">Mention “AI acceleration training” and your AI tool.</p>
+  </div>
 </div></section>
 
 <section class="sec" id="day"><div class="wrap">
@@ -189,10 +193,16 @@ body{margin:0}
       <li><div><b>A custom viscosity law</b> <span>up to an SDK hook in the solver</span></div></li>
     </ul>
   </div>
-  <figure class="shot">
-    <img data-site="images/events/ai-omelette-pour.gif" src="/_blob/e96ee1c996b1b7421d8f11121fce2a57" alt="Simulated egg pour into a pan, rendered from Particleworks particles" width="520" height="293">
-    <figcaption>The omelette: viscosity follows temperature, cooking history per particle, Blender render.</figcaption>
-  </figure>
+  <div class="side">
+    <figure class="shot">
+      <img data-site="images/events/ai-omelette-pour.gif" src="/_blob/e96ee1c996b1b7421d8f11121fce2a57" alt="Simulated egg pour into a pan, rendered from Particleworks particles" width="520" height="293">
+      <figcaption>The omelette: viscosity follows temperature, cooking history per particle, Blender render.</figcaption>
+    </figure>
+    <figure class="shot">
+      <img data-site="images/events/multiphase-viscous-pour.gif" src="/_blob/a3aac1392658bd2bbf0eea9f0e120435" alt="Two viscous sauces pouring onto stuffed pasta in a simulation render" width="440" height="275">
+      <figcaption>Two fluids, one study definition: materials compared by script.</figcaption>
+    </figure>
+  </div>
 </div></section>
 
 <section class="sec alt" id="need"><div class="wrap">
@@ -205,16 +215,13 @@ body{margin:0}
   </div>
 </div></section>
 
-<section class="reg" id="request"><div class="wrap">
+<section class="reg"><div class="wrap">
   <div>
     <span class="kick"><i></i>We reply with a proposal</span>
     <h2>Tell us your team and your cases.</h2>
-    <p>Mention “AI acceleration training” and the AI tool you plan to use. Or write to <a href="mailto:info@particleworks-europe.com">info@particleworks-europe.com</a>.</p>
+    <p>Or write to <a href="mailto:info@particleworks-europe.com">info@particleworks-europe.com</a>.</p>
   </div>
-  <div class="card">
-    <h3>Request this training</h3>
-    <div class="slot" data-site-slot="contact-form">Contact form</div>
-  </div>
+  <div class="cta" style="margin:0;justify-content:flex-end"><a class="btn btn-p" href="#request">Request this training</a></div>
 </div></section>
 
 <section class="next"><div class="wrap">

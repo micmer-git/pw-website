@@ -1,3 +1,9 @@
+<?php
+// MachForm embed URL for the form in the top-right card.
+// Paste the form's embed URL between the quotes; leave empty to show the e-mail fallback.
+$machform_url = '';
+$machform_height = 700;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,7 +140,7 @@ body{margin:0}
 .agenda h3{font-size:18px;font-weight:700}
 .agenda p{color:var(--mute);font-size:15px;margin-top:4px}
 .agenda .qa h3{color:var(--green)}
-.agenda .side{position:sticky;top:84px}
+.agenda .side{position:sticky;top:84px;display:grid;gap:20px}
 .agenda .shot{box-shadow:0 18px 44px rgba(10,31,51,.18);border-color:var(--line)}
 .agenda .shot figcaption{background:#fff;color:var(--mute)}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:44px}
@@ -246,10 +252,22 @@ body{margin:0}
       <a class="ev-btn btn-g" href="#agenda">See the agenda</a>
     </div>
   </div>
-  <figure class="shot">
-    <img src="images/events/ai-omelette-pour.gif" loading="lazy" alt="Simulated egg pour into a pan, rendered from Particleworks particles" width="520" height="293">
-    <figcaption>An omelette, simulated and rendered end to end from a script. Viscosity follows temperature.</figcaption>
-  </figure>
+  <div class="ev-card" id="register">
+    <h3>Save your seat</h3>
+    <p class="mini">Thu 26 Nov 2026 · 15:00–15:45 CET · online · free</p>
+    <?php if ($machform_url !== ''): ?>
+<div id="mf_placeholder" data-formurl="<?= htmlspecialchars($machform_url) ?>" data-formheight="<?= (int)$machform_height ?>" data-formtitle="Register for the webinar" data-paddingbottom="10"></div>
+<script>
+  (function(f,o,r,m){
+    r=f.createElement('script');r.async=1;r.src=o+'js/mf.js';
+    m=f.getElementById('mf_placeholder'); m.parentNode.insertBefore(r, m);
+  })(document,'https://assets.forms-eu.com/');
+</script>
+<?php else: ?>
+<div class="slot">Registration form<br>loads here</div><a class="ev-btn btn-p" style="width:100%;margin-top:14px" href="mailto:info@particleworks-europe.com?subject=Webinar%20registration%20%E2%80%93%20AI-accelerated%20Particleworks%20(26%20Nov%202026)&amp;body=Name%3A%0ACompany%3A%0AJob%20title%3A%0ACountry%3A%0A">Or write to us by e-mail</a>
+<?php endif; ?>
+    <p class="mini">Recording sent to every registrant.</p>
+  </div>
 </div></section>
 
 <section class="sec" id="can"><div class="wrap">
@@ -280,6 +298,10 @@ body{margin:0}
     </ol>
     <div class="side">
       <figure class="shot">
+        <img src="images/events/ai-omelette-pour.gif" loading="lazy" alt="Simulated egg pour into a pan, rendered from Particleworks particles" width="520" height="293">
+        <figcaption>An omelette, simulated and rendered end to end from a script. Viscosity follows temperature.</figcaption>
+      </figure>
+      <figure class="shot">
         <img src="images/events/fsi-flexible-array.gif" loading="lazy" alt="Array of four flexible sheets deforming under falling liquid" width="560" height="394">
         <figcaption>A study array launched, monitored and compared from one script.</figcaption>
       </figure>
@@ -298,17 +320,13 @@ body{margin:0}
   <p class="note">Demonstration gearbox, Particleworks 8.2, 375 k particles, 2 s run. No customer data.</p>
 </div></section>
 
-<section class="reg" id="register"><div class="wrap">
+<section class="reg"><div class="wrap">
   <div>
     <span class="kick"><i></i>Free · live online</span>
     <h2>Thu 26 November, 15:00 CET. Bring a case.</h2>
-    <p>45 minutes, recording sent to every registrant. Presented by Michele Merelli, Particleworks Europe / EnginSoft.</p>
+    <p>45 minutes, presented by Michele Merelli, Particleworks Europe / EnginSoft. Prefer e-mail? <a href="mailto:info@particleworks-europe.com" style="color:#7fd0ff;font-weight:600">info@particleworks-europe.com</a></p>
   </div>
-  <div class="ev-card">
-    <h3>Save your seat</h3>
-    <p class="mini" style="margin:14px 0 16px">Free of charge · live online · recording sent to every registrant.</p><a class="ev-btn btn-p" style="width:100%" href="mailto:info@particleworks-europe.com?subject=Webinar%20registration%20%E2%80%93%20AI-accelerated%20Particleworks%20(26%20Nov%202026)&amp;body=Name%3A%0ACompany%3A%0AJob%20title%3A%0ACountry%3A%0A">Register by e-mail</a>
-    <p class="mini">Prefer e-mail? <a href="mailto:info@particleworks-europe.com">info@particleworks-europe.com</a></p>
-  </div>
+  <div class="cta" style="margin:0;justify-content:flex-end"><a class="ev-btn btn-p" href="#register">Save my seat</a></div>
 </div></section>
 
 <section class="next"><div class="wrap">

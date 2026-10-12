@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Generate the two AI-acceleration landing pages (.php + identical .html twin):
+"""Generate the two AI-acceleration landing pages (.php + static .html twin):
 
   webinar-ai-particleworks.php      45-min live webinar, Thu 26 Nov 2026
   training-ai-acceleration.php      custom 1-day training
 
-The design source of truth is design/ai-events/*.dc.html (the Design canvas artboards).
+Design source of truth: design/ai-events/*.dc.html (the Design canvas artboards).
 This script lifts each artboard's CSS and body, drops the mock top bar and footer, renames the
-classes that clash with Bootstrap, swaps the form placeholders for real embeds and wraps the result in
-the site's own head, nav and footer (taken from training.php).
+classes that clash with Bootstrap, and wraps the result in the site's own head, nav and footer
+(taken from training.php).
 
-Registration form: set WEBINAR_FORM_URL once the MachForm exists (until then an e-mail card is shown).
+The .php files are real PHP: `$machform_url` at the top feeds the MachForm card in the hero. Empty =
+e-mail fallback. The .html twin (GitHub Pages) is static with the same default resolved.
 """
 import re
 from pathlib import Path
@@ -18,39 +19,56 @@ ROOT = Path(__file__).parent
 SRC = ROOT / "design" / "ai-events"
 BASE = (ROOT / "training.php").read_text(encoding="utf-8")
 SITE = "https://particleworks-europe.com"
-
-WEBINAR_FORM_URL = None      # e.g. "https://particleworks-europe.forms-eu.com/embed.php?id=NNNNN"
-WEBINAR_FORM_H = 700
-CONTACT_FORM_URL = "https://particleworks-europe.forms-eu.com/embed.php?id=22527"   # = contact.php
-CONTACT_FORM_H = 681
 MAIL = "info@particleworks-europe.com"
 
 head, rest = BASE.split("<main>", 1)
 _, foot = rest.split("</main>", 1)
 
-
-def machform(url, height, title):
-    return f"""<div id="mf_placeholder" data-formurl="{url}" data-formheight="{height}" data-formtitle="{title}" data-paddingbottom="10"></div>
-<script>
-  (function(f,o,r,m){{
-    r=f.createElement('script');r.async=1;r.src=o+'js/mf.js';
-    m=f.getElementById('mf_placeholder'); m.parentNode.insertBefore(r, m);
-  }})(document,'https://assets.forms-eu.com/');
-</script>"""
-
-
-def webinar_slot():
-    if WEBINAR_FORM_URL:
-        return machform(WEBINAR_FORM_URL, WEBINAR_FORM_H, "Register for the webinar")
-    return (f'<p class="mini" style="margin:14px 0 16px">Free of charge · live online · recording sent to every registrant.</p>'
-            f'<a class="ev-btn btn-p" style="width:100%" href="mailto:{MAIL}?subject=Webinar%20registration%20%E2%80%93%20AI-accelerated%20Particleworks%20(26%20Nov%202026)'
-            f'&amp;body=Name%3A%0ACompany%3A%0AJob%20title%3A%0ACountry%3A%0A">Register by e-mail</a>')
-
-
-SLOTS = {
-    "webinar-form": webinar_slot,
-    "contact-form": lambda: machform(CONTACT_FORM_URL, CONTACT_FORM_H, "Request a custom training"),
+# slot key -> (default MachForm embed URL, height, embed title, mailto subject, placeholder label)
+FORMS = {
+    "webinar-form": ("", 700, "Register for the webinar",
+                     "Webinar%20registration%20%E2%80%93%20AI-accelerated%20Particleworks%20(26%20Nov%202026)",
+                     "Registration form<br>loads here"),
+    "contact-form": ("https://particleworks-europe.forms-eu.com/embed.php?id=22527", 681, "Request a custom training",
+                     "Custom%20training%20%E2%80%93%20AI%20acceleration%20of%20Particleworks",
+                     "Request form<br>loads here"),
 }
+
+
+def embed(url, height, title):
+    return (f'<div id="mf_placeholder" data-formurl="{url}" data-formheight="{height}" '
+            f'data-formtitle="{title}" data-paddingbottom="10"></div>\n'
+            "<script>\n"
+            "  (function(f,o,r,m){\n"
+            "    r=f.createElement('script');r.async=1;r.src=o+'js/mf.js';\n"
+            "    m=f.getElementById('mf_placeholder'); m.parentNode.insertBefore(r, m);\n"
+            "  })(document,'https://assets.forms-eu.com/');\n"
+            "</script>")
+
+
+def fallback(subject, label):
+    return (f'<div class="slot">{label}</div>'
+            f'<a class="ev-btn btn-p" style="width:100%;margin-top:14px" href="mailto:{MAIL}?subject={subject}'
+            '&amp;body=Name%3A%0ACompany%3A%0AJob%20title%3A%0ACountry%3A%0A">Or write to us by e-mail</a>')
+
+
+def slot_html(key, php):
+    url, h, title, subj, label = FORMS[key]
+    if php:
+        return ("<?php if ($machform_url !== ''): ?>\n"
+                + embed("<?= htmlspecialchars($machform_url) ?>", "<?= (int)$machform_height ?>", title)
+                + "\n<?php else: ?>\n" + fallback(subj, label) + "\n<?php endif; ?>")
+    return embed(url, h, title) if url else fallback(subj, label)
+
+
+def php_header(key):
+    url, h = FORMS[key][:2]
+    return ("<?php\n"
+            "// MachForm embed URL for the form in the top-right card.\n"
+            "// Paste the form's embed URL between the quotes; leave empty to show the e-mail fallback.\n"
+            f"$machform_url = '{url}';\n"
+            f"$machform_height = {h};\n"
+            "?>\n")
 
 
 def lift(dc_name):
@@ -59,17 +77,13 @@ def lift(dc_name):
     body = re.search(r'(<div class="ev">.*?)\n</x-dc>', s, re.S).group(1)
     body = re.sub(r'<header class="ev-top">.*?</header>\s*', "", body, flags=re.S)
     body = re.sub(r'<footer class="foot">.*?</footer>\s*', "", body, flags=re.S)
-    # image: artboard blob url -> site file
-    body = re.sub(r' src="/_blob/[0-9a-f]+"', "", body)
+    body = re.sub(r' src="/_blob/[0-9a-f]+"', "", body)                      # artboard blob -> site file
     body = re.sub(r'data-site="([^"]+)"', r'src="\1" loading="lazy"', body)
-    # form placeholders
-    body = re.sub(r'<div class="slot" data-site-slot="([^"]+)">[^<]*</div>',
-                  lambda m: SLOTS[m.group(1)](), body)
-    # Bootstrap clashes
-    css = re.sub(r"\.btn(?![\w-])", ".ev-btn", css)
+    body = re.sub(r'<div class="slot" data-site-slot="([^"]+)">[^<]*</div>', r"@@SLOT:\1@@", body)
+    css = re.sub(r"\.btn(?![\w-])", ".ev-btn", css)                          # Bootstrap clashes
     css = re.sub(r"\.card(?![\w-])", ".ev-card", css)
     body = re.sub(r'class="btn(?=[ "])', 'class="ev-btn', body)
-    body = body.replace('class="card"', 'class="ev-card"')
+    body = body.replace('class="card"', 'class="ev-card"').replace('class="card ', 'class="ev-card ')
     return css.strip(), body
 
 
@@ -98,7 +112,11 @@ PAGES = [
 
 for fname, dc, title, desc in PAGES:
     css, body = lift(dc)
-    html = make_head(fname, title, desc, css) + "<main>\n" + body + "\n</main>" + foot
+    key = re.search(r"@@SLOT:([\w-]+)@@", body).group(1)
+    page = make_head(fname, title, desc, css) + "<main>\n" + body + "\n</main>" + foot
     for ext in ("php", "html"):
-        (ROOT / f"{fname}.{ext}").write_text(html, encoding="utf-8", newline="\n")
-    print(fname, len(html), "bytes")
+        out = page.replace(f"@@SLOT:{key}@@", slot_html(key, ext == "php"))
+        if ext == "php":
+            out = php_header(key) + out
+        (ROOT / f"{fname}.{ext}").write_text(out, encoding="utf-8", newline="\n")
+    print(fname, len(out), "bytes")
