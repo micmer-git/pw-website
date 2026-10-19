@@ -14,7 +14,6 @@ return [
       'id' => '01', 'time' => '09:00–10:00', 'title' => 'Talk title', 'speaker' => 'Name', 'org' => 'Company',
       'photo' => 'name.jpg',                   // file in experience/speakers/
       'findings' => ['Finding one.', 'Finding two.'],
-      'youtube' => '',                         // unlisted YouTube video id, '' = "coming soon"
       'pdf' => 'file.pdf',                     // file in proceedings2026-files/, '' = "on request"
   ]],
 ];

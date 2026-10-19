@@ -425,9 +425,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <h2>Air: measure it before you simulate it</h2>
 
-            <p>The afternoon was about bubbles. deepfluid showed what an optical air-in-oil sensor sees that a single number hides: two oils with the same 0.65% air content can carry bubbles of 132 µm or 68 µm, and the difference changes the oil&ndash;air contact surface, hence oxidation, cavitation behaviour and compressibility. The consequence for simulation is direct. The aeration model has to be calibrated twice, on the total amount of air generated and on the bubble size distribution, and a calibration belongs to one oil and one additive package: change the additives and the temperature trend can even flip sign. Temperature scaling of the coefficients is, honestly, still an open point.</p>
-
-            <p>IAV took the coupled Particleworks&ndash;Granuleworks approach to an electric three-speed commercial-vehicle transmission and followed the air from formation to dissolution, counting bubbles by source with their Particle Explorer tool. A simple oil guide on the lower intermediate shaft cut the splash that creates the air. The settings were close to best practice, with the Courant number raised from 0.2 to 0.3. And in the discussion, the speaker was candid that the measures are on their way to manufacturing but not yet confirmed on a bench. That candour is what made the case persuasive.</p>
+            <p>The afternoon opened with bubbles. deepfluid showed what an optical air-in-oil sensor sees that a single number hides: two oils with the same 0.65% air content can carry bubbles of 132 µm or 68 µm, and the difference changes the oil&ndash;air contact surface, hence oxidation, cavitation behaviour and compressibility. The consequence for simulation is direct. The aeration model has to be calibrated twice, on the total amount of air generated and on the bubble size distribution, and a calibration belongs to one oil and one additive package: change the additives and the temperature trend can even flip sign. Temperature scaling of the coefficients is, honestly, still an open point.</p>
 
             <hr class="section-rule">
 
@@ -439,9 +437,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <hr class="section-rule">
 
-            <h2>Under the hood: Particleworks 9.0</h2>
+            <h2>9.0 on real cases</h2>
 
-            <p>The release itself explains why these workflows are getting faster to set up. Multi-level resolution lets particles be refined where it matters without abrupt size jumps; an elastic-body model, a stabilised LSMPS scheme and the promotion of the liquid-film heat transfer model to a full feature widen the physics. On the Granuleworks side, multi-GPU DEM delivered a 3.5&times; speed-up on four A100 cards for a 16-million-particle ribbon mixer. A DEM&ndash;MPS&ndash;CHT thermal coupling and tetrahedral CHT meshes complete the picture. Asked about AI, the Prometech team pointed to the Python API, which already lets an AI agent drive the solver, and asked users how they would like AI tools to look in 9.1.</p>
+            <p>The morning keynote presented Particleworks 9.0 and Granuleworks 4.0 through industrial examples rather than a feature list. Multi-GPU DEM delivered a 3.5&times; speed-up on four A100 cards for a ribbon mixer with 16 million particles. An elastic-body model let a valve with fixed edges open under flow, and the same model coupled with MPS to simulate screen printing. The liquid-film heat transfer model, now an official feature, showed regions of higher heat transfer than the conventional model. It is the same direction as the afternoon's thermal talks.</p>
 
             <hr class="section-rule">
 
@@ -449,11 +447,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <p>Two habits ran through every talk. First, a result earns trust by closing a check that does not depend on the model: an oil balance at zero, a thermocouple, a worn prototype. Second, the people who got the most from the method were precise about cost: three to five iterations, a day per case, minutes for a steady solution. Meshless CFD in Modena looked less like a promise and more like a tool with a known price.</p>
 
-            <p>Slides, recordings and short summaries of the talks the speakers released are in the proceedings.</p>
+            <p>Slides and short summaries of the talks the speakers released are in the proceedings.</p>
 
             <div class="cta-box">
               <h3>Get the Modena proceedings</h3>
-              <p>Slides, one video per talk and the key findings of each presentation, free after a short form.</p>
+              <p>Slides and the key findings of each released presentation, free after a short form.</p>
               <a href="../experience/proceedings2026.php" class="btn-pw"><i class="bi bi-unlock me-2"></i>Open the proceedings</a>
             </div>
 
@@ -480,7 +478,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="col-md-4">
               <a href="../experience/proceedings2026.php" class="related-card">
                 <h5>Proceedings 2026</h5>
-                <p>Slides, recordings and key findings of every released talk.</p>
+                <p>Slides and key findings of every released talk.</p>
                 <span class="card-arrow"><i class="bi bi-arrow-right"></i></span>
               </a>
             </div>

@@ -44,7 +44,7 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="../favicon.ico">
   <title>Proceedings — Particleworks Experience 2026 | Modena, October 7</title>
-  <meta name="description" content="Presentations, recordings and key findings from Particleworks Experience 2026, Modena. Free access after a short form.">
+  <meta name="description" content="Presentations and key findings from Particleworks Experience 2026, Modena. Free access after a short form.">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -144,7 +144,7 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
     .talk-time { font-size:0.78rem; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--ev-crimson); }
     .talk-top h3 { font-size:1.12rem; font-weight:800; letter-spacing:-0.2px; margin:0.15rem 0; line-height:1.3; }
     .talk-who { font-size:0.88rem; color:var(--pw-gray); }
-    .talk-body { display:grid; grid-template-columns:1.1fr 1fr; gap:0; }
+    .talk-body { display:grid; grid-template-columns:1.6fr 1fr; gap:0; }
     @media(max-width:860px){ .talk-body { grid-template-columns:1fr; } }
     .talk-find { padding:1.4rem 1.6rem; }
     .talk-find h4 { font-size:0.78rem; font-weight:800; letter-spacing:1.3px; text-transform:uppercase; color:var(--pw-gray); margin-bottom:0.7rem; }
@@ -184,6 +184,7 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
             <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="proceedings2026.php"><i class="bi bi-unlock"></i> Proceedings 2026</a></li>
               <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2025.php"><i class="bi bi-calendar3"></i> Proceedings 2025</a></li>
               <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2024.php"><i class="bi bi-calendar3"></i> Proceedings 2024</a></li>
               <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2023.php"><i class="bi bi-calendar3"></i> Proceedings 2023</a></li>
@@ -203,7 +204,7 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
     <div class="container">
       <div class="pr-eyebrow"><i class="bi bi-lock"></i> Proceedings 2026</div>
       <h1>Take the <span class="accent">Modena</span> talks home.</h1>
-      <p class="lead">Slides, recordings and the key findings of Particleworks Experience 2026 — every talk the speakers released for sharing. Leave your details once and the whole collection opens.</p>
+      <p class="lead">Slides and key findings of Particleworks Experience 2026 — every talk the speakers released for sharing. Leave your details once and the whole collection opens.</p>
       <div class="pr-facts">
         <span class="pr-fact"><i class="bi bi-calendar-event"></i> October 7, 2026</span>
         <span class="pr-fact"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena (IT)</span>
@@ -235,7 +236,6 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
             <h3>What you get</h3>
             <ul class="aside-list">
               <li><i class="bi bi-file-earmark-pdf"></i><span><b>The slides</b>PDF of each talk released by its speaker.</span></li>
-              <li><i class="bi bi-play-circle"></i><span><b>The recordings</b>Each talk as its own video.</span></li>
               <li><i class="bi bi-lightbulb"></i><span><b>Key findings</b>A short summary of what each talk showed.</span></li>
               <li><i class="bi bi-shield-check"></i><span><b>Your data</b>Processed in line with GDPR, solely to share the proceedings and follow up on them.</span></li>
             </ul>
@@ -273,7 +273,7 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
       <?php endif; ?>
 
       <h2 class="pr-h2">Talks</h2>
-      <p class="pr-sub">Slides and recordings of the presentations released by their speakers.</p>
+      <p class="pr-sub">Slides of the presentations released by their speakers.</p>
       <?php foreach ($cfg['talks'] as $t): ?>
       <article class="talk" id="talk-<?= e($t['id']) ?>">
         <div class="talk-top">
@@ -290,11 +290,6 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
             <ul><?php foreach ($t['findings'] as $f): ?><li><?= e($f) ?></li><?php endforeach; ?></ul>
           </div>
           <div class="talk-media">
-            <?php if (!empty($t['youtube'])): ?>
-            <div class="vid"><button type="button" aria-label="Play the recording" style="background-image:url(https://i.ytimg.com/vi/<?= e($t['youtube']) ?>/hqdefault.jpg)" data-yt="<?= e($t['youtube']) ?>"></button></div>
-            <?php else: ?>
-            <div class="vid soon"><i class="bi bi-camera-video"></i> Recording coming soon</div>
-            <?php endif; ?>
             <div class="d-flex flex-wrap align-items-center gap-3">
               <?php if (!empty($t['pdf'])): ?>
               <a class="btn-red" href="proceedings2026.php?dl=<?= e($t['id']) ?>"><i class="bi bi-download"></i> Slides (PDF)</a>
@@ -308,7 +303,7 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
       <?php endforeach; ?>
 
       <?php if (!empty($cfg['blog_url'])): ?>
-      <a class="blog-card" href="<?= e($cfg['blog_url']) ?>"><i class="bi bi-journal-text"></i><div><b>Read the story of the day</b><span>A 1,000-word look at what Modena taught us about lubrication, air-in-oil and thermal simulation.</span></div></a>
+      <a class="blog-card" href="<?= e($cfg['blog_url']) ?>"><i class="bi bi-journal-text"></i><div><b>Read the story of the day</b><span>A 1,000-word look at what Modena taught us about heat, air and wear.</span></div></a>
       <?php endif; ?>
     </div>
   </section>
@@ -368,15 +363,6 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     window.addEventListener('scroll', function(){ document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30); });
-    // click-to-play: the YouTube player (and its cookies) only loads when asked
-    document.querySelectorAll('button[data-yt]').forEach(function(b){
-      b.addEventListener('click', function(){
-        var f = document.createElement('iframe');
-        f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0';
-        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true; f.title = 'Recording';
-        b.replaceWith(f);
-      });
-    });
     // the form iframe posts its height: fit it
     window.addEventListener('message', function(e){
       if (typeof e.origin !== 'string' || e.origin.indexOf('forms-eu.com') === -1) return;
