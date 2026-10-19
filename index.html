@@ -139,6 +139,26 @@
       100% { opacity: 0; transform: translateY(-120px); }
     }
     @media (prefers-reduced-motion: reduce) { .hero-svg-overlay * { animation: none !important; } .hero-svg-overlay .hero-flow { opacity: 0.4; } }
+    /* hero carousel */
+    .hero-slides { position: relative; z-index: 2; width: 100%; display: grid; }
+    .hero-slide { grid-area: 1 / 1; position: relative; display: flex; align-items: center; min-height: calc(100vh - 80px); padding: 2rem 0 4.5rem; opacity: 0; visibility: hidden; transition: opacity .7s ease, visibility .7s; }
+    .hero-slide.active { opacity: 1; visibility: visible; z-index: 2; }
+    .hero-slide .hero-content { width: 100%; }
+    .hero-slide h1 { font-size: clamp(2.1rem, 4.4vw, 3.7rem); }
+    .hs-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+    .hs-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(8,24,40,.92) 0%, rgba(8,24,40,.72) 55%, rgba(8,24,40,.45) 100%); }
+    .hs-badge { display: inline-block; margin-bottom: 1rem; background: rgba(37,163,97,.15); color: #3ddc84; font-size: .78rem; font-weight: 600; padding: .45rem 1rem; border-radius: 50px; letter-spacing: .5px; }
+    .hs-chips { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+    .hs-chips span { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15); border-radius: 14px; padding: 1.1rem 1.2rem; color: rgba(255,255,255,.75); font-size: .9rem; }
+    .hs-chips b { display: block; color: #fff; font-size: 1.6rem; font-weight: 800; letter-spacing: -.5px; }
+    .hs-fig { width: 100%; height: auto; border-radius: 16px; box-shadow: 0 24px 60px rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.15); }
+    .hs-nav { position: absolute; top: 50%; z-index: 5; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.08); color: #fff; transform: translateY(-50%); cursor: pointer; }
+    .hs-nav:hover { background: rgba(255,255,255,.2); }
+    .hs-prev { left: 14px; } .hs-next { right: 14px; }
+    .hs-dots { position: absolute; left: 0; right: 0; bottom: 28px; z-index: 5; display: flex; justify-content: center; gap: 10px; }
+    .hs-dots button { width: 34px; height: 5px; border: 0; border-radius: 3px; background: rgba(255,255,255,.3); padding: 0; cursor: pointer; }
+    .hs-dots button.on { background: #fff; }
+    @media (max-width: 991px) { .hs-nav { display: none; } .hero-slide { min-height: 0; padding: 2.5rem 0 4.5rem; } .hs-shade { background: rgba(8,24,40,.82); } .hero { min-height: 0; padding-top: 63px; } }
     .hero-content { position: relative; z-index: 2; }
     .hero h1 {
       font-size: clamp(2.6rem, 5.5vw, 4.5rem);
@@ -1001,28 +1021,65 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <circle class="hd" cx="1400" cy="800" r="2.5" fill="url(#heroPg)" style="animation-delay:4.2s"/>
       </g>
     </svg>
-    <div class="container hero-content">
-      <div class="row align-items-center">
-        <div class="col-lg-7">
-          <div class="mb-3">
-            <span class="badge rounded-pill" style="background:rgba(37,163,97,0.15);color:#25a361;font-size:0.78rem;font-weight:600;padding:0.45rem 1rem;letter-spacing:0.5px;">NEW RELEASE</span>
+    <div class="hero-slides" id="heroSlides" aria-roledescription="carousel" aria-label="Highlights">
+      <div class="hero-slide active" data-i="0">
+        <div class="container hero-content"><div class="row align-items-center">
+          <div class="col-lg-7">
+            <span class="hs-badge">PARTICLEWORKS EXPERIENCE 2026</span>
+            <h1 class="mb-3">The proceedings<br>are <span class="text-dim">online</span></h1>
+            <p class="lead mb-4">Slides, key findings and talks from Modena, 7 October 2026: heat, air and wear, seen through meshless simulation.</p>
+            <div class="d-flex gap-3 flex-wrap align-items-center">
+              <a href="experience/proceedings2026.html" class="btn btn-pw">Open the proceedings</a>
+              <a href="blog/pw-experience-2026.html" class="btn btn-pw-outline">Read the key insights</a>
+            </div>
           </div>
-          <h1 class="mb-3">Discover<br>Particleworks <span class="text-dim">8.2</span></h1>
-          <p class="lead mb-4">Better post-processing, advanced air solvers and a new explicit method for pressure. The most powerful meshfree CFD release yet.</p>
-          <div class="d-flex gap-3 flex-wrap align-items-center">
-            <a href="blog/particleworks-82.html" class="btn btn-pw">Read the Release Notes</a>
-            <a href="#" class="btn btn-pw-outline" data-bs-toggle="modal" data-bs-target="#videoModal">
-              <span class="play-btn-glass me-1" style="width:36px;height:36px;font-size:0.85rem;"><i class="bi bi-play-fill"></i></span>
-              Watch Demo
-            </a>
-          </div>
-        </div>
+          <div class="col-lg-5 d-none d-lg-block"><div class="hs-chips"><span><b>6</b> talks</span><span><b>Heat</b> thermal balance</span><span><b>Air</b> aeration</span><span><b>Wear</b> erosion</span></div></div>
+        </div></div>
       </div>
+      <div class="hero-slide" data-i="1">
+        <img class="hs-bg" src="images/events/ai-omelette-pour.gif" alt="" width="520" height="293">
+        <div class="hs-shade"></div>
+        <div class="container hero-content"><div class="row align-items-center"><div class="col-lg-7">
+          <span class="hs-badge">LIVE WEBINAR · FREE · 45 MIN</span>
+          <h1 class="mb-3">Let an AI agent <span class="text-dim">run</span> your Particleworks studies</h1>
+          <p class="lead mb-4">Thursday 26 November 2026, 15:00 CET. Gearbox thermal chains, materials DoE and automatic reports, driven by script and AI agents.</p>
+          <div class="d-flex gap-3 flex-wrap align-items-center">
+            <a href="webinar-ai-particleworks.html" class="btn btn-pw">Save my seat</a>
+          </div>
+        </div></div></div>
+      </div>
+      <div class="hero-slide" data-i="2">
+        <div class="container hero-content"><div class="row align-items-center">
+          <div class="col-lg-6">
+            <span class="hs-badge">CUSTOM TRAINING · 1 DAY</span>
+            <h1 class="mb-3">AI automation: make Particleworks <span class="text-dim">run itself</span></h1>
+            <p class="lead mb-4">The workshop method in the morning. In the afternoon we build the scripts and automation for your own simulations, and they stay with you.</p>
+            <div class="d-flex gap-3 flex-wrap align-items-center">
+              <a href="training-ai-acceleration.html" class="btn btn-pw">See the training</a>
+            </div>
+          </div>
+          <div class="col-lg-6 d-none d-lg-block"><img class="hs-fig" src="images/events/ai-iceberg.jpg" alt="Iceberg: from writing Python scripts to AI agents that run and review simulations" width="1672" height="941" loading="lazy"></div>
+        </div></div>
+      </div>
+      <button type="button" class="hs-nav hs-prev" aria-label="Previous"><i class="bi bi-chevron-left"></i></button>
+      <button type="button" class="hs-nav hs-next" aria-label="Next"><i class="bi bi-chevron-right"></i></button>
+      <div class="hs-dots" role="tablist"><button type="button" class="on" aria-label="Slide 1"></button><button type="button" aria-label="Slide 2"></button><button type="button" aria-label="Slide 3"></button></div>
     </div>
     <div style="position:absolute;right:-8%;top:8%;width:500px;height:500px;background:radial-gradient(circle,rgba(37,163,97,0.12),transparent 65%);border-radius:50%;z-index:1;"></div>
     <div style="position:absolute;left:30%;bottom:-15%;width:600px;height:300px;background:radial-gradient(ellipse,rgba(0,136,204,0.1),transparent 70%);z-index:1;"></div>
   </section>
 
+<script>
+(function(){var r=document.getElementById('heroSlides');if(!r)return;var sl=r.querySelectorAll('.hero-slide'),dt=r.querySelectorAll('.hs-dots button'),i=0,t=null,paused=false;
+function go(n){i=(n+sl.length)%sl.length;sl.forEach(function(e,k){e.classList.toggle('active',k===i);e.setAttribute('aria-hidden',k!==i)});dt.forEach(function(e,k){e.classList.toggle('on',k===i)})}
+function arm(){clearInterval(t);if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;t=setInterval(function(){if(!paused)go(i+1)},8000)}
+r.querySelector('.hs-prev').onclick=function(){go(i-1);arm()};r.querySelector('.hs-next').onclick=function(){go(i+1);arm()};
+dt.forEach(function(b,k){b.onclick=function(){go(k);arm()}});
+r.addEventListener('mouseenter',function(){paused=true});r.addEventListener('mouseleave',function(){paused=false});
+r.addEventListener('focusin',function(){paused=true});r.addEventListener('focusout',function(){paused=false});
+if(location.hash.indexOf('#slide')===0)go(parseInt(location.hash.slice(6),10)||0);
+go(i);arm()})();
+</script>
   <!-- ============ VIDEO MODAL ============ -->
   <div class="modal fade modal-video" id="videoModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">

@@ -101,17 +101,17 @@ body{margin:0}
 .btn-p:hover{background:var(--blue-d)}
 .btn-g{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
 .btn-g:hover{border-color:#fff}
-.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden;padding:72px 0 80px;background-image:radial-gradient(rgba(127,208,255,.22) 1.4px,transparent 1.6px);background-size:28px 28px}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:center}
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden;padding:34px 0 38px;background-image:radial-gradient(rgba(127,208,255,.22) 1.4px,transparent 1.6px);background-size:28px 28px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:40px;align-items:center}
 .kick{display:inline-flex;gap:10px;align-items:center;font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#7fd0ff}
 .kick i{width:8px;height:8px;border-radius:50%;background:#3ddc84;display:inline-block}
-.hero h1{font-size:clamp(36px,5.2vw,64px);line-height:1.04;font-weight:800;letter-spacing:-.025em;margin-top:18px}
+.hero h1{font-size:clamp(30px,4vw,48px);line-height:1.06;font-weight:800;letter-spacing:-.025em;margin-top:12px}
 .hero h1 em{font-style:normal;color:#7fd0ff}
-.hero .lead{font-size:19px;color:#c4d4e2;margin-top:20px;max-width:34em}
-.facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin:28px 0 0;padding:0;list-style:none}
+.hero .lead{font-size:17px;color:#c4d4e2;margin-top:12px;max-width:36em}
+.facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin:18px 0 0;padding:0;list-style:none}
 .facts li{font-weight:700;font-size:15px}
 .facts small{display:block;font-weight:500;font-size:12px;color:#8fa6ba;letter-spacing:.06em;text-transform:uppercase}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
 .shot{margin:0;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 30px 70px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12)}
 .shot img{display:block;width:100%;height:auto}
 .shot figcaption{padding:12px 16px;font-size:13px;color:#c4d4e2;background:#10283f}
@@ -134,17 +134,22 @@ body{margin:0}
 .half li b{display:block;font-size:16px}
 .half li span{display:block;color:var(--mute);font-size:14.5px;margin-top:2px}
 .half.pm li span{color:#c4d4e2}
-.stairs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:end;margin-top:52px}
-.step{border-radius:16px;padding:24px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
-.step:nth-child(1){min-height:200px}
-.step:nth-child(2){min-height:250px}
-.step:nth-child(3){min-height:300px}
-.step:nth-child(4){min-height:350px;background:var(--ink);border-color:var(--ink);color:#fff}
+.ladder{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:32px;align-items:center;margin-top:40px}
+.ladder .shot{box-shadow:0 18px 44px rgba(10,31,51,.18);border-color:var(--line)}
+.ladder .shot figcaption{background:#fff;color:var(--mute)}
+.stairs{display:grid;gap:14px}
+.step{border-radius:16px;padding:20px 22px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.step:nth-child(2){margin-left:18px}
+.step:nth-child(3){margin-left:36px;background:var(--ink);border-color:var(--ink);color:#fff}
 .step .n{font-size:13px;font-weight:800;color:var(--blue);letter-spacing:.06em}
-.step:nth-child(4) .n{color:#7fd0ff}
-.step h3{font-size:21px;font-weight:800;letter-spacing:-.01em}
+.step:nth-child(3) .n{color:#7fd0ff}
+.step h3{font-size:20px;font-weight:800;letter-spacing:-.01em}
 .step p{font-size:14.5px;color:var(--mute)}
-.step:nth-child(4) p{color:#c4d4e2}
+.step:nth-child(3) p{color:#c4d4e2}
+.req{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:#b42318;background:#fef3f2;border-radius:8px;padding:6px 10px}
+.glance{display:grid;gap:10px;margin-top:12px}
+.glance li{list-style:none;font-size:15px;padding:9px 0;border-top:1px solid var(--line)}
+.glance{padding:0}
 .build{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
 .build ul{list-style:none;margin:28px 0 0;padding:0}
 .build li{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:13px 0;border-top:1px solid var(--line);font-size:16px}
@@ -158,8 +163,8 @@ body{margin:0}
 .need div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
 .need h3{font-size:18px;font-weight:700}
 .need p{color:var(--mute);font-size:15px;margin-top:6px}
-.reg{background:var(--ink);color:#fff;padding:84px 0;background-image:radial-gradient(rgba(127,208,255,.18) 1.4px,transparent 1.6px);background-size:28px 28px}
-.reg .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:56px;align-items:center}
+.reg{background:var(--ink);color:#fff;padding:56px 0;background-image:radial-gradient(rgba(127,208,255,.18) 1.4px,transparent 1.6px);background-size:28px 28px}
+.reg .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:start}
 .reg h2{font-size:clamp(30px,4vw,48px);line-height:1.08;font-weight:800;letter-spacing:-.02em}
 .reg p{color:#c4d4e2;font-size:17px;margin-top:14px}
 .reg p a{color:#7fd0ff;font-weight:600}
@@ -175,12 +180,12 @@ body{margin:0}
 .next .ev-btn{border-color:var(--ink);color:var(--ink)}
 .foot{padding:26px 0;font-size:13px;color:var(--mute)}
 @media (max-width:900px){
-.hero .wrap,.day,.build,.reg .wrap{grid-template-columns:minmax(0,1fr);gap:36px}
-.stairs,.need{grid-template-columns:minmax(0,1fr)}
-.step:nth-child(n){min-height:0}
+.hero .wrap,.day,.build,.reg .wrap,.ladder{grid-template-columns:minmax(0,1fr);gap:28px}
+.need{grid-template-columns:minmax(0,1fr)}
+.step:nth-child(n){margin-left:0}
 .ev-top .when{display:none}
 .sec,.reg{padding:56px 0}
-.hero{padding:48px 0 56px}
+.hero{padding:28px 0 32px}
 }
   </style>
 </head>
@@ -262,21 +267,15 @@ body{margin:0}
       <a class="ev-btn btn-g" href="#day">See the day</a>
     </div>
   </div>
-  <div class="ev-card" id="request">
-    <h3>Request this training</h3>
-    <p class="mini">Tell us your team and cases. We reply with a proposal.</p>
-    <?php if ($machform_url !== ''): ?>
-<div id="mf_placeholder" data-formurl="<?= htmlspecialchars($machform_url) ?>" data-formheight="<?= (int)$machform_height ?>" data-formtitle="Request a custom training" data-paddingbottom="10"></div>
-<script>
-  (function(f,o,r,m){
-    r=f.createElement('script');r.async=1;r.src=o+'js/mf.js';
-    m=f.getElementById('mf_placeholder'); m.parentNode.insertBefore(r, m);
-  })(document,'https://assets.forms-eu.com/');
-</script>
-<?php else: ?>
-<div class="slot">Request form<br>loads here</div><a class="ev-btn btn-p" style="width:100%;margin-top:14px" href="mailto:info@particleworks-europe.com?subject=Custom%20training%20%E2%80%93%20AI%20acceleration%20of%20Particleworks&amp;body=Name%3A%0ACompany%3A%0AJob%20title%3A%0ACountry%3A%0A">Or write to us by e-mail</a>
-<?php endif; ?>
-    <p class="mini">Mention “AI acceleration training” and your AI tool.</p>
+  <div class="ev-card" id="glance">
+    <h3>The training at a glance</h3>
+    <ul class="glance">
+      <li><b>1 day</b>, your team, your cases</li>
+      <li><b>Morning</b> the workshop method, <b>afternoon</b> your own cases</li>
+      <li>Scripts and automation <b>stay with you</b></li>
+      <li><b>Required:</b> an AI tool installed locally on your own machine</li>
+    </ul>
+    <a class="ev-btn btn-p" style="width:100%;margin-top:14px" href="#request">Request this training</a>
   </div>
 </div></section>
 
@@ -309,14 +308,19 @@ body{margin:0}
 </div></section>
 
 <section class="sec alt" id="ladder"><div class="wrap">
-  <span class="eyebrow">From script to SDK</span>
-  <h2>Four levels of control. Take as many as you need.</h2>
-  <p class="sub">Each level builds on the one before. The last one changes what the software can do.</p>
-  <div class="stairs">
-    <article class="step"><span class="n">LEVEL 1</span><h3>Your script</h3><p>Rigid Python for pre and post-processing and DoE. Reproducible, and it runs overnight.</p></article>
-    <article class="step"><span class="n">LEVEL 2</span><h3>AI chat</h3><p>Writes pwpy code with the API documents and examples in context.</p></article>
-    <article class="step"><span class="n">LEVEL 3</span><h3>AI agent</h3><p>Claude Code or Codex runs the machine, folders and GPU jobs, iterates, remembers your best practices, and calls Blender or Paraview.</p></article>
-    <article class="step"><span class="n">LEVEL 4</span><h3>SDK</h3><p>Hooks inside the solver: viscosity per particle, new physics that did not exist before.</p></article>
+  <span class="eyebrow">From script to agent</span>
+  <h2>Three stages. Take as many as you need.</h2>
+  <p class="sub">The visible part is the script. Most of the value sits below the waterline.</p>
+  <div class="ladder">
+    <figure class="shot">
+      <img src="images/events/ai-iceberg.jpg" loading="lazy" alt="Iceberg diagram: writing Python is the tip; AI helping write code, AI running simulations and AI reviewing results sit below the waterline" width="1672" height="941">
+      <figcaption>The complexity iceberg of AI plus Particleworks automation, from the workshop.</figcaption>
+    </figure>
+    <div class="stairs">
+      <article class="step"><span class="n">STAGE 1</span><h3>Script &amp; AI chat</h3><p>Rigid Python for pre and post-processing and DoE. An AI chat writes the pwpy code with the API documents and examples in context.</p></article>
+      <article class="step"><span class="n">STAGE 2</span><h3>AI agent</h3><p>Claude Code or Codex runs the machine: folders, GPU jobs, retries. It calls Blender or Paraview.</p></article>
+      <article class="step"><span class="n">STAGE 3</span><h3>Review, learn, extend</h3><p>The agent checks the results, remembers your best practices, and goes as far as an SDK hook inside the solver.</p></article>
+    </div>
   </div>
 </div></section>
 
@@ -347,21 +351,37 @@ body{margin:0}
 
 <section class="sec alt" id="need"><div class="wrap">
   <span class="eyebrow">Requirements</span>
-  <h2>Bring a laptop and an AI tool</h2>
+  <h2>Bring a laptop with an AI tool installed locally</h2>
   <div class="need">
-    <div><h3>An AI coding tool, installed locally</h3><p>Claude Code Desktop (Anthropic), Codex (OpenAI), or any other AI tool on your own machine.</p></div>
+    <div><h3>Required: an AI coding tool, installed locally</h3><p>Claude Code Desktop (Anthropic), Codex (OpenAI), or another AI tool installed on your own machine before the day. A browser chat alone is not enough.</p></div>
     <div><h3>Particleworks, same machine</h3><p>So every script is tested live, on your own installation.</p></div>
     <div><h3>No training data needed</h3><p>Agents work like a junior engineer reading the documentation. Your data stays on your machine.</p></div>
   </div>
 </div></section>
 
-<section class="reg"><div class="wrap">
+<section class="reg" id="request-sec"><div class="wrap">
   <div>
     <span class="kick"><i></i>We reply with a proposal</span>
     <h2>Tell us your team and your cases.</h2>
     <p>Or write to <a href="mailto:info@particleworks-europe.com">info@particleworks-europe.com</a>.</p>
+    <p><b style="color:#fff">Required:</b> an AI tool (Claude Code Desktop, Codex or similar) installed locally on the participants' own machines.</p>
   </div>
-  <div class="cta" style="margin:0;justify-content:flex-end"><a class="ev-btn btn-p" href="#request">Request this training</a></div>
+  <div class="ev-card" id="request">
+    <h3>Request this training</h3>
+    <p class="mini">Tell us your team and cases. We reply with a proposal.</p>
+    <?php if ($machform_url !== ''): ?>
+<div id="mf_placeholder" data-formurl="<?= htmlspecialchars($machform_url) ?>" data-formheight="<?= (int)$machform_height ?>" data-formtitle="Request a custom training" data-paddingbottom="10"></div>
+<script>
+  (function(f,o,r,m){
+    r=f.createElement('script');r.async=1;r.src=o+'js/mf.js';
+    m=f.getElementById('mf_placeholder'); m.parentNode.insertBefore(r, m);
+  })(document,'https://assets.forms-eu.com/');
+</script>
+<?php else: ?>
+<div class="slot">Request form<br>loads here</div><a class="ev-btn btn-p" style="width:100%;margin-top:14px" href="mailto:info@particleworks-europe.com?subject=Custom%20training%20%E2%80%93%20AI%20acceleration%20of%20Particleworks&amp;body=Name%3A%0ACompany%3A%0AJob%20title%3A%0ACountry%3A%0A">Or write to us by e-mail</a>
+<?php endif; ?>
+    <p class="mini">Mention “AI acceleration training” and your AI tool. A local install of an AI tool on your own machine is required.</p>
+  </div>
 </div></section>
 
 <section class="next"><div class="wrap">
