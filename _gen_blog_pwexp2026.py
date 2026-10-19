@@ -25,6 +25,28 @@ CSS = '''
     figure.slide { margin:1.2rem 0 1.6rem; }
     figure.slide img { width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.10); border:1px solid rgba(0,0,0,0.06); }
     figure.slide figcaption { font-size:0.8rem; color:#6c757d; margin-top:0.5rem; line-height:1.5; }
+    html { scroll-behavior:smooth; }
+    .article-content { font-size:1.02rem; line-height:1.75; }
+    .article-content h2 { margin-top:0.4rem; }
+    .sec-eyebrow { display:inline-flex; align-items:center; gap:0.45rem; font-size:0.74rem; font-weight:800; letter-spacing:1.6px; text-transform:uppercase; color:#c01f24; margin:2.6rem 0 0.3rem; }
+    .sec-eyebrow::before { content:''; width:26px; height:3px; border-radius:3px; background:linear-gradient(90deg,#d9503f,#8f161b); }
+    .sec-lead { font-size:1.08rem; color:#3a4150; margin-bottom:0.4rem; }
+    .toc { display:flex; flex-wrap:wrap; gap:0.5rem; margin:1.2rem 0 0.4rem; }
+    .toc a { font-size:0.8rem; font-weight:600; text-decoration:none; color:#8f161b; border:1px solid rgba(192,31,36,0.3); border-radius:50px; padding:0.3rem 0.85rem; background:#fff; }
+    .toc a:hover { background:#c01f24; color:#fff; }
+    .toc small { color:#6c757d; font-weight:500; }
+    .standfirst { font-size:1.12rem; line-height:1.6; font-weight:600; color:var(--pw-dark,#1a1a2e); margin:0 0 0.9rem; }
+    mark.hl { background:linear-gradient(transparent 55%, rgba(255,196,0,0.38) 55%); color:inherit; padding:0 0.1em; font-weight:600; }
+    .statstrip { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:0.7rem; margin:0.4rem 0 1.1rem; }
+    .stat { background:#fff; border:1px solid rgba(0,0,0,0.08); border-top:3px solid #c01f24; border-radius:12px; padding:0.7rem 0.9rem; }
+    .stat b { display:block; font-size:1.45rem; line-height:1.15; font-weight:800; letter-spacing:-0.5px; color:#8f161b; }
+    .stat span { display:block; font-size:0.78rem; color:#5d6670; margin-top:0.2rem; line-height:1.35; }
+    .daystats { margin:1.4rem 0 0.4rem; }
+    .moments-blog { display:flex; flex-wrap:wrap; gap:0.4rem; align-items:center; margin:-0.6rem 0 1.4rem; }
+    .moments-blog .lbl { font-size:0.72rem; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:#6c757d; margin-right:0.2rem; }
+    .moments-blog a { font-size:0.78rem; font-weight:600; text-decoration:none; color:#c01f24; border:1px solid rgba(192,31,36,0.3); border-radius:50px; padding:0.22rem 0.7rem 0.22rem 0.5rem; background:#fff; }
+    .moments-blog a:hover { background:#c01f24; color:#fff; }
+    .moments-blog a i { vertical-align:-1px; }
     @media(max-width:560px){ .talk-intro { flex-direction:column; text-align:center; } }
   </style>'''
 head = head.replace('</style>', CSS, 1)
@@ -44,17 +66,40 @@ tail = tail.replace('''<a href="particleworks-82.html" class="related-card">
                 <p>Slides and key findings of every released talk.</p>''')
 
 
-def talk(time, title, who, photo, body_html, points, slide, caption):
+
+def mm(t):
+    return f'{t // 60}:{t % 60:02d}'
+
+
+def talk(tid, time, title, who, photo, lead, stats, paras, points, slide, caption, moments, note_html=''):
+    st = ''.join(f'<div class="stat"><b>{v}</b><span>{l}</span></div>' for v, l in stats)
+    ps = ''.join(f'\n            <p>{p}</p>' for p in paras)
+    mo = ''.join(f'<a href="../experience/proceedings2026.php?talk={tid}&amp;t={t}#talk-{tid}"><i class="bi bi-play-fill"></i> {mm(t)} {lab}</a>' for t, lab in moments)
+    nt = f'\n            <div class="eng-note"><b>Engineering note.</b> {note_html}</div>' if note_html else ''
     return f'''
-            <div class="talk-intro"><img src="../experience/speakers/{photo[0]}" alt="{photo[1]}"><div><div class="t-time">{time}</div><h3>{title}</h3><div class="t-who">{who}</div></div></div>
-{body_html}
+            <div class="talk-intro" id="talk-{tid}"><img src="../experience/speakers/{photo[0]}" alt="{photo[1]}"><div><div class="t-time">{time}</div><h3>{title}</h3><div class="t-who">{who}</div></div></div>
+            <p class="standfirst">{lead}</p>
+            <div class="statstrip">{st}</div>{ps}{nt}
             <div class="keypoints"><h5>Key points</h5><ul>{''.join(f'<li>{p}</li>' for p in points)}</ul></div>
-            <figure class="slide"><img src="images/pwe2026/slide-{slide}.jpg" alt="{title} — key slide" loading="lazy"><figcaption>{caption}</figcaption></figure>'''
+            <figure class="slide"><img src="images/pwe2026/slide-{slide}.jpg" alt="{title} — key slide" loading="lazy"><figcaption><b>Key slide.</b> {caption}</figcaption></figure>
+            <div class="moments-blog"><span class="lbl">Watch the moment</span>{mo}</div>'''
 
 
-def note(html):
-    return f'\n            <div class="eng-note"><b>Engineering note.</b> {html}</div>'
+def sec(eyebrow, h2, lead):
+    return f'\n            <div class="sec-eyebrow">{eyebrow}</div>\n            <h2>{h2}</h2>\n            <p class="sec-lead">{lead}</p>'
 
+
+def hl(x):
+    return f'<mark class="hl">{x}</mark>'
+
+
+
+RD = ('04', '11:45–12:15', 'CHT Analysis of a Reciprocating Pump', 'Leonardo Lanciotti — R&amp;D CFD S.R.L. – Comet S.p.A. (IT)', ('leonardo-lanciotti.jpg', 'Leonardo Lanciotti'))
+SKF = ('06', '12:45–13:15', 'Integrating Particleworks into SKF Engineering Tools: Part I', 'Lijun Cao &amp; Fabrizio Mandrile — SKF (NL)', ('lijun-cao.jpg', 'Lijun Cao'))
+TRK = ('10', '16:30–17:00', 'Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method', 'Leonardo Tiberi — Track One SRL – Unimore (IT)', ('leonardo-tiberi.jpg', 'Leonardo Tiberi'))
+DFL = ('07', '14:30–15:00', 'Direct Optical Air-in-Oil Measurement as an Enabler for Accurate Simulation of Gearings and Hydraulic Systems', 'Dr. Lukas Hafner — deepfluid (DE), with Gianluca Parma — EnginSoft', ('lukas-hafner.jpg', 'Lukas Hafner'))
+HES = ('05', '12:15–12:45', 'Moving Particle Simulation of Eroded Pelton Runners', 'Jean Decaix — HES-SO Valais/Wallis (CH)', ('jean-decaix.jpg', 'Jean Decaix'))
+BRG = ('11', '17:00–17:30', 'Simulation of Sand Separation and Wear in the Börger FlowSep', 'Bernd Valtwies — Börger GmbH (DE) &amp; Riccardo Sala — EnginSoft (IT)', ('bernd-valtwies.jpg', 'Bernd Valtwies'))
 
 BODY = '''
   <!-- Hero -->
@@ -62,10 +107,10 @@ BODY = '''
     <div class="container">
       <div class="version-badge"><i class="bi bi-calendar-event me-1"></i> PW Experience 2026</div>
       <h1>What Modena Taught Us About Heat, Air and Wear</h1>
-      <p class="lead">Modena, October 7, 2026 — seven talks, the key slide of each</p>
+      <p class="lead">Modena, October 7, 2026 — six talks, the key slide of each, and the moment to watch</p>
       <div class="hero-meta">
         <span><i class="bi bi-calendar3"></i> October 2026</span>
-        <span><i class="bi bi-clock"></i> 11 min read</span>
+        <span><i class="bi bi-clock"></i> 12 min read</span>
         <span><i class="bi bi-tag"></i> Conference Highlights</span>
       </div>
     </div>
@@ -77,110 +122,114 @@ BODY = '''
         <div class="col-lg-9 col-xl-8">
           <article class="article-content">
 
-            <p>On October 7, Particleworks users filled the BPER FORUM Monzani in Modena for a day that opened with the release of Particleworks 9.0 and Granuleworks 4.0 and closed, nine hours later, with a group photo. In between, speakers from bearing makers, e-drive engineers, a hydropower research project, a pump manufacturer and several engineering firms kept returning to three questions: <strong>where does the heat go, where does the air go, and where does the material wear?</strong></p>
+            <p class="standfirst">On October 7, Particleworks users filled the BPER FORUM Monzani in Modena for a day built around three questions: ''' + hl('where does the heat go, where does the air go, and where does the material wear?') + '''</p>
 
-            <p>None of the talks was a software demo. Each put simulation next to a thermocouple, an optical sensor or a worn prototype, and said plainly how well they agreed. Below, the seven talks that the speakers released for sharing, each with the one slide that carries the most information. The full slides are in the <a href="../experience/proceedings2026.php">proceedings</a>.</p>
+            <p>Speakers from a bearing maker, a pump manufacturer, a hydropower research project and several engineering firms answered them with the same discipline. Each put simulation next to a thermocouple, an optical sensor or a worn prototype, and said plainly how well they agreed. This post follows six of the talks, each introduced by its speaker, with the engineering that mattered, the one slide that carries the most information, and a link to the exact moment in the recording. The slides are in the <a href="../experience/proceedings2026.php">proceedings</a>.</p>
+
+            <div class="statstrip daystats">
+              <div class="stat"><b>3–5</b><span>manual iterations to close a pump's thermal balance</span></div>
+              <div class="stat"><b>&lt; 7 %</b><span>error against the bench test on a carrier roller</span></div>
+              <div class="stat"><b>0.45 vs 0.43 %</b><span>simulated vs measured air in a gearbox after calibration</span></div>
+              <div class="stat"><b>10 → 25 %</b><span>badly separated sand when the flow rate goes up</span></div>
+            </div>
+
+            <div class="toc">
+              <a href="#talk-04">Heat · R&amp;D CFD <small>pump</small></a>
+              <a href="#talk-06">Heat · SKF <small>bearings</small></a>
+              <a href="#talk-10">Heat · Track One <small>roller</small></a>
+              <a href="#talk-07">Air · deepfluid <small>gear oil</small></a>
+              <a href="#talk-05">Wear · HES-SO <small>Pelton</small></a>
+              <a href="#talk-11">Wear · Börger <small>separator</small></a>
+            </div>
+
+            <hr class="section-rule">
+''' + sec('01 · Heat', 'From side effect to deliverable', 'Three talks treated temperature as the result to deliver. They share one trick: ' + hl('never run the oil and the solid together in time.') + ' Oil reaches its flow pattern in seconds, metal needs hours. So the oil is simulated briefly, its heat-transfer coefficient (HTC) and near-wall temperature are handed to a steady conjugate-heat-transfer (CHT) solution, and the two are iterated until nothing moves.') + talk(*RD,
+    lead='A pump lubricated by oil sloshing, cooled by natural convection, and a thermal model that is closed by physics, not by fitting.',
+    stats=[('3–5', 'manual iterations'), ('≈ 1.5 h', 'per case, once the model exists'), ('5.4 °C', 'worst thermocouple gap')],
+    paras=['The case was a volumetric water pump with 3.7 kW at the shaft and 85–90% mechanical efficiency, so roughly ' + hl('0.4–0.55 kW') + ' of heat to dissipate, oil at 63 °C, ambient 22 °C. A fully coupled unsteady run would need double precision and a transient far too long, so a few seconds of sloshing give the HTC map and a steady CHT converges in minutes.',
+           'The delicate input is where the heat is born. Loads on the kinematic pairs were not available, so instead of trial and error the team ran a dynamic analysis of the pump, took friction coefficients from the literature and split the power between contacts. Each source is a local volumetric heat source in a thin slice of CAD next to the contact.',
+           'The results show where the model is right and where it is not. The shaft sits at 70–80 °C as in the test, and a ' + hl('hot spot at the piston–seal contact') + ' appears exactly where seals degrade in service. The small bearing comes out hotter than the large one, contrary to experiment: a sign that sloshing needs a particle refinement there.'],
+    note_html='Convergence is not judged on temperatures alone. The oil is not a heat sink, so the heat it takes from the shaft must equal the heat it gives to the housing: <code>Q&#775;<sub>shaft&rarr;oil</sub> = &Sigma; HTC<sub>i</sub>(T<sub>i</sub>&minus;T<sub>oil</sub>)A<sub>i</sub> = &Sigma; HTC<sub>j</sub>(T<sub>oil</sub>&minus;T<sub>j</sub>)A<sub>j</sub></code>, on a uniform surface mesh built from the HTC map. If it is not zero, scale the thermal power, the oil temperature or the external HTC and iterate.',
+    points=['Sloshing is decoupled from CHT: seconds of oil flow, minutes of steady CHT.', 'Six of seven thermocouples within 3.1 °C of the test; the worst, the open-side bearing, 5.4 °C.', 'The seal hot spot is predicted where seals fail in practice.', 'The setup can take longer than the run: the iteration itself is cheap.'],
+    slide='04', caption='Simulation versus experimental thermocouples, with the difference in °C for each position (R&amp;D CFD).',
+    moments=[(370, 'Why decouple sloshing and CHT'), (432, 'Power split'), (863, 'Results'), (1208, 'Q&amp;A: how many iterations?')]) + talk(*SKF,
+    lead='Before trusting a heat-transfer coefficient inside a bearing tool, verify it on the simplest cases that exist, and report the spread honestly.',
+    stats=[('−7 … +28 %', 'Particleworks HTC vs correlation'), ('−8 … +17 %', 'conventional CFD vs correlation'), ('4', 'radius-ratio / speed cases')],
+    paras=['SKF framed thermal analysis as a ladder: lumped networks, finite-element thermal models, FE with CFD-derived HTCs one way, then fully coupled CFD. Each step buys fidelity and costs time. Their plan is the one-way rung inside the ' + hl('BEAST bearing simulation tool') + ': BEAST provides dynamics and heat sources, Particleworks provides the HTCs.',
+           'The verification used a sphere in a uniform flow and oil between concentric cylinders, the inner one rotating. Against the Aoki correlation the two numerical methods scatter by similar amounts, which is the honest message: the correlation is not truth either. The vortex pattern appeared with ' + hl('mostly default settings') + ', with one caution: watch the velocity (Courant) limiter.',
+           'The roadmap is concrete: a segmented bearing first, ideally with a ' + hl('cyclic boundary condition') + ', which SKF has asked for, otherwise a full bearing with strong local refinement.'],
+    points=['Concentric cylinders, bearing oil, radius ratio 0.5 and 0.83, 1,500 and 3,000 rpm.', 'Particleworks HTC 352–554 W/m²K against 312–531 from the correlation.', 'Once a bearing rotates there is no good reference model, so complexity is added step by step.', 'Request to the roadmap: cyclic boundary condition for bearing segments.'],
+    slide='06', caption='HTC results for the concentric-cylinders model: Particleworks, correlation and conventional CFD (SKF).',
+    moments=[(904, 'BEAST + Particleworks'), (1177, 'Two verification models'), (2343, 'Results and the limiter'), (2602, 'Wish: cyclic boundary')]) + talk(*TRK,
+    lead='A rotating carrier roller, a two-phase iterative CHT, and a bench test that agrees to within 7%.',
+    stats=[('< 7 %', 'error vs bench test'), ('3–4', 'iterations'), ('1 day', 'per case')],
+    paras=['A carrier roller holds the track chain of an excavator: the shell rotates, the shaft stays fixed, and the internal temperature decides whether the seals survive. Track One modelled every component with its own motion and material, and added the thermal boundaries a real roller has: two heat-generating surfaces (seal and bushing), a heat sink at the chain contact and on the circumferential surface, and convection to air.',
+           'The iterative steady-state CHT has two phases. ' + hl('Phase 1') + ' runs the oil alone with the solids frozen and extracts averaged HTC and near-wall temperature maps: a few hours. ' + hl('Phase 2') + ' maps them on the solids and solves the new steady temperature field: a few minutes. The loop stops when the solid field no longer changes, here after three to four passes. Oil viscosity follows an Arrhenius–Vogel law, so temperature feeds back on the flow at every pass.'],
+    note_html='Because the roller rotates, the contact patch that sees the chain is not fixed; a naive contact resistance would overestimate heat dissipation. Track One divides it by the footprint-to-contact area ratio &tau;: <code>R&Prime;<sub>c,eq</sub> = R&Prime;<sub>c,real</sub> / &tau;</code>. Air convection used <code>HTC<sub>air</sub> = 5.7 + 3.8&middot;v</code>.',
+    points=['Phase 1 (oil only, hours) and phase 2 (solid mapping, minutes) alternate until the solid field is stable.', 'Bench test: laser sensors outside, a probe in the oil, load and speed applied through the wheels.', 'Next: oil rheology evolution, FEM coupling for deformation, critical operating conditions.'],
+    slide='10', caption='Case 1: simulated against measured temperatures on collar, cover, shell, shaft and oil (Track One).',
+    moments=[(466, 'Viscosity follows temperature'), (661, 'Equivalent contact resistance'), (726, 'Phase 1 / phase 2'), (850, 'Results vs bench')]) + '''
+
+            <hr class="section-rule">
+''' + sec('02 · Air', 'Measure it before you simulate it', 'Aeration changes viscosity, density, film thickness and oxidation. The afternoon showed how to put a measured number on it before the model is asked to predict it.') + talk(*DFL,
+    lead='Two oils with the same air content can behave very differently, so the aeration model has to be calibrated on bubbles, not on a percentage.',
+    stats=[('0.65 %', 'same air: 132 µm vs 68 µm bubbles'), ('18 → 32 m²', 'oil–air contact surface'), ('0.45 vs 0.43 %', 'simulated vs measured, after calibration')],
+    paras=['An optical inline sensor sees what a single air-content number hides. In one oil, ' + hl('361 bubbles of 132 µm') + ' offered 18 m² of oil–air contact surface; in the other, ' + hl('1,289 bubbles of 68 µm') + ' offered 32 m². Same percentage, almost double the interface, so very different oxidation, cavitation and compressibility behaviour.',
+           'For simulation this means calibrating the Particleworks aeration model on two things: the total air generated and the bubble size distribution. The demonstration was a differential gear at 130 rpm with 1.4 litres of oil and 2.7 million particles of 0.8 mm. Before calibration the model returned 0.12% air with 800 µm bubbles, simply the particle size. After calibration with deepfluid data: ' + hl('0.45% air and 186 µm') + ', against measured 0.43% and 180 µm.',
+           'The caveat came from the room. A calibration belongs to an oil and its additive package; change the additives and it must be repeated. Coefficients can be scaled with speed from a reference speed, but the temperature dependence is still an open point.'],
+    points=['Same air content can hide very different bubble populations.', 'Calibrate generation rate and size distribution: 0.12% / 800 µm becomes 0.45% / 186 µm.', 'A calibration is specific to an oil and additive package.', 'Temperature scaling of the coefficients: open point.'],
+    slide='07', caption='Quantitative comparison before and after calibration: air content and bubble-size distribution against the measurement (deepfluid).',
+    moments=[(325, 'Same air, different bubbles'), (732, 'Calibrating the model'), (1157, 'Before vs after'), (1316, 'Q&amp;A: new additive'), (1500, 'Temperature: open point')]) + '''
+
+            <hr class="section-rule">
+''' + sec('03 · Wear', 'Simulating what breaks', 'Two very different machines, one question: can a particle simulation say where the hardware will wear before it does?') + talk(*HES,
+    lead='A Pelton runner, a single jet, and the efficiency lost to erosion computed on a GPU.',
+    stats=[('5 min → 1.5 d', 'run time, coarse to fine, one L40S'), ('2–3 days', 'production lost per runner inspection'), ('3 stages', 'new, 3 years, 5 years')],
+    paras=['The context is ReHydro, a Horizon Europe project of 18 partners and about 12 million euros that runs to 2028. Europe’s hydropower fleet is 50–55 years old and now balances wind and solar, so runners see sediment and cavitation erosion. Inspecting one means two or three days without production, which is why a ' + hl('prediction of the efficiency loss') + ' has real value.',
+           'The set-up is lean: a single jet, imposed rotation, viscosity neglected, time step near 10<sup>&minus;6</sup> s and a Courant limiter of 0.2. Several revolutions are feasible, where a finite-volume code takes more than a week. For a new runner, dimensionless torque approaches 1 as the particle size drops from 5 to 0.5 mm, and a ' + hl('linear extrapolation to zero size') + ' lands close to it.',
+           'For eroded runners, artificial erosion (flat or rounded splitter, enlarged cut-out, worn tip) was compared with analytical and published efficiency drops. Then came real runners: new, after three years and after five, when the owner decided to refurbish. The torque decrease was ' + hl('predicted accurately') + '.'],
+    points=['Single jet, imposed speed, CFL limiter 0.2: 5 minutes to 1.5 days on an NVIDIA L40S.', 'Flat-splitter efficiency drop follows the analytical trend, closer with finer particles.', 'Next: let the runner speed respond to load rejection, which needs the shaft-line inertia.', 'Longer term: a brick of a digital twin for owners who ask what 2% of efficiency costs them.'],
+    slide='05', caption='Dimensionless torque of three physically eroded runners (T-1 to T-3) against the erosion parameter (HES-SO).',
+    moments=[(70, 'ReHydro: why erosion matters'), (443, 'Set-up and run times'), (549, 'Extrapolating to zero size'), (689, 'New, 3 and 5 years'), (1196, 'Q&amp;A: load rejection')]) + talk(*BRG,
+    lead='A sand separator for biogas plants, simulated before the second prototype, and a wear map that the hardware confirmed.',
+    stats=[('< 10 %', 'mass-flow deviation vs tests'), ('10 → 25 %', 'badly separated at higher flow rate'), ('≈ 6 months', '24/7 until visible wear')],
+    paras=['Biogas plants are moving from maize silage to manure, which brings stones, sand and soil. Sand settles in the final storage tank (about 1.9 m after 36 months in the case shown), blocks pipes and tankers and shrinks usable volume. The FlowSep is a cyclone-like stage that sends the heavy phase to output 1 and a clean thin phase to output 2. Sand is only about 1% of the material, in fractions of 0.4–0.5, 0.3–0.4 and under 0.3 mm.',
+           'Börger measured flows, densities and the ash content (800 °C burns off the organics) and EnginSoft built the Granuleworks–Particleworks model. The reference case deviated by ' + hl('less than 10% in mass flow') + ' from the tests. About 10% of the sand leaves through the wrong outlet, and it is the small particles: large ones are centrifuged radially, as intended.',
+           'Then the surprise. Börger’s instinct was to raise the flow rate. The simulation showed ' + hl('the opposite') + ': at the higher flow rate the coarse fraction reaches the clean output and the badly separated share rises from about 10% to about 25%. Better to go slower and separate better.',
+           'Finally, wear. The model flagged high interaction at the back plate and near the blades, and the prototype wore exactly there after roughly half a year of round-the-clock operation.'],
+    note_html='Wall interaction was read from the particle number density within 1 mm of the wall, combined with velocity. With version 9, the force acting on the wall from the particles is the more direct indicator.',
+    points=['Evaluation parameter: number of fraction-1 particles in the clean output.', 'Higher flow rate loses separation efficiency, against the first intuition.', 'Simulated wear zones match the prototype: back plate and bending edge.', 'Use: decide whether to widen the radius or lengthen the unit before the next prototype.'],
+    slide='11', caption='Wear in the prototype housing: “the wear pattern corresponds to simulation” (Börger).',
+    moments=[(330, 'The sand problem'), (619, 'How the FlowSep works'), (1364, 'Who leaks'), (1495, 'Higher flow rate'), (1661, 'Prototype wear'), (1811, 'With 9.0: wall force')]) + '''
 
             <hr class="section-rule">
 
-            <h2>The release, seen through industrial cases</h2>
-''' + talk('09:00–10:00', 'Particleworks 9.0 &amp; Granuleworks 4.0', 'Issei Masaie &amp; Iori Saigo — Prometech Software (JP)',
-    ('iori-saigo.jpg', 'Iori Saigo'),
-    '''            <p>The morning keynote did not walk through a feature list; it showed what the new capabilities do on real geometries. The most concrete number came from a ribbon mixer with 16 million particles solved with a double-precision DEM solver: one, two and four A100 GPUs gave speed-ups of 1.00, 1.96 and 3.49, which is about 87% parallel efficiency at four cards. That is what turns a day-long powder run into an overnight one.</p>
+            <div class="sec-eyebrow">From the floor</div>
+            <h2>The questions that mattered</h2>
 
-            <p>The same logic applied to structures. DEM can now output the force distribution on walls, until now an MPS-only quantity, and the example was shot peening, where the contour of the summed force shows directly where a component takes the load. For heat, a two-way DEM&ndash;MPS&ndash;CHT coupling solves fluid, powder and wall temperatures together, with a temperature for each powder particle; the case shown was a plastic-pellet cooling silo, where powder volume and uneven distribution locally change the heat transfer.</p>''',
-    ['Multi-GPU DEM: <strong>3.49&times; on 4 A100</strong> for 16 M particles in double precision.',
-     'DEM wall-force output makes wear and load visible on structures (shot-peening example).',
-     'DEM&ndash;MPS&ndash;CHT: per-particle powder temperature coupled both ways with fluid and wall.',
-     'Elastic-body model: a valve with fixed edges under flow and screen printing coupled with MPS; the liquid-film HTC model now flags regions of higher heat transfer than the conventional model.'],
-    '01', 'Multi-GPU support for DEM: speed-up of the ribbon-mixer case on 1, 2 and 4 A100 GPUs (Prometech).') + '''
+            <ul>
+              <li><strong>How much effort is the manual iteration?</strong> Three to five passes, and a steady CHT takes minutes on a GPU (R&amp;D CFD).</li>
+              <li><strong>Does a calibration transfer between lubricants?</strong> No: the same base oil with other additives needs a new one, and the temperature trend can flip sign (deepfluid).</li>
+              <li><strong>Why such a basic first verification?</strong> Because once a bearing rotates there is no good reference model; complexity is added step by step (SKF).</li>
+              <li><strong>Why dimensionless results?</strong> Owners ask what 2% of efficiency lost to a single flood costs them over a year, not for newtons (HES-SO).</li>
+            </ul>
 
             <hr class="section-rule">
 
-            <h2>Heat: from side effect to deliverable</h2>
-
-            <p>Three talks treated temperature as the result to deliver. They share one trick: <strong>never run the oil and the solid together in time.</strong> Oil reaches its flow pattern in seconds; metal needs hours. So the oil is simulated briefly, its heat-transfer coefficient (HTC) and near-wall temperature are handed to a steady conjugate-heat-transfer (CHT) solution, and the two are iterated until nothing moves.</p>
-''' + talk('11:45–12:15', 'CHT Analysis of a Reciprocating Pump', 'Leonardo Lanciotti — R&amp;D CFD S.R.L. – Comet S.p.A. (IT)',
-    ('leonardo-lanciotti.jpg', 'Leonardo Lanciotti'),
-    '''            <p>The case was a volumetric water pump lubricated by oil sloshing in the crankcase, with heat leaving by natural convection: 3.7 kW at the shaft and 85&ndash;90% mechanical efficiency, so roughly 0.4&ndash;0.55 kW to dissipate, with the oil at 63 °C and ambient at 22 °C. A fully coupled unsteady model would need double precision and a thermal transient far too long to run, so the team used a few seconds of sloshing to get the HTC map and then a steady CHT that converges in minutes.</p>
-
-            <p>The delicate input is where the heat is born. Loads on the kinematic pairs were not available, so instead of trial and error the team ran a dynamic analysis of the pump, took friction coefficients from the literature and split the power between contacts; each source is applied as a local volumetric heat source in a thin slice of CAD next to the contact. The results show where the model is right and where it is not: the shaft sits at 70&ndash;80 °C as in the test, a hot spot appears at the piston&ndash;seal contact, which is exactly where seals degrade in service, while the small bearing comes out hotter than the large one, contrary to experiment, a sign that sloshing needs a particle refinement there.</p>''' + note('Convergence is not judged on temperatures alone. The oil is not a heat sink, so the heat it takes from the shaft must equal the heat it gives to the housing: <code>Q&#775;<sub>shaft&rarr;oil</sub> = &Sigma; HTC<sub>i</sub>(T<sub>i</sub>&minus;T<sub>oil</sub>)A<sub>i</sub> = &Sigma; HTC<sub>j</sub>(T<sub>oil</sub>&minus;T<sub>j</sub>)A<sub>j</sub></code>, evaluated on a uniform surface mesh from the Particleworks HTC map. If it is not zero, scale the thermal power, the oil temperature or the external HTC and iterate.'),
-    ['Sloshing is decoupled from CHT: seconds of oil flow, minutes of steady CHT.',
-     'Six of seven thermocouples within 3.1 °C of the test; the worst, the open-side bearing, is off by 5.4 °C.',
-     'The seal hot spot is predicted where seals fail in practice.',
-     '<strong>3&ndash;5 manual iterations, about 1.5 hours per case</strong> once the model exists; the setup can take longer than the run.'],
-    '04', 'Simulation versus experimental thermocouples on the pump, with the difference in °C for each position (R&amp;D CFD).') + talk('12:45–13:15', 'Integrating Particleworks into SKF Engineering Tools: Part I', 'Lijun Cao &amp; Fabrizio Mandrile — SKF (NL)',
-    ('lijun-cao.jpg', 'Lijun Cao'),
-    '''            <p>SKF framed the problem as a ladder: lumped thermal networks, finite-element thermal models, then FE with CFD-derived HTCs one way, then fully coupled CFD. Each step buys fidelity and costs time. Their plan is the one-way rung inside the BEAST bearing simulation tool: BEAST provides the dynamics and heat sources, Particleworks provides the HTCs, and the combination shortens iteration cycles. Before trusting it, they verified the HTC on two textbook cases, a sphere in a uniform flow and oil between concentric cylinders, the inner one rotating.</p>
-
-            <p>The result is instructive because it is not flattering to anyone. Against the Aoki correlation, Particleworks lay between &minus;7% and +28% over four combinations of radius ratio and speed, and the conventional CFD code between &minus;8% and +17%: the two numerical methods scatter around the correlation by similar amounts. What mattered to SKF is that the vortex pattern appeared with mostly default settings, and the one caution was to watch the velocity (Courant) limiter. The roadmap is concrete: a segmented bearing model first, ideally with a cyclic boundary condition, which SKF has asked for, otherwise a full bearing with strong local refinement.</p>''',
-    ['One-way coupling: BEAST dynamics and heat sources, Particleworks HTC, FE thermal solution.',
-     'Concentric cylinders, bearing oil, radius ratio 0.5 and 0.83, 1,500 and 3,000 rpm: <strong>HTC of 352&ndash;554 W/m&sup2;K</strong> against 312&ndash;531 from the correlation.',
-     'Mostly default settings reproduced the vortex pattern; mind the velocity limiter.',
-     'Request to the roadmap: cyclic boundary condition for bearing segments.'],
-    '06', 'HTC results for the concentric-cylinders model: Particleworks, correlation and conventional CFD (SKF).') + talk('16:30–17:00', 'Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method', 'Leonardo Tiberi — Track One SRL – Unimore (IT)',
-    ('leonardo-tiberi.jpg', 'Leonardo Tiberi'),
-    '''            <p>A carrier roller holds the track chain of an excavator: the shell rotates, the shaft stays fixed, and the internal temperature decides whether the seals survive. Track One modelled every component with its own motion and material and added the thermal boundaries a real roller has: two heat-generating surfaces (seal and bushing), a heat sink at the chain contact and the circumferential surface, and convection to air.</p>
-
-            <p>The iterative steady-state CHT has two phases. Phase 1 runs the oil alone with the solids frozen and extracts averaged HTC and near-wall temperature maps, a few hours of simulation; phase 2 maps them onto the solids and solves the new steady temperature field, a few minutes. The loop stops when the solid field no longer changes within a tolerance, which here took three to four iterations. Oil viscosity follows an Arrhenius&ndash;Vogel law, so oil temperature feeds back on the flow at every pass.</p>''' + note('Because the roller rotates, the contact patch that sees the chain is not fixed; a naive contact resistance would overestimate heat dissipation. Track One divides it by the footprint-to-contact area ratio &tau;: <code>R&Prime;<sub>c,eq</sub> = R&Prime;<sub>c,real</sub> / &tau;</code>. Air convection used <code>HTC<sub>air</sub> = 5.7 + 3.8&middot;v</code>.'),
-    ['Phase 1 (oil only, hours) and phase 2 (solid mapping, minutes) alternate until the solid field is stable.',
-     '<strong>3&ndash;4 iterations</strong>; about one day per case.',
-     'Errors against the bench test below 7% on thermocouples and oil in both load cases (laser sensors outside, probe in the oil).',
-     'Next: oil rheology evolution, FEM coupling for deformation, critical operating conditions.'],
-    '10', 'Case 1: simulated against measured temperatures on collar, cover, shell, shaft and oil (Track One).') + '''
-
-            <hr class="section-rule">
-
-            <h2>Air: measure it before you simulate it</h2>
-''' + talk('14:30–15:00', 'Direct Optical Air-in-Oil Measurement as an Enabler for Accurate Simulation of Gearings and Hydraulic Systems', 'Dr. Lukas Hafner — deepfluid (DE), with Gianluca Parma — EnginSoft',
-    ('lukas-hafner.jpg', 'Lukas Hafner'),
-    '''            <p>An optical inline sensor sees what a single air-content number hides. The slide that opened the measurement part showed two oils at the same 0.65% air: in one, 361 bubbles of 132 µm average diameter offering 18 m&sup2; of oil&ndash;air contact surface; in the other, 1,289 bubbles of 68 µm and 32 m&sup2;. Same percentage, almost double the interface, so very different oxidation, cavitation and compressibility behaviour. Hafner added that cavitation maps correlate with both air content and bubble size.</p>
-
-            <p>For simulation this means calibrating the Particleworks aeration model on two things, the total air generated and the bubble size distribution, and then using it also away from the calibration point. The demonstration was a differential gear at 130 rpm with 1.4 litres of oil and 2.7 million particles of 0.8 mm. Before calibration the model returned 0.12% air with 800 µm bubbles, simply the particle size. After calibration with deepfluid data it returned <strong>0.45% air and 186 µm bubbles against measured values of 0.43% and 180 µm</strong>.</p>''',
-    ['Same air content can hide very different bubble populations: 132 µm / 18 m&sup2; versus 68 µm / 32 m&sup2;.',
-     'Calibrate both generation rate and size distribution: 0.12% / 800 µm becomes 0.45% / 186 µm (measured 0.43% / 180 µm).',
-     'A calibration belongs to an oil and its additive package: change the additives and it must be repeated.',
-     'Coefficients can be scaled with speed from a reference speed; the temperature dependence is an open point.'],
-    '07', 'Quantitative comparison before and after calibration: air content and bubble-size distribution against the measurement (deepfluid).') + '''
-
-            <hr class="section-rule">
-
-            <h2>Wear: simulating what breaks</h2>
-''' + talk('12:15–12:45', 'Moving Particle Simulation of Eroded Pelton Runners', 'Jean Decaix — HES-SO Valais/Wallis (CH)',
-    ('jean-decaix.jpg', 'Jean Decaix'),
-    '''            <p>The context is ReHydro, a Horizon Europe project of 18 partners and about 12 million euros that runs to 2028. Europe&rsquo;s hydropower fleet is 50&ndash;55 years old and must now balance wind and solar, so runners see sediment and cavitation erosion that costs efficiency, and inspecting one means two or three days without production. HES-SO&rsquo;s question was whether MPS can compute the torque, and the torque loss, of an eroded Pelton runner.</p>
-
-            <p>The setup is lean: a single jet, imposed rotation, viscosity neglected, a time step near 10<sup>&minus;6</sup> s and a Courant limiter of 0.2, from 5 minutes (coarse) to 1.5 days (fine) on an NVIDIA L40S. Several full revolutions are feasible, which Decaix noted a finite-volume code takes more than a week to do. For a new runner, dimensionless torque rises as the particle size goes from 5 to 0.5 mm, and a linear extrapolation to zero size lands close to 1. For eroded runners, he first used artificial erosion (a flat or rounded splitter, an enlarged cut-out, a worn tip) to compare the efficiency drop with analytical and published results, then real runners at three stages: new, after three years and after five, when the owner decided to refurbish.</p>''',
-    ['Single jet, imposed speed, CFL limiter 0.2: 5 minutes to 1.5 days on an L40S.',
-     'Torque converges towards the target as particle size shrinks; extrapolating to zero size gives a cheap estimate.',
-     'Efficiency drop from a flat splitter follows the analytical trend, closer with finer particles.',
-     '<strong>Torque loss from real erosion is predicted accurately</strong>; next, letting the runner speed respond to load rejection, which needs the shaft-line inertia.'],
-    '05', 'Dimensionless torque of three physically eroded runners (T-1 to T-3) against the erosion parameter (HES-SO).') + talk('17:00–17:30', 'Simulation of Sand Separation and Wear in the Börger FlowSep', 'Bernd Valtwies — Börger GmbH (DE) &amp; Riccardo Sala — EnginSoft (IT)',
-    ('bernd-valtwies.jpg', 'Bernd Valtwies'),
-    '''            <p>Biogas plants are moving from maize silage to manure, which brings stones, sand and soil. Sand settles in the final storage tank (about 1.9 m of it after 36 months in the case shown), blocks pipes and tankers and shrinks usable volume. The FlowSep is a cyclone-like stage behind Börger&rsquo;s BioSelect that sends the heavy phase to output 1 and a clean thin phase to output 2. Sand is only about 1% of the material, split in fractions of 0.4&ndash;0.5, 0.3&ndash;0.4 and under 0.3 mm, and in the thin phase of the real machine the coarsest fraction is completely gone.</p>
-
-            <p>Börger measured flows, densities and the ash content (heating to 800 °C burns off the organics) and EnginSoft built the Granuleworks&ndash;Particleworks model. The reference case deviated by <strong>less than 10% in mass flow</strong> from the tests, and the particle sizes in the thin phase matched exactly. The model then compared two flow rates and showed more particles of the first fraction reaching the clean output at the higher one, before the question turned to wear: the predicted high-wear zones, at the back plate and along the bending edge, are where the prototype wore after roughly half a year of round-the-clock operation.</p>''' + note('Wall interaction was read from the particle number density within 1 mm of the wall, together with velocity. With version 9, the force acting on the wall from the particles is the more direct indicator, and it is now available for DEM too.'),
-    ['Evaluation parameter: number of fraction-1 particles in the clean output; <strong>deviation under 10%</strong> from the tests.',
-     'Higher flow rate sends more of the coarse fraction into the clean phase.',
-     'Simulated wear zones match the prototype: back plate and bending edge, after ~6 months of 24/7 operation.',
-     'Use: decide whether to widen the radius or lengthen the unit before building the next prototype.'],
-    '11', 'Wear in the prototype housing: &ldquo;the wear pattern corresponds to simulation&rdquo; (Börger).') + '''
-
-            <hr class="section-rule">
-
-            <h2>From the floor</h2>
-
-            <p>Some of the best material was in the questions. Asked how much effort the manual iteration costs, R&amp;D CFD answered that three to five passes were enough and that a steady CHT takes minutes on a GPU. Asked whether a calibration transfers between lubricants, deepfluid was clear: the same base oil with different additives needs a new calibration, and the temperature trend can even flip sign. SKF explained why the first verification is so basic: once a bearing rotates there is simply no good reference model, so they start with the simplest one that exists and add complexity step by step. And HES-SO reminded everyone why the dimensionless form matters: owners do not ask for newtons, they ask what 2% of efficiency lost to a single flood costs them over a year.</p>
-
-            <hr class="section-rule">
-
+            <div class="sec-eyebrow">Take-home</div>
             <h2>What we take home</h2>
 
-            <p><strong>Trust comes from a check that does not depend on the model:</strong> an oil balance at zero, a thermocouple, a bubble sensor, a worn prototype. <strong>Cost was stated, not hidden:</strong> three to five iterations, a day per case, minutes for a steady solution, a particle size you can extrapolate away. And <strong>the physics is being split on purpose</strong>: fast flow in particles, slow heat in a steady solid, measured air as calibration data. Meshless CFD in Modena looked less like a promise and more like a tool with a known price.</p>
+            <div class="keypoints"><h5>Three habits</h5><ul>
+              <li><strong>Trust comes from a check that does not depend on the model:</strong> an oil balance at zero, a thermocouple, a bubble sensor, a worn prototype.</li>
+              <li><strong>Cost was stated, not hidden:</strong> three to five iterations, a day per case, minutes for a steady solution, a particle size you can extrapolate away.</li>
+              <li><strong>The physics is split on purpose:</strong> fast flow in particles, slow heat in a steady solid, measured air as calibration data.</li>
+            </ul></div>
+
+            <p>Meshless CFD in Modena looked less like a promise and more like a tool with a known price.</p>
 
             <div class="cta-box">
               <h3>Get the Modena proceedings</h3>
-              <p>Slides and the key findings of each released presentation, free after a short form.</p>
+              <p>Slides, recordings and the key findings of each released presentation, free after a short form.</p>
               <a href="../experience/proceedings2026.php" class="btn-pw"><i class="bi bi-unlock me-2"></i>Open the proceedings</a>
             </div>
 

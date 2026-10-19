@@ -22,7 +22,7 @@ if ($cfg) {
     $authed = isset($_COOKIE[$COOKIE]) && hash_equals($good, (string)$_COOKIE[$COOKIE]);
     if ($authed && isset($_GET['dl'])) {                 // authenticated PDF download — files sit in a Deny-all folder
         foreach ($cfg['talks'] as $t) {
-            if ($t['id'] === $_GET['dl'] && !empty($t['pdf'])) {
+            if ((empty($t['publish_from']) || date('Y-m-d') >= $t['publish_from']) && $t['id'] === $_GET['dl'] && !empty($t['pdf'])) {
                 $f = __DIR__ . '/proceedings2026-files/' . basename($t['pdf']);
                 if (is_file($f)) {
                     header('Content-Type: application/pdf'); header('Content-Length: ' . filesize($f));
@@ -35,6 +35,9 @@ if ($cfg) {
     }
 }
 header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-cache');
+// talks with a publish_from date stay hidden until that day (server date)
+$talks = [];
+if ($cfg) foreach ($cfg['talks'] as $t) { if (empty($t['publish_from']) || date('Y-m-d') >= $t['publish_from']) $talks[] = $t; }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -144,7 +147,7 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
     .talk-time { font-size:0.78rem; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--ev-crimson); }
     .talk-top h3 { font-size:1.12rem; font-weight:800; letter-spacing:-0.2px; margin:0.15rem 0; line-height:1.3; }
     .talk-who { font-size:0.88rem; color:var(--pw-gray); }
-    .talk-body { display:grid; grid-template-columns:1.6fr 1fr; gap:0; }
+    .talk-body { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:0; }
     @media(max-width:860px){ .talk-body { grid-template-columns:1fr; } }
     .talk-find { padding:1.4rem 1.6rem; }
     .talk-find h4 { font-size:0.78rem; font-weight:800; letter-spacing:1.3px; text-transform:uppercase; color:var(--pw-gray); margin-bottom:0.7rem; }
@@ -154,10 +157,16 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
     .talk-media { padding:1.4rem 1.6rem; border-left:1px solid rgba(0,0,0,0.06); display:flex; flex-direction:column; gap:0.9rem; }
     @media(max-width:860px){ .talk-media { border-left:0; border-top:1px solid rgba(0,0,0,0.06); } }
     .vid { position:relative; aspect-ratio:16/9; border-radius:14px; overflow:hidden; background:#11111e; }
-    .vid iframe, .vid button { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .vid iframe, .vid button, .vid video { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .vid video { object-fit:contain; background:#000; }
     .vid button { background-size:cover; background-position:center; cursor:pointer; padding:0; }
     .vid button::after { content:'\25B6'; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:62px; height:62px; line-height:62px; border-radius:50%; background:var(--ev-accent); color:#fff; font-size:1.4rem; padding-left:4px; box-shadow:0 8px 24px rgba(0,0,0,0.35); }
     .vid.soon { display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.6); font-size:0.9rem; gap:0.5rem; }
+    .moments { display:flex; flex-wrap:wrap; gap:0.4rem; align-items:center; }
+    .moments span { font-size:0.72rem; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--pw-gray); margin-right:0.2rem; }
+    .moments button { border:1px solid rgba(192,31,36,0.3); background:#fff; color:var(--ev-crimson); border-radius:50px; padding:0.25rem 0.7rem 0.25rem 0.45rem; font-size:0.78rem; font-weight:600; cursor:pointer; }
+    .moments button:hover { background:var(--ev-crimson); color:#fff; }
+    .moments button i { font-size:0.9rem; vertical-align:-1px; }
     .btn-red { background:var(--ev-accent); color:#fff; border:0; padding:0.6rem 1.3rem; border-radius:50px; font-weight:600; font-size:0.9rem; display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; box-shadow:0 6px 18px rgba(181,30,35,0.25); }
     .btn-red:hover { color:#fff; filter:brightness(1.08); }
     .btn-soft { color:var(--pw-gray); font-size:0.88rem; }
@@ -255,7 +264,7 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
       <div class="pr-facts">
         <span class="pr-fact"><i class="bi bi-calendar-event"></i> October 7, 2026</span>
         <span class="pr-fact"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena (IT)</span>
-        <span class="pr-fact"><i class="bi bi-mic"></i> <?= count($cfg['talks']) ?> talks</span>
+        <span class="pr-fact"><i class="bi bi-mic"></i> <?= count($talks) ?> talks</span>
       </div>
     </div>
   </section>
@@ -274,7 +283,7 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
 
       <h2 class="pr-h2">Talks</h2>
       <p class="pr-sub">Slides of the presentations released by their speakers.</p>
-      <?php foreach ($cfg['talks'] as $t): ?>
+      <?php foreach ($talks as $t): ?>
       <article class="talk" id="talk-<?= e($t['id']) ?>">
         <div class="talk-top">
           <?php if (!empty($t['photo'])): ?><img src="speakers/<?= e($t['photo']) ?>" alt="<?= e($t['speaker']) ?>"><?php endif; ?>
@@ -290,8 +299,21 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
             <ul><?php foreach ($t['findings'] as $f): ?><li><?= e($f) ?></li><?php endforeach; ?></ul>
           </div>
           <div class="talk-media">
+            <?php $pdfok = !empty($t['pdf']) && is_file(__DIR__ . '/proceedings2026-files/' . basename($t['pdf'])); ?>
+            <?php if (!empty($t['video_file'])): ?>
+            <div class="vid"><video controls preload="metadata" src="<?= e($t['video_file']) ?>" data-vid="<?= e($t['id']) ?>"></video></div>
+            <?php elseif (!empty($t['youtube'])): ?>
+            <div class="vid"><button type="button" aria-label="Play the recording" style="background-image:url(https://i.ytimg.com/vi/<?= e($t['youtube']) ?>/hqdefault.jpg)" data-yt="<?= e($t['youtube']) ?>" data-vid="<?= e($t['id']) ?>"></button></div>
+            <?php else: ?>
+            <div class="vid soon"><i class="bi bi-camera-video"></i> Recording coming soon</div>
+            <?php endif; ?>
+            <?php if (!empty($t['moments']) && (!empty($t['youtube']) || !empty($t['video_file']))): ?>
+            <div class="moments"><span>Jump to</span>
+              <?php foreach ($t['moments'] as $m): ?><button type="button" data-seek="<?= e($t['id']) ?>" data-t="<?= (int)$m[0] ?>"><i class="bi bi-play-fill"></i><?= sprintf('%d:%02d', intdiv($m[0], 60), $m[0] % 60) ?> <?= e($m[1]) ?></button><?php endforeach; ?>
+            </div>
+            <?php endif; ?>
             <div class="d-flex flex-wrap align-items-center gap-3">
-              <?php if (!empty($t['pdf'])): ?>
+              <?php if ($pdfok): ?>
               <a class="btn-red" href="proceedings2026.php?dl=<?= e($t['id']) ?>"><i class="bi bi-download"></i> Slides (PDF)</a>
               <?php else: ?>
               <span class="btn-soft"><i class="bi bi-envelope"></i> Slides on request: <a href="mailto:info@particleworks-europe.com?subject=Proceedings%202026%20-%20<?= rawurlencode($t['org']) ?>">info@particleworks-europe.com</a></span>
@@ -363,6 +385,27 @@ header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-ca
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     window.addEventListener('scroll', function(){ document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30); });
+    // ---- video: click-to-play, jump to a moment, deep links from the blog (?talk=04&t=370) ----
+    function playAt(id, t) {
+      var v = document.querySelector('video[data-vid="' + id + '"]');
+      if (v) { v.currentTime = t; v.play(); v.scrollIntoView({behavior:'smooth', block:'center'}); return; }
+      var f = document.querySelector('iframe[data-vid="' + id + '"]');
+      if (f) { f.contentWindow.postMessage(JSON.stringify({event:'command', func:'seekTo', args:[t, true]}), '*'); f.contentWindow.postMessage(JSON.stringify({event:'command', func:'playVideo', args:[]}), '*'); f.scrollIntoView({behavior:'smooth', block:'center'}); return; }
+      var b = document.querySelector('button[data-yt][data-vid="' + id + '"]');
+      if (b) { var fr = document.createElement('iframe'); fr.dataset.vid = id;
+        fr.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0&enablejsapi=1&start=' + t;
+        fr.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; fr.allowFullscreen = true; fr.title = 'Recording'; b.replaceWith(fr); fr.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+    document.querySelectorAll('button[data-yt]').forEach(function(b){ b.addEventListener('click', function(){ playAt(b.dataset.vid, 0); }); });
+    document.querySelectorAll('button[data-seek]').forEach(function(b){ b.addEventListener('click', function(){ playAt(b.dataset.seek, parseInt(b.dataset.t, 10)); }); });
+    (function(){
+      var q = new URLSearchParams(location.search), tgt = q.get('talk') ? {talk:q.get('talk'), t:q.get('t')||'0'} : null;
+      try {
+        if (tgt && !document.querySelector('.talk')) { sessionStorage.setItem('pwe26_target', JSON.stringify(tgt)); return; }   // gate view: remember where the visitor was going
+        if (!tgt && document.querySelector('.talk')) { var k = sessionStorage.getItem('pwe26_target'); if (k) { tgt = JSON.parse(k); sessionStorage.removeItem('pwe26_target'); } }
+      } catch (e) {}
+      if (tgt && document.querySelector('.talk')) { var el = document.getElementById('talk-' + tgt.talk); if (el) setTimeout(function(){ playAt(tgt.talk, parseInt(tgt.t, 10) || 0); }, 400); }
+    })();
     // the form iframe posts its height: fit it
     window.addEventListener('message', function(e){
       if (typeof e.origin !== 'string' || e.origin.indexOf('forms-eu.com') === -1) return;
