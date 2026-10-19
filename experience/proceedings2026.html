@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex,nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../favicon.ico">
+  <title>Proceedings — Particleworks Experience 2026 | Modena, October 7</title>
+  <meta name="description" content="Presentations and key findings from Particleworks Experience 2026, Modena. Free access after a short form.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pw-blue:#0088cc; --pw-blue-dark:#006da3; --pw-green:#25a361; --pw-green-dark:#1e8a51;
+      --pw-dark:#1a1a2e; --pw-gray:#6c757d; --pw-light:#f8f9fa;
+      --pw-gradient:linear-gradient(135deg,#0088cc 0%,#25a361 100%);
+      --pw-gradient-dark:linear-gradient(135deg,#04243a 0%,#0a3a5c 45%,#0d4a3a 100%);
+      --ev-red:#d9503f; --ev-red-deep:#b51e23; --ev-red-dark:#8f161b; --ev-blue:#1983d0;
+      --ev-crimson:#c01f24; --ev-vivid:#e0382a; --ev-coral:#ef5c43;
+      --ev-gradient:linear-gradient(135deg,#d9503f 0%,#b51e23 58%,#8f161b 100%);
+      --ev-accent:linear-gradient(135deg,#ef5c43 0%,#b51e23 100%);
+    }
+    * { font-family:'Inter',sans-serif; }
+    html { scroll-behavior:smooth; }
+    body { color:var(--pw-dark); overflow-x:hidden; background:#fff; }
+
+    .navbar { background:rgba(255,255,255,0.97); backdrop-filter:blur(12px); box-shadow:0 1px 0 rgba(0,0,0,0.06); padding:0.6rem 0; transition:box-shadow .3s; }
+    .navbar.scrolled { box-shadow:0 2px 20px rgba(0,0,0,0.08); }
+    .navbar-brand img { height:38px; }
+    .navbar .nav-link { font-size:0.88rem; font-weight:500; color:var(--pw-dark); padding:0.5rem 0.85rem !important; transition:color .2s; }
+    .navbar .nav-link:hover { color:var(--pw-blue); }
+    .nav-register { background:var(--pw-blue); color:#fff !important; border-radius:50px; padding:0.5rem 1.3rem !important; font-weight:600; }
+    .nav-register:hover { background:var(--pw-blue-dark); color:#fff !important; }
+    .navbar .dropdown-toggle::after { margin-left:0.35rem; vertical-align:0.1em; }
+    .navbar .dropdown-menu { border:1px solid rgba(0,0,0,0.06); border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,0.10); padding:0.5rem; margin-top:0.4rem; min-width:210px; }
+    .navbar .dropdown-item { border-radius:8px; padding:0.5rem 0.7rem; font-size:0.86rem; font-weight:500; color:var(--pw-dark); display:flex; align-items:center; gap:0.6rem; }
+    .navbar .dropdown-item i { color:var(--ev-crimson); font-size:0.95rem; }
+    .navbar .dropdown-item:hover, .navbar .dropdown-item:focus { background:linear-gradient(135deg, rgba(217,80,63,0.10), rgba(143,22,27,0.06)); color:var(--ev-crimson); }
+
+    /* Hero */
+    .reg-hero { position:relative; padding:8.5rem 0 4rem; background:linear-gradient(135deg, rgba(217,80,63,0.85), rgba(143,22,27,0.93)), url('../images/experience2026/theme-bg.jpg') center/cover no-repeat; overflow:hidden; }
+    .reg-hero::before { content:''; position:absolute; inset:0; background:
+        radial-gradient(ellipse 70% 60% at 12% 92%, rgba(255,180,150,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 55% at 88% 8%, rgba(255,255,255,0.12) 0%, transparent 60%); }
+    .reg-hero .container { position:relative; z-index:3; }
+    .hero-particles { position:absolute; inset:0; z-index:1; opacity:0.35; }
+    .eyebrow { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.32); color:#ffe6dd; padding:0.4rem 1rem; border-radius:50px; font-size:0.78rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1.4rem; }
+    .reg-hero h1 { font-size:clamp(2.2rem,5.2vw,3.6rem); font-weight:900; color:#fff; letter-spacing:-1px; line-height:1.08; }
+    .reg-hero h1 .accent { background:linear-gradient(120deg,#fff,#ffd9c2); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .reg-hero .lead { font-size:1.15rem; color:rgba(255,255,255,0.85); max-width:620px; line-height:1.7; margin-top:1.2rem; }
+    .hero-facts { display:flex; flex-wrap:wrap; gap:0.7rem; margin-top:2rem; }
+    .hero-fact { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.20); color:#fff5f1; padding:0.55rem 1.05rem; border-radius:12px; font-size:0.9rem; font-weight:500; }
+    .hero-fact i { color:#ffd9c2; font-size:1.05rem; }
+
+    /* Form section */
+    .reg-section { padding:3.5rem 0 4.5rem; background:linear-gradient(180deg,#fff,#f6fafd); }
+    .reg-card { background:#fff; border:1px solid rgba(0,0,0,0.07); border-radius:24px; box-shadow:0 18px 50px rgba(7,40,70,0.08); overflow:hidden; }
+    .reg-card-head { padding:1.6rem 1.9rem; border-bottom:1px solid rgba(0,0,0,0.06); display:flex; align-items:center; gap:0.8rem; background:linear-gradient(135deg,#fff6f3,#fdeeec); }
+    .reg-card-head .ic { flex-shrink:0; width:46px; height:46px; border-radius:12px; background:var(--ev-accent); display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.3rem; }
+    .reg-card-head h2 { font-size:1.2rem; font-weight:800; margin:0; letter-spacing:-0.3px; }
+    .reg-card-head p { margin:0.15rem 0 0; font-size:0.88rem; color:var(--pw-gray); }
+    .reg-embed-wrap { position:relative; }
+    .reg-embed { display:block; width:100%; min-height:1180px; border:0; }
+    .reg-fallback { text-align:center; font-size:0.88rem; color:var(--pw-gray); padding:1.1rem 1.5rem; border-top:1px solid rgba(0,0,0,0.06); }
+    .reg-fallback a { color:var(--ev-crimson); font-weight:600; }
+
+    .aside-card { background:#fff; border:1px solid rgba(0,0,0,0.07); border-radius:18px; padding:1.6rem 1.7rem; height:100%; }
+    .aside-card h3 { font-size:1rem; font-weight:800; letter-spacing:-0.2px; margin-bottom:1rem; }
+    .aside-list { list-style:none; padding:0; margin:0; }
+    .aside-list li { display:flex; gap:0.7rem; align-items:flex-start; font-size:0.92rem; line-height:1.5; color:#445; margin-bottom:0.9rem; }
+    .aside-list li i { color:var(--ev-crimson); font-size:1.05rem; margin-top:0.1rem; flex-shrink:0; }
+    .aside-list li b { color:var(--pw-dark); font-weight:600; display:block; }
+    .btn-ghost-red { background:transparent; color:var(--ev-crimson); border:1.5px solid rgba(192,31,36,0.4); padding:0.6rem 1.3rem; border-radius:50px; font-weight:600; font-size:0.9rem; transition:all .3s; display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; }
+    .btn-ghost-red:hover { background:var(--ev-crimson); color:#fff; }
+
+    footer { background:#11111e; color:rgba(255,255,255,0.7); padding:3.5rem 0 1.5rem; }
+    footer a { color:rgba(255,255,255,0.7); text-decoration:none; transition:color .2s; }
+    footer a:hover { color:#fff; }
+    footer .footer-brand img { height:34px; margin-bottom:1rem; }
+    footer .footer-divider { border-top:1px solid rgba(255,255,255,0.08); margin:2rem 0 1.5rem; }
+    .social-link { width:40px; height:40px; border-radius:10px; background:rgba(255,255,255,0.06); display:inline-flex; align-items:center; justify-content:center; font-size:1.1rem; transition:all .3s; }
+    .social-link:hover { background:var(--pw-blue); color:#fff; }
+  
+    /* ---- proceedings 2026 ---- */
+    .pr-hero { position:relative; padding:8.5rem 0 4rem; background:linear-gradient(135deg, rgba(217,80,63,0.85), rgba(143,22,27,0.93)), url('img/theme-bg.jpg') center/cover no-repeat; overflow:hidden; }
+    .pr-hero .container { position:relative; z-index:3; }
+    .pr-hero h1 { font-size:clamp(2.2rem,5.2vw,3.6rem); font-weight:900; color:#fff; letter-spacing:-1px; line-height:1.08; }
+    .pr-hero h1 .accent { background:linear-gradient(120deg,#fff,#ffd9c2); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .pr-hero .lead { font-size:1.15rem; color:rgba(255,255,255,0.85); max-width:640px; line-height:1.7; margin-top:1.2rem; }
+    .pr-eyebrow { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.32); color:#ffe6dd; padding:0.4rem 1rem; border-radius:50px; font-size:0.78rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1.2rem; }
+    .pr-facts { display:flex; flex-wrap:wrap; gap:0.7rem; margin-top:2rem; }
+    .pr-fact { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.20); color:#fff5f1; padding:0.55rem 1.05rem; border-radius:50px; font-size:0.9rem; font-weight:500; }
+    .pr-fact i { color:#ffd9c2; }
+    .pr-section { padding:3.5rem 0 4.5rem; background:linear-gradient(180deg,#fff,#f6fafd); }
+    .pr-h2 { font-size:1.7rem; font-weight:800; letter-spacing:-0.5px; margin-bottom:0.4rem; }
+    .pr-sub { color:var(--pw-gray); margin-bottom:2rem; max-width:720px; }
+    .take-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem; margin-bottom:3rem; }
+    .take { background:#fff; border:1px solid rgba(0,0,0,0.07); border-radius:18px; padding:1.3rem 1.4rem; }
+    .take .n { width:34px; height:34px; border-radius:10px; background:var(--ev-accent); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; margin-bottom:0.8rem; }
+    .take b { display:block; margin-bottom:0.3rem; }
+    .take p { margin:0; font-size:0.9rem; color:#445; line-height:1.55; }
+    .talk { background:#fff; border:1px solid rgba(0,0,0,0.07); border-radius:22px; box-shadow:0 14px 40px rgba(7,40,70,0.06); margin-bottom:1.6rem; overflow:hidden; }
+    .talk-top { display:flex; gap:1.1rem; align-items:center; padding:1.4rem 1.6rem; background:linear-gradient(135deg,#fff6f3,#fdeeec); border-bottom:1px solid rgba(0,0,0,0.06); }
+    .talk-top img { width:72px; height:72px; border-radius:50%; object-fit:cover; border:3px solid #fff; box-shadow:0 4px 14px rgba(143,22,27,0.18); flex-shrink:0; }
+    .talk-time { font-size:0.78rem; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--ev-crimson); }
+    .talk-top h3 { font-size:1.12rem; font-weight:800; letter-spacing:-0.2px; margin:0.15rem 0; line-height:1.3; }
+    .talk-who { font-size:0.88rem; color:var(--pw-gray); }
+    .talk-body { display:grid; grid-template-columns:1.6fr 1fr; gap:0; }
+    @media(max-width:860px){ .talk-body { grid-template-columns:1fr; } }
+    .talk-find { padding:1.4rem 1.6rem; }
+    .talk-find h4 { font-size:0.78rem; font-weight:800; letter-spacing:1.3px; text-transform:uppercase; color:var(--pw-gray); margin-bottom:0.7rem; }
+    .talk-find ul { padding-left:1.1rem; margin:0; }
+    .talk-find li { font-size:0.93rem; line-height:1.55; color:#334; margin-bottom:0.5rem; }
+    .talk-find li::marker { color:var(--ev-crimson); }
+    .talk-media { padding:1.4rem 1.6rem; border-left:1px solid rgba(0,0,0,0.06); display:flex; flex-direction:column; gap:0.9rem; }
+    @media(max-width:860px){ .talk-media { border-left:0; border-top:1px solid rgba(0,0,0,0.06); } }
+    .vid { position:relative; aspect-ratio:16/9; border-radius:14px; overflow:hidden; background:#11111e; }
+    .vid iframe, .vid button { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .vid button { background-size:cover; background-position:center; cursor:pointer; padding:0; }
+    .vid button::after { content:'\25B6'; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:62px; height:62px; line-height:62px; border-radius:50%; background:var(--ev-accent); color:#fff; font-size:1.4rem; padding-left:4px; box-shadow:0 8px 24px rgba(0,0,0,0.35); }
+    .vid.soon { display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.6); font-size:0.9rem; gap:0.5rem; }
+    .btn-red { background:var(--ev-accent); color:#fff; border:0; padding:0.6rem 1.3rem; border-radius:50px; font-weight:600; font-size:0.9rem; display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; box-shadow:0 6px 18px rgba(181,30,35,0.25); }
+    .btn-red:hover { color:#fff; filter:brightness(1.08); }
+    .btn-soft { color:var(--pw-gray); font-size:0.88rem; }
+    .blog-card { display:flex; gap:1.2rem; align-items:center; background:var(--ev-gradient); color:#fff; border-radius:22px; padding:1.6rem 1.9rem; margin-top:2.4rem; text-decoration:none; }
+    .blog-card:hover { color:#fff; filter:brightness(1.06); }
+    .blog-card i { font-size:2rem; }
+    .blog-card b { font-size:1.15rem; display:block; }
+    .blog-card span { opacity:.85; font-size:0.92rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="https://particleworks-europe.com/"><img src="../images/PW_Europe_logo_small.png" alt="Particleworks Europe"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse justify-content-end" id="nav">
+        <ul class="navbar-nav align-items-lg-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="index.php">Experience 2026</a></li>
+          <li class="nav-item"><a class="nav-link" href="workshop.php">Oct 6 · Technical Session</a></li>
+          <li class="nav-item"><a class="nav-link" href="program.php">Oct 7 · Program</a></li>
+          <li class="nav-item"><a class="nav-link active" href="proceedings2026.html">Proceedings 2026</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="proceedings2026.html"><i class="bi bi-unlock"></i> Proceedings 2026</a></li>
+              <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2025.php"><i class="bi bi-calendar3"></i> Proceedings 2025</a></li>
+              <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2024.php"><i class="bi bi-calendar3"></i> Proceedings 2024</a></li>
+              <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2023.php"><i class="bi bi-calendar3"></i> Proceedings 2023</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="https://particleworks-europe.com/experience/contact.php">Contact</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.php">Register</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+
+    <section class="pr-hero">
+    <div class="container">
+      <div class="pr-eyebrow"><i class="bi bi-lock"></i> Proceedings 2026</div>
+      <h1>Take the <span class="accent">Modena</span> talks home.</h1>
+      <p class="lead">Slides and key findings of Particleworks Experience 2026 — every talk the speakers released for sharing. Leave your details once and the whole collection opens.</p>
+      <div class="pr-facts">
+        <span class="pr-fact"><i class="bi bi-calendar-event"></i> October 7, 2026</span>
+        <span class="pr-fact"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena (IT)</span>
+        <span class="pr-fact"><i class="bi bi-gift"></i> Free access</span>
+      </div>
+    </div>
+  </section>
+  <section class="reg-section" id="form">
+    <div class="container">
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-8">
+          <div class="reg-card">
+            <div class="reg-card-head">
+              <div class="ic"><i class="bi bi-unlock"></i></div>
+              <div><h2>Unlock the proceedings</h2><p>Fill in your details — you'll land on the proceedings straight after.</p></div>
+            </div>
+                        <div class="reg-fallback" style="border:0;padding:2.5rem 1.5rem">The proceedings are being prepared. Write to <a href="mailto:info@particleworks-europe.com">info@particleworks-europe.com</a> and we will send them to you.</div>
+                      </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="aside-card">
+            <h3>What you get</h3>
+            <ul class="aside-list">
+              <li><i class="bi bi-file-earmark-pdf"></i><span><b>The slides</b>PDF of each talk released by its speaker.</span></li>
+              <li><i class="bi bi-lightbulb"></i><span><b>Key findings</b>A short summary of what each talk showed.</span></li>
+              <li><i class="bi bi-shield-check"></i><span><b>Your data</b>Processed in line with GDPR, solely to share the proceedings and follow up on them.</span></li>
+            </ul>
+            <div class="d-flex flex-wrap gap-2 mt-3"><a href="program.php" class="btn-ghost-red"><i class="bi bi-calendar3"></i> View the program</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand"><img src="../images/PWEurope_negativ-logo.png" alt="Particleworks Europe"></div>
+          <p class="small" style="max-width:300px;">European competence center for meshfree CFD simulation with Particleworks and Granuleworks technologies.</p>
+          <div class="d-flex gap-2 mt-3">
+            <a href="https://www.linkedin.com/company/particleworks-europe/" class="social-link" target="_blank"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Experience 2026</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="index.php">Conference overview</a></li>
+            <li class="mb-2"><a href="workshop.php">Technical Session (Oct 6)</a></li>
+            <li class="mb-2"><a href="program.php">Program (Oct 7)</a></li>
+            <li class="mb-2"><a href="proceedings2026.html">Proceedings 2026</a></li>
+            <li class="mb-2"><a href="registration.php">Registration</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Venue</h6>
+          <p class="small mb-0">BPER FORUM Monzani – Sala Bossoli<br>Via Aristotele 33<br>41126 Modena (MO), Italy</p>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Contact</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><i class="bi bi-telephone me-1"></i> +39 0461 915391</li>
+            <li class="mb-2"><a href="mailto:info@particleworks-europe.com"><i class="bi bi-envelope me-1"></i> info@particleworks-europe.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="d-flex flex-wrap gap-3 small mb-3" style="opacity:.85;">
+        <span class="text-white-50">Past editions:</span>
+        <a href="https://particleworks-europe.com/experience/proceedings2025.php">Proceedings 2025</a>
+        <a href="https://particleworks-europe.com/experience/proceedings2024.php">Proceedings 2024</a>
+        <a href="https://particleworks-europe.com/experience/gallery2024.php">Gallery 2024</a>
+        <a href="https://particleworks-europe.com/experience/proceedings2023.php">Proceedings 2023</a>
+        <a href="https://particleworks-europe.com/experience/speakers2023.php">Speakers 2023</a>
+        <a href="https://particleworks-europe.com/experience/gallery2023.php">Gallery 2023</a>
+      </div>
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <p class="small mb-0">&copy; 2026 Particleworks Europe. All rights reserved.</p>
+        <p class="small mb-0"><a href="../privacy.php" class="me-3">Privacy</a>Meshfree CFD simulation technology</p>
+      </div>
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.addEventListener('scroll', function(){ document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30); });
+    // the form iframe posts its height: fit it
+    window.addEventListener('message', function(e){
+      if (typeof e.origin !== 'string' || e.origin.indexOf('forms-eu.com') === -1) return;
+      var h = null, d = e.data;
+      if (typeof d === 'number') h = d; else if (d && typeof d === 'object') h = d.height || d.frameHeight || (d.iframe && d.iframe.height);
+      else if (typeof d === 'string') { var m = d.match(/(\d{3,5})/); if (m) h = parseInt(m[1], 10); }
+      if (h && h > 300 && h < 20000) { var f = document.getElementById('reg-form'); if (f) f.style.height = h + 'px'; }
+    }, false);
+  </script>
+</body>
+</html>
