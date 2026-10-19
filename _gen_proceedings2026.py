@@ -8,7 +8,9 @@ Run:  python _gen_proceedings2026.py
 """
 import re, pathlib
 root = pathlib.Path(__file__).parent
-reg = (root / 'experience' / 'registration.html').read_text(encoding='utf8')
+import sys as _s; _s.path.insert(0, str(root))
+from _experience_chrome import fix_nav, fix_footer
+reg = (root / '_templates' / 'experience-registration.html').read_text(encoding='utf8')
 
 head = reg[:reg.index('</style>')]
 head = re.sub(r'<title>.*?</title>', '<title>Proceedings — Particleworks Experience 2026 | Modena, October 7</title>', head, flags=re.S)
@@ -17,12 +19,10 @@ head = re.sub(r'<meta name="description" content=".*?">',
 head = head.replace('<head>', '<head>\n  <meta name="robots" content="noindex,nofollow">', 1)
 
 nav = reg[reg.index('<!-- Navbar -->'):reg.index('<!-- Hero -->')]
-nav = nav.replace('<li class="nav-item"><a class="nav-link" href="program.php">Oct 7 · Program</a></li>',
-                  '<li class="nav-item"><a class="nav-link" href="program.php">Oct 7 · Program</a></li>\n          <li class="nav-item"><a class="nav-link active" href="proceedings2026.php">Proceedings 2026</a></li>')
+nav = fix_nav(nav).replace('nav-register" href="proceedings2026.php"', 'nav-register active" href="proceedings2026.php"')
 
 footer = reg[reg.index('<!-- Footer -->'):reg.index('<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3')]
-footer = footer.replace('<li class="mb-2"><a href="registration.php">Registration</a></li>',
-                        '<li class="mb-2"><a href="proceedings2026.php">Proceedings 2026</a></li>\n            <li class="mb-2"><a href="registration.php">Registration</a></li>')
+footer = fix_footer(footer)
 
 css = r'''
     /* ---- proceedings 2026 ---- */
@@ -84,16 +84,11 @@ css = r'''
 import sys, html as _html
 sys.path.insert(0, str(root))
 from _pwexp26_content import TALKS as _T, ORDER as _O
-_prog = (root / 'experience' / 'program.html').read_text(encoding='utf8')
-_arts = _prog.split('<article class="talk"')[1:]
+import json as _json
+_AB = _json.loads((root / '_pwexp26_abstracts.json').read_text(encoding='utf8'))
 def _abstract(key):
-    for a in _arts:
-        if key in a and '<div class="abs">' in a:
-            ab = a[a.index('<div class="abs">') + 17:]
-            ab = ab[:ab.index('<div class="authors">')]
-            return ''.join(re.findall(r'<p>.*?</p>', ab, flags=re.S))
-    return ''
-_KEY = {'04': 'Lanciotti', '06': 'Lijun Cao', '10': 'Tiberi', '07': 'Hafner', '05': 'Decaix', '11': 'Valtwies'}
+    return _AB.get(key, '')
+_KEY = {k: k for k in ['04', '05', '06', '07', '10', '11']}
 _cards = ''
 for _id in ['04', '05', '06', '07', '10', '11']:   # programme order
     d = _T[_id]
@@ -205,7 +200,7 @@ hero_gate = r'''
               <li><i class="bi bi-lightbulb"></i><span><b>Key findings</b>A short summary of what each talk showed.</span></li>
               <li><i class="bi bi-shield-check"></i><span><b>Your data</b>Processed in line with GDPR, solely to share the proceedings and follow up on them.</span></li>
             </ul>
-            <div class="d-flex flex-wrap gap-2 mt-3"><a href="program.php" class="btn-ghost-red"><i class="bi bi-calendar3"></i> View the program</a></div>
+            <div class="d-flex flex-wrap gap-2 mt-3"><a href="../blog/pw-experience-2026.php" class="btn-ghost-red"><i class="bi bi-journal-text"></i> Read the story of the day</a></div>
           </div>
         </div>
       </div>

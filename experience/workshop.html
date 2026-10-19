@@ -170,7 +170,6 @@
         <ul class="navbar-nav align-items-lg-center gap-1">
           <li class="nav-item"><a class="nav-link" href="index.php">Experience 2026</a></li>
           <li class="nav-item"><a class="nav-link" href="workshop.php">Oct 6 · Technical Session</a></li>
-          <li class="nav-item"><a class="nav-link" href="program.php">Oct 7 · Program</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -181,7 +180,7 @@
             </ul>
           </li>
           <li class="nav-item"><a class="nav-link" href="https://particleworks-europe.com/experience/contact.php">Contact</a></li>
-          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.php">Register</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="proceedings2026.php">Proceedings 2026</a></li>
         </ul>
       </div>
     </div>
@@ -213,7 +212,7 @@
         <span class="hero-fact"><i class="bi bi-mic"></i> 6 technical topics</span>
       </div>
       <div class="hero-cta-row">
-        <a href="registration.php" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
+        <a href="proceedings2026.php" class="btn-pw"><i class="bi bi-unlock"></i> Proceedings 2026</a>
         <a href="#session" class="btn-ghost"><i class="bi bi-arrow-down"></i> See the topics</a>
       </div>
     </div>
@@ -234,7 +233,7 @@
           </div>
         </div>
         <div class="col-lg-5">
-          <a href="program.php" class="agenda-card text-decoration-none text-reset">
+          <a href="proceedings2026.php" class="agenda-card text-decoration-none text-reset">
             <div class="agenda-day"><div class="num">07</div><div class="mon">Oct · Wed</div></div>
             <div>
               <h3>Conference Day</h3>
@@ -541,7 +540,7 @@
       <h2>Join us in Modena</h2>
       <p>Two days, one community. Reserve your seat for Particleworks Experience 2026 — or submit your own abstract before the program closes.</p>
       <div class="hero-cta-row justify-content-center">
-        <a href="registration.php" class="btn-pw"><i class="bi bi-pencil-square"></i> Register</a>
+        <a href="proceedings2026.php" class="btn-pw"><i class="bi bi-unlock"></i> Proceedings 2026</a>
         <a href="https://particleworks-europe.com/experience/call-for-abstract" class="btn-ghost"><i class="bi bi-file-earmark-text"></i> Submit your abstract</a>
       </div>
     </div>
@@ -563,8 +562,7 @@
           <ul class="list-unstyled small">
             <li class="mb-2"><a href="index.php">Conference overview</a></li>
             <li class="mb-2"><a href="workshop.php">Technical Session (Oct 6)</a></li>
-            <li class="mb-2"><a href="program.php">Program (Oct 7)</a></li>
-            <li class="mb-2"><a href="registration.php">Registration</a></li>
+            <li class="mb-2"><a href="proceedings2026.php">Proceedings 2026</a></li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-4">
@@ -596,7 +594,7 @@
     </div>
   </footer>
 
-  <a href="registration.php" class="btn-pw float-reg"><i class="bi bi-pencil-square"></i> Register</a>
+  <a href="proceedings2026.php" class="btn-pw float-reg"><i class="bi bi-unlock"></i> Proceedings 2026</a>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>

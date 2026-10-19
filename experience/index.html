@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="../favicon.ico">
-  <title>Particleworks Experience 2026 — Modena, October 6-7</title>
-  <meta name="description" content="Particleworks Experience 2026 — Modena, October 6-7. Technical workshop, the release of Particleworks 9.0 and validated case studies from industry and academia. Register or submit your abstract.">
+  <title>Particleworks Experience 2026 — Thank you, Modena | Proceedings now online</title>
+  <meta name="description" content="Particleworks Experience 2026, Modena, October 6–7: thank you. Slides, recordings and key findings of the released talks are online.">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -120,6 +120,13 @@
     footer .footer-divider { border-top:1px solid rgba(255,255,255,0.08); margin:2rem 0 1.5rem; }
     .social-link { width:40px; height:40px; border-radius:10px; background:rgba(255,255,255,0.06); display:inline-flex; align-items:center; justify-content:center; font-size:1.1rem; transition:all .3s; }
     .social-link:hover { background:var(--pw-blue); color:#fff; }
+  
+    /* post-event */
+    .take-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; }
+    .take { background:#fff; border:1px solid rgba(0,0,0,0.07); border-radius:18px; padding:1.3rem 1.4rem; }
+    .take .n { width:34px; height:34px; border-radius:10px; background:var(--ev-accent); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; margin-bottom:0.8rem; }
+    .take b { display:block; margin-bottom:0.3rem; } .take p { margin:0; font-size:0.9rem; color:#445; line-height:1.55; }
+    .tag { display:inline-block; font-size:0.68rem; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--ev-crimson); margin-bottom:0.15rem; }
   </style>
 </head>
 <body>
@@ -133,202 +140,107 @@
         <ul class="navbar-nav align-items-lg-center gap-1">
           <li class="nav-item"><a class="nav-link" href="index.php">Experience 2026</a></li>
           <li class="nav-item"><a class="nav-link" href="workshop.php">Oct 6 · Technical Session</a></li>
-          <li class="nav-item"><a class="nav-link" href="program.php">Oct 7 · Program</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="proceedings2026.php"><i class="bi bi-unlock"></i> Proceedings 2026</a></li>
               <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2025.php"><i class="bi bi-calendar3"></i> Proceedings 2025</a></li>
               <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2024.php"><i class="bi bi-calendar3"></i> Proceedings 2024</a></li>
               <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2023.php"><i class="bi bi-calendar3"></i> Proceedings 2023</a></li>
             </ul>
           </li>
           <li class="nav-item"><a class="nav-link" href="https://particleworks-europe.com/experience/contact.php">Contact</a></li>
-          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.php">Register</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="proceedings2026.php">Proceedings 2026</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- Hero -->
+  <!-- post-event landing -->
   <section class="hero">
-    <svg class="hero-particles" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 500" aria-hidden="true">
-      <g fill="#ffe2d4">
-        <circle cx="120" cy="80" r="3"><animate attributeName="cy" values="80;120;80" dur="7s" repeatCount="indefinite"/></circle>
-        <circle cx="300" cy="200" r="2.4" opacity="0.7"><animate attributeName="cy" values="200;160;200" dur="9s" repeatCount="indefinite"/></circle>
-        <circle cx="540" cy="100" r="3.4" opacity="0.6"><animate attributeName="cy" values="100;140;100" dur="6s" repeatCount="indefinite"/></circle>
-        <circle cx="820" cy="240" r="2.6" opacity="0.7"><animate attributeName="cy" values="240;200;240" dur="8s" repeatCount="indefinite"/></circle>
-        <circle cx="1010" cy="120" r="3" opacity="0.6"><animate attributeName="cy" values="120;170;120" dur="7.5s" repeatCount="indefinite"/></circle>
-        <circle cx="700" cy="380" r="2.2" opacity="0.5"><animate attributeName="cy" values="380;340;380" dur="10s" repeatCount="indefinite"/></circle>
-        <circle cx="200" cy="420" r="2.8" opacity="0.5"><animate attributeName="cy" values="420;380;420" dur="8.5s" repeatCount="indefinite"/></circle>
-      </g>
-    </svg>
     <div class="container">
-      <div class="badge-year"><i class="bi bi-stars"></i> European Edition · Modena 2026</div>
-      <h1 class="sr-only">Particleworks Experience 2026 — European Edition, Modena, October 6–7</h1>
+      <div class="badge-year"><i class="bi bi-heart-fill"></i> Thank you, Modena</div>
+      <h1 class="sr-only">Particleworks Experience 2026 — European Edition, Modena, October 6–7: proceedings now online</h1>
       <div class="hero-banner"><img src="../images/experience2026/banner-2026.jpg" alt="Particleworks Experience 2026 — European Edition · October 6-7, 2026 · Modena, Italy"></div>
-      <p class="lead">The annual meeting of the meshless CFD community. Two days of hands-on workshops, the release of <strong>Particleworks&nbsp;9.0</strong>, and validated case studies from industry and academia.</p>
+      <p class="lead">Two days with the meshless CFD community in Modena. The <strong>proceedings are online</strong>: slides, recordings and the key findings of every talk the speakers released.</p>
       <div class="hero-meta">
         <span class="m"><i class="bi bi-calendar-event"></i> October 6–7, 2026</span>
         <span class="m"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena · Italy</span>
       </div>
       <div class="hero-cta">
-        <a href="registration.php" class="btn-pw"><i class="bi bi-pencil-square"></i> Register now</a>
-        <a href="program.php" class="btn-ghost"><i class="bi bi-calendar3"></i> View the program</a>
+        <a href="proceedings2026.php" class="btn-pw"><i class="bi bi-unlock"></i> Unlock the proceedings</a>
+        <a href="../blog/pw-experience-2026.php" class="btn-ghost"><i class="bi bi-journal-text"></i> Read the story of the day</a>
       </div>
     </div>
   </section>
 
-  <!-- Two days -->
-  <section class="days">
-    <div class="container">
-      <div class="sec-head">
-        <div class="kick">Two days · Modena</div>
-        <h2>Pick your day</h2>
-        <p>A technical afternoon on Particleworks 9.0, then a full conference day. Click either day to explore its program.</p>
-      </div>
-      <div class="row g-4 justify-content-center">
-
-        <!-- Day 1 — clickable to technical session -->
-        <div class="col-lg-5">
-          <a href="workshop.php" class="day-card conf">
-            <span class="ribbon"><i class="bi bi-arrow-right-circle"></i> See program</span>
-            <div class="date-row"><span class="dnum">06</span><span class="dmon">October 2026 · Tuesday</span></div>
-            <div class="time"><i class="bi bi-clock"></i> 14:00 — 18:00</div>
-            <h3>Technical Session</h3>
-            <p>What's new in <strong>Particleworks 9.0</strong>, advanced modeling techniques and use cases — AI-driven automation, CHT, multi-phase, FSI, CFD+DEM — plus 1:1 support meetings.</p>
-            <span class="go">Explore the six topics <i class="bi bi-arrow-right"></i></span>
-            <svg class="corner-svg" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="40" stroke="#c01f24" stroke-width="6"/><circle cx="50" cy="50" r="18" stroke="#c01f24" stroke-width="6"/></svg>
-          </a>
-        </div>
-
-        <!-- Day 2 — clickable to program -->
-        <div class="col-lg-5">
-          <a href="program.php" class="day-card conf">
-            <span class="ribbon"><i class="bi bi-arrow-right-circle"></i> See program</span>
-            <div class="date-row"><span class="dnum">07</span><span class="dmon">October 2026 · Wednesday</span></div>
-            <div class="time"><i class="bi bi-clock"></i> 08:45 — 17:30</div>
-            <h3>Conference Day</h3>
-            <p>Introduction to <strong>Particleworks 9.0</strong> and presentations from industry &amp; academia — shot peening, e-motor cooling, pumps and hydropower.</p>
-            <span class="go">Explore the full program <i class="bi bi-arrow-right"></i></span>
-            <svg class="corner-svg" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="40" stroke="#e0382a" stroke-width="6"/><path d="M30 50 H70 M50 30 V70" stroke="#e0382a" stroke-width="6"/></svg>
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Topics teaser -->
   <section class="topics">
     <div class="container">
       <div class="sec-head">
         <div class="kick">Conference Day · October 7</div>
-        <h2>What's on the program</h2>
-        <p>A preliminary line-up of talks. The full program is being finalised.</p>
+        <h2>What the day showed</h2>
+        <p>Heat, air and wear, seen through meshless simulation.</p>
       </div>
-      <div class="row g-3 justify-content-center">
-        <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-keynote" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic kn"><i class="bi bi-rocket-takeoff"></i></div>
-            <div><h4>What's New in Particleworks 9.0 &amp; Granuleworks 4.0</h4><div class="org">Keynote · Issei Masaie &amp; Iori Saigo · Prometech Software 🇯🇵</div></div>
-          </div></a>
-        </div>
-        <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-shot-peening" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic"><i class="bi bi-bullseye"></i></div>
-            <div><h4>Simulation of Shot Peening: A CFD-DEM Coupled Case Study</h4><div class="org">MTU Aero Engines AG 🇩🇪</div></div>
-          </div></a>
-        </div>
-        <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-stator" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic"><i class="bi bi-lightning-charge"></i></div>
-            <div><h4>Integrated Simulation of Stator Oil Jacket &amp; Jet Cooling</h4><div class="org">University of Modena and Reggio Emilia 🇮🇹</div></div>
-          </div></a>
-        </div>
-        <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-pump" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic"><i class="bi bi-thermometer-half"></i></div>
-            <div><h4>CHT Analysis of a Reciprocating Pump</h4><div class="org">R&amp;D CFD S.R.L. · Comet S.p.A. 🇮🇹</div></div>
-          </div></a>
-        </div>
-        <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-pelton" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic"><i class="bi bi-water"></i></div>
-            <div><h4>Moving Particle Simulation of Eroded Pelton Runners</h4><div class="org">HES-SO Valais//Wallis 🇨🇭</div></div>
-          </div></a>
-        </div>
-        <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-skf-htc" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic"><i class="bi bi-record-circle"></i></div>
-            <div><h4>Verification of Heat Transfer Coefficient for Bearings</h4><div class="org">SKF 🇳🇱</div></div>
-          </div></a>
-        </div>
-        <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-air-in-oil" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic"><i class="bi bi-camera"></i></div>
-            <div><h4>Direct Optical Air-in-Oil Measurement for Gearings &amp; Hydraulics</h4><div class="org">deepfluid 🇩🇪</div></div>
-          </div></a>
-        </div>
-        <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-bubble-dynamics" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic"><i class="bi bi-droplet-half"></i></div>
-            <div><h4>Air Bubble Dynamics in Gear Oil of an Electric Drivetrain</h4><div class="org">IAV GmbH 🇩🇪</div></div>
-          </div></a>
-        </div>
-        <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-gear-airflow" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic"><i class="bi bi-gear-wide-connected"></i></div>
-            <div><h4>Gear Lubrication Analysis &amp; R&amp;D on Airflow Effects</h4><div class="org">Univance Corporation 🇯🇵</div></div>
-          </div></a>
-        </div>
-        <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-carrier-roller" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic"><i class="bi bi-truck"></i></div>
-            <div><h4>Lubrication of a Carrier Roller using CFD 3D-MPS</h4><div class="org">Track One SRL · Unimore 🇮🇹</div></div>
-          </div></a>
-        </div>
-        <div class="col-md-6 col-lg-5">
-          <a href="program.php#talk-flowsep" class="text-decoration-none text-reset"><div class="topic">
-            <div class="ic"><i class="bi bi-funnel"></i></div>
-            <div><h4>Sand Separation &amp; Wear in the Börger FlowSep</h4><div class="org">Börger GmbH 🇩🇪 · EnginSoft 🇮🇹</div></div>
-          </div></a>
-        </div>
-        <div class="col-md-6 col-lg-5 d-flex">
-          <a href="program.php" class="btn-pw w-100 justify-content-center align-self-stretch" style="border-radius:16px;"><i class="bi bi-calendar3"></i> See the full program</a>
-        </div>
-      </div>
+      <div class="take-grid"><div class="take"><div class="n">1</div><b>Heat became a deliverable</b><p>Three talks closed thermal models with a fast steady CHT: minutes to a day per case, and every gap against the bench stated (about 5–6 °C worst on the pump, up to about 12 % on the roller oil).</p></div><div class="take"><div class="n">2</div><b>Where you read the number matters</b><p>On one sphere the same code returned an HTC of 66 or 169 W/m²K depending on where it was sampled; one air content (0.65 %) hid bubbles of 132 µm or 68 µm.</p></div><div class="take"><div class="n">3</div><b>Calibrate on what is measured</b><p>Optical bubble data took a gearbox aeration model from 0.12 % to 0.45 % air against a measured 0.43 %, and from 800 to 186 µm bubbles against 180 µm.</p></div><div class="take"><div class="n">4</div><b>Simulation says where it wears — and what not to do</b><p>Pelton torque loss and the wear zones of a separator housing were predicted; doubling the separator flow rate, the obvious fix, lifted the sand lost from 10 % to 25 %.</p></div></div>
     </div>
   </section>
 
-  <!-- Venue -->
-  <section class="venue">
+  <section class="topics" style="padding-top:2rem">
     <div class="container">
-      <div class="row g-4 align-items-stretch">
-        <div class="col-lg-6">
-          <div class="venue-box h-100 d-flex flex-column justify-content-center">
-            <div class="badge-year"><i class="bi bi-geo-alt"></i> Venue</div>
-            <h3>BPER FORUM Monzani — Sala Bossoli</h3>
-            <p>Via Aristotele 33, 41126 Modena (MO), Italy. In the heart of Italy's Motor Valley, a short trip from Bologna and Milan.</p>
-            <div><a href="https://www.google.com/maps/search/?api=1&amp;query=BPER%20FORUM%20Monzani%2C%20Via%20Aristotele%2033%2C%2041126%20Modena" target="_blank" rel="noopener" class="btn-ghost"><i class="bi bi-map"></i> Open in Maps</a></div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <iframe class="venue-map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="BPER FORUM Monzani, Modena"
-            src="https://www.google.com/maps?q=BPER%20FORUM%20Monzani%2C%20Via%20Aristotele%2033%2C%2041126%20Modena&output=embed"></iframe>
+      <div class="sec-head">
+        <div class="kick">The talks</div>
+        <h2>Six talks, ready to watch</h2>
+        <p>Abstracts are open. Slides, recordings and key findings unlock with a short form.</p>
+      </div>
+      <div class="row g-3 justify-content-center"><div class="col-md-6 col-lg-5"><a href="proceedings2026.php#talks" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-thermometer-half"></i></div>
+            <div><span class="tag">Heat</span><h4>CHT Analysis of a Reciprocating Pump</h4><div class="org">R&amp;D CFD S.R.L. – Comet S.p.A. (IT) 🇮🇹</div></div>
+          </div></a></div><div class="col-md-6 col-lg-5"><a href="proceedings2026.php#talks" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-record-circle"></i></div>
+            <div><span class="tag">Heat</span><h4>Integrating Particleworks into SKF Engineering Tools: Part I</h4><div class="org">SKF (NL) 🇳🇱</div></div>
+          </div></a></div><div class="col-md-6 col-lg-5"><a href="proceedings2026.php#talks" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-truck"></i></div>
+            <div><span class="tag">Heat</span><h4>Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method</h4><div class="org">TrackOne SRL – Unimore (IT) 🇮🇹</div></div>
+          </div></a></div><div class="col-md-6 col-lg-5"><a href="proceedings2026.php#talks" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-camera"></i></div>
+            <div><span class="tag">Air</span><h4>Direct Optical Air-in-Oil Measurement for Gearings &amp; Hydraulics</h4><div class="org">deepfluid (DE) – EnginSoft SpA (IT) 🇩🇪</div></div>
+          </div></a></div><div class="col-md-6 col-lg-5"><a href="proceedings2026.php#talks" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-water"></i></div>
+            <div><span class="tag">Wear</span><h4>Moving Particle Simulation of Eroded Pelton Runners</h4><div class="org">HES-SO Valais/Wallis (CH) 🇨🇭</div></div>
+          </div></a></div><div class="col-md-6 col-lg-5"><a href="proceedings2026.php#talks" class="text-decoration-none text-reset"><div class="topic">
+            <div class="ic"><i class="bi bi-funnel"></i></div>
+            <div><span class="tag">Wear</span><h4>Simulation of Sand Separation and Wear in the Börger FlowSep</h4><div class="org">Börger GmbH (DE) – EnginSoft SpA (IT) 🇩🇪</div></div>
+          </div></a></div>
+        <div class="col-md-6 col-lg-5 d-flex">
+          <a href="proceedings2026.php" class="btn-pw w-100 justify-content-center align-self-stretch" style="border-radius:16px;"><i class="bi bi-unlock"></i> Open the proceedings</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta-final" id="register">
+  <section class="days" style="padding-top:2rem">
+    <div class="container">
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-7">
+          <a href="workshop.php" class="day-card conf">
+            <span class="ribbon"><i class="bi bi-arrow-right-circle"></i> Look back</span>
+            <div class="date-row"><span class="dnum">06</span><span class="dmon">October 2026 · Tuesday</span></div>
+            <h3>Technical Session</h3>
+            <p>What's new in <strong>Particleworks 9.0</strong>, advanced modeling techniques and use cases — AI-driven automation, CHT, multi-phase, FSI, CFD+DEM.</p>
+            <span class="go">See the six topics <i class="bi bi-arrow-right"></i></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-final" id="proceedings">
     <div class="container text-center">
-      <h2>Save your seat for Modena</h2>
-      <p>Register for Particleworks Experience 2026 — or submit your own title and abstract before the call for papers closes.</p>
+      <h2>Take the Modena talks home</h2>
+      <p>Leave your details once and the whole collection opens. Earlier editions stay online too.</p>
       <div class="hero-cta justify-content-center">
-        <a href="registration.php" class="btn-pw"><i class="bi bi-pencil-square"></i> Register</a>
-        <a href="https://particleworks-europe.com/experience/call-for-abstract" class="btn-ghost"><i class="bi bi-file-earmark-text"></i> Submit your abstract</a>
+        <a href="proceedings2026.php" class="btn-pw"><i class="bi bi-unlock"></i> Unlock the proceedings</a>
+        <a href="https://particleworks-europe.com/experience/proceedings2025.php" class="btn-ghost"><i class="bi bi-calendar3"></i> Proceedings 2025</a>
       </div>
     </div>
   </section>
@@ -348,9 +260,7 @@
           <h6 class="fw-semibold text-white mb-3" style="font-size:0.85rem;">Experience 2026</h6>
           <ul class="list-unstyled small">
             <li class="mb-2"><a href="workshop.php">Technical Session (Oct 6)</a></li>
-            <li class="mb-2"><a href="program.php">Program (Oct 7)</a></li>
-            <li class="mb-2"><a href="registration.php">Registration</a></li>
-            <li class="mb-2"><a href="https://particleworks-europe.com/experience/call-for-abstract">Call for papers</a></li>
+            <li class="mb-2"><a href="proceedings2026.php">Proceedings 2026</a></li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-4">

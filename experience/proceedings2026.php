@@ -197,19 +197,16 @@ if ($cfg) foreach ($cfg['talks'] as $t) { if (empty($t['publish_from']) || date(
         <ul class="navbar-nav align-items-lg-center gap-1">
           <li class="nav-item"><a class="nav-link" href="index.php">Experience 2026</a></li>
           <li class="nav-item"><a class="nav-link" href="workshop.php">Oct 6 · Technical Session</a></li>
-          <li class="nav-item"><a class="nav-link" href="program.php">Oct 7 · Program</a></li>
-          <li class="nav-item"><a class="nav-link active" href="proceedings2026.php">Proceedings 2026</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Past editions</a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="proceedings2026.php"><i class="bi bi-unlock"></i> Proceedings 2026</a></li>
               <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2025.php"><i class="bi bi-calendar3"></i> Proceedings 2025</a></li>
               <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2024.php"><i class="bi bi-calendar3"></i> Proceedings 2024</a></li>
               <li><a class="dropdown-item" href="https://particleworks-europe.com/experience/proceedings2023.php"><i class="bi bi-calendar3"></i> Proceedings 2023</a></li>
             </ul>
           </li>
           <li class="nav-item"><a class="nav-link" href="https://particleworks-europe.com/experience/contact.php">Contact</a></li>
-          <li class="nav-item ms-lg-2"><a class="nav-link nav-register" href="registration.php">Register</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link nav-register active" href="proceedings2026.php">Proceedings 2026</a></li>
         </ul>
       </div>
     </div>
@@ -257,7 +254,7 @@ if ($cfg) foreach ($cfg['talks'] as $t) { if (empty($t['publish_from']) || date(
               <li><i class="bi bi-lightbulb"></i><span><b>Key findings</b>A short summary of what each talk showed.</span></li>
               <li><i class="bi bi-shield-check"></i><span><b>Your data</b>Processed in line with GDPR, solely to share the proceedings and follow up on them.</span></li>
             </ul>
-            <div class="d-flex flex-wrap gap-2 mt-3"><a href="program.php" class="btn-ghost-red"><i class="bi bi-calendar3"></i> View the program</a></div>
+            <div class="d-flex flex-wrap gap-2 mt-3"><a href="../blog/pw-experience-2026.php" class="btn-ghost-red"><i class="bi bi-journal-text"></i> Read the story of the day</a></div>
           </div>
         </div>
       </div>
@@ -366,9 +363,7 @@ if ($cfg) foreach ($cfg['talks'] as $t) { if (empty($t['publish_from']) || date(
           <ul class="list-unstyled small">
             <li class="mb-2"><a href="index.php">Conference overview</a></li>
             <li class="mb-2"><a href="workshop.php">Technical Session (Oct 6)</a></li>
-            <li class="mb-2"><a href="program.php">Program (Oct 7)</a></li>
             <li class="mb-2"><a href="proceedings2026.php">Proceedings 2026</a></li>
-            <li class="mb-2"><a href="registration.php">Registration</a></li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-4">
