@@ -314,7 +314,7 @@ body{margin:0}
   <div class="ladder">
     <figure class="shot">
       <img src="images/events/ai-iceberg.jpg" loading="lazy" alt="Iceberg diagram: writing Python is the tip; AI helping write code, AI running simulations and AI reviewing results sit below the waterline" width="1672" height="941">
-      <figcaption>The complexity iceberg of AI plus Particleworks automation, from the workshop.</figcaption>
+      <figcaption>The complexity iceberg of AI plus Particleworks automation, from the workshop. Levels 1–2 are stage 1, level 3 is stage 2, level 4 is stage 3.</figcaption>
     </figure>
     <div class="stairs">
       <article class="step"><span class="n">STAGE 1</span><h3>Script &amp; AI chat</h3><p>Rigid Python for pre and post-processing and DoE. An AI chat writes the pwpy code with the API documents and examples in context.</p></article>

@@ -79,6 +79,48 @@ css = r'''
     .blog-card span { opacity:.85; font-size:0.92rem; }
 '''
 
+
+# ---- the OPEN part (as proceedings2024/2025): public abstracts of the released talks, copied from program.php ----
+import sys, html as _html
+sys.path.insert(0, str(root))
+from _pwexp26_content import TALKS as _T, ORDER as _O
+_prog = (root / 'experience' / 'program.html').read_text(encoding='utf8')
+_arts = _prog.split('<article class="talk"')[1:]
+def _abstract(key):
+    for a in _arts:
+        if key in a and '<div class="abs">' in a:
+            ab = a[a.index('<div class="abs">') + 17:]
+            ab = ab[:ab.index('<div class="authors">')]
+            return ''.join(re.findall(r'<p>.*?</p>', ab, flags=re.S))
+    return ''
+_KEY = {'04': 'Lanciotti', '06': 'Lijun Cao', '10': 'Tiberi', '07': 'Hafner', '05': 'Decaix', '11': 'Valtwies'}
+_cards = ''
+for _id in ['04', '05', '06', '07', '10', '11']:   # programme order
+    d = _T[_id]
+    _cards += (f'<div class="open-talk"><img src="speakers/{d["photo"][0]}" alt="{d["photo"][1]}">'
+               f'<div><div class="ot-who">{d["org"].split(" (")[0]} | {d["speaker"]}</div><h3>{d["title"]}</h3>{_abstract(_KEY[_id])}'
+               f'</div></div>')
+open_section = ('''
+  <section class="pr-section pr-open" id="talks">
+    <div class="container">
+      <h2 class="pr-h2">The talks</h2>
+      <p class="pr-sub">What was presented in Modena on October 7, 2026. Slides, recordings and the key findings of every released talk open with the form above.</p>
+      ''' + _cards + '''
+      <a class="blog-card" href="../blog/pw-experience-2026.php"><i class="bi bi-journal-text"></i><div><b>Read the story of the day</b><span>What Modena taught us about heat, air and wear: quotes, slides and the moments to watch.</span></div></a>
+      <p class="pr-sub mt-4 mb-0"><i class="bi bi-clock-history"></i> Earlier editions: <a href="proceedings2025.php">Proceedings 2025</a> · <a href="proceedings2024.php">Proceedings 2024</a></p>
+    </div>
+  </section>''')
+css += '''
+    .open-talk { display:flex; gap:1.2rem; background:#fff; border:1px solid rgba(0,0,0,0.07); border-radius:18px; padding:1.3rem 1.5rem; margin-bottom:1rem; }
+    .open-talk img { width:84px; height:84px; border-radius:50%; object-fit:cover; flex-shrink:0; border:3px solid #fff; box-shadow:0 4px 14px rgba(143,22,27,0.18); }
+    .ot-who { font-size:0.8rem; font-weight:700; letter-spacing:0.4px; text-transform:uppercase; color:var(--pw-gray); }
+    .open-talk h3 { font-size:1.08rem; font-weight:800; color:var(--ev-crimson); margin:0.2rem 0 0.5rem; line-height:1.3; }
+    .open-talk p { font-size:0.9rem; line-height:1.6; margin:0 0 0.45rem; color:#334; }
+    .open-talk .ot-hook { background:#f3faf6; border-left:3px solid #25a361; padding:0.5rem 0.8rem; border-radius:0 8px 8px 0; }
+    .open-talk .ot-hook i { color:#25a361; }
+    @media(max-width:600px){ .open-talk { flex-direction:column; } }
+'''
+
 php_top = r'''<?php
 // Proceedings 2026 — form-gated.  No secrets / no talk content in this file (public repo):
 // everything private lives in proceedings2026-private.php, uploaded by FTP only (see the .sample.php).
@@ -169,6 +211,7 @@ hero_gate = r'''
       </div>
     </div>
   </section>
+''' + open_section + r'''
   <?php else: ?>
 '''
 
@@ -242,7 +285,7 @@ content = r'''
       <?php endforeach; ?>
 
       <?php if (!empty($cfg['blog_url'])): ?>
-      <a class="blog-card" href="<?= e($cfg['blog_url']) ?>"><i class="bi bi-journal-text"></i><div><b>Read the story of the day</b><span>A 1,000-word look at what Modena taught us about heat, air and wear.</span></div></a>
+      <a class="blog-card" href="<?= e($cfg['blog_url']) ?>"><i class="bi bi-journal-text"></i><div><b>Read the story of the day</b><span>Quotes, slides and the moments to watch: what Modena taught us about heat, air and wear.</span></div></a>
       <?php endif; ?>
     </div>
   </section>

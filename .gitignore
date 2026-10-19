@@ -5,3 +5,4 @@ website_now.zip
 # Proceedings 2026: gate secrets, talk content and PDFs are FTP-only (public repo)
 experience/proceedings2026-private.php
 experience/proceedings2026-files/
+__pycache__/
