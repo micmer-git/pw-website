@@ -106,7 +106,7 @@
     .talk-time { font-size:0.78rem; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--ev-crimson); }
     .talk-top h3 { font-size:1.12rem; font-weight:800; letter-spacing:-0.2px; margin:0.15rem 0; line-height:1.3; }
     .talk-who { font-size:0.88rem; color:var(--pw-gray); }
-    .talk-body { display:grid; grid-template-columns:1.6fr 1fr; gap:0; }
+    .talk-body { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:0; }
     @media(max-width:860px){ .talk-body { grid-template-columns:1fr; } }
     .talk-find { padding:1.4rem 1.6rem; }
     .talk-find h4 { font-size:0.78rem; font-weight:800; letter-spacing:1.3px; text-transform:uppercase; color:var(--pw-gray); margin-bottom:0.7rem; }
@@ -116,10 +116,16 @@
     .talk-media { padding:1.4rem 1.6rem; border-left:1px solid rgba(0,0,0,0.06); display:flex; flex-direction:column; gap:0.9rem; }
     @media(max-width:860px){ .talk-media { border-left:0; border-top:1px solid rgba(0,0,0,0.06); } }
     .vid { position:relative; aspect-ratio:16/9; border-radius:14px; overflow:hidden; background:#11111e; }
-    .vid iframe, .vid button { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .vid iframe, .vid button, .vid video { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .vid video { object-fit:contain; background:#000; }
     .vid button { background-size:cover; background-position:center; cursor:pointer; padding:0; }
     .vid button::after { content:'\25B6'; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:62px; height:62px; line-height:62px; border-radius:50%; background:var(--ev-accent); color:#fff; font-size:1.4rem; padding-left:4px; box-shadow:0 8px 24px rgba(0,0,0,0.35); }
     .vid.soon { display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.6); font-size:0.9rem; gap:0.5rem; }
+    .moments { display:flex; flex-wrap:wrap; gap:0.4rem; align-items:center; }
+    .moments span { font-size:0.72rem; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--pw-gray); margin-right:0.2rem; }
+    .moments button { border:1px solid rgba(192,31,36,0.3); background:#fff; color:var(--ev-crimson); border-radius:50px; padding:0.25rem 0.7rem 0.25rem 0.45rem; font-size:0.78rem; font-weight:600; cursor:pointer; }
+    .moments button:hover { background:var(--ev-crimson); color:#fff; }
+    .moments button i { font-size:0.9rem; vertical-align:-1px; }
     .btn-red { background:var(--ev-accent); color:#fff; border:0; padding:0.6rem 1.3rem; border-radius:50px; font-weight:600; font-size:0.9rem; display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; box-shadow:0 6px 18px rgba(181,30,35,0.25); }
     .btn-red:hover { color:#fff; filter:brightness(1.08); }
     .btn-soft { color:var(--pw-gray); font-size:0.88rem; }
@@ -254,6 +260,27 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     window.addEventListener('scroll', function(){ document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 30); });
+    // ---- video: click-to-play, jump to a moment, deep links from the blog (?talk=04&t=370) ----
+    function playAt(id, t) {
+      var v = document.querySelector('video[data-vid="' + id + '"]');
+      if (v) { v.currentTime = t; v.play(); v.scrollIntoView({behavior:'smooth', block:'center'}); return; }
+      var f = document.querySelector('iframe[data-vid="' + id + '"]');
+      if (f) { f.contentWindow.postMessage(JSON.stringify({event:'command', func:'seekTo', args:[t, true]}), '*'); f.contentWindow.postMessage(JSON.stringify({event:'command', func:'playVideo', args:[]}), '*'); f.scrollIntoView({behavior:'smooth', block:'center'}); return; }
+      var b = document.querySelector('button[data-yt][data-vid="' + id + '"]');
+      if (b) { var fr = document.createElement('iframe'); fr.dataset.vid = id;
+        fr.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0&enablejsapi=1&start=' + t;
+        fr.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; fr.allowFullscreen = true; fr.title = 'Recording'; b.replaceWith(fr); fr.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+    document.querySelectorAll('button[data-yt]').forEach(function(b){ b.addEventListener('click', function(){ playAt(b.dataset.vid, 0); }); });
+    document.querySelectorAll('button[data-seek]').forEach(function(b){ b.addEventListener('click', function(){ playAt(b.dataset.seek, parseInt(b.dataset.t, 10)); }); });
+    (function(){
+      var q = new URLSearchParams(location.search), tgt = q.get('talk') ? {talk:q.get('talk'), t:q.get('t')||'0'} : null;
+      try {
+        if (tgt && !document.querySelector('.talk')) { sessionStorage.setItem('pwe26_target', JSON.stringify(tgt)); return; }   // gate view: remember where the visitor was going
+        if (!tgt && document.querySelector('.talk')) { var k = sessionStorage.getItem('pwe26_target'); if (k) { tgt = JSON.parse(k); sessionStorage.removeItem('pwe26_target'); } }
+      } catch (e) {}
+      if (tgt && document.querySelector('.talk')) { var el = document.getElementById('talk-' + tgt.talk); if (el) setTimeout(function(){ playAt(tgt.talk, parseInt(tgt.t, 10) || 0); }, 400); }
+    })();
     // the form iframe posts its height: fit it
     window.addEventListener('message', function(e){
       if (typeof e.origin !== 'string' || e.origin.indexOf('forms-eu.com') === -1) return;
