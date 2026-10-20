@@ -250,7 +250,7 @@ body{margin:0}
     <h3>Save your seat</h3>
     <p class="mini">Thu 26 Nov 2026 · 15:00–15:45 CET · online · free</p>
     <div class="slot">Registration form<br>loads here</div><a class="ev-btn btn-p" style="width:100%;margin-top:14px" href="mailto:info@particleworks-europe.com?subject=Webinar%20registration%20%E2%80%93%20AI-accelerated%20Particleworks%20(26%20Nov%202026)&amp;body=Name%3A%0ACompany%3A%0AJob%20title%3A%0ACountry%3A%0A">Or write to us by e-mail</a>
-    <p class="mini">Recording sent to every registrant.</p>
+    <p class="mini">Recording sent to every registrant. To attend you need only a browser; to repeat the workflow on your own machine afterwards, an AI tool (Codex or Claude Code) must be installed there.</p>
   </div>
 </div></section>
 
@@ -262,7 +262,7 @@ body{margin:0}
     <article class="tile"><span class="n">01</span><h3>Gearbox, end to end</h3><p>Churning run, heat-transfer map and steady thermal model chained in one command. Every step is gated before it spends GPU time.</p><div class="proof">9.2 h of GPU condensed into a 20 s thermal solve</div></article>
     <article class="tile"><span class="n">02</span><h3>DoE on materials</h3><p>16 fluids across the rheology map, Newtonian to Bingham, shear-thinning and shear-thickening, against 9 obstacle shapes.</p><div class="proof">144 cases from one study definition</div></article>
     <article class="tile"><span class="n">03</span><h3>Post-processing on autopilot</h3><p>Wetting maps, peak forces, torque, HTC and the report, produced the same way for every run.</p><div class="proof">A plausibility gate rejects bad fields before you see them</div></article>
-    <article class="tile"><span class="n">04</span><h3>Blender in the loop</h3><p>Particles to surface to cinematic frames. Colour and translucency can follow each particle's own history.</p><div class="proof">Beauty renders without leaving the pipeline</div></article>
+    <article class="tile"><span class="n">04</span><h3>Blender in the loop</h3><p>Particles to surface to cinematic frames. Colour and translucency can follow each particle's own history.</p><div class="proof">Renders come out of the same script</div></article>
     <article class="tile"><span class="n">05</span><h3>Complex workflows</h3><p>The omelette: pour, swirl, cooking history integrated per particle, then compared against the no-swirl case.</p><div class="proof">Swirl cuts thickness variation 0.31 → 0.22</div></article>
     <article class="tile hot"><span class="n">06</span><h3>Beyond the GUI</h3><p>Scripted motions, custom viscosity laws, and the SDK to hook into the solver and add physics that did not exist.</p><div class="proof">Viscosity as a function of temperature, per particle</div></article>
   </div>
@@ -277,8 +277,8 @@ body{margin:0}
       <li><div class="t">15:07<small>10 min</small></div><div><h3>Gearbox, end to end</h3><p>Churning loss, HTC map, steady CHT. What was automated, what was machine-checked, what the temperatures really mean.</p></div></li>
       <li><div class="t">15:17<small>9 min</small></div><div><h3>DoE on materials, plus post-processing</h3><p>16 fluids × 9 shapes, wetting and force maps, and the Blender renders generated from the same script.</p></div></li>
       <li><div class="t">15:26<small>9 min</small></div><div><h3>Complex workflows</h3><p>The omelette: temperature-driven viscosity, per-particle history, and what it takes to prepare such a case.</p></div></li>
-      <li><div class="t">15:35<small>5 min</small></div><div><h3>Engineering insights</h3><p>The checks that separate a plausible result from a correct one.</p></div></li>
-      <li class="qa"><div class="t">15:40<small>5 min</small></div><div><h3>Live Q&amp;A</h3><p>Bring your own case.</p></div></li>
+      <li><div class="t">15:35<small>5 min</small></div><div><h3>Checks on the results</h3><p>How the pipeline rejects a bad field before it reaches a report.</p></div></li>
+      <li class="qa"><div class="t">15:40<small>5 min</small></div><div><h3>Live Q&amp;A</h3><p>Questions on your own cases.</p></div></li>
     </ol>
     <div class="side">
       <figure class="shot">
@@ -291,26 +291,6 @@ body{margin:0}
       </figure>
     </div>
   </div>
-</div></section>
-
-<section class="sec" id="insights"><div class="wrap">
-  <span class="eyebrow">Engineering insights</span>
-  <h2>Three numbers from the gearbox report</h2>
-  <div class="stats">
-    <div class="stat"><b>2.1×</b><h3>ISO over-predicts the churning loss</h3><p>118 W by ISO/TR 14179-2 against 55 W simulated. ISO has no term for gears fed by thrown oil, which is most of this box.</p></div>
-    <div class="stat"><b>3–6×</b><h3>Gears cool harder than the housing</h3><p>Mean HTC 214 W/m²K on a gear against 36 on the housing. Relative velocity drives it, not how wet the surface is.</p></div>
-    <div class="stat"><b>0</b><h3>HTC in an adiabatic run</h3><p>Zero non-zero values over 670,920 triangles. The thermal map needed a real re-run, not a post-process.</p></div>
-  </div>
-  <p class="note">Demonstration gearbox, Particleworks 8.2, 375 k particles, 2 s run. No customer data.</p>
-</div></section>
-
-<section class="reg"><div class="wrap">
-  <div>
-    <span class="kick"><i></i>Free · live online</span>
-    <h2>Thu 26 November, 15:00 CET. Bring a case.</h2>
-    <p>45 minutes, presented by Michele Merelli, Particleworks Europe / EnginSoft. To attend you only need a browser. To reproduce the workflow on your own machine afterwards, a local install of an AI tool (Claude Code Desktop, Codex) is required. Prefer e-mail? <a href="mailto:info@particleworks-europe.com" style="color:#7fd0ff;font-weight:600">info@particleworks-europe.com</a></p>
-  </div>
-  <div class="cta" style="margin:0;justify-content:flex-end"><a class="ev-btn btn-p" href="#register">Save my seat</a></div>
 </div></section>
 
 <section class="next"><div class="wrap">

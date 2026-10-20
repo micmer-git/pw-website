@@ -136,8 +136,7 @@
           <h4>CHT Analysis of a Reciprocating Pump</h4>
           <p>Thermal analysis of a reciprocating pump operating at a fixed working point. The objective is to identify potential hot spots within the system and to verify that the resulting thermal levels remain within acceptable limits for the piston seals.</p><p>The first phase consists of an isothermal sloshing analysis of the oil inside the pump housing, used to compute the heat transfer coefficient (HTC) distribution on the internal walls — subsequently applied as a boundary condition in the second phase. The second phase is a steady-state conjugate heat transfer (CHT) analysis: frictional losses from the dynamic analysis of the crank mechanism are applied to the relevant contact regions as heat sources, and heat transfer is evaluated between the solid components, the external environment, and the prescribed HTC and temperature boundary conditions. CFD results are compared and validated against experimental thermocouple measurements.</p>
         </div>
-        <div class="col-lg-4">
-          <div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/qVtrBzDs-co" title="R&D CFD presentation" loading="lazy" allowfullscreen></iframe></div>
+        <div class="col-lg-4"><div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/qVtrBzDs-co" title="R&D CFD presentation" loading="lazy" allowfullscreen></iframe></div>
         </div>
       </div>
       <!-- HES-SO -->
@@ -151,8 +150,7 @@
           <h4>Moving Particle Simulation of Eroded Pelton Runners</h4>
           <p>Hydropower is essential for grid stability but faces growing challenges from increased sediment transport driven by climate change, which induces erosion affecting turbine efficiency, wear, and maintenance costs. Pelton turbines are particularly vulnerable, with nozzle tips and runner buckets suffering erosion-related efficiency losses. Predicting such losses with traditional CFD is difficult due to complex free-surface, high-velocity flows and rotating components.</p><p>Meshless methods, especially Moving Particle Simulation (MPS), offer promising alternatives enhanced by GPU computing. This study uses scans of real erosion geometries from runners at different life stages (new, mid-life, end-of-life). Simulations at best efficiency conditions with a single jet configuration show torque drops of <strong>6%</strong> and <strong>6.6%</strong> for mid-life and end-of-life runners. The findings confirm the capability of MPS to accurately capture performance losses due to realistic erosion patterns. Future work will focus on experimental validation and scaling the methodology to larger Pelton turbines.</p>
         </div>
-        <div class="col-lg-4">
-          <div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/lef8A75FZ5k" title="HES-SO presentation" loading="lazy" allowfullscreen></iframe></div>
+        <div class="col-lg-4"><div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/lef8A75FZ5k" title="HES-SO presentation" loading="lazy" allowfullscreen></iframe></div>
         </div>
       </div>
       <!-- SKF -->
@@ -166,8 +164,7 @@
           <h4>Integrating Particleworks into SKF Engineering Tools: Part I</h4>
           <p>The calculation of the heat transfer coefficient (HTC) in Particleworks provides a new way of quickly estimating convective HTCs on bearing components. These HTCs are coupled with SKF internal tools such as <strong>BEAST</strong> to calculate bearing temperatures, enhancing the accuracy and robustness of bearing thermal analysis.</p><p>This work presents a detailed evaluation of Particleworks' capability to predict HTCs under flow conditions relevant to rolling-element bearings. Simplified benchmark cases were considered, including heat transfer on a sphere in a uniform flow and between rotating concentric cylinders (Taylor vortices). Particleworks results are compared with well-established HTC correlations from the literature as well as solutions from ANSYS Fluent. The findings contribute to SKF's ongoing efforts to improve the thermal modelling capabilities of rolling bearings.</p>
         </div>
-        <div class="col-lg-4">
-          <div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/7ITTalQNChs" title="SKF presentation" loading="lazy" allowfullscreen></iframe></div>
+        <div class="col-lg-4"><div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/7ITTalQNChs" title="SKF presentation" loading="lazy" allowfullscreen></iframe></div>
         </div>
       </div>
       <!-- deepfluid -->
@@ -181,8 +178,21 @@
           <h4>Direct Optical Air-in-Oil Measurement as an Enabler for Accurate Simulation of Gearings and Hydraulic Systems</h4>
           <p>Air entrainment in oils is a critical factor influencing the efficiency, reliability and lifetime of gearings and hydraulic systems. This contribution presents a direct air-in-oil measurement approach based on optical machine vision, enabling the direct detection and quantification of air bubbles in lubricants and hydraulic fluids. A central objective is to generate reliable measurement data that can be transferred from laboratory investigations to field applications — providing the physical input needed to describe real air-in-oil behavior in simulations more accurately.</p><p>By connecting direct optical measurements with simulation models, uncertainties in assumptions and boundary conditions can be reduced, improving the prediction of system behavior under aerated oil conditions. The availability of validated measurement data can also reduce the number of required simulation and design-iteration steps, making development faster while supporting optimized efficiency and reliability. Overall, the approach highlights how direct air-in-oil measurement can serve as an enabler for accurate simulation, condition monitoring and system optimization.</p>
         </div>
-        <div class="col-lg-4">
-          <div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/Ip6wCIB_bSM" title="deepfluid presentation" loading="lazy" allowfullscreen></iframe></div>
+        <div class="col-lg-4"><div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/Ip6wCIB_bSM" title="deepfluid presentation" loading="lazy" allowfullscreen></iframe></div>
+        </div>
+      </div>
+      <!-- Univance -->
+      <div class="row bg-light p-3 align-items-start">
+        <div class="col-lg-3 col-md-4 text-center">
+          <img alt="Naohiro Fujita" class="rounded-circle border border-5 img-fluid mb-3" src="speakers/naohiro-fujita.jpg" />
+          <p><a href="/experience/2026/proceedings/09.UNIVANCE-NAOHIRO-FUJITA.pdf" target="_blank" rel="noopener" class="btn btn-primary"><i class="bi bi-file-earmark-pdf me-2"></i>Download presentation</a></p>
+        </div>
+        <div class="col-lg-5 col-md-8">
+          <h5>Univance Corporation | Naohiro Fujita</h5>
+          <h4>Application of Particleworks to Gear Lubrication Analysis and Its Expansion to R&amp;D on Airflow Effects</h4>
+          <p>Gear lubrication in gearboxes is a critical design aspect; however, the oil behavior involving splashing and churning is highly complex, making it difficult to evaluate in the early design stage using conventional analytical approaches or CFD.</p><p>Particleworks is well suited for simulating free-surface flows and can effectively handle the oil churning behavior caused by gears. Taking advantage of this capability, it has been applied to lubrication studies in the early design phase. As a result, visualization of lubrication conditions and comparison between design options have become possible, contributing to improved evaluation efficiency.</p><p>In parallel with these applications, the effects of airflow on gear lubrication are being investigated as part of ongoing R&amp;D activities. In this presentation, the details of these efforts will be introduced.</p>
+        </div>
+        <div class="col-lg-4"><p class="small text-muted">Slides only: no recording of this talk.</p>
         </div>
       </div>
       <!-- TrackOne -->
@@ -196,8 +206,7 @@
           <h4>Study of the Lubrication on Carrier Roller using a CFD 3D-MPS Method</h4>
           <p>In the context of undercarriage systems engineering, the continuous increase in operational speeds and applied loads requires increasingly advanced design strategies to ensure maximum component reliability and operator safety. One of the most critical components is the track/carrier roller, which is subjected not only to severe mechanical wear but also to overheating induced by internal friction and interaction with adjacent components.</p><p>This study presents an analysis model to evaluate the lubrication of a carrier roller, investigating both fluid-dynamic and thermal aspects. Field operating conditions were considered and replicated within the model to analyze the lubricant's behavior inside the roller layout. The model was validated through bench testing, where roller temperatures were monitored up to thermal convergence; a comparison between these experimental measurements and the proposed CFD model results showed good correlation.</p>
         </div>
-        <div class="col-lg-4">
-          <div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/uFIH9fnBhh4" title="TrackOne presentation" loading="lazy" allowfullscreen></iframe></div>
+        <div class="col-lg-4"><div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/uFIH9fnBhh4" title="TrackOne presentation" loading="lazy" allowfullscreen></iframe></div>
         </div>
       </div>
       <!-- Börger -->
@@ -211,8 +220,7 @@
           <h4>Simulation of Sand Separation and Wear in the Börger FlowSep</h4>
           <p>The Börger FlowSep is a compact separation unit that removes abrasive sand and grit from process fluids using centrifugal force, protecting downstream pumps and equipment from premature wear. This study applies Particleworks to simulate the separation process — resolving how sand particles are driven out of the fluid stream inside the unit.</p><p>Beyond separation efficiency, the simulation is used to anticipate where abrasive wear is likely to concentrate on the wetted surfaces, so that geometry and material choices can be optimised for a longer service life. Coupling the particle-laden flow with the expected wear patterns gives Börger's engineers a predictive view of both performance and durability ahead of physical prototyping.</p>
         </div>
-        <div class="col-lg-4">
-          <div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/X9gMb70HHJ8" title="Börger presentation" loading="lazy" allowfullscreen></iframe></div>
+        <div class="col-lg-4"><div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/X9gMb70HHJ8" title="Börger presentation" loading="lazy" allowfullscreen></iframe></div>
         </div>
       </div>
     <p class="text-center mt-4"><a href="../blog/pw-experience-2026.php">Read the story of the day</a> · <a href="proceedings2025.php">Proceedings 2025</a> · <a href="proceedings2024.php">Proceedings 2024</a></p>

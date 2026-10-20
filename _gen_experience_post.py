@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Post-event Experience microsite: landing page that unlocks the proceedings, Program and Registration retired
+"""Post-event Experience microsite: landing page that leads to the proceedings form, Program and Registration retired
 (redirect stubs), Technical Session page kept but without registration CTAs. Run after _gen_proceedings2026.py's inputs are in place:
     python _gen_experience_post.py && python _gen_proceedings2026.py
 Sources frozen on first run (so the originals survive being replaced): _templates/experience-registration.html (head/css/nav/footer
@@ -61,7 +61,7 @@ if 'post-event' not in old:
         <span class="m"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena · Italy</span>
       </div>
       <div class="hero-cta">
-        <a href="proceedings2026.php" class="btn-pw"><i class="bi bi-unlock"></i> Unlock the proceedings</a>
+        <a href="proceedings2026.php" class="btn-pw"><i class="bi bi-unlock"></i> Get the proceedings</a>
         <a href="../blog/pw-experience-2026.php" class="btn-ghost"><i class="bi bi-journal-text"></i> Read the story of the day</a>
       </div>
     </div>
@@ -82,12 +82,12 @@ if 'post-event' not in old:
     <div class="container">
       <div class="sec-head">
         <div class="kick">The talks</div>
-        <h2>Six talks, ready to watch</h2>
-        <p>Abstracts are open. Slides, recordings and key findings unlock with a short form.</p>
+        <h2>Six talks with slides and recordings</h2>
+        <p>Abstracts of all eleven talks are open. Slides, recordings and key findings open after a short form. The Univance talk is available as slides only.</p>
       </div>
       <div class="row g-3 justify-content-center">{cards}
         <div class="col-md-6 col-lg-5 d-flex">
-          <a href="proceedings2026.php" class="btn-pw w-100 justify-content-center align-self-stretch" style="border-radius:16px;"><i class="bi bi-unlock"></i> Open the proceedings</a>
+          <a href="proceedings2026.php" class="btn-pw w-100 justify-content-center align-self-stretch" style="border-radius:16px;"><i class="bi bi-file-earmark-text"></i> Fill in the form</a>
         </div>
       </div>
     </div>
@@ -111,10 +111,10 @@ if 'post-event' not in old:
 
   <section class="cta-final" id="proceedings">
     <div class="container text-center">
-      <h2>Take the Modena talks home</h2>
-      <p>Leave your details once and the whole collection opens. Earlier editions stay online too.</p>
+      <h2>Get the slides and recordings</h2>
+      <p>One short form gives access to every released talk. This browser keeps the access for 7 days. Earlier editions stay online.</p>
       <div class="hero-cta justify-content-center">
-        <a href="proceedings2026.php" class="btn-pw"><i class="bi bi-unlock"></i> Unlock the proceedings</a>
+        <a href="proceedings2026.php" class="btn-pw"><i class="bi bi-unlock"></i> Get the proceedings</a>
         <a href="https://particleworks-europe.com/experience/proceedings2025.php" class="btn-ghost"><i class="bi bi-calendar3"></i> Proceedings 2025</a>
       </div>
     </div>
