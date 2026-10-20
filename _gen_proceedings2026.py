@@ -160,7 +160,7 @@ if ($cfg) {
 header('X-Robots-Tag: noindex, nofollow'); header('Cache-Control: private, no-cache');
 // talks with a publish_from date stay hidden until that day (server date)
 $talks = [];
-if ($cfg) foreach ($cfg['talks'] as $t) { if (empty($t['publish_from']) || date('Y-m-d') >= $t['publish_from']) $talks[] = $t; }
+if ($cfg) foreach ($cfg['talks'] as $t) $talks[] = $t;   // every talk is listed; later / unavailable ones show the abstract and a status
 ?>
 '''
 
@@ -242,8 +242,8 @@ content = r'''
       <?php endif; ?>
 
       <h2 class="pr-h2">Talks</h2>
-      <p class="pr-sub">Slides of the presentations released by their speakers.</p>
-      <?php foreach ($talks as $t): ?>
+      <p class="pr-sub">All eleven talks, in programme order. Where slides or a recording cannot be shared, the card says so.</p>
+      <?php foreach ($talks as $t): $later = !empty($t['publish_from']) && date('Y-m-d') < $t['publish_from']; $na = !empty($t['unavailable']); $bare = $later || $na; ?>
       <article class="talk" id="talk-<?= e($t['id']) ?>">
         <div class="talk-top">
           <?php if (!empty($t['photo'])): ?><img src="speakers/<?= e($t['photo']) ?>" alt="<?= e($t['speaker']) ?>"><?php endif; ?>
@@ -255,7 +255,7 @@ content = r'''
         </div>
         <div class="talk-body">
           <div class="talk-find">
-            <?php if (!empty($t['findings'])): ?>
+            <?php if (!$bare && !empty($t['findings'])): ?>
             <h4>Key findings</h4>
             <ul><?php foreach ($t['findings'] as $f): ?><li><?= e($f) ?></li><?php endforeach; ?></ul>
             <?php else: ?>
@@ -265,7 +265,7 @@ content = r'''
           </div>
           <div class="talk-media">
             <?php $pdfok = !empty($t['pdf']) && is_file(__DIR__ . '/proceedings2026-files/' . basename($t['pdf'])); ?>
-            <?php if (!empty($t['no_video'])): ?>
+            <?php if ($bare || !empty($t['no_video'])): ?>
             <?php elseif (!empty($t['video_file'])): ?>
             <div class="vid"><video controls preload="metadata" src="<?= e($t['video_file']) ?>" data-vid="<?= e($t['id']) ?>"></video></div>
             <?php elseif (!empty($t['youtube'])): ?>
@@ -273,13 +273,17 @@ content = r'''
             <?php else: ?>
             <div class="vid soon"><i class="bi bi-camera-video"></i> Recording coming soon</div>
             <?php endif; ?>
-            <?php if (!empty($t['moments']) && (!empty($t['youtube']) || !empty($t['video_file']))): ?>
+            <?php if (!$bare && !empty($t['moments']) && (!empty($t['youtube']) || !empty($t['video_file']))): ?>
             <div class="moments"><span>Jump to</span>
               <?php foreach ($t['moments'] as $m): ?><button type="button" data-seek="<?= e($t['id']) ?>" data-t="<?= (int)$m[0] ?>"><i class="bi bi-play-fill"></i><?= sprintf('%d:%02d', intdiv($m[0], 60), $m[0] % 60) ?> <?= e($m[1]) ?></button><?php endforeach; ?>
             </div>
             <?php endif; ?>
             <div class="d-flex flex-wrap align-items-center gap-3">
-              <?php if ($pdfok): ?>
+              <?php if ($later): ?>
+              <span class="btn-soft"><i class="bi bi-calendar-event"></i> Slides and recording: <?= e(date('F Y', strtotime($t['publish_from']))) ?></span>
+              <?php elseif ($na): ?>
+              <span class="btn-soft"><i class="bi bi-slash-circle"></i> Slides and recording are not available for sharing.</span>
+              <?php elseif ($pdfok): ?>
               <a class="btn-red" href="proceedings2026.php?dl=<?= e($t['id']) ?>"><i class="bi bi-download"></i> Slides (PDF)</a>
               <?php else: ?>
               <span class="btn-soft"><i class="bi bi-envelope"></i> Slides on request: <a href="mailto:info@particleworks-europe.com?subject=Proceedings%202026%20-%20<?= rawurlencode($t['org']) ?>">info@particleworks-europe.com</a></span>
@@ -290,7 +294,7 @@ content = r'''
       </article>
       <?php endforeach; ?>
 
-      <p class="pr-sub mt-2"><i class="bi bi-info-circle"></i> The speaker of the shot-peening talk did not release the slides. The keynote, the Univance and the IAV talks are slides only, without a recording. Michelangelo Raimondo's talk follows in January 2027. Your access stays active in this browser for 7 days.</p>
+      <p class="pr-sub mt-2"><i class="bi bi-info-circle"></i> The keynote, the IAV and the Univance talks are slides only, without a recording. Your access stays active in this browser for 7 days.</p>
       <?php if (!empty($cfg['blog_url'])): ?>
       <a class="blog-card" href="<?= e($cfg['blog_url']) ?>"><i class="bi bi-journal-text"></i><div><b>Read the story of the day</b><span>Quotes, slides and the moments to watch: what Modena taught us about heat, air and wear.</span></div></a>
       <?php endif; ?>
