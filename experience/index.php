@@ -168,7 +168,7 @@
         <span class="m"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena · Italy</span>
       </div>
       <div class="hero-cta">
-        <a href="proceedings2026.php" class="btn-pw"><i class="bi bi-unlock"></i> Unlock the proceedings</a>
+        <a href="proceedings2026.php" class="btn-pw"><i class="bi bi-unlock"></i> Get the proceedings</a>
         <a href="../blog/pw-experience-2026.php" class="btn-ghost"><i class="bi bi-journal-text"></i> Read the story of the day</a>
       </div>
     </div>
@@ -189,8 +189,8 @@
     <div class="container">
       <div class="sec-head">
         <div class="kick">The talks</div>
-        <h2>Six talks, ready to watch</h2>
-        <p>Abstracts are open. Slides, recordings and key findings unlock with a short form.</p>
+        <h2>Six talks with slides and recordings</h2>
+        <p>Abstracts of all eleven talks are open. Slides, recordings and key findings open after a short form. The Univance talk is available as slides only.</p>
       </div>
       <div class="row g-3 justify-content-center"><div class="col-md-6 col-lg-5"><a href="proceedings2026.php#talks" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-thermometer-half"></i></div>
@@ -212,7 +212,7 @@
             <div><span class="tag">Wear</span><h4>Simulation of Sand Separation and Wear in the Börger FlowSep</h4><div class="org">Börger GmbH (DE) – EnginSoft SpA (IT) 🇩🇪</div></div>
           </div></a></div>
         <div class="col-md-6 col-lg-5 d-flex">
-          <a href="proceedings2026.php" class="btn-pw w-100 justify-content-center align-self-stretch" style="border-radius:16px;"><i class="bi bi-unlock"></i> Open the proceedings</a>
+          <a href="proceedings2026.php" class="btn-pw w-100 justify-content-center align-self-stretch" style="border-radius:16px;"><i class="bi bi-file-earmark-text"></i> Fill in the form</a>
         </div>
       </div>
     </div>
@@ -236,10 +236,10 @@
 
   <section class="cta-final" id="proceedings">
     <div class="container text-center">
-      <h2>Take the Modena talks home</h2>
-      <p>Leave your details once and the whole collection opens. Earlier editions stay online too.</p>
+      <h2>Get the slides and recordings</h2>
+      <p>One short form gives access to every released talk. This browser keeps the access for 7 days. Earlier editions stay online.</p>
       <div class="hero-cta justify-content-center">
-        <a href="proceedings2026.php" class="btn-pw"><i class="bi bi-unlock"></i> Unlock the proceedings</a>
+        <a href="proceedings2026.php" class="btn-pw"><i class="bi bi-unlock"></i> Get the proceedings</a>
         <a href="https://particleworks-europe.com/experience/proceedings2025.php" class="btn-ghost"><i class="bi bi-calendar3"></i> Proceedings 2025</a>
       </div>
     </div>

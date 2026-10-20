@@ -7,6 +7,7 @@ import re, json, pathlib, sys
 root = pathlib.Path(__file__).parent
 sys.path.insert(0, str(root))
 from _pwexp26_content import TALKS
+TALKS['09'] = dict(short_org='Univance', org='Univance Corporation (JP)', speaker='Naohiro Fujita', photo=('naohiro-fujita.jpg', 'Naohiro Fujita'), title='Application of Particleworks to Gear Lubrication Analysis and Its Expansion to R&amp;D on Airflow Effects', pdf='09.UNIVANCE-NAOHIRO-FUJITA.pdf')
 from _experience_chrome import fix_nav, fix_footer
 
 YT = {'04': 'qVtrBzDs-co', '05': 'lef8A75FZ5k', '06': '7ITTalQNChs', '07': 'Ip6wCIB_bSM', '10': 'uFIH9fnBhh4', '11': 'X9gMb70HHJ8'}
@@ -31,7 +32,10 @@ css = '''
     .dwl-list .btn-primary { background:#c01f24; border-color:#c01f24; border-radius:50px; font-weight:600; font-size:0.9rem; }
     .dwl-list .ratio iframe { border:0; border-radius:12px; }
 '''
-order = ['04', '05', '06', '07', '10', '11']
+def video(k, d):
+    if k not in YT: return '<p class="small text-muted">Slides only: no recording of this talk.</p>'
+    return f'<div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/{YT[k]}" title="{d["short_org"]} presentation" loading="lazy" allowfullscreen></iframe></div>'
+order = ['04', '05', '06', '07', '09', '10', '11']
 blocks = ''
 for k in order:
     d = TALKS[k]
@@ -49,8 +53,7 @@ for k in order:
           <h4>{d["title"].replace("&", "&amp;") if "&amp;" not in d["title"] else d["title"]}</h4>
           {AB.get(k, "")}
         </div>
-        <div class="col-lg-4">
-          <div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/{YT[k]}" title="{d["short_org"]} presentation" loading="lazy" allowfullscreen></iframe></div>
+        <div class="col-lg-4">{video(k, d)}
         </div>
       </div>'''
 body = f'''

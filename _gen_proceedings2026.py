@@ -88,18 +88,20 @@ import json as _json
 _AB = _json.loads((root / '_pwexp26_abstracts.json').read_text(encoding='utf8'))
 def _abstract(key):
     return _AB.get(key, '')
-_KEY = {k: k for k in ['04', '05', '06', '07', '10', '11']}
+from _pwexp26_programme import PROGRAMME, STATUS
 _cards = ''
-for _id in ['04', '05', '06', '07', '10', '11']:   # programme order
-    d = _T[_id]
-    _cards += (f'<div class="open-talk"><img src="speakers/{d["photo"][0]}" alt="{d["photo"][1]}">'
-               f'<div><div class="ot-who">{d["org"].split(" (")[0]} | {d["speaker"]}</div><h3>{d["title"]}</h3>{_abstract(_KEY[_id])}'
-               f'</div></div>')
+for _id, _photo, _title, _spk, _org, _st, _when in PROGRAMME:
+    if _photo is None:
+        d = _T[_id]; _photo = 'speakers/' + d['photo'][0]; _title = d['title']; _spk = d['speaker']; _org = d['org'].split(' (')[0]
+    _label = STATUS[_st] + _when
+    _cards += (f'<div class="open-talk"><img src="{_photo}" alt="{_spk}">'
+               f'<div><div class="ot-who">{_org} | {_spk}</div><h3>{_title}</h3>{_abstract(_id)}'
+               f'<span class="ot-st ot-{_st}">{_label}</span></div></div>')
 open_section = ('''
   <section class="pr-section pr-open" id="talks">
     <div class="container">
       <h2 class="pr-h2">The talks</h2>
-      <p class="pr-sub">What was presented in Modena on October 7, 2026. Slides, recordings and the key findings of every released talk open with the form above.</p>
+      <p class="pr-sub">The eleven talks of October 7, 2026. Slides, recordings and key findings of the released talks open after the form above.</p>
       ''' + _cards + '''
       <a class="blog-card" href="../blog/pw-experience-2026.php"><i class="bi bi-journal-text"></i><div><b>Read the story of the day</b><span>What Modena taught us about heat, air and wear: quotes, slides and the moments to watch.</span></div></a>
       <p class="pr-sub mt-4 mb-0"><i class="bi bi-clock-history"></i> Earlier editions: <a href="proceedings2025.php">Proceedings 2025</a> · <a href="proceedings2024.php">Proceedings 2024</a></p>
@@ -111,6 +113,9 @@ css += '''
     .ot-who { font-size:0.8rem; font-weight:700; letter-spacing:0.4px; text-transform:uppercase; color:var(--pw-gray); }
     .open-talk h3 { font-size:1.08rem; font-weight:800; color:var(--ev-crimson); margin:0.2rem 0 0.5rem; line-height:1.3; }
     .open-talk p { font-size:0.9rem; line-height:1.6; margin:0 0 0.45rem; color:#334; }
+    .ot-st { display:inline-block; font-size:0.72rem; font-weight:800; letter-spacing:0.8px; text-transform:uppercase; padding:0.25rem 0.7rem; border-radius:50px; margin-top:0.2rem; background:#fdeeec; color:var(--ev-crimson); }
+    .ot-none { background:#eee; color:#666; }
+    .ot-later { background:#fff2dc; color:#a3600b; }
     .open-talk .ot-hook { background:#f3faf6; border-left:3px solid #25a361; padding:0.5rem 0.8rem; border-radius:0 8px 8px 0; }
     .open-talk .ot-hook i { color:#25a361; }
     @media(max-width:600px){ .open-talk { flex-direction:column; } }
@@ -134,7 +139,7 @@ if ($cfg) {
             echo '<!doctype html><meta charset="utf-8"><title>Thank you</title><script>try{top.location.replace(' . json_encode($u) . ')}catch(x){location.replace(' . json_encode($u) . ')}</script><p style="font-family:sans-serif">Thank you! <a href="' . e($u) . '" target="_top">Open the proceedings</a></p>';
             exit;
         }
-        setcookie($COOKIE, $good, ['expires' => time() + 60 * 60 * 24 * 90, 'path' => '/', 'secure' => $secure, 'httponly' => true, 'samesite' => 'Lax']);
+        setcookie($COOKIE, $good, ['expires' => time() + 60 * 60 * 24 * 7, 'path' => '/', 'secure' => $secure, 'httponly' => true, 'samesite' => 'Lax']);
         header('Location: proceedings2026.php'); exit;
     }
     $authed = isset($_COOKIE[$COOKIE]) && hash_equals($good, (string)$_COOKIE[$COOKIE]);
@@ -165,7 +170,7 @@ hero_gate = r'''
     <div class="container">
       <div class="pr-eyebrow"><i class="bi bi-lock"></i> Proceedings 2026</div>
       <h1>Take the <span class="accent">Modena</span> talks home.</h1>
-      <p class="lead">Slides and key findings of Particleworks Experience 2026 — every talk the speakers released for sharing. Leave your details once and the whole collection opens.</p>
+      <p class="lead">Slides and key findings of Particleworks Experience 2026 — every talk the speakers released for sharing. Fill in the form once; this browser keeps your access for 7 days.</p>
       <div class="pr-facts">
         <span class="pr-fact"><i class="bi bi-calendar-event"></i> October 7, 2026</span>
         <span class="pr-fact"><i class="bi bi-geo-alt"></i> BPER FORUM Monzani, Modena (IT)</span>
@@ -180,7 +185,7 @@ hero_gate = r'''
           <div class="reg-card">
             <div class="reg-card-head">
               <div class="ic"><i class="bi bi-unlock"></i></div>
-              <div><h2>Unlock the proceedings</h2><p>Fill in your details — you'll land on the proceedings straight after.</p></div>
+              <div><h2>Get the proceedings</h2><p>Fill in your details — you'll land on the proceedings straight after.</p></div>
             </div>
             <?php if ($cfg && !empty($cfg['machform_url'])): ?>
             <div class="reg-embed-wrap">
@@ -250,12 +255,18 @@ content = r'''
         </div>
         <div class="talk-body">
           <div class="talk-find">
+            <?php if (!empty($t['findings'])): ?>
             <h4>Key findings</h4>
             <ul><?php foreach ($t['findings'] as $f): ?><li><?= e($f) ?></li><?php endforeach; ?></ul>
+            <?php else: ?>
+            <h4>About the talk</h4>
+            <?php foreach ((array)($t['abstract'] ?? []) as $p): ?><p style="font-size:0.93rem;line-height:1.6;color:#334"><?= e($p) ?></p><?php endforeach; ?>
+            <?php endif; ?>
           </div>
           <div class="talk-media">
             <?php $pdfok = !empty($t['pdf']) && is_file(__DIR__ . '/proceedings2026-files/' . basename($t['pdf'])); ?>
-            <?php if (!empty($t['video_file'])): ?>
+            <?php if (!empty($t['no_video'])): ?>
+            <?php elseif (!empty($t['video_file'])): ?>
             <div class="vid"><video controls preload="metadata" src="<?= e($t['video_file']) ?>" data-vid="<?= e($t['id']) ?>"></video></div>
             <?php elseif (!empty($t['youtube'])): ?>
             <div class="vid"><button type="button" aria-label="Play the recording" style="background-image:url(https://i.ytimg.com/vi/<?= e($t['youtube']) ?>/hqdefault.jpg)" data-yt="<?= e($t['youtube']) ?>" data-vid="<?= e($t['id']) ?>"></button></div>
@@ -279,6 +290,7 @@ content = r'''
       </article>
       <?php endforeach; ?>
 
+      <p class="pr-sub mt-2"><i class="bi bi-info-circle"></i> The speakers of the keynote, the shot-peening talk and the air-bubble talk did not release their slides. Michelangelo Raimondo's talk follows in January 2027. Your access stays active in this browser for 7 days.</p>
       <?php if (!empty($cfg['blog_url'])): ?>
       <a class="blog-card" href="<?= e($cfg['blog_url']) ?>"><i class="bi bi-journal-text"></i><div><b>Read the story of the day</b><span>Quotes, slides and the moments to watch: what Modena taught us about heat, air and wear.</span></div></a>
       <?php endif; ?>
