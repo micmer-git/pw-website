@@ -7,6 +7,8 @@ import re, json, pathlib, sys
 root = pathlib.Path(__file__).parent
 sys.path.insert(0, str(root))
 from _pwexp26_content import TALKS
+TALKS['01'] = dict(short_org='Prometech', org='Prometech Software (JP)', speaker='Issei Masaie & Iori Saigo', photo=('iori-saigo.jpg', 'Iori Saigo'), title='Particleworks 9.0 &amp; Granuleworks 4.0', pdf='01.PROMETECH-Pw900_Gw400_NewFeatures.pdf')
+TALKS['08'] = dict(short_org='IAV', org='IAV GmbH (DE)', speaker='René Kockisch', photo=('rene-kockisch.jpg', 'René Kockisch'), title='From Formation to Dissolution: Air Bubble Dynamics in Gear Oil of an Electric 3-Speed Commercial Vehicle Drivetrain', pdf='08.IAV-RENE-KOCKISCH_Air_Bubble_Dynamics.pdf')
 TALKS['09'] = dict(short_org='Univance', org='Univance Corporation (JP)', speaker='Naohiro Fujita', photo=('naohiro-fujita.jpg', 'Naohiro Fujita'), title='Application of Particleworks to Gear Lubrication Analysis and Its Expansion to R&amp;D on Airflow Effects', pdf='09.UNIVANCE-NAOHIRO-FUJITA.pdf')
 from _experience_chrome import fix_nav, fix_footer
 
@@ -35,7 +37,7 @@ css = '''
 def video(k, d):
     if k not in YT: return '<p class="small text-muted">Slides only: no recording of this talk.</p>'
     return f'<div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/{YT[k]}" title="{d["short_org"]} presentation" loading="lazy" allowfullscreen></iframe></div>'
-order = ['04', '05', '06', '07', '09', '10', '11']
+order = ['01', '04', '05', '06', '07', '08', '09', '10', '11']
 blocks = ''
 for k in order:
     d = TALKS[k]

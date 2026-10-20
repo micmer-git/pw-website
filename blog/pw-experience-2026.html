@@ -503,7 +503,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="col-lg-9 col-xl-8">
           <article class="article-content">
 
-            <p class="standfirst">On October 7 the BPER FORUM Monzani in Modena hosted the Particleworks Experience. Six released talks asked three questions: where does the heat go, where does the air go, and where does the material wear?</p>
+            <p class="standfirst">On October 7 the BPER FORUM Monzani in Modena hosted the Particleworks Experience. Six talks with recordings asked three questions: where does the heat go, where does the air go, and where does the material wear?</p>
 
             <p>The speakers came from a bearing maker, a pump manufacturer, a hydropower research project and several engineering firms. Each put the simulation next to a thermocouple, an optical sensor or a worn prototype, and stated the gap. Every “Watch this moment” link plays the recording at that second in a floating player. The full slides are on the <a href="../experience/proceedings2026.php">proceedings page</a>.</p>
 
@@ -636,6 +636,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="pair"><figure class="slide"><img src="images/pwe2026/s11-27.jpg" alt="Simulation of Sand Separation and Wear in the Börger FlowSep — slide" loading="lazy"><figcaption>Simulation: high sand interaction at the housing near the blades and at the back plate (Börger, EnginSoft).</figcaption></figure><figure class="slide"><img src="images/pwe2026/s11-30.jpg" alt="Simulation of Sand Separation and Wear in the Börger FlowSep — slide" loading="lazy"><figcaption>The prototype housing: “the wear pattern corresponds to simulation” (Börger).</figcaption></figure></div>
             <div class="keypoints"><h5>In short</h5><ul><li>Of the sand that escapes, the small particles are the problem; the geometry can be changed to catch them.</li><li>Higher flow rate: bad separation 10 % → 25 %.</li><li>Simulated wear zones match the prototype: blades and back plate.</li></ul></div>
             <div class="moments-blog"><span class="lbl">Jump to</span><a class="yt " href="https://youtu.be/X9gMb70HHJ8?t=330" data-talk="11" data-t="330" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> 5:30 The sand problem</a><a class="yt " href="https://youtu.be/X9gMb70HHJ8?t=353" data-talk="11" data-t="353" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> 5:53 1.9 m of sand</a><a class="yt " href="https://youtu.be/X9gMb70HHJ8?t=619" data-talk="11" data-t="619" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> 10:19 How the FlowSep works</a><a class="yt " href="https://youtu.be/X9gMb70HHJ8?t=1364" data-talk="11" data-t="1364" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> 22:44 Who leaks</a><a class="yt " href="https://youtu.be/X9gMb70HHJ8?t=1495" data-talk="11" data-t="1495" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> 24:55 Higher flow rate</a><a class="yt " href="https://youtu.be/X9gMb70HHJ8?t=1544" data-talk="11" data-t="1544" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> 25:44 Faster is not better</a><a class="yt " href="https://youtu.be/X9gMb70HHJ8?t=1601" data-talk="11" data-t="1601" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> 26:41 The wear map</a><a class="yt " href="https://youtu.be/X9gMb70HHJ8?t=1661" data-talk="11" data-t="1661" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> 27:41 Prototype wear</a><a class="yt " href="https://youtu.be/X9gMb70HHJ8?t=1811" data-talk="11" data-t="1811" target="_blank" rel="noopener"><i class="bi bi-play-fill"></i> 30:11 With 9.0: wall force</a></div>
+
+            <hr class="section-rule">
+
+            <div class="sec-eyebrow">Also on the programme</div>
+            <h2>Three talks with slides only</h2>
+            <p>These speakers released their slides but not a recording, so there are no quotes here. Each is in the <a href="../experience/proceedings2026.php">proceedings</a>.</p>
+            <ul>
+              <li><strong>Prometech Software</strong> (Issei Masaie and Iori Saigo) presented the Particleworks 9.0 and Granuleworks 4.0 releases. The new features get their own article.</li>
+              <li><strong>IAV</strong> (René Kockisch) followed air bubbles in the gear oil of an electric 3-speed commercial-vehicle drivetrain: formation, transport, coalescence and dissolution, measured with the IAV Particle Explorer.</li>
+              <li><strong>Univance</strong> (Naohiro Fujita) showed gearbox lubrication studies in early design, and early R&amp;D on how airflow changes the oil distribution.</li>
+            </ul>
 
             <hr class="section-rule">
 
