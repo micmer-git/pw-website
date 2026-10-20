@@ -125,6 +125,20 @@
 
   <section class="dwl-hero"><div class="container"><h1>2026 Proceedings</h1><p>Particleworks Experience 2026 · Modena · October 7 — presentations and recordings</p></div></section>
   <section class="dwl-list"><div class="container">
+      <!-- Prometech -->
+      <div class="row bg-light p-3 align-items-start">
+        <div class="col-lg-3 col-md-4 text-center">
+          <img alt="Iori Saigo" class="rounded-circle border border-5 img-fluid mb-3" src="speakers/iori-saigo.jpg" />
+          <p><a href="/experience/2026/proceedings/01.PROMETECH-Pw900_Gw400_NewFeatures.pdf" target="_blank" rel="noopener" class="btn btn-primary"><i class="bi bi-file-earmark-pdf me-2"></i>Download presentation</a></p>
+        </div>
+        <div class="col-lg-5 col-md-8">
+          <h5>Prometech Software | Issei Masaie &amp; Iori Saigo</h5>
+          <h4>Particleworks 9.0 &amp; Granuleworks 4.0</h4>
+          <p>This presentation introduces the latest releases of <strong>Particleworks 9.0</strong> and <strong>Granuleworks 4.0</strong>. Featuring major advances in simulation performance and multi-physics capabilities, these new versions enable more accurate and efficient analysis of complex fluid dynamics.</p><p>Application examples and case studies will also be presented to demonstrate the value of the latest developments. New capabilities will be presented live at the conference, in step with the release. Join us to explore the new possibilities with Particleworks and Granuleworks.</p>
+        </div>
+        <div class="col-lg-4"><p class="small text-muted">Slides only: no recording of this talk.</p>
+        </div>
+      </div>
       <!-- R&D CFD -->
       <div class="row bg-light p-3 align-items-start">
         <div class="col-lg-3 col-md-4 text-center">
@@ -179,6 +193,20 @@
           <p>Air entrainment in oils is a critical factor influencing the efficiency, reliability and lifetime of gearings and hydraulic systems. This contribution presents a direct air-in-oil measurement approach based on optical machine vision, enabling the direct detection and quantification of air bubbles in lubricants and hydraulic fluids. A central objective is to generate reliable measurement data that can be transferred from laboratory investigations to field applications — providing the physical input needed to describe real air-in-oil behavior in simulations more accurately.</p><p>By connecting direct optical measurements with simulation models, uncertainties in assumptions and boundary conditions can be reduced, improving the prediction of system behavior under aerated oil conditions. The availability of validated measurement data can also reduce the number of required simulation and design-iteration steps, making development faster while supporting optimized efficiency and reliability. Overall, the approach highlights how direct air-in-oil measurement can serve as an enabler for accurate simulation, condition monitoring and system optimization.</p>
         </div>
         <div class="col-lg-4"><div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/Ip6wCIB_bSM" title="deepfluid presentation" loading="lazy" allowfullscreen></iframe></div>
+        </div>
+      </div>
+      <!-- IAV -->
+      <div class="row bg-light p-3 align-items-start">
+        <div class="col-lg-3 col-md-4 text-center">
+          <img alt="René Kockisch" class="rounded-circle border border-5 img-fluid mb-3" src="speakers/rene-kockisch.jpg" />
+          <p><a href="/experience/2026/proceedings/08.IAV-RENE-KOCKISCH_Air_Bubble_Dynamics.pdf" target="_blank" rel="noopener" class="btn btn-primary"><i class="bi bi-file-earmark-pdf me-2"></i>Download presentation</a></p>
+        </div>
+        <div class="col-lg-5 col-md-8">
+          <h5>IAV GmbH | René Kockisch</h5>
+          <h4>From Formation to Dissolution: Air Bubble Dynamics in Gear Oil of an Electric 3-Speed Commercial Vehicle Drivetrain</h4>
+          <p>Air entrainment in gear oils significantly affects lubrication performance, efficiency and durability in electric drivetrains. This study investigates the formation, transport, coalescence and dissolution of air bubbles in the gear oil of an electric 3-speed commercial vehicle drivetrain using the IAV Particle Explorer.</p><p>High-speed imaging and particle-based analysis enable a detailed quantification of bubble dynamics under representative operating conditions. The results reveal characteristic bubble size distributions, preferred transport paths within the transmission and dissolution behavior.</p><p>The findings provide valuable insights into air–oil interaction mechanisms and support the optimization of transmission design, lubrication systems and overall drivetrain efficiency.</p>
+        </div>
+        <div class="col-lg-4"><p class="small text-muted">Slides only: no recording of this talk.</p>
         </div>
       </div>
       <!-- Univance -->

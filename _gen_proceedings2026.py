@@ -290,7 +290,7 @@ content = r'''
       </article>
       <?php endforeach; ?>
 
-      <p class="pr-sub mt-2"><i class="bi bi-info-circle"></i> The speakers of the keynote, the shot-peening talk and the air-bubble talk did not release their slides. Michelangelo Raimondo's talk follows in January 2027. Your access stays active in this browser for 7 days.</p>
+      <p class="pr-sub mt-2"><i class="bi bi-info-circle"></i> The speaker of the shot-peening talk did not release the slides. The keynote, the Univance and the IAV talks are slides only, without a recording. Michelangelo Raimondo's talk follows in January 2027. Your access stays active in this browser for 7 days.</p>
       <?php if (!empty($cfg['blog_url'])): ?>
       <a class="blog-card" href="<?= e($cfg['blog_url']) ?>"><i class="bi bi-journal-text"></i><div><b>Read the story of the day</b><span>Quotes, slides and the moments to watch: what Modena taught us about heat, air and wear.</span></div></a>
       <?php endif; ?>

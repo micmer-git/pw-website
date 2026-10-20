@@ -322,7 +322,7 @@ BODY = '''
         <div class="col-lg-9 col-xl-8">
           <article class="article-content">
 
-            <p class="standfirst">On October 7 the BPER FORUM Monzani in Modena hosted the Particleworks Experience. Six released talks asked three questions: where does the heat go, where does the air go, and where does the material wear?</p>
+            <p class="standfirst">On October 7 the BPER FORUM Monzani in Modena hosted the Particleworks Experience. Six talks with recordings asked three questions: where does the heat go, where does the air go, and where does the material wear?</p>
 
             <p>The speakers came from a bearing maker, a pump manufacturer, a hydropower research project and several engineering firms. Each put the simulation next to a thermocouple, an optical sensor or a worn prototype, and stated the gap. Every “Watch this moment” link plays the recording at that second in a floating player. The full slides are on the <a href="../experience/proceedings2026.php">proceedings page</a>.</p>
 
@@ -330,6 +330,17 @@ BODY = '''
 
             <hr class="section-rule">
 ''' + body_talks + '''
+            <hr class="section-rule">
+
+            <div class="sec-eyebrow">Also on the programme</div>
+            <h2>Three talks with slides only</h2>
+            <p>These speakers released their slides but not a recording, so there are no quotes here. Each is in the <a href="../experience/proceedings2026.php">proceedings</a>.</p>
+            <ul>
+              <li><strong>Prometech Software</strong> (Issei Masaie and Iori Saigo) presented the Particleworks 9.0 and Granuleworks 4.0 releases. The new features get their own article.</li>
+              <li><strong>IAV</strong> (René Kockisch) followed air bubbles in the gear oil of an electric 3-speed commercial-vehicle drivetrain: formation, transport, coalescence and dissolution, measured with the IAV Particle Explorer.</li>
+              <li><strong>Univance</strong> (Naohiro Fujita) showed gearbox lubrication studies in early design, and early R&amp;D on how airflow changes the oil distribution.</li>
+            </ul>
+
             <hr class="section-rule">
 
             <div class="sec-eyebrow">From the floor</div>

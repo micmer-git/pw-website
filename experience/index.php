@@ -190,7 +190,7 @@
       <div class="sec-head">
         <div class="kick">The talks</div>
         <h2>Six talks with slides and recordings</h2>
-        <p>Abstracts of all eleven talks are open. Slides, recordings and key findings open after a short form. The Univance talk is available as slides only.</p>
+        <p>Abstracts of all eleven talks are open. Slides, recordings and key findings open after a short form. The Prometech, IAV and Univance talks are slides only.</p>
       </div>
       <div class="row g-3 justify-content-center"><div class="col-md-6 col-lg-5"><a href="proceedings2026.php#talks" class="text-decoration-none text-reset"><div class="topic">
             <div class="ic"><i class="bi bi-thermometer-half"></i></div>
