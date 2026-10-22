@@ -6,9 +6,9 @@ root = pathlib.Path(__file__).parent
 src = (root / 'blog' / 'pw-experience-2025.html').read_text(encoding='utf8')
 
 head = src[:src.index('<!-- Hero -->')]
-head = re.sub(r'<title>.*?</title>', '<title>Heat, air and wear: six talks from Particleworks Experience 2026 | Particleworks Europe</title>', head, flags=re.S)
+head = re.sub(r'<title>.*?</title>', '<title>Heat, air and wear: eight talks from Particleworks Experience 2026 | Particleworks Europe</title>', head, flags=re.S)
 head = re.sub(r'<meta name="description" content=".*?">',
-              '<meta name="description" content="Six talks from Particleworks Experience 2026 in Modena: thermal models checked against thermocouples, an aeration model calibrated on measured bubbles, and wear predicted for a Pelton runner and a sand separator. With slides, quotes and video.">', head, count=1, flags=re.S)
+              '<meta name="description" content="Eight talks from Particleworks Experience 2026 in Modena: thermal models checked against thermocouples, aeration calibrated on measured bubbles and traced to its source in a drivetrain, oil splash at 110 million particles, and wear predicted for a Pelton runner and a sand separator. With the slides and the key numbers.">', head, count=1, flags=re.S)
 CSS = '''
     /* --- PWEXP26 talk blocks --- */
     .talk-intro { display:flex; gap:1rem; align-items:center; background:linear-gradient(135deg,#fff6f3,#fdeeec); border:1px solid rgba(192,31,36,0.15); border-left:5px solid #c01f24; border-radius:14px; padding:1rem 1.2rem; margin:1.8rem 0 1.1rem; }
@@ -130,7 +130,10 @@ tail = tail.replace('''<a href="particleworks-82.html" class="related-card">
 
 import sys
 sys.path.insert(0, str(root))
-from _pwexp26_content import TALKS, ORDER, TAKEAWAYS, SKF_SPHERE, TRK_ERR, DFL_AIR, BRG_SEP
+from _pwexp26_content import TALKS, ORDER, TAKEAWAYS, SKF_SPHERE, TRK_ERR, DFL_AIR, BRG_SEP, SLIDES_ONLY
+
+SHOW_QUOTES = False          # the verbatim quotes stay in the content file for the other builders; the blog does not print them
+ALLT = {**TALKS, **SLIDES_ONLY}   # eight talks; the two from SLIDES_ONLY have no recording
 
 
 def mm(t):
@@ -141,9 +144,28 @@ def hl(x):
     return f'<mark class="hl">{x}</mark>'
 
 
+# The blog prints no verbatim quotations: short phrases woven into the prose are put into reported speech.
+UNQ = {
+    'and \u201cif not controlled, the spikes lead to component failure\u201d.': 'and spikes that are not controlled lead to component failure.',
+    'would give \u201can unrealistic and unbalanced temperature map\u201d.': 'would give an unrealistic, unbalanced temperature map.',
+    '\u201cmeasured data does not replace the simulation\u201d.': 'a measurement does not replace the simulation.',
+    'can \u201close maybe half a bucket\u201d.': 'can lose perhaps half a bucket.',
+    'takes \u201cmore than one week\u201d.': 'takes more than a week.',
+    '\u201cwe have already lost the main part of efficiency even at stage T2\u201d.': 'most of the efficiency is already gone at stage T2.',
+    '\u201cIt\u2019s better to go slower and separate better\u201d, or change the geometry': 'a slower flow separates better; the alternative is to change the geometry',
+    '\u201cthe wear pattern corresponds to simulation\u201d': 'the wear pattern corresponds to the simulation',
+}
+
+
+def unq(s):
+    for a, b in UNQ.items():
+        s = s.replace(a, b)
+    return re.sub('[\u201c\u201d]', '', s)        # whatever is left loses its marks too
+
+
 def md(t):
-    """**x** -> highlight"""
-    return re.sub(r'\*\*(.+?)\*\*', lambda m: hl(m.group(1)), t)
+    """**x** -> highlight; no quotation marks survive"""
+    return re.sub(r'\*\*(.+?)\*\*', lambda m: hl(m.group(1)), unq(t))
 
 
 YTID = {'04': 'qVtrBzDs-co', '05': 'lef8A75FZ5k', '06': '7ITTalQNChs', '07': 'Ip6wCIB_bSM', '10': 'uFIH9fnBhh4', '11': 'X9gMb70HHJ8'}
@@ -158,7 +180,7 @@ def ytlink(tid, t, inner, cls=''):
 RED, BLUE, GREEN, GREY, AMBER = '#c01f24', '#e07a3c', '#25a361', '#8a94a0', '#d98a00'
 
 
-def hbars(title, sub, items, unit, ref=None, vmax=None, colors=None):
+def hbars(title, sub, items, unit, ref=None, vmax=None, colors=None, fmt=None):
     """horizontal bars. items: (label, value, kind) kind in ref/bad/mid/good/plain"""
     vmax = vmax or max(v for _, v, *_ in items) * 1.12
     W, lw, rw, rh = 640, 300, 60, 30
@@ -171,7 +193,7 @@ def hbars(title, sub, items, unit, ref=None, vmax=None, colors=None):
         y = 10 + i * rh
         out.append(f'<text x="{lw - 8}" y="{y + 17}" text-anchor="end" class="cl">{lab}</text>')
         out.append(f'<rect x="{lw}" y="{y + 3}" width="{bw * v / vmax:.1f}" height="19" rx="4" fill="{cmap[k]}"/>')
-        out.append(f'<text x="{lw + bw * v / vmax + 6:.1f}" y="{y + 18}" class="cv">{v:g}{unit}</text>')
+        out.append(f'<text x="{lw + bw * v / vmax + 6:.1f}" y="{y + 18}" class="cv">{fmt(v) if fmt else format(v, "g")}{unit}</text>')
     if ref is not None:
         x = lw + bw * ref / vmax
         out.append(f'<line x1="{x:.1f}" y1="4" x2="{x:.1f}" y2="{H - 8}" stroke="#1a1a2e" stroke-dasharray="4 3" stroke-width="1.4"/>')
@@ -221,7 +243,20 @@ def chart_brg():
     return hbars('Sand that leaves through the clean outlet', 'Percent of the sand fed, from the simulation (Börger / EnginSoft).', [(l, v, 'good' if i == 0 else 'bad') for i, (l, v) in enumerate(BRG_SEP)], ' %', vmax=30)
 
 
-CHARTS = {'sphere': chart_sphere, 'trk': chart_trk, 'dfl': chart_dfl, 'brg': chart_brg}
+def chart_iav():
+    items = [('Target box, before', 83187, 'bad'), ('Target box, with oil guide', 31781, 'good'),
+             ('Blue source, before', 46704, 'bad'), ('Blue source, with oil guide', 0, 'good'),
+             ('Brown source, before', 2370, 'bad'), ('Brown source, with oil guide', 214, 'good'),
+             ('Green source, before', 2152, 'bad'), ('Green source, with oil guide', 275, 'good')]
+    return hbars('Air particles in the target box, by source', 'Particle counts from IAV\'s slides 19 and 20. Blue: the wall behind the intermediate shaft.', items, '', vmax=95000, fmt=lambda v: f'{v:,.0f}')
+
+
+def chart_univ():
+    items = [('Earlier chain case, 4 K40 GPUs, 30 h', 0.42, 'bad'), ('Chain case 2026, 4 Blackwell GPUs, 45 h', 110, 'good')]
+    return hbars('Particles in a Univance chain oil-splash case', 'Millions of particles (Univance, slides 9 and 10).', items, ' M', vmax=125)
+
+
+CHARTS = {'sphere': chart_sphere, 'trk': chart_trk, 'dfl': chart_dfl, 'brg': chart_brg, 'iav': chart_iav, 'univ': chart_univ}
 
 
 # ---------- blocks ----------
@@ -230,11 +265,11 @@ def label(t):
 
 
 def fig(f, cap, title):
-    return f'<figure class="slide"><img src="images/pwe2026/{f}.jpg" alt="{title} — slide" loading="lazy"><figcaption><b>Slide.</b> {cap}</figcaption></figure>'
+    return f'<figure class="slide"><img src="images/pwe2026/{f}.jpg" alt="{title} — slide" loading="lazy"><figcaption><b>Slide.</b> {unq(cap)}</figcaption></figure>'
 
 
 def figpair(items, title):
-    ims = ''.join(f'<figure class="slide"><img src="images/pwe2026/{f}.jpg" alt="{title} — slide" loading="lazy"><figcaption>{cap}</figcaption></figure>' for f, cap in items)
+    ims = ''.join(f'<figure class="slide"><img src="images/pwe2026/{f}.jpg" alt="{title} — slide" loading="lazy"><figcaption>{unq(cap)}</figcaption></figure>' for f, cap in items)
     return f'<div class="pair">{ims}</div>'
 
 
@@ -247,14 +282,15 @@ def finding(n, head, text):
 
 
 def talk(tid):
-    d = TALKS[tid]
-    parts = [f'<div class="talk-intro" id="talk-{tid}"><img src="../experience/speakers/{d["photo"][0]}" alt="{d["photo"][1]}"><div><div class="t-time">{d["tag"]} · {d["time"]}</div><h3>{d["title"]}</h3><div class="t-who">{d["who"].replace(" — ", " · ")}</div></div></div>',
+    d = ALLT[tid]
+    rec = d.get('rec', True)
+    parts = [f'<div class="talk-intro" id="talk-{tid}"><img src="../experience/speakers/{d["photo"][0]}" alt="{d["photo"][1]}"><div><div class="t-time">{d["tag"]}{" · " + d["time"] if d.get("time") else " · slides only"}</div><h3>{d["title"]}</h3><div class="t-who">{d["who"].replace(" — ", " · ")}</div></div></div>',
              f'<p class="standfirst">{md(d["lead"])}</p>',
              label('The context')]
     parts += [f'<p>{md(p)}</p>' for p in d['context']]
     parts.append(fig(*d['slideA'], d['title']))
     parts.append(label('What they found'))
-    qpos = dict(zip(d['quote_pos'], d['quotes']))
+    qpos = dict(zip(d['quote_pos'], d['quotes'])) if SHOW_QUOTES and rec else {}
     for i, (h, t) in enumerate(d['findings']):
         parts.append(finding(i + 1, h, t))
         if i in qpos:
@@ -273,8 +309,9 @@ def talk(tid):
         eqs = ''.join(f'<div class="eq"><span class="eq-l">{l}</span><span class="eq-m">{m}</span></div>' for l, m in n['eqs'])
         parts.append(f'<div class="eng-note"><div class="en-h">Engineering note</div><p>{n["text"]}</p><div class="eq-list">{eqs}</div></div>')
     parts.append(f'<div class="keypoints"><h5>In short</h5><ul>{"".join(f"<li>{md(k)}</li>" for k in d["keys"])}</ul></div>')
-    mo = ''.join(ytlink(tid, t, f'<i class="bi bi-play-fill"></i> {mm(t)} {lab}') for t, lab in d['moments'])
-    parts.append(f'<div class="moments-blog"><span class="lbl">Jump to</span>{mo}</div>')
+    if rec:
+        mo = ''.join(ytlink(tid, t, f'<i class="bi bi-play-fill"></i> {mm(t)} {lab}') for t, lab in d['moments'])
+        parts.append(f'<div class="moments-blog"><span class="lbl">Jump to</span>{mo}</div>')
     return '\n            '.join(parts)
 
 
@@ -284,33 +321,38 @@ def sec(eyebrow, h2, lead):
 
 SECT = {
     '04': sec('01 · Heat', 'Closing the thermal model', 'Two talks closed a thermal model with the same trick: oil and metal never run on the same clock. The oil is simulated briefly, its heat-transfer map goes into a steady solution of the solids, and the result is compared with measurements. The SKF talk, in between, tests the heat-transfer coefficient such models rely on.'),
-    '07': sec('02 · Air', 'Measure it before you simulate it', 'Aeration changes viscosity, density, film thickness and oxidation rate. The afternoon showed how to get a measured number for it before asking the model to predict it.'),
+    '07': sec('02 · Air', 'Measure it, trace it, see what it does', 'Aeration changes viscosity, density, film thickness and oxidation rate. Three talks looked at air from three sides: how to get a measured number before asking the model to predict it, where the air starts in a real drivetrain, and how the airflow itself shapes the oil.'),
     '05': sec('03 · Wear', 'Where it wears, and what that costs', 'Two very different machines, one question: can a particle simulation say where the hardware wears and how much performance it loses?'),
 }
 HR = '\n\n            <hr class="section-rule">\n'
 body_talks = ''
-for tid in ['04', '06', '10', '07', '05', '11']:
+ORDER_BLOG = ['04', '06', '10', '07', '08', '09', '05', '11']
+for tid in ORDER_BLOG:
     if tid in SECT:
         body_talks += HR + SECT[tid]
     body_talks += '\n            ' + talk(tid) + '\n'
 
+TAKEAWAYS_MORE = [
+    ('Trace the air to where it starts', 'IAV counted every air particle by its source in an e-drivetrain: 46,704 of the 83,187 in the target box began at one wall, and an oil guide there cut the box to 31,781.'),
+    ('Oil and air in one run', 'Univance simulated a chain at 110 million particles and a gear at 10,000 rpm with oil and air as particles, and matched the splash patterns it saw on the bench.'),
+]
 QA = [
-    ('How many manual iterations does the pump model take?', 'Three to five, and a steady CHT converges in minutes on a GPU. “Sometimes the setup is longer than the simulation itself.” (R&amp;D CFD)'),
+    ('How many manual iterations does the pump model take?', 'Three to five, and a steady CHT converges in minutes on a GPU. Once the model exists, a case takes about an hour and a half. (R&amp;D CFD)'),
     ('Does an aeration calibration transfer?', 'Across geometry yes, across speed by scaling, across additives no: the same base oil with another additive package needs a new one, and the temperature trend can flip sign. (deepfluid)'),
     ('Why start from such basic verification cases?', 'Once a bearing rotates there is no good reference model, so SKF adds complexity step by step. (SKF)'),
     ('What do owners want from a Pelton simulation?', 'What 2&nbsp;% of efficiency lost to one flood costs over a year, and when to refurbish. (HES-SO)'),
 ]
-toc = ''.join(f'<a href="#talk-{t}">{TALKS[t]["tag"]} · {TALKS[t]["short_org"]} <small>{TALKS[t]["topic"]}</small></a>' for t in ['04', '06', '10', '07', '05', '11'])
+toc = ''.join(f'<a href="#talk-{t}">{ALLT[t]["tag"]} · {ALLT[t]["short_org"]} <small>{ALLT[t]["topic"]}</small></a>' for t in ORDER_BLOG)
 BODY = '''
   <!-- Hero -->
   <section class="blog-hero">
     <div class="container">
       <div class="version-badge"><i class="bi bi-calendar-event me-1"></i> PW Experience 2026</div>
-      <h1>Heat, air and wear: six talks from Modena</h1>
-      <p class="lead">Particleworks Experience, October 7, 2026. For each talk: the context, what the speakers found, the slide that shows it and a sentence from the recording.</p>
+      <h1>Heat, air and wear: eight talks from Modena</h1>
+      <p class="lead">Particleworks Experience, October 7, 2026. For each talk: the context, what the speakers found and the slide that shows it. Where a recording exists, you can open it at the right second.</p>
       <div class="hero-meta">
         <span><i class="bi bi-calendar3"></i> October 2026</span>
-        <span><i class="bi bi-clock"></i> 18 min read</span>
+        <span><i class="bi bi-clock"></i> 22 min read</span>
         <span><i class="bi bi-tag"></i> Conference report</span>
       </div>
     </div>
@@ -322,9 +364,9 @@ BODY = '''
         <div class="col-lg-9 col-xl-8">
           <article class="article-content">
 
-            <p class="standfirst">On October 7 the BPER FORUM Monzani in Modena hosted the Particleworks Experience. Six talks with recordings asked three questions: where does the heat go, where does the air go, and where does the material wear?</p>
+            <p class="standfirst">On October 7 the BPER FORUM Monzani in Modena hosted the Particleworks Experience. Eight talks asked three questions: where does the heat go, where does the air go, and where does the material wear? Six have recordings; IAV and Univance released their slides only.</p>
 
-            <p>The speakers came from a bearing maker, a pump manufacturer, a hydropower research project and several engineering firms. Each put the simulation next to a thermocouple, an optical sensor or a worn prototype, and stated the gap. Every “Watch this moment” link plays the recording at that second in a floating player. The full slides are on the <a href="../experience/proceedings2026.php">proceedings page</a>.</p>
+            <p>The speakers came from a bearing maker, a pump manufacturer, a hydropower research project and several engineering firms. Each put the simulation next to a thermocouple, an optical sensor or a worn prototype, and stated the gap. Where a talk has a recording, the links under it play the recording at that second in a floating player. The full slides are on the <a href="../experience/proceedings2026.php">proceedings page</a>.</p>
 
             <div class="toc">''' + toc + '''</div>
 
@@ -333,12 +375,10 @@ BODY = '''
             <hr class="section-rule">
 
             <div class="sec-eyebrow">Also on the programme</div>
-            <h2>Three talks with slides only</h2>
-            <p>These speakers released their slides but not a recording, so there are no quotes here. Each is in the <a href="../experience/proceedings2026.php">proceedings</a>.</p>
+            <h2>One more talk, slides only</h2>
+            <p>Prometech Software released its slides but not a recording. They are in the <a href="../experience/proceedings2026.php">proceedings</a>.</p>
             <ul>
               <li><strong>Prometech Software</strong> (Issei Masaie and Iori Saigo) presented the Particleworks 9.0 and Granuleworks 4.0 releases. The new features get their own article.</li>
-              <li><strong>IAV</strong> (René Kockisch) followed air bubbles in the gear oil of an electric 3-speed commercial-vehicle drivetrain: formation, transport, coalescence and dissolution, measured with the IAV Particle Explorer.</li>
-              <li><strong>Univance</strong> (Naohiro Fujita) showed gearbox lubrication studies in early design, and early R&amp;D on how airflow changes the oil distribution.</li>
             </ul>
 
             <hr class="section-rule">
@@ -352,8 +392,8 @@ BODY = '''
             <div class="sec-eyebrow">Take-home</div>
             <h2>What the day showed</h2>
 
-            <div class="keypoints"><h5>Four findings</h5><ul>
-              ''' + ''.join(f'<li><strong>{h}.</strong> {t}</li>' for h, t in TAKEAWAYS) + '''
+            <div class="keypoints"><h5>Six findings</h5><ul>
+              ''' + ''.join(f'<li><strong>{h}.</strong> {t}</li>' for h, t in TAKEAWAYS + TAKEAWAYS_MORE) + '''
             </ul></div>
 
             <p>No talk claimed a perfect match. The useful part was the stated gap: about 5–6 °C at worst on the pump, about 12 % on the roller oil, a factor of 2.5 on a sphere depending on where the HTC was read.</p>
