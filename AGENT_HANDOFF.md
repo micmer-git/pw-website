@@ -3,6 +3,12 @@
 Append-only, **newest block on top**. One block whenever an agent stops, hands over, or gets
 blocked. Format and rules: `AGENTS.md` §5.
 
+## 2026-10-22 · claude · PWEXP26 blog: IAV and Univance as full sections, no quotations
+- **Did:** branch `blog/iav-univance-no-quotes` (worktree `~/pw-website-wt-blog`, **not merged, not pushed**). Eight talks in the blog; IAV (08) and Univance (09) written from their released slides into `SLIDES_ONLY` in `_pwexp26_content.py` (not in `TALKS`, so the proceedings page, YouTube sheet and thumbnails are untouched). Blog prints no quotations: quote blocks off (`SHOW_QUOTES=False`, data kept), embedded phrases rephrased through `UNQ`, Q&A line reworded. Prometech is the only slides-only talk left. Six new slide images `s08-*`, `s09-*`.
+- **Evidence:** `python _gen_blog_pwexp2026.py` -> 8 talk blocks, 0 curly quotes in the article, 20/20 images and 8/8 speaker photos present, `.html`/`.php` twins rebuilt. Numbers checked against the PDFs: IAV 83,187 -> 31,781 target-box particles (-61.8 %), blue 46,704 -> 0; Univance chain 420,000 (0.8 mm, 3.0 s, 30 h, 4xK40) -> 110,000,000 (0.4 mm, 6.0 s, 45 h, 4xBlackwell) = 262x.
+- **Unverified / traps:** Univance's own slides give 110 M particles for the 10,000 rpm gear (p24) but 60 M on their summary slide (p27): the blog does not use a gear particle count. IAV slides carry the footer `Released, confidential`: the user asked to include them. Deploy bundle (`06.proceedings-2026-deliverable/deploy-prod`) has the new blog files, images and two speaker photos staged; nothing uploaded.
+- **Next:** user reviews the branch; merge `--no-ff` to main and push only on their word (public surface); FTP the staged files.
+
 ## 2026-10-12 · claude · AI events pages rebuilt as one-pagers from the workshop deck
 - **Did:** both pages redesigned from zero (design canvas -> `design/ai-events/*.dc.html`, lifted by `_gen_ai_events.py`), content from `Particleworks-PWEXP26-full-workshop_ai_automation.pptx` (gearbox CHT chain, 16x9 materials DoE, post-processing, Blender, omelette, pwpy/agent/SDK ladder). 2 GIFs per page.
 - **Evidence:** Edge headless 1280 px; the three stats (2.1x ISO, 3-6x HTC, 0 HTC adiabatic) are slides 26-31 of the deck.
