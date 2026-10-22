@@ -236,3 +236,62 @@ TALKS = {
 }
 
 ORDER = ['04', '06', '10', '07', '05', '11']   # blog + proceedings order
+
+
+# ---- slides-only talks (no recording): written from the speakers' released slides only; numbers checked against the slide tables ----
+# Used by _gen_blog_pwexp2026.py. `rec=False`: no video moments, no quotes.
+SLIDES_ONLY = {
+'08': dict(
+    tag='Air', short_org='IAV', topic='e-drivetrain', rec=False,
+    title='Air Bubble Dynamics in the Gear Oil of an Electric 3-Speed Drivetrain',
+    who='René Kockisch — IAV GmbH (DE)', speaker='René Kockisch', org='IAV GmbH (DE)',
+    photo=('rene-kockisch.jpg', 'René Kockisch'), pdf='08.IAV-RENE-KOCKISCH_Air_Bubble_Dynamics.pdf',
+    lead='In the gear oil of a real e-drivetrain, **more than half of the air in the target box started at one wall**, behind one shaft. An oil guide there cut the air in the box by 62&nbsp;%.',
+    context=[
+        'Air in the gear oil of an electric drivetrain changes lubrication, efficiency and durability. IAV, an engineering partner for powertrain systems, uses Particleworks for the oil level, the oil paths and flow rates, oil velocities, bearing lubrication, indications for heat-transfer coefficients, churning losses and air inclusion.',
+        'The case was IAV\'s 3-speed electric commercial-vehicle powertrain, with a maximum input torque of 1,500 Nm. The model has 33 relevant model groups that mirror the transmission assembly, and it aims at the oil behavior and the air content in the suction area of the pump. A 1D thermal model and a 1D hydraulic model supply the inflows, six at the oil gallery for gear lubrication and one at the second intermediate shaft, and the pump is the outflow.',
+        'In the coupled MPS/DEM run with Particleworks and Granuleworks, air is a set of DEM particles. Reading thousands of short-lived particles is the hard part, so IAV built a tool for it, the IAV Particle Explorer.'],
+    slideA=('s08-17', 'The IAV Particle Explorer: input data, particle graphics, diagrams, and initial against final particle counts with and without one-time particles (IAV).'),
+    findings=[
+        ('Filter the noise first',
+         'Some air particles exist for only a very short time. Counting them would mislead, so the Particle Explorer detects these one-time particles and shows the initial and final counts with and without them.'),
+        ('Give every air particle a source',
+         'The tool traces particles back to the area where they started and counts them per area; DEM and MPS particles can both be assigned to a source. A target box and a set of source boxes turn a cloud of particles into numbers, here for the first 25 s of simulated time.'),
+        ('One wall behind one shaft',
+         'With three source boxes, the target box held 83,187 air particles. 46,704 of them started at the backside wall behind the intermediate shaft (blue box), 2,370 at the backside wall behind the input shaft (brown) and 2,152 inside the covered final drive (green). **More than half of the air came from one source**; the rest started elsewhere.'),
+        ('A small measure, and its count',
+         'An oil guide for the lower intermediate shaft, meant to reduce oil splash and with it the air taken into the oil, brought the target box down to 31,781 air particles, **62&nbsp;% fewer**. The blue source fell to 0, the green to 275 and the brown to 214.')],
+    chart='iav', chart_after=2,
+    slidesB=[('s08-19', 'Before the measure: 83,187 air particles in the target box; green source 2,152, blue 46,704, brown 2,370 (IAV).'),
+             ('s08-20', 'With the oil guide for the lower intermediate shaft: 31,781 in the target box; green 275, blue 0, brown 214 (IAV).')], pair=True,
+    keys=['The coupled MPS/DEM process follows the air bubbles from formation to dissolution in detail.',
+          'The IAV Particle Explorer turns transient particle behavior into countable analytics for each source.',
+          'In this e-transmission **one source gave more than half of the air** in the target box, and an oil guide cut the total by 62&nbsp;%.'],
+),
+'09': dict(
+    tag='Air', short_org='Univance', topic='chain and gear oil', rec=False,
+    title='Gear Lubrication Analysis, and Its Expansion to R&amp;D on Airflow Effects',
+    who='Naohiro Fujita — Univance Corporation (JP)', speaker='Naohiro Fujita', org='Univance Corporation (JP)',
+    photo=('naohiro-fujita.jpg', 'Naohiro Fujita'), pdf='09.UNIVANCE-NAHOIRO-FUJITA-gearbox.pdf',
+    lead='Univance checks its oil splash **in the design phase**, and now at a scale of **110 million particles**: a chain case 262 times the size of an earlier one, and a gear studied with oil and air as particles.',
+    context=[
+        'Univance is a Japanese drivetrain supplier, founded in 1937, with about 2,000 employees and products from transmissions and 4WD units to electric powertrain parts. CAE starts early in its V-model development, and Particleworks is mainly used in the design phase. The reasons given: lubrication reduces friction and wear and removes heat, physical tests show little of the oil flow inside a gearbox, and a late issue can mean a costly redesign.',
+        'Two earlier cases show the routine use. A gear oil splash (200 rpm, 15 s, 800,000 particles of 3 mm, 12 hours on four K40 GPUs) was evaluated more than ten times in design before release, and its oil flow agreed with the experiment. A transfer-case chain (75 rpm, 3.0 s, 420,000 particles of 0.8 mm, 30 hours) also agreed with the experiment. Both cases shortened development and saved prototypes and tests.'],
+    slideA=('s09-10', 'Chain oil splash at 325 rpm: 110 million particles of 0.4 mm, 6.0 s in 45 hours on four GPUs (Univance).'),
+    findings=[
+        ('A chain case 262 times bigger',
+         'The earlier chain case had 420,000 particles of 0.8 mm and ran 3.0 s in 30 hours on four K40 GPUs. The 2026 case has 110 million particles of 0.4 mm and runs 6.0 s in 45 hours on four Blackwell GPUs. Oil penetrates between the links, a film forms on the inner wall of the case and flows down, and the air trapped during the tossing stays stagnant.'),
+        ('At 6,500 rpm, air matters',
+         'The same kind of chain at 6,500 rpm, 0.3 s in 46 hours, with oil and air as separate phases, makes the effect of the airflow on oil distribution and lubrication visible.'),
+        ('Airflow explained what the camera saw',
+         'On a test gear pair, Univance dropped oil on the gear and filmed it with a high-speed camera while PIV (particle image velocimetry) measured the air. Oil avoided the rotating gear, slid over the tooth tip, partly stuck to the teeth or was drawn into the mesh. An MPS–FVM coupled simulation reproduced the curved oil trajectory and the upward airflow, and the air velocities in the air curtain agree with the PIV measurements.'),
+        ('Then oil and air as particles',
+         'MPS–FVM coupling struggled with thin oil films, full-system models and stability. Univance moved to a gas-liquid two-phase analysis with oil and air as particles: 10,000 rpm, 5.0 s, 0.3 mm for both phases, 84 hours on four Blackwell GPUs in single precision (the coupled run before it: 6,000 rpm, 5.0 s, 0.5 mm, 48 hours on two A100). The splash patterns at 3,000 and 10,000 rpm and the airflow structures were reproduced.')],
+    chart='univ', chart_after=0,
+    slidesB=[('s09-11', 'The chain at 6,500 rpm: oil and air phases combined, then each phase on its own (Univance).'),
+             ('s09-25', 'Oil splash patterns at 3,000 and 10,000 rpm: experiment against the two-phase simulation (Univance).')], pair=True,
+    keys=['Particleworks supports design-phase lubrication checks: more than ten evaluations of one gear case before release.',
+          'A chain case grew from 420,000 to **110 million particles** on four GPUs: twice the simulated time in 1.5 times the run time.',
+          'Airflow explains the oil behavior seen with a high-speed camera and PIV: curved trajectories and an upward air stream in the mesh.'],
+),
+}
